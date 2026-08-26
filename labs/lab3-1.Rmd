@@ -1,0 +1,130 @@
+---
+title: "Lab 3.1 - Data Importation"
+output:
+  html_document:
+    css: ./ds_labs.css
+    toc: yes
+    toc_float: yes
+    fig_caption: no
+    seal : False
+    includes:
+      after_body: insert-logo.html
+  pdf_document:
+    toc: yes
+---
+
+
+<div class="title-logo"></div>
+
+```{r packages_setup, echo=FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = T, warning = F, message = F)
+knitr::opts_chunk$set(fig.width=8, fig.height=6) 
+```
+
+
+```{r}
+library(tidyverse)
+```
+
+## Exercise 1
+
+Simulate reading a dataset written in csv containing four variables:
+name, age, gender and smoker (with possible values yes/no), and two observations, yours and that of 
+a friend. Include a metadata line at the beginning with a comment describing the data.
+For example:
+
+
+```{r}
+data_text <- "# Data for Ana and Pedro
+name,age,gender,smokes
+Pedro,29,male,no
+Ana,26,female,yes"
+```
+
+
+Read the data into a tibble. Then save them in csv format inside a folder called `data`.
+Once saved, read them again (this time from the file).
+Finally, save them again in excel format.
+
+
+
+## Exercise 2
+
+Federal Reserve Economic Data (FRED) is a database maintained by the Federal Reserve Bank of St. Louis (USA). It contains almost a million time series showing the evolution of different economic measures.
+
+Go to the FRED website [https://fred.stlouisfed.org/](https://fred.stlouisfed.org/). Export the data on the evolution of the Median Consumer Price Index in csv.
+Load them into R and do the following:
+
+* Plot the evolution of the Median Consumer Price Index since the year 2000.
+
+* On what date was the maximum Median Consumer Price Index reached? And the minimum? 
+
+
+## Exercise 3
+
+Our World in Data is an initiative of the University of Oxford that aims to release data about multiple social phenomena. In particular, it offers empirical results about the change in living conditions on the planet over time. The data come from various fields: economic, social, judicial, ecological, etc.
+
+How many times have you heard, at the New Year's Eve dinner, a relative say: "things were better in my day, there was not so much unemployment!"? Well, in this lab we will use Our World in Data together with R so that you can rebut those comments with empirical data. 
+
+The first thing you have to do is go to the page [https://ourworldindata.org/](https://ourworldindata.org/). You will see a tab that says "Browse by Topic". Look for a topic of interest in that tab.
+When you select it, you will reach an article that will most likely contain some plot. A Download tab will appear in the plot; click it and download the data in csv.
+
+Once downloaded, load them into R and try to reproduce the plot that appears in the article.
+
+Here is an example with data on the evolution of gas prices in different regions.
+The plot is this one:
+[https://ourworldindata.org/grapher/natural-gas-prices](https://ourworldindata.org/grapher/natural-gas-prices).
+
+
+
+## Exercise 4
+
+Look in FRED for some data of interest to you. Download it in **excel**, import it into R,
+build a plot and draw some conclusion.
+
+## Exercise 5
+
+Parse each of these dates/times
+
+```{r}
+d1 <- "January 01, 2010"
+d2 <- "2015-Mar-07"
+d3 <- "06-Jun-2017"
+d4 <- c("August 19 (2015)", "July 1 (2015)")
+d5 <- "12/30/14" # Dec 30, 2014
+t1 <- "1705"
+t2 <- "11:15:10.12 PM"
+```
+
+
+## Exercise 6
+
+Write code that does the following:
+
+* Check whether a folder called "unemployment_data" exists; if it does not exist, it must create it.
+
+* Download the Spanish unemployment data from FRED (in FRED these data are called: "Unemployment Rate: Aged 15-74: All Persons for Spain") and save them in the "unemployment_data" folder.
+
+* Read the data just downloaded.
+
+* If the most recent unemployment rate is below 10 % print the message
+`"The unemployment rate has fallen below 10%"`, otherwise, print
+`"The unemployment rate remains above 10%"`
+
+
+
+## Exercise 7
+
+Weyland Yutani Manufacturing wants to carry out a cost analysis. To this end, you are provided with an Excel report with the costs by region.
+
+1. Read the Excel file **weyland_cost_results.xlsx**.
+2. You will notice that the table has many NA values and unnecessary rows; we need to clean it up:
+
+    - There are rows showing subtotals for each `region` (for example, "Central Total" or "East Total") and for the whole company ("Grand Total"). Filter the data frame so that it does not contain these subtotal rows. The rows with NA values must remain after this filtering. *Hint:* You can use the `endsWith()` function to filter these data.
+    
+    - Now we need to fill in the NA values. Note that the `region` is the same as in the previous row, so you will need to fill in the same value as the row above the one you are on. Look into the use of `fill` for this purpose. 
+
+
+
+
+

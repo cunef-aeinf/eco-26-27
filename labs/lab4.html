@@ -11,7 +11,7 @@
 
 
 
-<title>Lab 3.1 - Data Importation</title>
+<title>Lab 4 - Models</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -1640,7 +1640,7 @@ border-radius: 0px;
 
 
 
-<h1 class="title toc-ignore">Lab 3.1 - Data Importation</h1>
+<h1 class="title toc-ignore">Lab 4 - Models</h1>
 
 </div>
 
@@ -1648,113 +1648,224 @@ border-radius: 0px;
 <div class="title-logo">
 
 </div>
-<pre class="r"><code>library(tidyverse)</code></pre>
+<pre class="r"><code>library(tidyverse)
+library(modelr)</code></pre>
 <div id="exercise-1" class="section level2">
 <h2>Exercise 1</h2>
-<p>Simulate reading a dataset written in csv containing four variables:
-name, age, gender and smoker (with possible values yes/no), and two
-observations, yours and that of a friend. Include a metadata line at the
-beginning with a comment describing the data. For example:</p>
-<pre class="r"><code>data_text &lt;- &quot;# Data for Ana and Pedro
-name,age,gender,smokes
-Pedro,29,male,no
-Ana,26,female,yes&quot;</code></pre>
-<p>Read the data into a tibble. Then save them in csv format inside a
-folder called <code>data</code>. Once saved, read them again (this time
-from the file). Finally, save them again in excel format.</p>
+<p>Using the <code>diamonds</code> dataset, visualize the relationship
+between the following pairs of variables:</p>
+<ul>
+<li><code>cut</code> and <code>price</code></li>
+<li><code>color</code> and <code>price</code></li>
+<li><code>clarity</code> and <code>price</code></li>
+</ul>
+<p>Do you find an unusual pattern?</p>
+<p><strong>Hint</strong>: the lowest-quality color for a diamond is J
+(slightly yellow), the worst clarity is I1 and the worst cut is
+Fair.</p>
+<div id="solution" class="section level3">
+<h3>Solution</h3>
+</div>
 </div>
 <div id="exercise-2" class="section level2">
 <h2>Exercise 2</h2>
-<p>Federal Reserve Economic Data (FRED) is a database maintained by the
-Federal Reserve Bank of St. Louis (USA). It contains almost a million
-time series showing the evolution of different economic measures.</p>
-<p>Go to the FRED website <a href="https://fred.stlouisfed.org/">https://fred.stlouisfed.org/</a>.
-Export the data on the evolution of the Median Consumer Price Index in
-csv. Load them into R and do the following:</p>
-<ul>
-<li><p>Plot the evolution of the Median Consumer Price Index since the
-year 2000.</p></li>
-<li><p>On what date was the maximum Median Consumer Price Index reached?
-And the minimum?</p></li>
-</ul>
+<p>Fit a linear model where the predictor variable is <code>carat</code>
+(the weight of the diamonds) and the dependent variable is
+<code>price</code>. Obtain the value of the coefficients and interpret
+them. What conclusion do you draw?</p>
+<div id="solution-1" class="section level3">
+<h3>Solution</h3>
+</div>
 </div>
 <div id="exercise-3" class="section level2">
 <h2>Exercise 3</h2>
-<p>Our World in Data is an initiative of the University of Oxford that
-aims to release data about multiple social phenomena. In particular, it
-offers empirical results about the change in living conditions on the
-planet over time. The data come from various fields: economic, social,
-judicial, ecological, etc.</p>
-<p>How many times have you heard, at the New Year’s Eve dinner, a
-relative say: “things were better in my day, there was not so much
-unemployment!”? Well, in this lab we will use Our World in Data together
-with R so that you can rebut those comments with empirical data.</p>
-<p>The first thing you have to do is go to the page <a href="https://ourworldindata.org/">https://ourworldindata.org/</a>. You
-will see a tab that says “Browse by Topic”. Look for a topic of interest
-in that tab. When you select it, you will reach an article that will
-most likely contain some plot. A Download tab will appear in the plot;
-click it and download the data in csv.</p>
-<p>Once downloaded, load them into R and try to reproduce the plot that
-appears in the article.</p>
-<p>Here is an example with data on the evolution of gas prices in
-different regions. The plot is this one: <a href="https://ourworldindata.org/grapher/natural-gas-prices">https://ourworldindata.org/grapher/natural-gas-prices</a>.</p>
+<p>Visualize the predictions of the previous model, as well as the
+residuals. Draw conclusions.</p>
+<div id="solution-2" class="section level3">
+<h3>Solution</h3>
+</div>
 </div>
 <div id="exercise-4" class="section level2">
 <h2>Exercise 4</h2>
-<p>Look in FRED for some data of interest to you. Download it in
-<strong>excel</strong>, import it into R, build a plot and draw some
-conclusion.</p>
+<p>Create a new dataset called <code>diamonds2</code> in which you
+remove all diamonds with carat greater than 2.5. Add two variables to
+this dataset called <code>lcarat</code> and <code>lprice</code>
+corresponding respectively to the base-two logarithm of
+<code>carat</code> and <code>price</code>.</p>
+<div id="solution-3" class="section level3">
+<h3>Solution</h3>
+</div>
 </div>
 <div id="exercise-5" class="section level2">
 <h2>Exercise 5</h2>
-<p>Parse each of these dates/times</p>
-<pre class="r"><code>d1 &lt;- &quot;January 01, 2010&quot;
-d2 &lt;- &quot;2015-Mar-07&quot;
-d3 &lt;- &quot;06-Jun-2017&quot;
-d4 &lt;- c(&quot;August 19 (2015)&quot;, &quot;July 1 (2015)&quot;)
-d5 &lt;- &quot;12/30/14&quot; # Dec 30, 2014
-t1 &lt;- &quot;1705&quot;
-t2 &lt;- &quot;11:15:10.12 PM&quot;</code></pre>
+<p>Using the data created in the previous exercise, fit a linear model
+where the predictor variable is <code>lcarat</code> and the dependent
+variable is <code>lprice</code>. Obtain the value of the coefficients
+and interpret them. According to this model, what happens to the price
+of a diamond if I double its <code>carat</code>?</p>
+<div id="solution-4" class="section level3">
+<h3>Solution</h3>
+</div>
 </div>
 <div id="exercise-6" class="section level2">
 <h2>Exercise 6</h2>
-<p>Write code that does the following:</p>
-<ul>
-<li><p>Check whether a folder called “unemployment_data” exists; if it
-does not exist, it must create it.</p></li>
-<li><p>Download the Spanish unemployment data from FRED (in FRED these
-data are called: “Unemployment Rate: Aged 15-74: All Persons for Spain”)
-and save them in the “unemployment_data” folder.</p></li>
-<li><p>Read the data just downloaded.</p></li>
-<li><p>If the most recent unemployment rate is below 10 % print the
-message <code>&quot;The unemployment rate has fallen below 10%&quot;</code>,
-otherwise, print
-<code>&quot;The unemployment rate remains above 10%&quot;</code></p></li>
-</ul>
+<p>Visualize the predictions of the previous model, as well as the
+residuals. Draw conclusions. Does this model fit the data better than
+the previous one?</p>
+<div id="solution-5" class="section level3">
+<h3>Solution</h3>
+</div>
 </div>
 <div id="exercise-7" class="section level2">
 <h2>Exercise 7</h2>
-<p>Weyland Yutani Manufacturing wants to carry out a cost analysis. To
-this end, you are provided with an Excel report with the costs by
-region.</p>
-<ol style="list-style-type: decimal">
-<li><p>Read the Excel file
-<strong>weyland_cost_results.xlsx</strong>.</p></li>
-<li><p>You will notice that the table has many NA values and unnecessary
-rows; we need to clean it up:</p>
-<ul>
-<li><p>There are rows showing subtotals for each <code>region</code>
-(for example, “Central Total” or “East Total”) and for the whole company
-(“Grand Total”). Filter the data frame so that it does not contain these
-subtotal rows. The rows with NA values must remain after this filtering.
-<em>Hint:</em> You can use the <code>endsWith()</code> function to
-filter these data.</p></li>
-<li><p>Now we need to fill in the NA values. Note that the
-<code>region</code> is the same as in the previous row, so you will need
-to fill in the same value as the row above the one you are on. Look into
-the use of <code>fill</code> for this purpose.</p></li>
-</ul></li>
-</ol>
+<p>Using the <code>diamonds2</code> dataset, visualize the relationship
+between the following variables and the residual computed in the
+previous exercise. * <code>cut</code> * <code>color</code> *
+<code>clarity</code></p>
+<p>What conclusion do you draw?</p>
+<div id="solution-6" class="section level3">
+<h3>Solution</h3>
+</div>
+</div>
+<div id="exercise-8" class="section level2">
+<h2>Exercise 8</h2>
+<p>Explore the <code>sim3</code> data from <code>modelr</code>. What
+type are the variables <code>x1</code> and <code>x2</code>? And
+<code>y</code>? Fit a linear model with response variable <code>y</code>
+and predictors <code>x1</code> and <code>x2</code> and visualize its
+predictions.</p>
+<p>Interpret the coefficients of this model.</p>
+<div id="solution-7" class="section level3">
+<h3>Solution</h3>
+</div>
+</div>
+<div id="exercise-9" class="section level2">
+<h2>Exercise 9</h2>
+<p>With the previous data, fit the following model</p>
+<p><span class="math display">\[
+y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_{12} x_1 x_2
+\]</span></p>
+<p>in R this model corresponds to the formula <code>y ~ x1 * x2</code>.
+Visualize the predictions of the model, and interpret its
+coefficients.</p>
+<div id="solution-8" class="section level3">
+<h3>Solution</h3>
+</div>
+</div>
+<div id="exercise-10" class="section level2">
+<h2>Exercise 10</h2>
+<p>For this exercise you need to load the <code>infer</code> package</p>
+<pre class="r"><code>library(infer)</code></pre>
+<div id="data" class="section level3">
+<h3>Data</h3>
+<p>The General Social Survey (GSS) collects data on contemporary
+American society in order to understand and explain trends and constants
+in attitudes, behaviors and attributes. Hundreds of trends have been
+monitored since 1972.</p>
+<p>The GSS contains a standard core of demographic, behavioral and
+attitudinal questions, plus topics of special interest. Among the topics
+covered are civil liberties, crime and violence, intergroup tolerance,
+morality, national spending priorities, psychological well-being, social
+mobility and stress and traumatic events.</p>
+<p>We will analyze GSS data from 2018 to understand how much time
+American adults spend on email.</p>
+<pre class="r"><code>gss_email &lt;- read_csv(&quot;data/gss_email_2018.csv&quot;)</code></pre>
+<p>We will use the <code>email</code> variable: the number of minutes
+that respondents spend on email weekly.</p>
+<p>The goal of this exercise is to compute the 95% confidence interval
+for the mean time that Americans spend on email.</p>
+</div>
+<div id="section" class="section level3">
+<h3>10.1</h3>
+<p>Set a seed to control the random process.</p>
+</div>
+<div id="section-1" class="section level3">
+<h3>10.2</h3>
+<p>Compute the bootstrap distribution</p>
+</div>
+<div id="section-2" class="section level3">
+<h3>10.3</h3>
+<p>Compute and visualize the CI</p>
+</div>
+<div id="section-3" class="section level3">
+<h3>10.4</h3>
+<p>Interpret the result</p>
+</div>
+</div>
+<div id="exercise-11" class="section level2">
+<h2>Exercise 11</h2>
+<p>So far we have worked only with models in which the response variable
+is quantitative. There are analogous models that can be used for cases
+in which the response variable is qualitative. One of these models is
+logistic regression. We will not explain how logistic regression works,
+but we are going to learn how a logistic regression is fitted in R.</p>
+<p>If our response variable <code>y</code> is qualitative and we have,
+for example, two predictors <code>x1</code> and <code>x2</code>, we fit
+a logistic regression as follows:</p>
+<pre class="r"><code>log_reg &lt;- glm( y ~ x1 + x2, data = data, family = binomial(link=&#39;logit&#39;))</code></pre>
+<p>We are going to use a logistic regression to try to predict whether
+the Titanic passengers survived or not, using as predictor variables,
+for example, sex, age, the class of their ticket, etc.</p>
+<p>First install the <code>titanic</code> package and load the data:</p>
+<pre class="r"><code>library(titanic)
+data(&quot;titanic_train&quot;)</code></pre>
+<p>Select the variables Survived, Age, Sex, Embarked, SibSp, Parch,
+Fare, Pclass. Convert to factor variables those that you consider to be
+factors. In addition, add an id variable indicating the row number. Save
+this in a new data frame called <code>titanic</code>.</p>
+<p><strong>Hint:</strong> use <code>?titanic_train</code> to see what
+each variable means.</p>
+<div id="solution-9" class="section level3">
+<h3>Solution</h3>
+</div>
+</div>
+<div id="exercise-12" class="section level2">
+<h2>Exercise 12</h2>
+<p>Create two datasets called <code>train</code> and <code>test</code>.
+The first must contain observations (rows) selected at random from the
+titanic data frame from the previous exercise. Its number of rows must
+be 70% of the number of rows of titanic. The second dataset must contain
+all the observations that are in the titanic dataset but are not in
+<code>train</code>.</p>
+<p><strong>Hint:</strong> use the <code>sample_frac()</code>
+function</p>
+<div id="solution-10" class="section level3">
+<h3>Solution</h3>
+</div>
+</div>
+<div id="exercise-13" class="section level2">
+<h2>Exercise 13</h2>
+<p>Fit a logistic regression model using the <code>train</code> data
+where the response variable is <code>Survived</code> and the predictor
+variable is <code>Sex</code>.</p>
+<div id="solution-11" class="section level3">
+<h3>Solution</h3>
+</div>
+</div>
+<div id="exercise-14" class="section level2">
+<h2>Exercise 14</h2>
+<p>The prediction of a logistic regression is a probability
+corresponding to the probability that the response variable takes value
+1 (in our case that the corresponding passenger survives) according to
+the model.</p>
+<p>Compute the predictions of the previous model on the
+<code>test</code> data. You will need to add type=“response” to the
+add_predictions function. Build a new variable that takes value 1 if the
+predicted probability is greater than or equal to 0.5 and zero
+otherwise.</p>
+<p>Finally, compute the percentage of correct predictions by comparing
+the newly created variable and the Survived variable.</p>
+<div id="solution-12" class="section level3">
+<h3>Solution</h3>
+</div>
+</div>
+<div id="exercise-15" class="section level2">
+<h2>Exercise 15</h2>
+<p>Try to improve the previous model by adding more variables. Which
+variable do you think has the most predictive power?</p>
+<div id="solution-13" class="section level3">
+<h3>Solution</h3>
+</div>
 </div>
 
 

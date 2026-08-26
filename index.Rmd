@@ -89,27 +89,27 @@ Welcome to the website for **Data Analysis and Information Extraction**, taught 
 <!-- NOT YET RELEASED: uncomment each lab as the course progresses.
 
 ### Lab 2.1 - Data Visualization
-  - [Exercises](./labs/lab2.html)
+  - [Exercises](./labs/lab2-1.html)
 
 
 ### Lab 2.2 - Data Transformation
-  - [Exercises](./labs/lab3.html)
+  - [Exercises](./labs/lab2-2.html)
 
 
 ### Lab 3.1 - Data Importation
-  - [Exercises](./labs/lab4.html)
+  - [Exercises](./labs/lab3-1.html)
 
 
 ### Lab 3.2 - Data Wrangling
-  - [Exercises](./labs/lab5.html)
+  - [Exercises](./labs/lab3-2.html)
 
 
 ### Lab 3.3 - Strings, Factors and Dates
-  - [Exercises](./labs/lab6.html)
+  - [Exercises](./labs/lab3-3.html)
 
 
 ### Lab 4 - Models
-  - [Exercises](./labs/lab7.html)
+  - [Exercises](./labs/lab4.html)
 
 -->
 

@@ -1,0 +1,211 @@
+---
+title: "Lab 3.1 - Data Importation"
+output:
+  html_document:
+    css: ./ds_labs.css
+    toc: yes
+    toc_float: yes
+    fig_caption: no
+    seal : False
+    includes:
+      after_body: insert-logo.html
+  pdf_document:
+    toc: yes
+---
+
+
+<div class="title-logo"></div>
+
+```{r packages_setup, echo=FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = T, warning = F, message = F)
+knitr::opts_chunk$set(fig.width=8, fig.height=6) 
+```
+
+
+```{r}
+library(tidyverse)
+```
+
+## Exercise 1
+
+Simulate reading a dataset written in csv containing four variables:
+name, age, gender and smoker (with possible values yes/no), and two observations, yours and that of 
+a friend. Include a metadata line at the beginning with a comment describing the data.
+For example:
+
+
+```{r, eval=TRUE}
+data_text <- "# Data for Ana and Pedro
+name,age,gender,smokes
+Pedro,29,male,no
+Ana,26,female,yes"
+```
+
+
+Read the data into a tibble. Then save them in csv format inside a folder called `data`.
+Once saved, read them again (this time from the file).
+Finally, save them again in excel format.
+
+```{r}
+data <- read_csv(data_text, comment = "#")
+write_csv(data, "data/friends.csv")
+```
+
+```{r}
+data <- read_csv("data/friends.csv")
+data
+```
+
+
+
+## Exercise 2
+
+Federal Reserve Economic Data (FRED) is a database maintained by the Federal Reserve Bank of St. Louis (USA). It contains almost a million time series showing the evolution of different economic measures.
+
+Go to the FRED website [https://fred.stlouisfed.org/](https://fred.stlouisfed.org/). Export the data on the evolution of the Median Consumer Price Index in csv.
+Load them into R and do the following:
+
+* Plot the evolution of the Median Consumer Price Index since the year 2000.
+
+* On what date was the maximum Median Consumer Price Index reached? And the minimum? 
+
+
+```{r}
+data_url <- "https://fred.stlouisfed.org/graph/fredgraph.csv?bgcolor=%23e1e9f0&chart_type=line&drp=0&fo=open%20sans&graph_bgcolor=%23ffffff&height=450&mode=fred&recession_bars=on&txtcolor=%23444444&ts=12&tts=12&width=1318&nt=0&thu=0&trc=0&show_legend=yes&show_axis_titles=yes&show_tooltip=yes&id=MEDCPIM158SFRBCLE&scale=left&cosd=1983-01-01&coed=2023-08-01&line_color=%234572a7&link_values=false&line_style=solid&mark_type=none&mw=3&lw=2&ost=-99999&oet=99999&mma=0&fml=a&fq=Monthly&fam=avg&fgst=lin&fgsnd=2020-02-01&line_index=1&transformation=lin&vintage_date=2023-10-05&revision_date=2023-10-05&nd=1983-01-01"
+download.file(data_url, destfile = "data/ipc.csv")
+cpi <- read_csv("data/ipc.csv")
+```
+
+```{r}
+cpi %>% filter(observation_date >= "2000-01-01") %>% ggplot(aes(x=observation_date, y=MEDCPIM158SFRBCLE)) + geom_line() + theme_minimal()
+```
+
+```{r}
+cpi %>% arrange(desc(MEDCPIM158SFRBCLE)) %>% slice(1)
+cpi %>% arrange(MEDCPIM158SFRBCLE) %>% slice(1)
+```
+
+
+## Exercise 3
+
+Our World in Data is an initiative of the University of Oxford that aims to release data about multiple social phenomena. In particular, it offers empirical results about the change in living conditions on the planet over time. The data come from various fields: economic, social, judicial, ecological, etc.
+
+How many times have you heard, at the New Year's Eve dinner, a relative say: "things were better in my day, there was not so much unemployment!"? Well, in this lab we will use Our World in Data together with R so that you can rebut those comments with empirical data. 
+
+The first thing you have to do is go to the page [https://ourworldindata.org/](https://ourworldindata.org/). You will see a tab that says "Browse by Topic". Look for a topic of interest in that tab.
+When you select it, you will reach an article that will most likely contain some plot. A Download tab will appear in the plot; click it and download the data in csv.
+
+Once downloaded, load them into R and try to reproduce the plot that appears in the article.
+
+Here is an example with data on the evolution of gas prices in different regions.
+The plot is this one:
+[https://ourworldindata.org/grapher/natural-gas-prices](https://ourworldindata.org/grapher/natural-gas-prices).
+
+
+### Solution
+
+
+```{r}
+gp <- read_csv("data/natural-gas-prices.csv")
+```
+
+```{r}
+ggplot(gp, aes(x=Year, y=`Gas - Prices`, color=Entity)) + 
+  geom_line() + geom_point(size=0.4) + theme_bw() + 
+  labs(title="Natural gas prices", 
+       subtitle="Natural gas prices, measured in current US dollars per cubic meter.") + 
+  scale_color_viridis_d()
+  
+```
+
+## Exercise 4
+
+Look in FRED for some data of interest to you. Download it in **excel**, import it into R,
+build a plot and draw some conclusion.
+
+
+
+## Exercise 5
+
+Parse each of these dates/times
+
+```{r}
+d1 <- "January 01, 2010"
+d2 <- "2015-Mar-07"
+d3 <- "06-Jun-2017"
+d4 <- c("August 19 (2015)", "July 1 (2015)")
+d5 <- "12/30/14" # Dec 30, 2014
+t1 <- "1705"
+t2 <- "11:15:10.12 PM"
+```
+
+```{r}
+# Parsing dates
+parsed_d1 <- parse_date(d1, format = "%B %d, %Y")
+parsed_d2 <- parse_date(d2, format = "%Y-%b-%d")
+parsed_d3 <- parse_date(d3, format = "%d-%b-%Y")
+parsed_d4 <- parse_date(d4, format = "%B %d (%Y)")
+parsed_d5 <- parse_date(d5, format = "%m/%d/%y")
+
+# Parsing times
+parsed_t1 <- parse_time(t1, format = "%H%M")
+parsed_t2 <- parse_time(t2, format = "%I:%M:%OS %p")
+```
+
+
+## Exercise 6
+
+Write code that does the following:
+
+* Check whether a folder called "unemployment_data" exists; if it does not exist, it must create it.
+
+* Download the Spanish unemployment data from FRED (in FRED these data are called: "Unemployment Rate: Aged 15-74: All Persons for Spain") and save them in the "unemployment_data" folder.
+
+* Read the data just downloaded.
+
+* If the most recent unemployment rate is below 10 % print the message
+`"The unemployment rate has fallen below 10%"`, otherwise, print
+`"The unemployment rate remains above 10%"`
+
+
+```{r, eval=FALSE}
+data_url <- "https://fred.stlouisfed.org/graph/fredgraph.csv?bgcolor=%23e1e9f0&chart_type=line&drp=0&fo=open%20sans&graph_bgcolor=%23ffffff&height=450&mode=fred&recession_bars=off&txtcolor=%23444444&ts=12&tts=12&width=1318&nt=0&thu=0&trc=0&show_legend=yes&show_axis_titles=yes&show_tooltip=yes&id=LRUN74TTESQ156S&scale=left&cosd=1999-01-01&coed=2023-01-01&line_color=%234572a7&link_values=false&line_style=solid&mark_type=none&mw=3&lw=2&ost=-99999&oet=99999&mma=0&fml=a&fq=Quarterly&fam=avg&fgst=lin&fgsnd=2020-02-01&line_index=1&transformation=lin&vintage_date=2023-10-05&revision_date=2023-10-05&nd=1999-01-01"
+
+if(!dir.exists("unemployment_data")){
+ dir.create("unemployment_data") 
+}
+download.file(data_url, "unemployment_data/unemployment_esp.csv")
+unemployment <- read_csv("unemployment_data/unemployment_esp.csv")
+unemployment <- unemployment %>% arrange(desc(DATE)) %>% slice(1) %>% select(LRUN74TTESQ156S)
+
+if(unemployment < 10){
+  print("The unemployment rate has fallen below 10%")
+} else{
+  print("The unemployment rate remains above 10%")
+}
+```
+
+
+
+## Exercise 7
+
+Weyland Yutani Manufacturing wants to carry out a cost analysis. To this end, you are provided with an Excel report with the costs by region.
+
+1. Read the Excel file **weyland_cost_results.xlsx**.
+2. You will notice that the table has many NA values and unnecessary rows; we need to clean it up:
+
+    - There are rows showing subtotals for each `region` (for example, "Central Total" or "East Total") and for the whole company ("Grand Total"). Filter the data frame so that it does not contain these subtotal rows. The rows with NA values must remain after this filtering. *Hint:* You can use the `endsWith()` function to filter these data.
+    
+    - Now we need to fill in the NA values. Note that the `region` is the same as in the previous row, so you will need to fill in the same value as the row above the one you are on. Look into the use of `fill` for this purpose. 
+
+
+```{r}
+library("readxl")
+read_excel("data/weyland_cost_results.xlsx", skip=6) %>% 
+  janitor::clean_names() %>% 
+  filter(!endsWith(region, "Total") | is.na(region)) %>% 
+  fill(region, .direction = "down")
+
+```
+
+

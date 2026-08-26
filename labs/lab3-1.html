@@ -11,7 +11,7 @@
 
 
 
-<title>Lab 3.3 - Strings, Factors and Dates</title>
+<title>Lab 3.1 - Data Importation</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -1640,7 +1640,7 @@ border-radius: 0px;
 
 
 
-<h1 class="title toc-ignore">Lab 3.3 - Strings, Factors and Dates</h1>
+<h1 class="title toc-ignore">Lab 3.1 - Data Importation</h1>
 
 </div>
 
@@ -1648,142 +1648,113 @@ border-radius: 0px;
 <div class="title-logo">
 
 </div>
-<pre class="r"><code>library(tidyverse)
-library(nycflights13)
-library(lubridate)
-library(tidyquant)</code></pre>
+<pre class="r"><code>library(tidyverse)</code></pre>
 <div id="exercise-1" class="section level2">
 <h2>Exercise 1</h2>
-<p>In the <code>flights</code> dataset the variables
-<code>dep_time</code>, <code>arr_time</code>,
-<code>sched_dep_time</code> and <code>sched_arr_time</code> contain the
-times in three- or four-digit format. Thus, 830 is half past eight in
-the morning and 2030 is half past eight in the evening. One way to
-extract the hour and the minutes from these times is the following:</p>
-<pre class="r"><code>time &lt;- 2030
-hour &lt;- time%/%100
-minutes &lt;- time%%100
-print(hour)</code></pre>
-<pre><code>## [1] 20</code></pre>
-<pre class="r"><code>print(minutes)</code></pre>
-<pre><code>## [1] 30</code></pre>
-<p>Understand and describe how these lines of code work. Create a
-dataframe called <code>flights_dt</code> in which the variables
-<code>dep_time</code>, <code>arr_time</code>,
-<code>sched_dep_time</code> and <code>sched_arr_time</code> contain the
-exact dates they refer to, in <code>datetime</code> format.</p>
-<div id="solution" class="section level3">
-<h3>Solution</h3>
-</div>
+<p>Simulate reading a dataset written in csv containing four variables:
+name, age, gender and smoker (with possible values yes/no), and two
+observations, yours and that of a friend. Include a metadata line at the
+beginning with a comment describing the data. For example:</p>
+<pre class="r"><code>data_text &lt;- &quot;# Data for Ana and Pedro
+name,age,gender,smokes
+Pedro,29,male,no
+Ana,26,female,yes&quot;</code></pre>
+<p>Read the data into a tibble. Then save them in csv format inside a
+folder called <code>data</code>. Once saved, read them again (this time
+from the file). Finally, save them again in excel format.</p>
 </div>
 <div id="exercise-2" class="section level2">
 <h2>Exercise 2</h2>
-<p>Visualize the distribution of flights by the <strong>day of the
-week</strong> on which they take off. What conclusion do you draw?</p>
-<div id="solution-1" class="section level3">
-<h3>Solution</h3>
-</div>
+<p>Federal Reserve Economic Data (FRED) is a database maintained by the
+Federal Reserve Bank of St. Louis (USA). It contains almost a million
+time series showing the evolution of different economic measures.</p>
+<p>Go to the FRED website <a href="https://fred.stlouisfed.org/">https://fred.stlouisfed.org/</a>.
+Export the data on the evolution of the Median Consumer Price Index in
+csv. Load them into R and do the following:</p>
+<ul>
+<li><p>Plot the evolution of the Median Consumer Price Index since the
+year 2000.</p></li>
+<li><p>On what date was the maximum Median Consumer Price Index reached?
+And the minimum?</p></li>
+</ul>
 </div>
 <div id="exercise-3" class="section level2">
 <h2>Exercise 3</h2>
-<p>Visualize the distribution of flights by the <strong>minute</strong>
-at which they take off and by the <strong>minute</strong> of the
-scheduled departure time. What pattern appears? How would you explain
-it?</p>
-<div id="solution-2" class="section level3">
-<h3>Solution</h3>
-</div>
+<p>Our World in Data is an initiative of the University of Oxford that
+aims to release data about multiple social phenomena. In particular, it
+offers empirical results about the change in living conditions on the
+planet over time. The data come from various fields: economic, social,
+judicial, ecological, etc.</p>
+<p>How many times have you heard, at the New Year’s Eve dinner, a
+relative say: “things were better in my day, there was not so much
+unemployment!”? Well, in this lab we will use Our World in Data together
+with R so that you can rebut those comments with empirical data.</p>
+<p>The first thing you have to do is go to the page <a href="https://ourworldindata.org/">https://ourworldindata.org/</a>. You
+will see a tab that says “Browse by Topic”. Look for a topic of interest
+in that tab. When you select it, you will reach an article that will
+most likely contain some plot. A Download tab will appear in the plot;
+click it and download the data in csv.</p>
+<p>Once downloaded, load them into R and try to reproduce the plot that
+appears in the article.</p>
+<p>Here is an example with data on the evolution of gas prices in
+different regions. The plot is this one: <a href="https://ourworldindata.org/grapher/natural-gas-prices">https://ourworldindata.org/grapher/natural-gas-prices</a>.</p>
 </div>
 <div id="exercise-4" class="section level2">
 <h2>Exercise 4</h2>
-<p>Create a new variable corresponding to the difference between
-<code>arr_time</code> and <code>dep_time</code>. Visualize the
-covariation between this variable and <code>air_time</code>. What do you
-observe? What is happening?</p>
-<div id="solution-3" class="section level3">
-<h3>Solution</h3>
-</div>
+<p>Look in FRED for some data of interest to you. Download it in
+<strong>excel</strong>, import it into R, build a plot and draw some
+conclusion.</p>
 </div>
 <div id="exercise-5" class="section level2">
 <h2>Exercise 5</h2>
-<p>Repeat the previous visualization, but using a different color for
-each time zone of the destination airport. What do you observe?</p>
-<p><strong>Hint</strong>: the time zone of the different airports is in
-the <code>airports</code> dataset and is called <code>tzone</code>.</p>
-<div id="solution-4" class="section level3">
-<h3>Solution</h3>
-</div>
+<p>Parse each of these dates/times</p>
+<pre class="r"><code>d1 &lt;- &quot;January 01, 2010&quot;
+d2 &lt;- &quot;2015-Mar-07&quot;
+d3 &lt;- &quot;06-Jun-2017&quot;
+d4 &lt;- c(&quot;August 19 (2015)&quot;, &quot;July 1 (2015)&quot;)
+d5 &lt;- &quot;12/30/14&quot; # Dec 30, 2014
+t1 &lt;- &quot;1705&quot;
+t2 &lt;- &quot;11:15:10.12 PM&quot;</code></pre>
 </div>
 <div id="exercise-6" class="section level2">
 <h2>Exercise 6</h2>
-<p>The <code>tidyquant</code> library can be used to import countless
-economic datasets into R. In particular, it can be used to import data
-on the price of different stocks.</p>
-<p>Extracting the price history of AMZN since the year 2000 is very
-simple:</p>
-<pre class="r"><code>prices  &lt;- tq_get(&quot;AMZN&quot;, get = &quot;stock.prices&quot;, from = &quot; 2000-01-01&quot;)
-prices </code></pre>
-<pre><code>## # A tibble: 6,701 × 8
-##    symbol date        open  high   low close    volume adjusted
-##    &lt;chr&gt;  &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-##  1 AMZN   2000-01-03  4.07  4.48  3.95  4.47 322352000     4.47
-##  2 AMZN   2000-01-04  4.27  4.57  4.09  4.10 349748000     4.10
-##  3 AMZN   2000-01-05  3.53  3.76  3.40  3.49 769148000     3.49
-##  4 AMZN   2000-01-06  3.57  3.63  3.20  3.28 375040000     3.28
-##  5 AMZN   2000-01-07  3.35  3.53  3.31  3.48 210108000     3.48
-##  6 AMZN   2000-01-10  3.63  3.63  3.28  3.46 295158000     3.46
-##  7 AMZN   2000-01-11  3.34  3.5   3.25  3.34 210654000     3.34
-##  8 AMZN   2000-01-12  3.39  3.40  3.15  3.18 216090000     3.18
-##  9 AMZN   2000-01-13  3.25  3.36  3.16  3.30 208962000     3.30
-## 10 AMZN   2000-01-14  3.34  3.43  3.20  3.21 137072000     3.21
-## # ℹ 6,691 more rows</code></pre>
-<p>Create a visualization that allows you to study the variation of the
-AMZN opening price over time. On what dates are the maximum and minimum
-opening prices reached?</p>
-<p>At the start of the pandemic, because of the mandatory lockdowns
-imposed by many countries, market expectations for Amazon soared.
-Imagine you had bought Amazon shares on 2 March 2020 for a value of 5000
-euros. Compute the net gains you would have obtained if you had sold
-those shares one year later. (Use the opening prices).</p>
-<div id="solution-5" class="section level3">
-<h3>Solution</h3>
-</div>
+<p>Write code that does the following:</p>
+<ul>
+<li><p>Check whether a folder called “unemployment_data” exists; if it
+does not exist, it must create it.</p></li>
+<li><p>Download the Spanish unemployment data from FRED (in FRED these
+data are called: “Unemployment Rate: Aged 15-74: All Persons for Spain”)
+and save them in the “unemployment_data” folder.</p></li>
+<li><p>Read the data just downloaded.</p></li>
+<li><p>If the most recent unemployment rate is below 10 % print the
+message <code>&quot;The unemployment rate has fallen below 10%&quot;</code>,
+otherwise, print
+<code>&quot;The unemployment rate remains above 10%&quot;</code></p></li>
+</ul>
 </div>
 <div id="exercise-7" class="section level2">
 <h2>Exercise 7</h2>
-<p>When using regular expressions, the <code>+</code> sign indicates
-repetition. Thus, if we want to detect a pattern that repeats an
-indefinite number of times, for example, detect all the Cs in
-CCCCCCCMMD, we proceed as follows.</p>
-<pre class="r"><code>str_view(&quot;CCCCCCCMMD&quot;, pattern = &quot;C+&quot;)</code></pre>
-<pre><code>## [1] │ &lt;CCCCCCC&gt;MMD</code></pre>
-<p>In addition, the <code>str_extract</code> function extracts the
-detected patterns. For example</p>
-<pre class="r"><code>str_extract(&quot;CCCCCCCMMD&quot;, pattern = &quot;C+&quot;)</code></pre>
-<pre><code>## [1] &quot;CCCCCCC&quot;</code></pre>
-<p>Using regular expressions, extract the ages from the following
-sentences. The result must be a vector containing the numbers 57, 36, 23
-and 1.</p>
-<pre class="r"><code>x1 &lt;- &quot;The patient is 57 years old&quot;
-x2 &lt;- &quot;My sister&#39;s age is 36 years&quot;
-x3 &lt;- &quot;At 23 years of age, she wore a size 36 dress&quot;
-x4 &lt;- &quot;He is only 1 year old!&quot;
-
-texts &lt;- c(x1,x2,x3,x4)</code></pre>
-<div id="solution-6" class="section level3">
-<h3>Solution</h3>
-</div>
-</div>
-<div id="exercise-8" class="section level2">
-<h2>Exercise 8</h2>
-<p>Using the <code>gss_cat</code> data from tidyverse, visualize the
-distribution of the <code>rincome</code> variable. To improve the
-visualization, recode the levels of this variable so that they are
-<code>Unknown</code>, <code>&lt;$15000</code> and
-<code>&gt;$15000</code>.</p>
-<div id="solution-7" class="section level3">
-<h3>Solution</h3>
-</div>
+<p>Weyland Yutani Manufacturing wants to carry out a cost analysis. To
+this end, you are provided with an Excel report with the costs by
+region.</p>
+<ol style="list-style-type: decimal">
+<li><p>Read the Excel file
+<strong>weyland_cost_results.xlsx</strong>.</p></li>
+<li><p>You will notice that the table has many NA values and unnecessary
+rows; we need to clean it up:</p>
+<ul>
+<li><p>There are rows showing subtotals for each <code>region</code>
+(for example, “Central Total” or “East Total”) and for the whole company
+(“Grand Total”). Filter the data frame so that it does not contain these
+subtotal rows. The rows with NA values must remain after this filtering.
+<em>Hint:</em> You can use the <code>endsWith()</code> function to
+filter these data.</p></li>
+<li><p>Now we need to fill in the NA values. Note that the
+<code>region</code> is the same as in the previous row, so you will need
+to fill in the same value as the row above the one you are on. Look into
+the use of <code>fill</code> for this purpose.</p></li>
+</ul></li>
+</ol>
 </div>
 
 

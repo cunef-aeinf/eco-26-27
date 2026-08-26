@@ -149,3 +149,14 @@ To improve the visualization, recode the levels of this variable so that they ar
 
 ### Solution
 
+## Exercise 9
+
+The data in `amazon_reviews.csv` contain reviews and ratings that certain users have given to a series of Amazon products. The variables included are:
+
+* `review`: text of the review
+* `rate`: rating (from 1 to 5)
+
+Create a new variable called `n_loves` corresponding to the number of times the word "love" or "Love" appears in each review. Compute the mean of `n_loves` for each value of `rate`. Present the results in a single tibble and draw a conclusion.
+
+### Solution
+
