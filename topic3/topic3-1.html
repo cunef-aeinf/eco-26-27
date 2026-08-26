@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Tema 3.1</title>
+    <title>Topic 3.1</title>
     <meta charset="utf-8" />
     <meta name="author" content="Roi Naveiro" />
     <script src="libs/header-attrs-2.29/header-attrs.js"></script>
@@ -19,47 +19,48 @@ class: center, middle, inverse, title-slide
 
 &lt;div class="title-logo"&gt;&lt;/div&gt;
 
-# Análisis y Explotación de la Información
+# Data Analysis and Information Extraction
  
-## Tema 3 - Data Wrangling
+## Topic 3 - Data Wrangling
 
-### 3.1 Importación de Datos
+### 3.1 Data Importation
 &lt;br&gt;
 &lt;br&gt;
 .pull-left[
 ### Roi Naveiro
+#### Academic Year 2026-2027
 ]
 ---
 
 
 ## Data Wrangling
 
-**Objetivo**: dejar los datos listos para su posterior **exploración** y **modelización**
+**Goal**: get the data ready for its subsequent **exploration** and **modeling**
 
-Convertir **datos crudos** en **datos procesados**
+Turn **raw data** into **processed data**
 
-**Datos crudos**
+**Raw data**
 
-  - Los datos tal cual aparecen en la fuente de origen
+  - The data exactly as it appears in the original source
   
-  - No han sufrido ninguna manipulación
+  - It has not undergone any manipulation
   
-**Datos procesados**
+**Processed data**
 
-  - Cada variable es una columna
+  - Each variable is a column
   
-  - Cada observación una fila
+  - Each observation a row
   
-  - Cada unidad observacional es una celda
+  - Each observational unit is a cell
   
-  - Datos más complejos, en varias tablas interconectadas
+  - More complex data, in several interconnected tables
   
 ---
 ## Data Wrangling
 
-* Importación de los datos
-* Organización de los datos
-* Transformación de los datos
+* Data importation
+* Data organization
+* Data transformation
 
 &lt;img src="img/data-science-wrangle.png" width="100%" style="display: block; margin: auto;" /&gt;
 
@@ -67,61 +68,61 @@ Convertir **datos crudos** en **datos procesados**
 ---
 class: center, middle, inverse
 
-# Importación de datos
+# Data importation
 
 ---
-## Importación de datos
+## Data importation
 
-* Aprederemos cómo descargar y leer datos en R
+* We will learn how to download and read data in R
 
-* Nos centraremos en **datos tabulares**
+* We will focus on **tabular data**
 
-* De nuevo, para esta parte, necesitaremos cargar `tidyverse`
+* Again, for this part, we will need to load `tidyverse`
 
 
 ``` r
 library(tidyverse)
 ```
 
-Seguiremos este esquema
+We will follow this outline
 
-* Descarga de datos
-* Lectura de ficheros en R-base
-* Lectura de ficheros tidyverse
+* Downloading data
+* Reading files in R-base
+* Reading files with tidyverse
 
 ---
 class: center, middle, inverse
 
-# Importación de datos: Descarga de datos
+# Data importation: Downloading data
 
 ---
 
-## Directorio de trabajo
+## Working directory
 
-* Es importante conocer el directorio de trabajo (el lugar de tu ordenador donde R se está ejecutando)
+* It is important to know the working directory (the place on your computer where R is running)
 
-* Dos comandos esenciales: `getwd()` y `setwd()`
+* Two essential commands: `getwd()` and `setwd()`
 
 
 ``` r
-# Devuelve el directorio de trabajo
+# Returns the working directory
 getwd()
 ```
 
 
 ``` r
-# Cambia el directorio de trabajo
+# Changes the working directory
 setwd()
 ```
 
 ---
 
-## Directorio de trabajo
+## Working directory
 
-Para navegar dentro de tu ordenador, necesitas conocer cómo construir rutas.
-Hay dos formas de especificar rutas al ordenador:
+To navigate inside your computer, you need to know how to build paths.
+There are two ways of specifying paths to the computer:
 
-* Rutas absolutas
+* Absolute paths
 
 
 ``` r
@@ -133,33 +134,33 @@ setwd("C:/Users/roi.naveiro/data")
 ```
 
 
-* Rutas relativas
+* Relative paths
 
 
 ``` r
-# Ruta relativa al directorio raíz
+# Path relative to the root directory
 setwd("./data")
 
-# Directorio relativo al directorio superior al raíz
+# Directory relative to the directory above the root
 setwd("../data")
 ```
 
 ---
 
-## Descarga de datos
+## Downloading data
 
-Vamos a ver cómo crear una carpeta `data` desde R (si esta no existe) y descargar unos datos dentro de la misma
+We are going to see how to create a `data` folder from R (if it does not exist) and download some data into it
 
-1. Comprobar si existe una carpeta llamada `data` en el directorio actual. Si no, crearla. Usar funciones `file.exists()` y `dir.create()`. Inténtalo
+1. Check whether a folder called `data` exists in the current directory. If not, create it. Use the functions `file.exists()` and `dir.create()`. Try it
 
 
 ---
 
-## Descarga de datos
+## Downloading data
 
-Vamos a ver cómo crear una carpeta `data` desde R (si esta no existe) y descargar unos datos dentro de la misma
+We are going to see how to create a `data` folder from R (if it does not exist) and download some data into it
 
-1. Descarga los datos sobre los indicadores de calidad de vino tinto [https://archive.ics.uci.edu/ml/datasets/Wine+Quality](https://archive.ics.uci.edu/ml/datasets/Wine+Quality).
+1. Download the data on red wine quality indicators [https://archive.ics.uci.edu/ml/datasets/Wine+Quality](https://archive.ics.uci.edu/ml/datasets/Wine+Quality).
 
 
 ``` r
@@ -171,15 +172,15 @@ list.files("./data")
 ---
 class: center, middle, inverse
 
-# Importación de datos: Lectura de ficheros en R-base
+# Data importation: Reading files in R-base
 ---
 
 ## `read.table()`
 
 
 ``` r
-# Así leemos datos con read.table
-# OJO: el separador es ;
+# This is how we read data with read.table
+# NOTE: the separator is ;
 red_wine_data &lt;- read.table("data/red_qualities.csv", header = T, sep = ';')
 red_wine_data %&gt;% head(5)
 ```
@@ -209,24 +210,24 @@ red_wine_data %&gt;% head(5)
 
 ##  `read.table()`
 
-Algunos parámetros importantes
+Some important parameters
 
-* _na.strings_ - elegir el caracter que representa un valor ausente
-* _nrows_ - cuántas filas leer (e.g. nrows=10 lee 10 filas)
-* _skip_ - número de filas a ignorar hasta empezar lectura
+* _na.strings_ - choose the character that represents a missing value
+* _nrows_ - how many rows to read (e.g. nrows=10 reads 10 rows)
+* _skip_ - number of rows to ignore before starting to read
 
 
 ---
 
 ##  `read.csv()`
 
-* Versión específica de `read.table` para leer ficheros *comma-separated values* (CSV)
+* Specific version of `read.table` for reading *comma-separated values* (CSV) files
 
-* Por defecto, asume que hay header y que el separador es la coma
+* By default, it assumes that there is a header and that the separator is the comma
 
 
 ``` r
-# Así leemos datos con read.csv
+# This is how we read data with read.csv
 red_wine_data &lt;- read.csv("data/red_qualities.csv", sep=";")
 red_wine_data %&gt;% head(5)
 ```
@@ -256,19 +257,19 @@ red_wine_data %&gt;% head(5)
 ---
 class: center, middle, inverse
 
-# Importación de datos: Lectura de ficheros con paquetes de tidyverse
+# Data importation: Reading files with tidyverse packages
 
 ---
-## El paquete `readr`
+## The `readr` package
 
-Ahora veremos cómo leer datos con el paquete `readr` que es parte de `tidyverse`
+Now we will see how to read data with the `readr` package, which is part of `tidyverse`
 
 
 ``` r
 library(tidyverse)
 ```
 
-Las funciones de `readr` se encargan de transfromar ficheros planos en *tibbles*
+The `readr` functions take care of transforming flat files into *tibbles*
 
 
 ---
@@ -276,10 +277,10 @@ Las funciones de `readr` se encargan de transfromar ficheros planos en *tibbles*
 .pull-left[
 ## readr
 
-- `read_csv()` - ficheros delimitados por `,`
-- `read_csv2()` - ficheros delimitados por `;` y que usan la coma como separador de los decimales
-- `read_tsv()` - ficheros delimitados por tabulador
-- `read_delim()` - ficheros con cualquier delimitación
+- `read_csv()` - files delimited by `,`
+- `read_csv2()` - files delimited by `;` that use the comma as the decimal separator
+- `read_tsv()` - tab-delimited files
+- `read_delim()` - files with any delimiter
 - ...
 ]
 
@@ -287,12 +288,12 @@ Las funciones de `readr` se encargan de transfromar ficheros planos en *tibbles*
 .pull-right[
 ## readxl
 
-- `read_excel()` - ficheros xls o xlsx 
+- `read_excel()` - xls or xlsx files 
 - ...
 ]
 
 ---
-## Lectura de datos
+## Reading data
 
 
 ``` r
@@ -320,9 +321,9 @@ red_wine_data
 ## #   alcohol &lt;dbl&gt;, quality &lt;dbl&gt;
 ```
 ---
-## Lectura de datos
+## Reading data
 
-También podemos pasarle un csv escrito a mano
+We can also pass it a hand-written csv
 
 ``` r
 df &lt;- read_csv("a,b,c
@@ -356,12 +357,12 @@ df
 ```
 
 ---
-## Lectura de datos
+## Reading data
 
-Así prevenimos la lectura de una línea
+This is how we prevent a line from being read
 
 ``` r
-df &lt;- read_csv("Línea de metadatos
+df &lt;- read_csv("Metadata line
                a,b,c
                1,2,3
                4,5,6", skip=1)
@@ -377,15 +378,15 @@ df
 ```
 
 ---
-## Lectura de datos
+## Reading data
 
-Así prevenimos la lectura de comentarios
+This is how we prevent comments from being read
 
 
 ``` r
-df &lt;- read_csv("# Línea de metadatos
+df &lt;- read_csv("# Metadata line
                a,b,c
-               # Un comentario
+               # A comment
                1,2,3
                4,5,6", comment = '#')
 df
@@ -401,9 +402,9 @@ df
 ```
 
 ---
-## Lectura de datos
+## Reading data
 
-Si las columnas no tienen nombre
+If the columns have no names
 
 ``` r
 df &lt;- read_csv("a,b,c
@@ -422,9 +423,9 @@ df
 ```
 
 ---
-## Lectura de datos
+## Reading data
 
-Si queremos nombrar las columnas
+If we want to name the columns
 
 
 ``` r
@@ -444,30 +445,30 @@ df
 ```
 
 ---
-## Lectura de datos
+## Reading data
 
-Dar nombres en formato apropiado
+Giving names in an appropriate format
 
 
 ``` r
-df &lt;- read_csv("Nombre Apellido, Es Fumador, EDAD_PACIENTE
-               Juan Montero, SI, 35
-               Maria Chacón, NO, 64")
+df &lt;- read_csv("First Name, Is Smoker, PATIENT_AGE
+               John, YES, 35
+               Mary, NO, 64")
 df %&gt;% janitor::clean_names()
 ```
 
 ```
 ## # A tibble: 2 × 3
-##   nombre_apellido es_fumador edad_paciente
-##   &lt;chr&gt;           &lt;chr&gt;              &lt;dbl&gt;
-## 1 Juan Montero    SI                    35
-## 2 Maria Chacón    NO                    64
+##   first_name is_smoker patient_age
+##   &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;
+## 1 John       YES                35
+## 2 Mary       NO                 64
 ```
 
 ---
-## Lectura de datos
+## Reading data
 
-Podemos indicar que caracteres se refieren a un valor ausente
+We can indicate which characters refer to a missing value
 
 
 ``` r
@@ -486,9 +487,9 @@ df
 ```
 
 ---
-# Lectura de datos en excell
+# Reading data in excel
 
-Necesitamos el paquete `library(readxl)`.
+We need the `library(readxl)` package.
 
 
 ``` r
@@ -515,17 +516,17 @@ df %&gt;% head(5)
 ---
 class: center, middle, inverse
 
-# Importación de datos: Parsear vectores y ficheros
+# Data importation: Parsing vectors and files
 
 ---
-## Parsear vectores
+## Parsing vectors
 
-La función `read_csv`, internamente, **parsea** un fichero de texto. Es decir, convierte un fichero
-de texto en una estructura de datos organizada.
+The `read_csv` function internally **parses** a text file. That is, it converts a text
+file into an organized data structure.
 
-Para entender mejor cómo hace esto debemos entender las funciones `parse*()`
+To better understand how it does this we must understand the `parse*()` functions
 
-Estas convierten un vector de caracteres en un vector de datos especializado
+These convert a character vector into a specialized data vector
 
 
 ``` r
@@ -553,11 +554,11 @@ str(parse_date(c("2022-01-04")))
 ```
 
 ---
-## Parsear vectores
+## Parsing vectors
 
-Como todas las funciones de tidyverse, las funciones `parse*()` son uniformes:
-el primer argumento es el vector a parsear y `na` permite indicar que caracteres
-serán tratados como valores ausentes
+Like all tidyverse functions, the `parse*()` functions are uniform:
+the first argument is the vector to parse and `na` allows us to indicate which characters
+will be treated as missing values
 
 
 ``` r
@@ -569,9 +570,9 @@ parse_integer(c("1", "4", "."), na=".")
 ```
 
 ---
-## Parsear vectores
+## Parsing vectors
 
-Si hay problemas, sale un mensaje warning
+If there are problems, a warning message appears
 
 ``` r
 parse_integer(c("1", "4", "c"))
@@ -593,31 +594,31 @@ parse_integer(c("1", "4", "c"))
 ```
 
 ---
-## Tipos de parseadores
+## Types of parsers
 
-* `parse_logical()` y `parse_integer()` para lógicos y enteros. Los más sencillos, dada su uniformidad
+* `parse_logical()` and `parse_integer()` for logicals and integers. The simplest ones, given their uniformity
 
-* `parse_double()` para números y `parse_number()` (más flexible). Son más complejos
+* `parse_double()` for numbers and `parse_number()` (more flexible). These are more complex
 
-* `parse_factor()` para variables tipo factor (categóricas con valores fijos y conocidos)
+* `parse_factor()` for factor-type variables (categorical, with fixed and known values)
 
-* `parse_datetime()`, `parse_date()` y `parse_time()` para tiempos y fechas. Son los más complejos dada la variabilidad en la escritura de fechas y tiempos.
-
----
-## Tipos de parseadores - Números
-
-Tres problemas
-
-1. Los números se escriben de manera diferente en distintas partes del mundo (1.45 vs 1,45)
-
-2. A veces los números vienen con símbolos (100%)
-
-3. Caracteres de agrupamiento (1.000.000)
+* `parse_datetime()`, `parse_date()` and `parse_time()` for times and dates. These are the most complex, given the variability in how dates and times are written.
 
 ---
-## Tipos de parseadores - Números
+## Types of parsers - Numbers
 
-1. Los números se escriben de manera diferente en distintas partes del mundo (1.45 vs 1,45)
+Three problems
+
+1. Numbers are written differently in different parts of the world (1.45 vs 1,45)
+
+2. Sometimes numbers come with symbols (100%)
+
+3. Grouping characters (1.000.000)
+
+---
+## Types of parsers - Numbers
+
+1. Numbers are written differently in different parts of the world (1.45 vs 1,45)
 
 
 ``` r
@@ -629,9 +630,9 @@ parse_double("1,45", locale = locale(decimal_mark = ","))
 ```
 
 ---
-## Tipos de parseadores - Números
+## Types of parsers - Numbers
 
-2. A veces los números vienen con símbolos (100%)
+2. Sometimes numbers come with symbols (100%)
 
 
 ``` r
@@ -651,7 +652,7 @@ parse_number("30%")
 ```
 
 ``` r
-parse_number("Me costó 100 €")
+parse_number("It cost me 100 €")
 ```
 
 ```
@@ -659,9 +660,9 @@ parse_number("Me costó 100 €")
 ```
 
 ---
-## Tipos de parseadores - Números
+## Types of parsers - Numbers
 
-3. Caracteres de agrupamiento (1.000.000)
+3. Grouping characters (1.000.000)
 
 
 ``` r
@@ -681,30 +682,30 @@ parse_number("100.330€$", locale = locale(grouping_mark = "."))
 ```
 
 ---
-## Tipos de parseadores - Factores
+## Types of parsers - Factors
 
-Hay que dar a `parse_factor` un vector de posibles niveles
+We must give `parse_factor` a vector of possible levels
 
 
 ``` r
-parse_factor(c("hombre", "mujer", "mujer", "otro", "portugues"), levels=c("hombre", "mujer", "otro"))
+parse_factor(c("male", "female", "female", "other", "portuguese"), levels=c("male", "female", "other"))
 ```
 
 ```
-## [1] hombre mujer  mujer  otro   &lt;NA&gt;  
+## [1] male   female female other  &lt;NA&gt;  
 ## attr(,"problems")
 ## # A tibble: 1 × 4
-##     row   col expected           actual   
-##   &lt;int&gt; &lt;int&gt; &lt;chr&gt;              &lt;chr&gt;    
-## 1     5    NA value in level set portugues
-## Levels: hombre mujer otro
+##     row   col expected           actual    
+##   &lt;int&gt; &lt;int&gt; &lt;chr&gt;              &lt;chr&gt;     
+## 1     5    NA value in level set portuguese
+## Levels: male female other
 ```
 
 
 ---
-## Tipos de parseadores - Fechas y horas
+## Types of parsers - Dates and times
 
-`parse_datetime()` para fecha con hora. Espera, en este orden, año, mes, dia, hora, minuto y segundo
+`parse_datetime()` for a date with a time. It expects, in this order, year, month, day, hour, minute and second
 
 ``` r
 parse_datetime("2022-01-01T1015")
@@ -714,7 +715,7 @@ parse_datetime("2022-01-01T1015")
 ## [1] "2022-01-01 10:15:00 UTC"
 ```
 
-`parse_date()` para fecha. Espera, en este orden, año, mes, dia, separados por `-` o `/`
+`parse_date()` for a date. It expects, in this order, year, month, day, separated by `-` or `/`
 
 ``` r
 parse_date("2022/01/01")
@@ -725,9 +726,9 @@ parse_date("2022/01/01")
 ```
 
 ---
-## Tipos de parseadores - Fechas y horas
+## Types of parsers - Dates and times
 
-`parse_time()` para hora. Espera, en este orden, hora, minuto y segundo separados por `:` y am pm opcionales
+`parse_time()` for a time. It expects, in this order, hour, minute and second separated by `:`, with optional am pm
 
 ``` r
 parse_time("10:15 am")
@@ -737,7 +738,7 @@ parse_time("10:15 am")
 ## 10:15:00
 ```
 
-También se puede especificar el formato
+The format can also be specified
 
 
 ``` r
@@ -748,69 +749,69 @@ parse_date("01/04/22", "%d/%m/%y")
 ## [1] "2022-04-01"
 ```
 
-[Más información sobre los formatos](https://readr.tidyverse.org/reference/parse_datetime.html)
+[More information about the formats](https://readr.tidyverse.org/reference/parse_datetime.html)
 
 ---
-## Tipos de parseadores - Fechas y horas
+## Types of parsers - Dates and times
 
-- **Año**
+- **Year**
 
-:   `%Y` (4 dígitos).
+:   `%Y` (4 digits).
 
-:   `%y` (2 dígitos); 00-69 -\&gt; 2000-2069, 70-99 -\&gt; 1970-1999.
+:   `%y` (2 digits); 00-69 -\&gt; 2000-2069, 70-99 -\&gt; 1970-1999.
 
-- **Mes**
+- **Month**
 
-:   `%m` (2 dígitos).
+:   `%m` (2 digits).
 
-:   `%b` (nombre abreviado, como "Jan").
+:   `%b` (abbreviated name, such as "Jan").
 
-:   `%B` (nombre completo, "January").
+:   `%B` (full name, "January").
 
-- **Día**
+- **Day**
 
-:   `%d` (2 dígitos).
+:   `%d` (2 digits).
 
-:   `%e` (espacio opcional).
+:   `%e` (optional space).
 
 ---
-## Tipos de parseadores - Fechas y horas
+## Types of parsers - Dates and times
 
-- **Tiempo**
+- **Time**
 
-:   `%H` 0-23 horas
+:   `%H` 0-23 hours
 
-:   `%I` 0-12, usar con `%p`.
+:   `%I` 0-12, use with `%p`.
 
 :   `%p` AM/PM
 
-:   `%M` minutos
+:   `%M` minutes
 
-:   `%S` segundos, número entero.
+:   `%S` seconds, whole number.
 
-:   `%OS` rsegundos reales.
+:   `%OS` real seconds.
 
-:   `%Z` Franja horaria (e.g. `America/Chicago`).
-
-
-:   `%z` (como offset de UTC, e.g. `+0800`).
+:   `%Z` Time zone (e.g. `America/Chicago`).
 
 
----
-## Parsear un fichero
+:   `%z` (as a UTC offset, e.g. `+0800`).
 
-Intentemos entender
-
-1. Cómo `readr` acierta automáticamente el tipo de columna para parsearla
-
-2. Cómo cambiar la especificación por defecto
 
 ---
-## Parsear un fichero
+## Parsing a file
 
-1. Cómo `readr` acierta automáticamente el tipo de columna para parsearla
+Let us try to understand
 
-Para esto, `readr` lee las primeras 1000 filas y cada columna y usa una heurística para adivinar el tipo. Posteriormente, utiliza el parser correspondiente.
+1. How `readr` automatically guesses the right column type in order to parse it
+
+2. How to change the default specification
+
+---
+## Parsing a file
+
+1. How `readr` automatically guesses the right column type in order to parse it
+
+To do this, `readr` reads the first 1000 rows of each column and uses a heuristic to guess the type. It then uses the corresponding parser.
 
 
 ``` r
@@ -831,18 +832,18 @@ str(parse_guess("2022-01-01"))
 
 ---
 
-## Parsear un fichero
+## Parsing a file
 
-A veces esta estrategia falla
+Sometimes this strategy fails
 
-* Puede ser que las 1000 primeras filas sean casos especiales (1000 enteros en variable double)
+* It may be that the first 1000 rows are special cases (1000 integers in a double variable)
 
-* La columna puede contener valores ausentes
+* The column may contain missing values
 
-Es recomendable, cuando se pueda, especificar el tipo de columnas
+It is advisable, whenever possible, to specify the column types
 
 ---
-## Ejemplo
+## Example
 
 
 ``` r
@@ -865,7 +866,7 @@ read_csv("data/df-na.csv")
 ```
 
 ---
-## Ejemplo
+## Example
 
 
 ``` r
@@ -891,20 +892,20 @@ read_csv("data/df-na.csv", col_types = list(col_double(), col_character(),
 ---
 class: center, middle, inverse
 
-# Importación de datos: escritura de datos
+# Data importation: writing data
 
 ---
-# Escritura de datos
+# Writing data
 
-Tres funciones principales
+Three main functions
 
-* `write_csv()`: escribe en csv
+* `write_csv()`: writes to csv
 
-* `write_tsv()`: escribe en tsv
+* `write_tsv()`: writes to tsv
 
-* `write_excel_csv()`: escribe en excell
+* `write_excel_csv()`: writes to excel
 
-El uso
+Usage
 
 
 ``` r
@@ -912,16 +913,16 @@ write_csv(df, "df.csv")
 ```
 
 ---
-# Escritura de datos
+# Writing data
 
-Con estas funciones se pierde información (por ejemplo el tipo de columnas).
+With these functions some information is lost (for example the column types).
 
-Recomendable usar `write_rds()` y `read_rds()` (análogas a `readRDS()` y `writeRDS()` de R Base)
+It is advisable to use `write_rds()` and `read_rds()` (analogous to `readRDS()` and `writeRDS()` from R Base)
 
-Estas guardan ficheros en formato binario RDS
+These save files in the binary RDS format
 
 ---
-# Escritura de datos
+# Writing data
 
 
 ``` r
@@ -940,45 +941,45 @@ iris_tibble %&gt;% head(5)
 ```
 
 ---
-## Otros datos
+## Other data
 
-Para el resto de tipos de datos que no hemos estudiado, existen paqutes de tidyverse 
+For the remaining data types that we have not studied, there are tidyverse packages 
 
 * **haven**: SPSS, Stata, SAS
 
-* **readxl** para excel
+* **readxl** for excel
 
-* **DBI** junto con **RMySQL**, **RSQLite**, etc. para lanzar queries de SQL contra bases de datos y devolver un data frame
+* **DBI** together with **RMySQL**, **RSQLite**, etc. to run SQL queries against databases and return a data frame
 
-* **jsonlite** leer datos JSON
+* **jsonlite** to read JSON data
 
 ---
-## Leer JSON
+## Reading JSON
 
 * Javascript Object Notation
 
-* Almacenamiento ligero de datos
+* Lightweight data storage
 
-* Es un formato común en APIs
+* It is a common format in APIs
 
-* Los datos se guardan objetos con pares atributo-valor y matrices
+* Data is stored in objects with attribute-value pairs and arrays
 
 ---
-## Leer JSON
+## Reading JSON
 
 
 &lt;img src="img/json.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 ---
-## Leer JSON
+## Reading JSON
 
 ``` r
 library(jsonlite)
 
-# Leer JSON
+# Read JSON
 iris_JSON &lt;- read_json("data/iris.json", simplifyVector = TRUE)
 
-# Convertir en dataframe
+# Convert into a dataframe
 iris_df &lt;- fromJSON(iris_JSON)
 
 head(iris_df)
@@ -995,10 +996,10 @@ head(iris_df)
 ```
 
 ---
-## Leer JSON
+## Reading JSON
 
 ``` r
-# La función prettify nos imprime el JSON de forma limpia
+# The prettify function prints the JSON out cleanly
 prettify(iris_JSON)
 ```
 
@@ -2061,163 +2062,163 @@ prettify(iris_JSON)
 ---
 class: center, middle, inverse
 
-# Introducción a Hadoop, MapReduce y Spark
+# Introduction to Hadoop, MapReduce and Spark
 
 ---
 
-## Motivación
+## Motivation
 
-- Hemos trabajado con ficheros de datos de **&lt; 1 GB** en **RAM** usando tidyverse.
+- We have worked with data files of **&lt; 1 GB** in **RAM** using tidyverse.
 
-- En la práctica hay ficheros de **cientos de GB o TB**. Dos problemas:
+- In practice there are files of **hundreds of GB or TB**. Two problems:
 
-  * **Límite de Memoria**: El conjunto de datos es más grande que la RAM disponible.
+  * **Memory Limit**: The dataset is larger than the available RAM.
   
-  * **Límite de Cómputo/Lectura**: Incluso si el archivo cabe en disco, su procesamiento secuencial es lento.
+  * **Compute/Read Limit**: Even if the file fits on disk, processing it sequentially is slow.
 
 
 ---
 
-## El problema: datos mayores que la memoria
+## The problem: data larger than memory
 
-| Recurso | Capacidad típica | Velocidad aproximada |
+| Resource | Typical capacity | Approximate speed |
 |---------|------------------|----------------------|
 | **RAM** | 8–64 GB | 10–100 GB/s |
 | **SSD** | 0.5–4 TB | 0.5–3 GB/s |
 | **HDD** | 4–20 TB | 100–250 MB/s |
 
-El acceso a disco (especialmente HDD) es muy lento. Las soluciones eficientes deben minimizar las operaciones de lectura/escritura en disco.
+Disk access (especially HDD) is very slow. Efficient solutions must minimize disk read/write operations.
 
 ---
 
-## Procesar por bloques (chunking)
+## Processing in chunks
 
-* La estrategia fundamental para manejar archivos grandes es procesarlos por partes (bloques o chunks).
+* The fundamental strategy for handling large files is to process them in parts (blocks or chunks).
 
-* Lógica general (Ej: calcular media de ristra muy grande de números):
+* General logic (e.g. computing the average of a very long string of numbers):
 
-1. **Inicializar**: Crear acumuladores en RAM (suma = 0, n = 0).
+1. **Initialize**: Create accumulators in RAM (total = 0, n = 0).
 
-2. **Iterar**:
+2. **Iterate**:
 
-  * Leer un bloque de datos desde el disco.
-  * Procesar ese bloque en RAM (calcular suma_bloque, n_bloque).
-  * Actualizar (suma += suma_bloque, n += n_bloque).
+  * Read a block of data from disk.
+  * Process that block in RAM (compute block_total, block_n).
+  * Update (total += block_total, n += block_n).
   
-3. **Finalizar**: Cuando se ha leído todo el archivo, combinar los resultados (media = suma / n).
+3. **Finalize**: Once the whole file has been read, combine the results (average = total / n).
 
-&gt; Este principio se aplica tanto en un solo equipo como en un entorno distribuido (varios equipos).
+&gt; This principle applies both on a single machine and in a distributed environment (several machines).
 
 ---
-## Tres opciones
+## Three options
 
-| **Opción** | **Cálculo** | **Intermedios** | **Velocidad**  |
+| **Option** | **Computation** | **Intermediates** | **Speed**  |
 |-------|---------|-------------|-----------  |
-| **Troceo local** | 1 ordenador | **Disco local** | Media|
-| **Hadoop + MapReduce** | Varios ordenadores | **Disco distribuido** | Baja (por disco)  |
-| **Spark** | Varios ordenadores | **RAM distribuida** (disco si no cabe) | Alta (interactivo)  |
+| **Local chunking** | 1 computer | **Local disk** | Medium|
+| **Hadoop + MapReduce** | Several computers | **Distributed disk** | Low (disk-bound)  |
+| **Spark** | Several computers | **Distributed RAM** (disk if it does not fit) | High (interactive)  |
 
 
 ---
 
-## Solución 1: Procesamiento secuencial local
+## Solution 1: Local sequential processing
 
-* Un único hilo de ejecución lee secuencialmente los bloques del archivo desde el disco local y los procesa.
+* A single execution thread sequentially reads the blocks of the file from the local disk and processes them.
 
-* Limitación: El rendimiento está acotado por la velocidad de I/O del disco y la capacidad de una única CPU.
+* Limitation: Performance is bounded by the disk I/O speed and the capacity of a single CPU.
 
 ```r
-con &lt;- file("numeros.csv")
+con &lt;- file("numbers.csv")
 chunk &lt;- 1e6
-suma &lt;- 0; n &lt;- 0
+total &lt;- 0; n &lt;- 0
 repeat {
-  x &lt;- scan(con, n = chunk, quiet = TRUE)   # lee del disco local
+  x &lt;- scan(con, n = chunk, quiet = TRUE)   # reads from the local disk
   if (length(x) == 0) break
-  suma &lt;- suma + sum(x)
-  n    &lt;- n + length(x)
+  total &lt;- total + sum(x)
+  n     &lt;- n + length(x)
 }
 close(con)
-media &lt;- suma / n
+average &lt;- total / n
 ```
 
-**Limitaciones**: secuencial; un fallo obliga a reiniciar; no hay paralelismo entre equipos.
+**Limitations**: sequential; a failure forces a restart; there is no parallelism across machines.
 
 ---
 
-## Solución 2: Hadoop + MapReduce
+## Solution 2: Hadoop + MapReduce
 
-- **HDFS**: divide el archivo en bloques y los guarda en **discos de varios equipos** con **copias**.
+- **HDFS**: splits the file into blocks and stores them on the **disks of several machines**, with **copies**.
 
-- **MapReduce**: procesa en **paralelo** y **combina** resultados.
+- **MapReduce**: processes in **parallel** and **combines** the results.
 
-**Media global (flujo):**
+**Global average (flow):**
 
 ```
-Nodo A → (sumaA, nA)
-Nodo B → (sumaB, nB)
+Node A → (totalA, nA)
+Node B → (totalB, nB)
 ...
-Combinar → media = (Σ suma_i) / (Σ n_i)
+Combine → average = (Σ total_i) / (Σ n_i)
 ```
 
-- Cálculo en **RAM** de cada nodo.
+- Computation in the **RAM** of each node.
 
-- Resultados **intermedios** se escriben/leen de **HDFS (disco)**.
+- **Intermediate** results are written to and read from **HDFS (disk)**.
 
-- **Robusto**, pensado para **procesos por lotes** (no interactivos).
+- **Robust**, designed for **batch processes** (not interactive ones).
 
 
 ---
 
-## Solución 3: Apache Spark
+## Solution 3: Apache Spark
 
-- También reparte el archivo entre nodos, pero mantiene **datos e intermedios en RAM** cuando es posible.
+- It also distributes the file across nodes, but keeps **the data and the intermediate results in RAM** whenever possible.
 
-- Evita tocar disco entre pasos.
+- It avoids touching the disk between steps.
 
-- Adecuado para **análisis interactivo** y **algoritmos con muchas repeticiones**.
+- Suitable for **interactive analysis** and **algorithms with many repetitions**.
 
-**Spark desde R (mínimo):**
+**Spark from R (minimal):**
 
 ```r
 library(sparklyr); library(dplyr)
-sc &lt;- spark_connect(master = "local")       # o clúster
+sc &lt;- spark_connect(master = "local")       # or a cluster
 copy_to(sc, mtcars, overwrite = TRUE) %&gt;%
-  summarise(media_hp = mean(hp)) %&gt;% collect()
+  summarise(mean_hp = mean(hp)) %&gt;% collect()
 ```
 ---
 
-## ¿Cuándo usar cada uno?
+## When to use each one?
 
-**Troceo local**
+**Local chunking**
 
-- Archivo algo **&gt; RAM** y **solo** tienes un equipo.
-- Cálculo sencillo (sumas, conteos, medias).
+- A file somewhat **&gt; RAM** and you **only** have one machine.
+- Simple computations (sums, counts, averages).
 
 **Hadoop + MapReduce**
 
-- Archivos **muy grandes** (multi‑TB o más) y **no** necesitas interacción rápida.
-- Procesos **programados** (diarios/semana), alta **fiabilidad**.
+- **Very large** files (multi‑TB or more) and you do **not** need fast interaction.
+- **Scheduled** processes (daily/weekly), high **reliability**.
 
 ---
 
-## ¿Cuándo usar cada uno?
+## When to use each one?
 
 **Spark**
 
-- Archivos **grandes** (10 GB – decenas de TB) con necesidad de **respuesta ágil**.
+- **Large** files (10 GB – tens of TB) with a need for a **quick response**.
 
-- **Análisis iterativo**, pruebas repetidas.
+- **Iterative analysis**, repeated tests.
 
-- Quieres reutilizar **R/dplyr** (`sparklyr`) con el mismo estilo de código.
+- You want to reuse **R/dplyr** (`sparklyr`) with the same coding style.
 
 
 ---
 
-## Bibliografía
+## Bibliography
 
-* Este tema está fundamentalmente basado en  [R for Data Science](https://r4ds.had.co.nz/), Wickham and Grolemund (2016)
+* This topic is largely based on  [R for Data Science](https://r4ds.had.co.nz/), Wickham and Grolemund (2016)
 
-* Puedes encontrar una introducción a Spark con R en: [Mastering Spark with R](https://therinspark.com/index.html)
+* You can find an introduction to Spark with R in: [Mastering Spark with R](https://therinspark.com/index.html)
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

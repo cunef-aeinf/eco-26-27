@@ -1,5 +1,5 @@
 ---
-title: "Lab 02 - Visualización"
+title: "Lab 2.1 - Data Visualization"
 output:
   html_document:
     css: ./ds_labs.css
@@ -22,76 +22,77 @@ knitr::opts_chunk$set(fig.width=12, fig.height=8)
 ```
 
 
-## Ejercicio 1
+## Exercise 1
 
-Utilizando los datos de la librería `gapminder`:
+Using the data from the `gapminder` package:
 
-* Filtra las obserevaciones correspondientes a los años 1957, 1967, 1977, 1987, 1997, 2007
+* Filter the observations corresponding to the years 1957, 1967, 1977, 1987, 1997, 2007
 
-* Representa la relación entre PIB per cápita y esperanza de vida por continentes y por años en diferentes gráficas usando **faceting**. El tamaño de los puntos ha de ser proporcional a la población.
-El color debe reflejar el continente. 
+* Plot the relationship between GDP per capita and life expectancy by continent and by year
+in different plots using **faceting**. The size of the points must be proportional to the population.
+The color must reflect the continent. 
 
-* ¿Qué conlusiones extraes?
+* What conclusions do you draw?
 
-### Solución
+### Solution
 
-Cargamos los paquetes necesarios
+We load the required packages
 ```{r}
 library(gapminder)
 library(tidyverse)
 ```
 
-Filtramos las observaciones de los años 1957, 1967, 1977, 1987, 1997, 2007
+We filter the observations for the years 1957, 1967, 1977, 1987, 1997, 2007
 
 ```{r}
 years <- c(1957, 1967, 1977, 1987, 1997, 2007)
 gapminder_filter <- gapminder %>% filter(year %in% years)
 ```
 
-Representamos gráficamente
+We plot this graphically
 ```{r}
 ggplot(data = gapminder_filter, aes(x = gdpPercap, y = lifeExp,
                                     size=pop, color=continent)) + 
   geom_point() +
-  labs(title = "PIB per Cápita vs Esperanza de Vida",
-       subtitle = "Por continente y año",
-       x = "PIB per Cápita ($)", y =  "Esperanza de vida (años)") +
+  labs(title = "GDP per Capita vs Life Expectancy",
+       subtitle = "By continent and year",
+       x = "GDP per Capita ($)", y =  "Life expectancy (years)") +
   scale_x_log10() +
   facet_grid(continent ~ year, scales = "free_x")
 ```
 
-## Ejercicio 2
+## Exercise 2
 
-La contaminación debida al consumo de plástico es un problema global que afecta negativamente a la salud de diversos ecosistemas.
-[Our World in Data](https://ourworldindata.org/plastic-pollution) contiene multitud de datos acerca de la evolución del consumo de plástico tanto a nivel global, como de país. Para este ejercicio nos centramos en los datos de 2010.
+Pollution due to plastic consumption is a global problem that negatively affects the health of many ecosystems.
+[Our World in Data](https://ourworldindata.org/plastic-pollution) contains a great deal of data on the evolution of plastic consumption both globally and by country. For this exercise we focus on the 2010 data.
 
-Los datos se encuentran en la carpeta data del repositorio. Puedes cargarlos utilizando
+The data are in the data folder of the repository. You can load them using
 
 ```{r load-data, message=FALSE, eval=TRUE}
 library(tidyverse)
 plastic <- read_csv("data/plastic-waste.csv")
 ```
 
-Las variables son las siguientes
+The variables are the following
 
-- `code`: Código de país (3 letras)
-- `entity`: Nombre completo del país
-- `continent`: Nombre del continente
-- `year`: Año
-- `gdp_per_cap`: PIB per cápita (2011) en dólares internacionales
-- `plastic_waste_per_cap`: Cantidad de residuos per capita de plástico en kg/día
-- `mismanaged_plastic_waste_per_cap`: Cantidad de residuos de plástico mal gestionados en kg/día
-- `mismanaged_plastic_waste`: Toneladas de residuos de plástico mal gestionados
-- `coastal_pop`: Número de individuos que viven en o cerca de la cosa
-- `total_pop`: Población total
+- `code`: Country code (3 letters)
+- `entity`: Full name of the country
+- `continent`: Name of the continent
+- `year`: Year
+- `gdp_per_cap`: GDP per capita (2011) in international dollars
+- `plastic_waste_per_cap`: Amount of plastic waste per capita in kg/day
+- `mismanaged_plastic_waste_per_cap`: Amount of mismanaged plastic waste in kg/day
+- `mismanaged_plastic_waste`: Tonnes of mismanaged plastic waste
+- `coastal_pop`: Number of individuals living on or near the coast
+- `total_pop`: Total population
 
-Visualiza la distribución de la cantidad de residuos de plástico per cápita (en 2010).
+Visualize the distribution of the amount of plastic waste per capita (in 2010).
 
-¿Existe algún valor atípico? Si es así, determina qué países son atípicos. Trata de mostrar si son o no datos erróneos (investigando en internet).
+Are there any outliers? If so, determine which countries are outliers. Try to establish whether or not they are erroneous data (by researching on the internet).
 
-Nota: Para el resto de ejercicios, filtra los datos atípicos si los hubiera.
+Note: For the remaining exercises, filter out the outliers if there are any.
 
-### Solución
+### Solution
 
 ```{r, eval=TRUE}
 ggplot(data = plastic, aes(x = plastic_waste_per_cap)) +
@@ -109,22 +110,22 @@ plastic <- plastic %>%
 
 ```
 
-## Ejercicio 3
+## Exercise 3
 
-Visualiza la distribución de la cantidad de residuos de plástico per capita por continente, usando distintos histogramas para cada continente.
+Visualize the distribution of the amount of plastic waste per capita by continent, using a different histogram for each continent.
 
-### Solución
+### Solution
 
 ```{r, eval=TRUE}
 ggplot(data = plastic, aes(x = plastic_waste_per_cap, fill = continent)) +
   geom_histogram(binwidth = 0.05) + facet_wrap(continent~.)
 ```
 
-## Ejercicio 4
+## Exercise 4
 
-Repite la gráfica anterior usando densidad, incluyendo todos los continentes en la misma gráfica indicándolos con distintos colores.
+Repeat the previous plot using density, including all the continents in the same plot and indicating them with different colors.
 
-### Solución
+### Solution
 
 ```{r plastic_waste_per_cap-dens-color, eval = TRUE}
 ggplot(data = plastic, 
@@ -133,11 +134,11 @@ ggplot(data = plastic,
   geom_density()
 ```
 
-## Ejercicio 5
+## Exercise 5
 
-Mejora la gráfica anterior pintando cada curva de un color y añadiendo transparencia.
+Improve the previous plot by filling each curve with a color and adding transparency.
 
-### Solución
+### Solution
 
 ```{r plastic_waste_per_cap-dens-color-fill-alpha, eval = TRUE}
 ggplot(plastic, 
@@ -147,11 +148,11 @@ ggplot(plastic,
   geom_density(alpha = 0.3)
 ```
 
-## Ejercicio 6
+## Exercise 6
 
-Elabora una visualización alternativa a la anterior que permita comparar la distribución de cantidad de residuos de plástico per cápita de diferentes continentes.
+Produce an alternative visualization to the previous one that allows the distribution of the amount of plastic waste per capita of different continents to be compared.
 
-### Solución
+### Solution
 
 ```{r plastic_waste_per_cap-box, eval = TRUE}
 ggplot(data = plastic, 
@@ -160,14 +161,14 @@ ggplot(data = plastic,
   geom_boxplot()
 ```
 
-## Ejercicio 7
+## Exercise 7
 
-Investiga qué son las [gráficas violín](http://ggplot2.tidyverse.org/reference/geom_violin.html).
-Construye la gráfica de violín de los datos anteriores. ¿Qué revelan estas gráficas que un boxplot no revela?
+Find out what [violin plots](http://ggplot2.tidyverse.org/reference/geom_violin.html) are.
+Build the violin plot of the previous data. What do these plots reveal that a boxplot does not?
 
-¿Observas algún patrón que distinga la distribución de la cantidad de residuos de plástico de continentes desarrolladas y en vías de desarrollo?
+Do you observe any pattern that distinguishes the distribution of the amount of plastic waste of developed and developing continents?
 
-### Solución
+### Solution
 
 ```{r}
 ggplot(data = plastic, 
@@ -178,15 +179,15 @@ ggplot(data = plastic,
   geom_violin()
 ```
 
-En África, América Latina y Asia hay gran cantidad de países con pocos residuos y pocos con muchos residuos, mientras que en Europa, norteamérica y Oceanía la distribución es más homogénea.
+In Africa, Latin America and Asia there are many countries with little waste and few with a lot of waste, whereas in Europe, North America and Oceania the distribution is more homogeneous.
 
 
-## Ejercicio 8
+## Exercise 8
 
-Visualiza la relación entre cantidad de residuos de plástico per cápita y PIB per cápita. Pinta cada continente con un color y añade un **único smoothing** que muestre la tendencia global. Además, usa la escala de colores viridis (investiga en internet cómo utilizarla).
-¿Cómo describirías esta relación? 
+Visualize the relationship between the amount of plastic waste per capita and GDP per capita. Color each continent with a different color and add a **single smoothing** that shows the overall trend. In addition, use the viridis color scale (look up on the internet how to use it).
+How would you describe this relationship? 
 
-### Solución
+### Solution
 
 ```{r}
 ggplot(data=plastic, mapping = aes(x = gdp_per_cap, 
@@ -195,15 +196,15 @@ ggplot(data=plastic, mapping = aes(x = gdp_per_cap,
 ```
 
 
-## Ejercicio 9
+## Exercise 9
 
-Repite la gráfica anterior pero únicamente incluyendo los datos de Europa (obviamente sin utilizar colores).
-¿Qué tendencia observas? ¿Qué países consumen menos plástico de lo implicado por esta tendencia?
+Repeat the previous plot but including only the data for Europe (obviously without using colors).
+What trend do you observe? Which countries consume less plastic than this trend implies?
 
-### Solución
+### Solution
 
 ```{r}
-plastic_europa <- plastic[plastic$continent == "Europe",]
+plastic_europe <- plastic[plastic$continent == "Europe",]
 plastic %>% filter(continent == "Europe") %>%
   ggplot(mapping = aes(x = gdp_per_cap, 
                      y = plastic_waste_per_cap) ) +
@@ -216,16 +217,17 @@ plastic %>%
   filter(plastic_waste_per_cap < 0.1 & gdp_per_cap > 40000) 
 
 
-plastic_europa[plastic_europa$gdp_per_cap > 40000 & plastic_europa$plastic_waste_per_cap < 0.1, "entity"]
+plastic_europe[plastic_europe$gdp_per_cap > 40000 & plastic_europe$plastic_waste_per_cap < 0.1, "entity"]
 ```
 
-## Ejercicio 10
+## Exercise 10
 
-Visualiza la relación entre los residuos de plástico per cápita y los residuos mal gestionados per cápita.
-Pinta cada continente de un color. ¿Cambia la asociación de estas dos variables entre continentes?
+Visualize the relationship between plastic waste per capita and mismanaged waste per capita.
+Color each continent with a different color.
+Does the association between these two variables change across continents?
 
 
-### Solución
+### Solution
 
 ```{r}
 ggplot(plastic, aes(x = plastic_waste_per_cap,

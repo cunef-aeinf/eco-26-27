@@ -1,5 +1,5 @@
 ---
-title: "Lab 2.2 - Transformación"
+title: "Lab 2.2 - Data Transformation"
 output:
   html_document:
     css: ./ds_labs.css
@@ -22,95 +22,95 @@ knitr::opts_chunk$set(fig.width=12, fig.height=8)
 ```
 
 
-En este laboratorio trabajaremos con datos procedentes de una encuesta sobre los hábitos de los fumadores en el Reino Unido. Los datos poceden del National STEM Centre, Large Datasets from stats4schools, [https://www.stem.org.uk/resources/elibrary/resource/28452/large-datasets-stats4schools](https://www.stem.org.uk/resources/elibrary/resource/28452/large-datasets-stats4schools).
+In this lab we will work with data from a survey on the habits of smokers in the United Kingdom. The data come from the National STEM Centre, Large Datasets from stats4schools, [https://www.stem.org.uk/resources/elibrary/resource/28452/large-datasets-stats4schools](https://www.stem.org.uk/resources/elibrary/resource/28452/large-datasets-stats4schools).
 
-Los datos se encuentran en la carpeta data del repositorio. Puedes cargarlos utilizando
+The data are in the data folder of the repository. You can load them using
 
 ```{r load-data, message=FALSE, eval=TRUE}
 library(tidyverse)
-fumar <- read_csv("data/smoking.csv")
+smoking <- read_csv("data/smoking.csv")
 ```
-La variables recogidas son (entre paréntesis aparecen los niveles que toman):
+The variables collected are (the levels they take appear in parentheses):
 
-* `gender`: Género
+* `gender`: Gender
 
-* `age`: Edad
+* `age`: Age
 
-*  `marital_status`: Estado civil (Divorced, Married, Separated, Single and Widowed)
+*  `marital_status`: Marital status (Divorced, Married, Separated, Single and Widowed)
 
-* `highest_qualification`: Nivel más alto de educación (A Levels, Degree, GCSE/CSE, GCSE/O Level, Higher/Sub Degree, No Qualification, ONC/BTEC y Other/Sub Degree)
+* `highest_qualification`: Highest qualification (A Levels, Degree, GCSE/CSE, GCSE/O Level, Higher/Sub Degree, No Qualification, ONC/BTEC and Other/Sub Degree)
 
-* `nationality`: Nacionalidad (British, English, Irish, Scottish, Welsh, Other, Refused y Unknown)
+* `nationality`: Nationality (British, English, Irish, Scottish, Welsh, Other, Refused and Unknown)
 
-* `ethnicity` : Etnia  (Asian, Black, Chinese, Mixed, White y Refused Unknown)
+* `ethnicity` : Ethnicity  (Asian, Black, Chinese, Mixed, White and Refused Unknown)
 
-* `gross_income`: Salario bruto (Under 2,600, 2,600 to 5,200, 5,200 to 10,400, 10,400 to 15,600, 15,600 to 20,800, 20,800 to 28,600, 28,600 to 36,400, Above 36,400, Refused y Unknown)
+* `gross_income`: Gross income (Under 2,600, 2,600 to 5,200, 5,200 to 10,400, 10,400 to 15,600, 15,600 to 20,800, 20,800 to 28,600, 28,600 to 36,400, Above 36,400, Refused and Unknown)
 
-* `region`: Region (London, Midlands & East Anglia, Scotland, South East, South West, The North y Wales)
+* `region`: Region (London, Midlands & East Anglia, Scotland, South East, South West, The North and Wales)
 
-* `smoke` : Fumador (No y Yes)
+* `smoke` : Smoker (No and Yes)
 
-* `amt_weekends`: Número de cigarros diarios en fin de semana
+* `amt_weekends`: Number of cigarettes per day on weekends
 
-* `amt_weekdays`:  Número de cigarros diarios entre semana
+* `amt_weekdays`:  Number of cigarettes per day on weekdays
 
-* `type`: Tipo de cigarrilos (Packets, Hand-Rolled, Both/Mainly Packets y Both/Mainly Hand-Rolled)
-
-
-
-## Ejercicio 1
-
-¿Cuántas observaciones hay en el dataset para cada género? ¿Qué proporción de mujeres son fumadoras? ¿Y de hombres?
+* `type`: Type of cigarettes (Packets, Hand-Rolled, Both/Mainly Packets and Both/Mainly Hand-Rolled)
 
 
-## Ejercicio 2
 
-Selecciona la variable `amt_weekends`, ordenala de forma decreciente y muestra los primeros 10 valores.
-Haz lo mismo con  `amt_weekdays`, ¿qué observas?
+## Exercise 1
 
-
-## Ejercicio 3
-
-¿Qué valores únicos presenta la variable `gross_income`?
-
-Sustituye los valores Unknown con `NA` y vuelve a calcular los valores únicos de la variable.
+How many observations are there in the dataset for each gender? What proportion of women are smokers? And of men?
 
 
-## Ejercicio 4 
+## Exercise 2
 
-Muestra las 10 últimas filas del dataset.
-
-
-## Ejercicio 5
-
-¿Cuál es la media de cigarrillos diarios entre semana que fuman los fumadores menores de 30? 
-¿Y la media de cigarrillos diarios entre semana que fuman los menores de 30 en general?
-
-**Nota**: Si observas `NA` determina  el posible origen de esos valores ausentes y su tratamiento.
+Select the `amt_weekends` variable, sort it in decreasing order and show the first 10 values.
+Do the same with  `amt_weekdays`; what do you observe?
 
 
-## Ejercicio 6
+## Exercise 3
 
-Calcula media, mediana, y desviación estándar de cigarrillos/dia en fin de semana y entre semana por grupos de edad menor o igual a 20, 20-30, ..., >90. 
-Resume las conclusiones de los resultados observados.
+What unique values does the `gross_income` variable take?
 
-*Nota*: Crea una nueva variable llamada `decada` utilizando la función `case_when`.
-Los niveles de esta variable han de ser
+Replace the Unknown values with `NA` and compute the unique values of the variable again.
+
+
+## Exercise 4 
+
+Show the last 10 rows of the dataset.
+
+
+## Exercise 5
+
+What is the mean number of cigarettes per weekday smoked by smokers under 30? 
+And the mean number of cigarettes per weekday smoked by under-30s in general?
+
+**Note**: If you see `NA`, determine  the possible origin of those missing values and how to handle them.
+
+
+## Exercise 6
+
+Compute the mean, median, and standard deviation of cigarettes/day on weekends and on weekdays by age groups less than or equal to 20, 20-30, ..., >90. 
+Summarize the conclusions drawn from the results observed.
+
+*Note*: Create a new variable called `decade` using the `case_when` function.
+The levels of this variable must be
 `"<=20","20-30","30-40", "40-50", "50-60", "60-70", "70-80", "80-90", ">90"`.
 
 
 
-## Ejercicio 7
+## Exercise 7
 
-Ordena las distintas etnias en orden decreciente de proporción de fumadores en la muestra. Excluye aquellas observaciones con etnia desconocida o no declarada.
+Sort the different ethnicities in decreasing order of the proportion of smokers in the sample. Exclude those observations with unknown or undeclared ethnicity.
 
-## Ejercicio 8
+## Exercise 8
 
-Reproduce el siguiente gráfico. Extrae alguna conclusión.
+Reproduce the following plot. Draw some conclusions.
 
 
 ```{r, echo=F, warning=F}
-fumar %>% mutate(decada=case_when(age<=20 ~"0-20",
+smoking %>% mutate(decade=case_when(age<=20 ~"0-20",
                     age>20 & age<=30 ~ "20-30",
                     age>30 & age<=40 ~ "30-40",
                     age>40 & age<=50 ~ "40-50",
@@ -120,51 +120,51 @@ fumar %>% mutate(decada=case_when(age<=20 ~"0-20",
                     age>80 & age<=90 ~ "80-90",
                     TRUE ~ "90-")) %>% 
   filter(smoke == "Yes") %>% 
-  group_by(decada, gender) %>%
+  group_by(decade, gender) %>%
   summarise(median_we = median(amt_weekdays)) %>% 
-  ggplot(aes(x=decada, y=median_we)) + geom_bar(stat="identity", fill="#D55E00") + 
-  facet_wrap(gender~.) + theme_minimal() + labs(x="Década", y="Mediana de Cigarrillos/Día entre semana")
+  ggplot(aes(x=decade, y=median_we)) + geom_bar(stat="identity", fill="#D55E00") + 
+  facet_wrap(gender~.) + theme_minimal() + labs(x="Decade", y="Median Cigarettes/Weekday")
 ```
 
-## Ejercicio 9
+## Exercise 9
 
-¿Qué tipos de tabaco son más populares en las distintas franjas de salario bruto? ¿Y en las distintas franjas de edad?
+Which types of tobacco are most popular in the different gross income brackets? And in the different age brackets?
 
-*Nota*: utiliza la variable decada creada anteriormente
+*Note*: use the decade variable created earlier
 
 
-## Ejercicio 10
+## Exercise 10
 
-¿Cuál es la diferencia entre estos dos códigos?
+What is the difference between these two pieces of code?
 
 ```{r, eval=F}
-fumar %>% count(gender, smoke) %>% mutate(prop=n/sum(n))
+smoking %>% count(gender, smoke) %>% mutate(prop=n/sum(n))
 ```
 
 ```{r, eval=F}
-fumar %>% group_by(gender, smoke) %>% summarise(n=n()) %>%
+smoking %>% group_by(gender, smoke) %>% summarise(n=n()) %>%
   mutate(prop=n/sum(n))
 ```
 
 
-## Ejercicio 11
+## Exercise 11
 
-¿Entre la gente que no está casada, cuántos cigarros/día entre semana se fuman de media por nivel de estudios?
+Among people who are not married, how many cigarettes/weekday are smoked on average by level of education?
 
 
-## Ejercicio 12
+## Exercise 12
 
-En numerosas ocasiones, ante la presencia de valores ausentes, es útil substituírlos
-por un valor. A este proceso se le conoce como imputación.
-Una de las técnicas más comunes de imputación de variables categóricas, consiste
-en substituír los valores ausentes por el valor más probable en cierto 
-segmento de la población (la moda).
+On many occasions, in the presence of missing values, it is useful to replace them
+with a value. This process is known as imputation.
+One of the most common techniques for imputing categorical variables consists
+of replacing the missing values with the most likely value in a certain 
+segment of the population (the mode).
 
-Por ejemplo, podemos sustituír los valores desconocidos o no declarados de la variable `ethnicity`
-por la etnia más frecuente en los datos, y asumir que el porcentaje de error será pequeño.
-Una estrategia quizás más inteligente es sustituír los valores desconocidos o no declarados de la variable `ethnicity` por la etnia más prevalente en la nación correspondiente. En este ejercicio,
-has de realizar esto último. Para ello, ayudate de la siguiente función
-para el cálculo de la moda.
+For example, we can replace the unknown or undeclared values of the `ethnicity` variable
+with the most frequent ethnicity in the data, and assume that the error rate will be small.
+A perhaps smarter strategy is to replace the unknown or undeclared values of the `ethnicity` variable with the most prevalent ethnicity in the corresponding nation. In this exercise,
+you have to do the latter. To do so, use the following function
+to compute the mode.
 
 ```{r}
 calc_mode <- function(x){
@@ -177,7 +177,7 @@ calc_mode <- function(x){
 }
 ```
 
-*Nota*: Excluye las observaciones con nacionalidad no conocida o no declarada.
-¿Qué sucede si las incluyes?
+*Note*: Exclude the observations with unknown or undeclared nationality.
+What happens if you include them?
 
 

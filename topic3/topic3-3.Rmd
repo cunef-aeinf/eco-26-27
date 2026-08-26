@@ -1,7 +1,7 @@
 ---
-title: "Tema 3.3"
+title: "Topic 3.3"
 author: "Roi Naveiro"
-date: ""
+date: "Academic Year 2026-2027"
 output: 
    xaringan::moon_reader:
     css: "ds_slides.css"
@@ -27,49 +27,50 @@ class: center, middle, inverse, title-slide
 
 <div class="title-logo"></div>
 
-# Análisis y Explotación de la Información
+# Data Analysis and Information Extraction
  
-## Tema 3 - Data Wrangling
+## Topic 3 - Data Wrangling
 
-### 3.3 Strings, factores y fechas
+### 3.3 Strings, Factors and Dates
 <br>
 <br>
 .pull-left[
 ### Roi Naveiro
+#### Academic Year 2026-2027
 ]
 ---
 
 
 ## Data Wrangling
 
-**Objetivo**: dejar los datos listos para su posterior **exploración** y **modelización**
+**Goal**: get the data ready for later **exploration** and **modeling**
 
-Convertir **datos crudos** en **datos procesados**
+Turn **raw data** into **processed data**
 
-**Datos crudos**
+**Raw data**
 
-  - Los datos tal cual aparecen en la fuente de origen
+  - The data exactly as they appear in the original source
   
-  - No han sufrido ninguna manipulación
+  - They have not undergone any manipulation
   
-**Datos procesados**
+**Processed data**
 
-  - Cada variable es una columna
+  - Each variable is a column
   
-  - Cada observación una fila
+  - Each observation a row
   
-  - Cada unidad observacional es una celda
+  - Each observational unit is a cell
   
-  - Datos más complejos, en varias tablas interconectadas
+  - More complex data, in several interconnected tables
   
 ---
 ## Data Wrangling
 
-* Importación de los datos
+* Data import
 
-* Organización de los datos
+* Data organization
 
-* Transformación de los datos
+* Data transformation
 
 ```{r, echo=FALSE, out.width = '100%',  fig.align='center'}
 knitr::include_graphics("img/data-science-wrangle.png")
@@ -81,16 +82,16 @@ library(nycflights13)
 ---
 class: center, middle, inverse
 
-# Transformación de datos
+# Data transformation
 
 ---
-## Transformación de datos
+## Data transformation
 
 * Strings
 
-* Factores
+* Factors
 
-* Fechas y horas
+* Dates and times
 
 ---
 class: center, middle, inverse
@@ -101,81 +102,81 @@ class: center, middle, inverse
 ---
 ## Strings
 
-* Veremos lo básico de manipulación de strings
+* We will cover the basics of string manipulation
 
-* Datos en formato texto
+* Data in text format
 
 ```{r}
-"Esto es un string"
-c("una", "dos y tres")
+"This is a string"
+c("one", "two and three")
 ```
 
-* Expresiones regulares (regexps): permiten identificar patrones en texto
+* Regular expressions (regexps): they allow us to identify patterns in text
 
-* Usaremos `stringr` de tidyverse para manipular strings
+* We will use `stringr` from tidyverse to manipulate strings
 
-* Todas sus funciones empiezan con `str_`
+* All of its functions start with `str_`
 
 ---
-## Strings: longitud
+## Strings: length
 
-Podemos calcular la longitud de una string usando `str_length()`
-
-```{r}
-str_length("Hola")
-```
-
-Las operaciones están vectorizadas
+We can compute the length of a string using `str_length()`
 
 ```{r}
-str_length( c("Hola", "Adiós") )
+str_length("Hello")
 ```
 
-**Pregunta:** ¿Qué pasa si hay espacios?
+The operations are vectorized
+
+```{r}
+str_length( c("Hello", "Goodbye") )
+```
+
+**Question:** What happens if there are spaces?
 
 ---
-## Strings: combinación
+## Strings: combining
 
-Combinamos strings con `str_c`
+We combine strings with `str_c`
 
 ```{r}
-str_c("Ma", "drid")
+str_c("Lon", "don")
 
-str_c("Un", "dos", sep=",")
+str_c("One", "two", sep=",")
 ```
 
-**Pregunta**: ¿Cómo combinarías dos strings con una coma seguida de un espacio?
+**Question**: How would you combine two strings with a comma followed by a space?
 
 ---
-## Strings: combinación
+## Strings: combining
 
-También vectorizado!
+Vectorized as well!
 
 ```{r}
-str_c("prefijo-", c("X", "Y", "Z"), "-sufijo")
+str_c("prefix-", c("X", "Y", "Z"), "-suffix")
 ```
 
-Para colapsar un texto largo en una única string
+To collapse a long text into a single string
 
 ```{r}
-str_c(c("En", "un", "lugar", "de", "la", "Mancha"), collapse = " ")
+str_c(c("It", "was", "the", "best", "of", "times"), collapse = " ")
 ```
 ---
 ## Strings: subsetting
 
-Para extraer partes de una string usamos `str_sub`
+To extract parts of a string we use `str_sub`
 
 ```{r}
 x <- c("Liberty", "La Nuit")
 str_sub(x, 1, 3)
 
-# Con números negativos empieza desde el final
+# With negative numbers it starts from the end
 str_sub(x, -3, -1)
 
 ```
 
 ---
-## Strings: cosas útiles
+## Strings: useful things
 
 ```{r}
 x <- c("Liberty", "La nuit")
@@ -187,70 +188,70 @@ str_to_title(x)
 ```
 
 ---
-## Strings: expresiones regulares
+## Strings: regular expressions
 
-Permiten describir patrones en strings. Se pueden hacer varias cosas con los
-patrones
+They allow us to describe patterns in strings. There are several things we can do with
+patterns
 
-* Determinar que strings cumplen el patrón. 
+* Determine which strings match the pattern. 
 
-* Determinar en qué posición aparece el patrón
+* Determine at which position the pattern appears
 
-* Extraer el patrón
+* Extract the pattern
 
-* Reemplazarlo
+* Replace it
 
-E.g. patrón "contiene ES seguido de dos números"
+E.g. the pattern "contains GB followed by two digits"
 
 ```{r}
-x1 <- "ES49"
-x2 <- "Mi número de cuenta es ES35 30..."
-x3 <- "Resido en España (ES)"
+x1 <- "GB49"
+x2 <- "My account number is GB35 30..."
+x3 <- "I live in Great Britain (GB)"
 ```
 
 ---
-## Strings: expresiones regulares
+## Strings: regular expressions
 
-Vamos aprender a jugar con patrones muy sencillos. Primero, coincidencia 
-exacta (ojo mayúsculas y minúsculas!)
+We are going to learn to work with very simple patterns. First, exact 
+matching (careful with upper and lower case!)
 
 ```{r}
-x <- c("Cats", "Uñas Chung Lee", "Capital")
+x <- c("Cats", "Nails Chung Lee", "Capital")
 str_view(x, "Le")
 ```
 
 ---
-## Strings: expresiones regulares
+## Strings: regular expressions
 
-Para identificar cualquier caracter usamos `.`
+To match any character we use `.`
 
 ```{r}
-x <- c("Cats", "Uñas Chung Lee", "Capital")
+x <- c("Cats", "Nails Chung Lee", "Capital")
 str_view(x, ".a.")
 ```
 ---
-## Strings: expresiones regulares
+## Strings: regular expressions
 
-Empieza por `^` 
+Starts with `^` 
 
 ```{r}
-x <- c("Cats", "Uñas Chung Lee", "Capital")
+x <- c("Cats", "Nails Chung Lee", "Capital")
 str_view(x, "^C")
 ```
 
 ---
-## Strings: expresiones regulares
+## Strings: regular expressions
 
-Termina por `$`
+Ends with `$`
 
 ```{r}
 str_view(x, "l$")
 ```
 
 ---
-## Strings: expresiones regulares
+## Strings: regular expressions
 
-`\b` delimita una palabra 
+`\b` delimits a word 
 
 ```{r}
 x <- c("My favourite animal is the cat", "Here you can see our catalog")
@@ -260,26 +261,26 @@ str_view(x, "\\bcat\\b")
 
 
 ---
-## Strings: expresiones regulares
+## Strings: regular expressions
 
-`\d`: cualquier dígito
-`\s`: espacio en blanco
-`[abc]`:  a, b, o c.
+`\d`: any digit
+`\s`: whitespace
+`[abc]`:  a, b, or c.
 
 ```{r}
-x = c("B12", "Eslava", "Ocho y Medio")
+x = c("B12", "Barbican", "Half Moon")
 str_view(x, "\\d")
 ```
 
 ---
-## Strings: expresiones regulares
+## Strings: regular expressions
 
 
-- En R, **`\` es un carácter reservado**: se usa para escribir secuencias especiales como `\n` o `\t`.
+- In R, **`\` is a reserved character**: it is used to write special sequences such as `\n` or `\t`.
 
-- Por eso, para escribir una barra invertida literal, usamos doble barra: `\\`
+- For this reason, to write a literal backslash we use a double backslash: `\\`
 
-- Así, R procesa `\\d` como la expresión regular `\d`: *“un dígito”*.
+- Thus, R processes `\\d` as the regular expression `\d`: *“a digit”*.
 
 
 ```{r}
@@ -288,44 +289,44 @@ writeLines("\\d")
 
 
 ---
-## Strings: expresiones regulares
+## Strings: regular expressions
 
 ```{r}
-x = c("ES12", "Mi cuenta es ES46", "Resido en España (ES)")
-str_view(x, "ES\\d\\d")
+x = c("GB12", "My account is GB46", "I live in Great Britain (GB)")
+str_view(x, "GB\\d\\d")
 ```
 
 ---
-## Strings: expresiones regulares
+## Strings: regular expressions
 
-**Ejercicio**: Detecta las autovías correctas
+**Exercise**: Detect the valid motorways
 
 ```{r}
-x <- c("Siempre paso por la A1", "A12", "A14", "La A6 va a Galicia", "EA5", "A3", "F2")
+x <- c("I always drive on the A1", "A12", "A14", "The A6 goes to Manchester", "EA5", "A3", "F2")
 ```
 
 
 
 ---
-## Strings: detectar patrones
+## Strings: detecting patterns
 
-Con esto estamos preparados para detectar patrones
+With this we are ready to detect patterns
 
 ```{r}
-x = c("ES12", "Mi cuenta es ES46", "Resido en España (ES)")
-str_detect(x, "ES\\d\\d")
+x = c("GB12", "My account is GB46", "I live in Great Britain (GB)")
+str_detect(x, "GB\\d\\d")
 ```
 
-Uso común, seleccionar los elementos que cumplen el patrón
+A common use: select the elements that match the pattern
 
 ```{r}
 words[str_detect(words, "x$")]
 ```
 
 ---
-## Strings: detectar patrones
+## Strings: detecting patterns
 
-También con dataframes
+Also with dataframes
 
 ```{r}
 df <- tibble(
@@ -337,25 +338,25 @@ df %>%
 ```
 
 ---
-## Strings: contar patrones
+## Strings: counting patterns
 
-¿Cuántas veces ocurre el patrón?
+How many times does the pattern occur?
 ```{r}
 x <- c("apple", "banana", "pear")
 str_count(x, "a")
 ```
 
-**Ejercicio**: calcula la media de vocales por palabra en `words`.
+**Exercise**: compute the mean number of vowels per word in `words`.
 
 ---
-## Strings: contar patrones
+## Strings: counting patterns
 
-Se usa mucho con mutate
+It is often used with mutate
 
 ```{r}
 df %>% 
   mutate(
-    vocales = str_count(word, "[aeiou]"),
+    vowels = str_count(word, "[aeiou]"),
   )
 ```
 
@@ -363,40 +364,40 @@ df %>%
 ---
 class: center, middle, inverse
 
-# Factores
+# Factors
 
 ---
-## Factores
+## Factors
 
-* Para trabajar con variables categóricas con número fijo de valores
+* To work with categorical variables with a fixed number of values
 
-* Trabajaremos con `forcats` de tiduverse
+* We will work with `forcats` from tidyverse
 
-* Crear factores
+* Create factors
 
 ---
-## Factores: creación
+## Factors: creation
 
 ```{r}
 x1 <- c("Dec", "Apr", "Jan", "Mar")
 ```
 
-Usar una string para almacenar esta variable tiene dos problemas
+Using a string to store this variable has two problems
 
-* Los valores son fijos y nada previene de errores
+* The values are fixed and nothing prevents errors
 ```{r}
 x1 <- c("Dec", "Apr", "Jan", "Mer")
 ```
 
-* No ordena de manera útil
+* It does not sort in a useful way
 ```{r}
 sort(x1)
 ```
 
 ---
-## Factores: creación
+## Factors: creation
 
-Esto se arregla creando un factor
+This is fixed by creating a factor
 ```{r}
 month_levels <- c(
   "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
@@ -407,9 +408,9 @@ sort(y1)
 ```
 
 ---
-## Factores: creación
+## Factors: creation
 
-Con pipes
+With pipes
 
 ```{r}
 f2 <- x1 %>% factor(levels = month_levels) 
@@ -417,18 +418,18 @@ f2
 ```
 
 ---
-## Factores
+## Factors
 
-Trabajaremos con los datos `gss_cat`
+We will work with the `gss_cat` data
 
 ```{r}
 glimpse(gss_cat)
 ```
 
 ---
-## Factores
+## Factors
 
-**Pregunta**: ¿Cómo identificarías los niveles posibles de la variable `race`?
+**Question**: How would you identify the possible levels of the variable `race`?
 
 --
 
@@ -437,27 +438,27 @@ gss_cat %>% count(race)
 ```
 
 ---
-## Factores
+## Factors
 
-* Reordenar niveles
+* Reorder levels
 
-* Modificar niveles
-
----
-## Factores - Reordenar niveles
-
-Con `fct_reorder()`. Toma tres argumentos
-
-* `f`, el factor que queremos reordenar
-
-* `x`, vector numérico para ordenar
-
-* Opcionalmente, `fun`, en caso de que haya varios valores de `x` para la misma
-`f`. (Por defecto, `fun` es la mediana)
+* Modify levels
 
 ---
-## Factores - Reordenar niveles
-Dos opciones 
+## Factors - Reordering levels
+
+With `fct_reorder()`. It takes three arguments
+
+* `f`, the factor we want to reorder
+
+* `x`, numeric vector used to sort
+
+* Optionally, `fun`, in case there are several values of `x` for the same
+`f`. (By default, `fun` is the median)
+
+---
+## Factors - Reordering levels
+Two options 
 
 ```{r, fig.width = 9, fig.height = 4}
 gss_cat %>%
@@ -468,8 +469,8 @@ gss_cat %>%
 ```
 
 ---
-## Factores - Reordenar niveles
-Tres opciones 
+## Factors - Reordering levels
+Three options 
 
 ```{r, fig.width = 9, fig.height = 4}
 gss_cat %>%
@@ -483,16 +484,16 @@ gss_cat %>%
 
 
 ---
-## Factores - Modificar niveles
+## Factors - Modifying levels
 
-Usamos `fct_recode()`
+We use `fct_recode()`
 
 ```{r}
 gss_cat %>% count(partyid)
 ```
 
 ---
-## Factores - Modificar niveles
+## Factors - Modifying levels
 
 ```{r}
 gss_cat %>%
@@ -508,9 +509,9 @@ gss_cat %>%
 ```
 
 ---
-## Factores - Modificar niveles
+## Factors - Modifying levels
 
-A veces útil colapsar niveles
+Sometimes it is useful to collapse levels
 
 ```{r}
 gss_cat %>%
@@ -527,32 +528,32 @@ gss_cat %>%
 ---
 class: center, middle, inverse
 
-# Fechas y horas
+# Dates and times
 
 ---
-## Fechas y horas
+## Dates and times
 
-Para trabajar con fechas y horas usamos `lubridate` que **NO** es parte tidyverse.
-Descárgalo y cárgalo en R
+To work with dates and times we use `lubridate`, which is **NOT** part of tidyverse.
+Download it and load it in R
 
 ```{r}
 library(lubridate)
 ```
 
 ---
-## Fechas y horas
+## Dates and times
 
-Tres tipos
+Three types
 
-* Fechas: `<date>` 
+* Dates: `<date>` 
 
-* Hora: `<time>` 
+* Times: `<time>` 
 
-* Fecha y hora: identifica unívocamente un tiempo. Referidas como `<dttm>` en los tibble
-(en R, POSIXct)
+* Date and time: uniquely identifies an instant in time. Referred to as `<dttm>` in tibbles
+(in R, POSIXct)
 
 ---
-## Fechas y horas
+## Dates and times
 
 ```{r}
 today()
@@ -562,18 +563,18 @@ str(now())
 ```
 
 ---
-## Fechas y horas
+## Dates and times
 
-En general proceden de strings.
+In general they come from strings.
 
-**Pregunta**: ¿Cómo convertir strings en objetos de fecha o fecha-hora?
+**Question**: How do we convert strings into date or date-time objects?
 
 ---
-## Fechas y horas
+## Dates and times
 
-* Otra forma de parsear más fácil con funciones de lubridate
+* Another, easier way to parse, with lubridate functions
 
-* Solo especificar orden usando “y”, “m”, y “d”
+* Just specify the order using “y”, “m”, and “d”
 
 ```{r}
 ymd("2017-01-31")
@@ -582,7 +583,7 @@ ymd("17-Jan-31")
 ```
 
 ---
-## Fechas y horas
+## Dates and times
 
 ```{r}
 mdy("January 31st, 2017")
@@ -593,9 +594,9 @@ mdy_hm("01/31/2017 08:01")
 ```
 
 ---
-## Fechas y horas
+## Dates and times
 
-A veces nos dan las componentes individuales por separado
+Sometimes we are given the individual components separately
 
 ```{r}
 library(nycflights13)
@@ -604,9 +605,9 @@ flights %>%
 ```
 
 ---
-## Fechas y horas
+## Dates and times
 
-Para esto `make_datetime()`. Ojo orden de argumentos!!
+For this, `make_datetime()`. Careful with the order of the arguments!!
 ```{r}
 flights %>% 
   select(year, month, day, hour, minute) %>% 
@@ -614,25 +615,25 @@ flights %>%
 ```
 
 ---
-## Fechas y horas
+## Dates and times
 
-Cambiar entre formatos
+Switching between formats
 ```{r}
 as_datetime(today())
 as_date(now())
 ```
 
 ---
-## Fechas y horas
+## Dates and times
 
-¿Qué hacer con fechas y horas? 
+What can we do with dates and times? 
 
-* Extraer componentes 
+* Extract components 
 
-* Realizar operaciones
+* Perform operations
 
 ---
-## Fechas y horas - Componentes
+## Dates and times - Components
 
 ```{r}
 datetime <- ymd_hms("2016-07-08 12:34:56")
@@ -649,7 +650,7 @@ wday(datetime)
 ```
 
 ---
-## Fechas y horas - Componentes
+## Dates and times - Components
 
 ```{r}
 datetime <- ymd_hms("2016-07-08 12:34:56")
@@ -663,7 +664,7 @@ second(datetime)
 ```
 
 ---
-## Fechas y horas - Componentes
+## Dates and times - Components
 
 ```{r}
 datetime <- ymd_hms("2016-07-08 12:34:56")
@@ -675,9 +676,9 @@ wday(datetime, label = TRUE, abbr = FALSE)
 ```
 
 ---
-## Fechas y horas - Componentes
+## Dates and times - Components
 
-Podemo modificar componentes usando las mismas funciones
+We can modify components using the same functions
 
 ```{r}
 (datetime <- ymd_hms("2016-07-08 12:34:56"))
@@ -690,59 +691,59 @@ datetime
 ```
 
 ---
-## Fechas y horas - Componentes
+## Dates and times - Components
 
-También podemos modificar componentes con `update`
+We can also modify components with `update`
 
 ```{r}
 update(datetime, year = 2023)
 ```
 
 ---
-## Fechas y horas - Operaciones
+## Dates and times - Operations
 
-Cuando trabajamos con fechas y horas, muchas veces queremos hacer **operaciones** del estilo:
+When we work with dates and times, we often want to perform **operations** such as:
 
-- Sumar o restar tiempo (ej: "¿qué fecha será en 3 semanas?")
+- Adding or subtracting time (e.g.: "what date will it be in 3 weeks?")
 
-- Medir diferencias entre fechas (ej: "¿cuántos días pasaron?")
+- Measuring differences between dates (e.g.: "how many days have passed?")
 
 
-Para esto, tenemos dos herramientas en lubridate:
+For this, we have two tools in lubridate:
 
-- Duraciones: Tiempo exacto en segundos (útil para medir intervalos exactos)
+- Durations: Exact time in seconds (useful for measuring exact intervals)
 
-- Períodos: Unidades como días, meses, años (útiles para sumar o restar en lógica de calendario)
+- Periods: Units such as days, months, years (useful for adding or subtracting with calendar logic)
 
 
 ---
-## Fechas y horas - Operaciones
+## Dates and times - Operations
 
-Al restar dos fechas, obtenemos un objeto  de clase `difftime`
+When we subtract two dates, we obtain an object of class `difftime`
 
 ```{r}
-mi_edad <- today() - ymd("1993 May 17")
-mi_edad
+my_age <- today() - ymd("1993 May 17")
+my_age
 ```
 
-- Este objeto representa una diferencia de tiempo, por defecto en días,
-aunque internamente puede expresarse en otras unidades (segundos, minutos, horas…).
+- This object represents a time difference, by default in days,
+although internally it can be expressed in other units (seconds, minutes, hours…).
 
-- Ambiguo y limitado: No siempre es claro ni flexible para hacer operaciones adicionales.
+- Ambiguous and limited: It is not always clear or flexible enough for further operations.
 
 ---
-## Fechas y horas - Operaciones con duraciones
+## Dates and times - Operations with durations
 
-Alternativa, trabajar con **duraciones** (en segundos)
+An alternative: work with **durations** (in seconds)
 
 ```{r}
-as.duration(mi_edad)
+as.duration(my_age)
 ```
 
 ---
-## Fechas y horas - Operaciones con duraciones
+## Dates and times - Operations with durations
 
-Funciones úliles. Siempre en segundos!!
+Useful functions. Always in seconds!!
 
 ```{r}
 dseconds(15)
@@ -751,9 +752,9 @@ dhours(c(12, 24))
 ddays(0:5)
 ```
 ---
-## Fechas y horas - Operaciones con duraciones
+## Dates and times - Operations with durations
 
-Funciones úliles. Siempre en segundos!!
+Useful functions. Always in seconds!!
 
 ```{r}
 dweeks(3)
@@ -762,7 +763,7 @@ dyears(1)
 
 
 ---
-## Fechas y horas - Operaciones con duraciones
+## Dates and times - Operations with durations
 
 ```{r}
 dyears(1) + dweeks(12) + dhours(15)
@@ -770,27 +771,27 @@ dyears(1) + dweeks(12) + dhours(15)
 ```
 
 ```{r}
-mañana <- today() + ddays(1)
-mañana
-año_pasado <- today() - dyears(1)
-año_pasado
+tomorrow <- today() + ddays(1)
+tomorrow
+last_year <- today() - dyears(1)
+last_year
 ```
 
 ---
-## Fechas y horas - Operaciones con períodos
+## Dates and times - Operations with periods
 
-- En lugar de duraciones, podemos trabajar con períodos.
+- Instead of durations, we can work with periods.
 
-- Los períodos representan cantidades de tiempo en unidades del calendario (como meses o años) y respetan su variabilidad, mientras que las duraciones son intervalos exactos medidos en segundos.
+- Periods represent amounts of time in calendar units (such as months or years) and respect their variability, whereas durations are exact intervals measured in seconds.
 
 
 ```{r}
-ymd("2020-01-1") + months(1)   # "2020-02-29" (respeta el calendario)
-ymd("2020-01-1") + dmonths(1)  # "2020-03-02" (30.44 días exactos)
+ymd("2020-01-1") + months(1)   # "2020-02-01" (respects the calendar)
+ymd("2020-01-1") + dmonths(1)  # "2020-01-31" (exactly 30.44 days)
 ```
 
 ---
-## Fechas y horas - Operaciones con períodos
+## Dates and times - Operations with periods
 
 
 ```{r}
@@ -801,9 +802,9 @@ days(7)
 ```
 
 ---
-## Fechas y horas - Operaciones con períodos
+## Dates and times - Operations with periods
 
-A veces más intuitivo
+Sometimes more intuitive
 
 ```{r}
 months(1:6)
@@ -812,9 +813,9 @@ years(1)
 ```
 
 ---
-## Fechas y horas - Operaciones con períodos
+## Dates and times - Operations with periods
 
-Operaciones con fechas
+Operations with dates
 
 ```{r}
 ymd("2017-01-01") + years(1)
@@ -823,9 +824,9 @@ ymd("2017-01-01") + days(1)
 ```
 
 ---
-## Fechas y horas - Operaciones con períodos
+## Dates and times - Operations with periods
 
-¿Qué está pasando?
+What is going on?
 
 ```{r}
 ymd("2016-01-01") + dyears(1)
@@ -834,6 +835,6 @@ ymd("2016-01-01") + years(1)
 
 
 ---
-## Bibliografía
+## Bibliography
 
-Este tema está fundamentalmente basado en  [R for Data Science](https://r4ds.had.co.nz/), Wickham and Grolemund (2016)
+This topic is largely based on  [R for Data Science](https://r4ds.had.co.nz/), Wickham and Grolemund (2016)

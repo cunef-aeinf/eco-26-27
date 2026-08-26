@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Tema 3.2</title>
+    <title>Topic 3.2</title>
     <meta charset="utf-8" />
     <meta name="author" content="Roi Naveiro" />
     <script src="libs/header-attrs-2.29/header-attrs.js"></script>
@@ -19,47 +19,48 @@ class: center, middle, inverse, title-slide
 
 &lt;div class="title-logo"&gt;&lt;/div&gt;
 
-# Análisis y Explotación de la Información
+# Data Analysis and Information Extraction
  
-## Tema 3 - Data Wrangling
+## Topic 3 - Data Wrangling
 
-### 3.2 Organización de Datos
+### 3.2 Data Organization
 &lt;br&gt;
 &lt;br&gt;
 .pull-left[
 ### Roi Naveiro
+#### Academic Year 2026-2027
 ]
 ---
 
 
 ## Data Wrangling
 
-**Objetivo**: dejar los datos listos para su posterior **exploración** y **modelización**
+**Goal**: get the data ready for later **exploration** and **modeling**
 
-Convertir **datos crudos** en **datos procesados**
+Turn **raw data** into **processed data**
 
-**Datos crudos**
+**Raw data**
 
-  - Los datos tal cual aparecen en la fuente de origen
+  - The data exactly as it appears in the original source
   
-  - No han sufrido ninguna manipulación
+  - It has not undergone any manipulation
   
-**Datos procesados**
+**Processed data**
 
-  - Cada variable es una columna
+  - Each variable is a column
   
-  - Cada observación una fila
+  - Each observation a row
   
-  - Cada unidad observacional es una celda
+  - Each observational unit is a cell
   
-  - Datos más complejos, en varias tablas interconectadas
+  - More complex data, in several interconnected tables
   
 ---
 ## Data Wrangling
 
-* Importación de los datos
-* Organización de los datos
-* Transformación de los datos
+* Data import
+* Data organization
+* Data transformation
 
 &lt;img src="img/data-science-wrangle.png" width="100%" style="display: block; margin: auto;" /&gt;
 
@@ -67,21 +68,21 @@ Convertir **datos crudos** en **datos procesados**
 ---
 class: center, middle, inverse
 
-# Organización de datos
+# Data organization
 
 ---
 
-# Datos Organizados
+# Tidy data
 
-* Aprenderemos forma consistente de organizar los datos en R
+* We will learn a consistent way of organizing data in R
 
-* Lo haremos a través del paquete `tidyr` del universo `tidyverse`
+* We will do so through the `tidyr` package from the `tidyverse` universe
 
 ---
-# Datos Organizados
+# Tidy data
 
-* Los mismos datos pueden representarse de múltiples formas
-* En el siguiente ejemplo presentamos los valores de cuatro variables (*country, year, population, cases*) de cuatro formas distintas
+* The same data can be represented in multiple ways
+* In the following example we present the values of four variables (*country, year, population, cases*) in four different ways
 
 
 ``` r
@@ -101,10 +102,10 @@ table1
 ```
 
 ---
-# Datos Organizados
+# Tidy data
 
-* Los mismos datos pueden representarse de múltiples formas
-* En el siguiente ejemplo presentamos los valores de cuatro variables (*country, year, population, cases*) de cuatro formas distintas
+* The same data can be represented in multiple ways
+* In the following example we present the values of four variables (*country, year, population, cases*) in four different ways
 
 
 ``` r
@@ -130,10 +131,10 @@ table2
 ```
 
 ---
-# Datos Organizados
+# Tidy data
 
-* Los mismos datos pueden representarse de múltiples formas
-* En el siguiente ejemplo presentamos los valores de cuatro variables (*country, year, population, cases*) de cuatro formas distintas
+* The same data can be represented in multiple ways
+* In the following example we present the values of four variables (*country, year, population, cases*) in four different ways
 
 
 ``` r
@@ -153,10 +154,10 @@ table3
 ```
 
 ---
-# Datos Organizados
+# Tidy data
 
-* Los mismos datos pueden representarse de múltiples formas
-* En el siguiente ejemplo presentamos los valores de cuatro variables (*country, year, population, cases*) de cuatro formas distintas
+* The same data can be represented in multiple ways
+* In the following example we present the values of four variables (*country, year, population, cases*) in four different ways
 
 
 ``` r
@@ -185,22 +186,22 @@ table4b
 ## 3 China       1272915272 1280428583
 ```
 ---
-# Datos Organizados
+# Tidy data
 
-* Solo uno está **organizado**
+* Only one of them is **tidy**
 
-* Hablamos de datos organizados si:
+* We speak of tidy data if:
 
-  - Cada variable corresponde a una columna
-  - Cada fila a un observación
-  - Cada celda a un valor
+  - Each variable corresponds to a column
+  - Each row to an observation
+  - Each cell to a value
   
 &lt;img src="img/tidy.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
-# Datos Organizados 
+# Tidy data 
 
-* La principal ventaja es poder utilizar las herramientas de R que, usualmente, trabajan sobre vectores de valores.
+* The main advantage is being able to use R's tools, which usually work on vectors of values.
 
 
 ``` r
@@ -220,25 +221,25 @@ table1 %&gt;% mutate(rate = 10000 * cases / population)
 ```
 
 ---
-# Datos Organizados 
+# Tidy data 
 
-* La mayoría de datos que recibimos, no están organizados.
+* Most of the data we receive is not tidy.
 
-* Primer paso: determinar qué son las variables y qué son las observaciones. ¿Ejemplos?
+* First step: determine what the variables are and what the observations are. Examples?
 
-* Segundo paso: resolver uno de estos problemas
+* Second step: solve one of these problems
 
-  - Una variable está dispersa por varias columnas
-  - Una observación está dispersa por múltiples filas
+  - A variable is spread across several columns
+  - An observation is spread across multiple rows
   
-* Esto se resuelve con `pivot_longer()` y `pivot_wider()`
+* This is solved with `pivot_longer()` and `pivot_wider()`
 
 ---
 # `pivot_longer()`
 
-* Se usa cuando una variable está dispersa por varias columnas
+* It is used when a variable is spread across several columns
 
-* Nombres de columnas son valores de variable
+* Column names are variable values
 
 
 ``` r
@@ -257,11 +258,11 @@ table4a
 ---
 # `pivot_longer()`
 
-* Necesitamos **pivotar** estas columnas a un nuevo par de variables. Para ello, debemos conocer:
+* We need to **pivot** these columns into a new pair of variables. To do so, we must know:
 
-  - El conjunto de columnas a pivotar
-  - El nombre de la variable que recibirá las columnas: `year`
-  - El nombre de la variable que recibirá los valores: `cases`
+  - The set of columns to pivot
+  - The name of the variable that will receive the columns: `year`
+  - The name of the variable that will receive the values: `cases`
 
 ---
 # `pivot_longer()`
@@ -284,21 +285,21 @@ table4a %&gt;% pivot_longer(c(`1999`, `2000`),
 ## 6 China       2000  213766
 ```
 
-* Nótese que los años son nombres que no empiezan por letra y por tanto han de rodearse de tildes...
+* Note that the years are names that do not start with a letter and therefore must be surrounded by backticks...
 
 ---
 # `pivot_longer()`
 
-Usa `pivot_longer()` para ordenar el dataset `table4b`
+Use `pivot_longer()` to tidy the `table4b` dataset
 
 ---
 # `pivot_wider()`
 
-* Se utiliza cuando tenemos una observación dispersa en filas
+* It is used when we have an observation spread across rows
 
-* En el siguiente dataset, cada observación es un país en un año
+* In the following dataset, each observation is a country in a year
 
-* Cada una ocupa dos filas
+* Each one takes up two rows
 
 
 ``` r
@@ -325,11 +326,11 @@ table2
 ---
 # `pivot_wider()`
 
-Para ordenar, necesitamos:
+To tidy it, we need:
 
-- La columna de la que extraeremos los nombres de las nuevas variables: `type`
+- The column from which we will take the names of the new variables: `type`
 
-- La columna de la que extraeremos sus valores: `count`
+- The column from which we will take their values: `count`
 
 ---
 # `pivot_wider()`
@@ -354,18 +355,18 @@ table2 %&gt;%
 
 ---
 
-# Organizar datos
+# Tidying data
 
-* `pivot_longer`: elimina columnas y añade filas, hace los datos más largos.
+* `pivot_longer`: removes columns and adds rows, makes the data longer.
 
-* `pivot_wider`: elimina filas y añade columnas, hace los datos más anchos.
+* `pivot_wider`: removes rows and adds columns, makes the data wider.
 
 ---
-# Separar y unir columnas
+# Separating and uniting columns
 
-* A veces, una misma columna contiene información acerca de dos variables.
+* Sometimes, a single column contains information about two variables.
 
-* Se puede separar en dos columnas utilizando `separate()`
+* It can be split into two columns using `separate()`
 
 
 ``` r
@@ -384,7 +385,7 @@ table3
 ## 6 China        2000 213766/1280428583
 ```
 ---
-# Separar y unir columnas
+# Separating and uniting columns
 
 
 ``` r
@@ -403,11 +404,11 @@ table3 %&gt;% separate(rate, into = c("cases", "population"))
 ## 6 China        2000 213766 1280428583
 ```
 ---
-# Separar y unir columnas
+# Separating and uniting columns
 
-* Por defecto, separa cuando encuentra carácter no alfanumérico.
+* By default, it separates when it finds a non-alphanumeric character.
 
-* Se puede especificar el caracter.
+* The character can be specified.
 
 
 ``` r
@@ -427,9 +428,9 @@ table3 %&gt;% separate(rate, into = c("cases", "population"), sep = "/")
 ```
 
 ---
-# Separar y unir columnas
+# Separating and uniting columns
 
-* Además, conviene convertir el tipo de columna, de lo contrario será de tipo string.
+* In addition, it is advisable to convert the column type, otherwise it will be of string type.
 
 
 ``` r
@@ -448,9 +449,9 @@ table3 %&gt;% separate(rate, into = c("cases", "population"), convert = TRUE)
 ## 6 China        2000 213766 1280428583
 ```
 ---
-# Separar y unir columnas
+# Separating and uniting columns
 
-* Se puede separar usando enteros
+* It is possible to separate using integers
 
 
 ``` r
@@ -459,10 +460,10 @@ table5 &lt;-
 ```
 
 ---
-# Separar y unir columnas
+# Separating and uniting columns
 
-* `unite()` hace lo contrario que `separate()`: combina columnas
-* Toma como argumentos:  nueva variable, conjunto de columnas a juntar y `sep`
+* `unite()` does the opposite of `separate()`: it combines columns
+* It takes as arguments:  the new variable, the set of columns to join and `sep`
 
 
 ``` r
@@ -485,111 +486,111 @@ table5 %&gt;% unite(new, century, year, sep = "")
 ---
 class: center, middle, inverse
 
-# Datos relacionales
+# Relational data
 
 ---
-# Datos relacionales
+# Relational data
 
-* Generalmente, en análisis de datos se trabaja con más de una base de datos.
+* Generally, in data analysis we work with more than one database.
 
-* Una de las mayores fuentes de riqueza en análisis de datos surge del cruce de bbdd!
+* One of the greatest sources of value in data analysis comes from cross-referencing databases!
 
-* Hay que saber cómo enganchar diferentes tablas de datos.
+* We need to know how to link different data tables.
 
-* Cuando los datos están repartidos en múltiples tablas, hablamos de **datos relacionales**
-
----
-# Keys (Llaves)
-
-* Son **variables** que se usan para conectar pares de tablas.
-
-* Dos tipos de llaves: Primary Key y Foreign Key
+* When the data is spread across multiple tables, we speak of **relational data**
 
 ---
+# Keys
 
-# ¿Qué es una **Primary Key (PK)**?
-- Es una columna (o combinación de columnas) que **identifica de manera única** cada fila en una tabla.
-- No puede tener **valores duplicados**.
+* They are **variables** used to connect pairs of tables.
 
-**Ejemplo correcto: Tabla de Clientes**
-
-| cliente_id (**PK**) | nombre  |
-|---------------------|---------|
-| 1                   | Ana     |
-| 2                   | Luis    |
-| 3                   | Marta   |
+* Two types of keys: Primary Key and Foreign Key
 
 ---
 
-# ¿Qué es una **Foreign Key (FK)**?
-- Es una columna en una tabla que **hace referencia** a una **clave primaria (PK)** en otra tabla.
-- Puede repetirse (relación **uno-a-muchos**).
+# What is a **Primary Key (PK)**?
+- It is a column (or combination of columns) that **uniquely identifies** each row in a table.
+- It cannot have **duplicate values**.
 
-**Ejemplo: Tabla de Pedidos**
+**Correct example: Customers table**
 
-| pedido_id | cliente_id (**FK**) | producto |
-|-----------|---------------------|----------|
-| 1001      | 1                   | Libro    |
-| 1002      | 2                   | Lápiz    |
-| 1003      | 1                   | Cuaderno |
-
-Varios pedidos pueden ser del **mismo cliente** (`cliente_id = 1`).
+| customer_id (**PK**) | name  |
+|----------------------|-------|
+| 1                    | Ana   |
+| 2                    | Luis  |
+| 3                    | Marta |
 
 ---
 
-## Relación 
+# What is a **Foreign Key (FK)**?
+- It is a column in a table that **refers** to a **primary key (PK)** in another table.
+- It can be repeated (**one-to-many** relationship).
 
-Una PK y su FK en otra tabla forman una **relación**.
+**Example: Orders table**
 
-* Normalmente, **añadimos información de la tabla con la Clave Primaria (PK)**  
-* A la **tabla que tiene la Clave Foránea (FK)**.
+| order_id | customer_id (**FK**) | product  |
+|----------|----------------------|----------|
+| 1001     | 1                    | Book     |
+| 1002     | 2                    | Pencil   |
+| 1003     | 1                    | Notebook |
 
+Several orders can belong to the **same customer** (`customer_id = 1`).
 
-| Tabla con **FK**            | Tabla con **PK**            |
-|-----------------------------|-----------------------------|
-| Contiene **referencias**     | Contiene **datos únicos**   |
-| Necesita **más información** | Aporta **información extra** |
-| Es la tabla **dependiente**  | Es la tabla **maestra**     |
-
-* No obstante,como veremos después, podemos hacer otras cosas.
 ---
 
-## Ejemplo
+## Relationship 
+
+A PK and its FK in another table form a **relationship**.
+
+* Normally, **we add information from the table with the Primary Key (PK)**  
+* To the **table that has the Foreign Key (FK)**.
+
+
+| Table with **FK**          | Table with **PK**              |
+|----------------------------|--------------------------------|
+| Contains **references**    | Contains **unique data**       |
+| Needs **more information** | Provides **extra information** |
+| Is the **dependent** table | Is the **master** table        |
+
+* Nevertheless, as we will see later, we can do other things.
+---
+
+## Example
 
 
 ``` r
 library(dplyr)
 
-clientes &lt;- tibble(
-  cliente_id = c(1, 2, 3),
-  nombre = c("Ana", "Luis", "Marta")
+customers &lt;- tibble(
+  customer_id = c(1, 2, 3),
+  name = c("Ana", "Luis", "Marta")
 )
 
-pedidos &lt;- tibble(
-  pedido_id = c(1001, 1002, 1003),
-  cliente_id = c(1, 2, 1),
-  producto = c("Libro", "Lápiz", "Cuaderno")
+orders &lt;- tibble(
+  order_id = c(1001, 1002, 1003),
+  customer_id = c(1, 2, 1),
+  product = c("Book", "Pencil", "Notebook")
 )
 
-left_join(pedidos, clientes, by = "cliente_id")
+left_join(orders, customers, by = "customer_id")
 ```
 
 ```
 ## # A tibble: 3 × 4
-##   pedido_id cliente_id producto nombre
-##       &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt; 
-## 1      1001          1 Libro    Ana   
-## 2      1002          2 Lápiz    Luis  
-## 3      1003          1 Cuaderno Ana
+##   order_id customer_id product  name 
+##      &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;
+## 1     1001           1 Book     Ana  
+## 2     1002           2 Pencil   Luis 
+## 3     1003           1 Notebook Ana
 ```
 
-Todo bien porque cliente_id es único en clientes y el join funciona correctamente.
+Everything is fine because customer_id is unique in customers and the join works correctly.
 
 
 ---
-# Keys (Llaves)
+# Keys
 
-Una vez identificada una llave primaria, es útil comprobar que es correcta
+Once a primary key has been identified, it is useful to check that it is correct
 
 
 ``` r
@@ -621,13 +622,13 @@ weather %&gt;%
 ```
 
 ---
-# Keys (Llaves)
+# Keys
 
-* A veces no existen llaves primarias! No hay una combinación de variables que identifique unívocamente cada observación.
+* Sometimes there are no primary keys! There is no combination of variables that uniquely identifies each observation.
 
-* Ejemplo, `flights`.
+* For example, `flights`.
 
-Útil añadir una... **llave surrogada**
+It is useful to add one... **a surrogate key**
 
 
 ``` r
@@ -648,78 +649,78 @@ flights_key %&gt;%
 ```
 
 ---
-# Problemas si la PK se repite
+# Problems if the PK is repeated
 
-Si `cliente_id` **se repite** en la tabla `clientes`:
+If `customer_id` **is repeated** in the `customers` table:
 
-| cliente_id (**PK?**) | nombre  |
-|----------------------|---------|
-| 1                    | Ana     |
-| 1                    | Alicia  |
-| 2                    | Luis    |
-| 3                    | Marta   |
+| customer_id (**PK?**) | name   |
+|-----------------------|--------|
+| 1                     | Ana    |
+| 1                     | Alicia |
+| 2                     | Luis   |
+| 3                     | Marta  |
 
-Recuerda, la tabla pedidos era
+Remember, the orders table was
 
-| pedido_id | cliente_id (**FK**) | producto |
-|-----------|---------------------|----------|
-| 1001      | 1                   | Libro    |
-| 1002      | 2                   | Lápiz    |
-| 1003      | 1                   | Cuaderno |
+| order_id | customer_id (**FK**) | product  |
+|----------|----------------------|----------|
+| 1001     | 1                    | Book     |
+| 1002     | 2                    | Pencil   |
+| 1003     | 1                    | Notebook |
 
 ---
 
-# Problemas si la PK se repite
+# Problems if the PK is repeated
 
-**Problema al hacer el join**:
+**Problem when performing the join**:
 
 
 
 
 ``` r
-# Join que genera duplicados no esperados
-left_join(pedidos, clientes, by = "cliente_id")
+# Join that generates unexpected duplicates
+left_join(orders, customers, by = "customer_id")
 ```
 
 ```
 ## # A tibble: 5 × 4
-##   pedido_id cliente_id producto nombre
-##       &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt; 
-## 1      1001          1 Libro    Ana   
-## 2      1001          1 Libro    Alicia
-## 3      1002          2 Lápiz    Luis  
-## 4      1003          1 Cuaderno Ana   
-## 5      1003          1 Cuaderno Alicia
+##   order_id customer_id product  name  
+##      &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt; 
+## 1     1001           1 Book     Ana   
+## 2     1001           1 Book     Alicia
+## 3     1002           2 Pencil   Luis  
+## 4     1003           1 Notebook Ana   
+## 5     1003           1 Notebook Alicia
 ```
 
 
 
 
 ---
-# Datos relacionales
+# Relational data
 
-En `tidyverse`, existen tres familias de verbos para trabajar con datos relacionales:
+In `tidyverse`, there are three families of verbs for working with relational data:
 
-* **Mutating joins**: añaden nuevas variables a una tabla de datos, procedentes de observaciones coincidentes de otra tabla.
+* **Mutating joins**: they add new variables to a data table, coming from matching observations in another table.
 
-* **Filtering joins**: filtran observaciones de una base de datos basándose en si coinciden o no con las observaciones de otra tabla.
+* **Filtering joins**: they filter observations from one database based on whether or not they match the observations in another table.
 
-* **Set operations**: utilizan las observaciones como si fueran elementos de un conjunto.
+* **Set operations**: they treat observations as if they were elements of a set.
 
 ---
 # `nycflights13`
 
-Utilizaremos este conjunto de datos para aprender sobre datos relacionales. Contiene las siguientes tablas:
+We will use this dataset to learn about relational data. It contains the following tables:
 
-* `airlines`:  Nombres de aerolíneas
+* `airlines`:  Airline names
 
-* `airports`: Información sobre cada aeropuerto
+* `airports`: Information about each airport
 
-* `planes`: Información sobre cada avión
+* `planes`: Information about each plane
 
-* `weather`: Información climática en cada aeropuerto de NYC a cada hora
+* `weather`: Weather information at each NYC airport for every hour
 
-* `flights`: Información sobre todos los vuelos que partieron de NYC en 2013
+* `flights`: Information about all flights that departed from NYC in 2013
 
 ---
 # `nycflights13`
@@ -736,12 +737,12 @@ class: center, middle, inverse
 
 # Mutating joins
 
-* Sirve para combinar variables de dos tablas.
+* It is used to combine variables from two tables.
 
-* Primero, empareja observaciones usando las llaves correspondientes, y después copia
-variables de una tabla a otra.
+* First, it matches observations using the corresponding keys, and then copies
+variables from one table to another.
 
-* Añade nuevas variables a la derecha!! Trabajamos con versión reducida
+* It adds new variables on the right!! We work with a reduced version
 
 
 ``` r
@@ -762,7 +763,7 @@ flights2 %&gt;% slice(1:3)
 ---
 # Mutating joins
 
-Para entender su funcionamiento, trabajamos con datos artificiales
+To understand how it works, we work with artificial data
 
 
 ``` r
@@ -789,15 +790,15 @@ y &lt;- tribble(
 ---
 # Inner join
 
-Empareja observaciones únicamente cuando las llaves son iguales.
+It matches observations only when the keys are equal.
 
 &lt;img src="img/join-inner.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 ---
 # Inner join
 
-La salida es un nuevo data frame con llave, variable x y variable y. 
-Las filas no emparejadas no aparecen!!
+The output is a new data frame with key, variable x and variable y. 
+Unmatched rows do not appear!!
 
 
 ``` r
@@ -816,14 +817,14 @@ x %&gt;%
 ---
 # Outer join
 
-Mantiene observaciones que aparecen **al menos** en uno de los dataset!!
-Tres tipos:
+It keeps observations that appear in **at least** one of the datasets!!
+Three types:
 
-* **Left join**: mantiene todas las observaciones de `x`
+* **Left join**: keeps all observations from `x`
 
-* **Right join**: mantiene todas las observaciones de `y`
+* **Right join**: keeps all observations from `y`
 
-* **Full join**: mantiene todas las observaciones de `x` e `y` 
+* **Full join**: keeps all observations from `x` and `y` 
 
 ---
 # Outer join
@@ -833,7 +834,7 @@ Tres tipos:
 ---
 # Outer join
 
-Predice la respuesta de los siguientes códigos
+Predict the output of the following code
 
 
 ``` r
@@ -850,7 +851,7 @@ x %&gt;%
 ---
 # Outer join
 
-Predice la respuesta de los siguientes códigos
+Predict the output of the following code
 
 
 ``` r
@@ -884,7 +885,7 @@ x %&gt;%
 ---
 # Outer join
 
-Predice la respuesta de los siguientes códigos
+Predict the output of the following code
 
 
 ``` r
@@ -904,18 +905,18 @@ x %&gt;%
 
 
 ---
-# ¿Llaves duplicadas?
+# Duplicate keys?
 
 &lt;img src="img/join-one-to-many.png" width="55%" style="display: block; margin: auto;" /&gt;
 
-* Caso 1: Una sola tablas tiene llaves duplicadas
+* Case 1: Only one table has duplicate keys
 
-* Caso 2: Ambas tablas tiene llaves duplicadas
+* Case 2: Both tables have duplicate keys
 
 ---
-# Llaves duplicadas - Caso 1
+# Duplicate keys - Case 1
 
-Caso típico!
+Typical case!
 
 
 ``` r
@@ -945,7 +946,7 @@ left_join(x, y, by = "key")
 ```
 
 ---
-# Llaves duplicadas - Caso 1
+# Duplicate keys - Case 1
 
 
 
@@ -964,9 +965,9 @@ left_join(x, y, by = "key")
 ```
 
 ---
-# Llaves duplicadas - Caso 2
+# Duplicate keys - Case 2
 
-Error, **llave primaria no identifica unívocamente las observaciones**
+Error, **the primary key does not uniquely identify the observations**
 
 
 ``` r
@@ -988,9 +989,9 @@ y &lt;- tribble(
 
 
 ---
-# Llaves duplicadas - Caso 2
+# Duplicate keys - Case 2
 
-Todas las combinaciones!
+All combinations!
 
 
 ``` r
@@ -1010,32 +1011,32 @@ left_join(x, y, by = "key")
 ```
 
 ---
-# Ejercicio
+# Exercise
 
-Utilizando los datos `flights` y `airlines`, crea una base de datos donde 
-aparezcan año, mes, día y hora de vuelo, así como la variable `carrier`
-que contiene las siglas de la aerolínea correspondiente y la
-variable `name` que tiene el nombre completo de la aerolínea.
+Using the `flights` and `airlines` data, create a database containing 
+the year, month, day and hour of the flight, as well as the `carrier` variable
+which contains the code of the corresponding airline and the
+`name` variable which has the full name of the airline.
 
 
-
----
-# Definiendo las llaves
-
-* Hasta ahora, la llave era una única variable, con el mismo nombre en ambas
-tablas.
-
-* Indicado en `by = "key"`
-
-* ¿Otros usos de `by`?
 
 ---
-# Usos de `by`
+# Defining the keys
 
-* `by = NULL` es el valor por defecto. Usa todas las variables que aparecen en 
-ambas tablas
+* So far, the key was a single variable, with the same name in both
+tables.
 
-* ¿Qué variables se utilizarán en el siguiente código?
+* Indicated in `by = "key"`
+
+* Other uses of `by`?
+
+---
+# Uses of `by`
+
+* `by = NULL` is the default value. It uses all the variables that appear in 
+both tables
+
+* Which variables will be used in the following code?
 
 
 ``` r
@@ -1044,9 +1045,9 @@ flights2 %&gt;%
 ```
 
 ---
-# Usos de `by`
+# Uses of `by`
 
-* `by = "x"` une según variable/s indicada/s, con **mismo nombre** en ambas tablas.
+* `by = "x"` joins according to the indicated variable(s), with the **same name** in both tables.
 
 
 
@@ -1057,12 +1058,12 @@ flights2 %&gt;%
 ```
 
 ---
-# Usos de `by`
+# Uses of `by`
 
-* `by = c("a" = "b")` empareja la variable `a` de la primera tabla con la
-variable `b` de la segunda.
+* `by = c("a" = "b")` matches the variable `a` of the first table with the
+variable `b` of the second.
 
-* ¿Qué pasa?
+* What happens?
 
 
 ``` r
@@ -1072,26 +1073,26 @@ flights2 %&gt;%
 
 
 ---
-# Ejercicio
+# Exercise
 
-¿Qué variables usarías como llave para juntar los datos `planes` y 
-`flights`?
+Which variables would you use as a key to join the `planes` and 
+`flights` data?
 
-Pista: usa las ayudas para entender cada uno de los datos
+Hint: use the help pages to understand each of the datasets
 
 ---
-# Ejercicio
+# Exercise
 
-¿Cuáles son los nombres completos de los aeropuertos de destino con el retraso medio
-más alto? Presenta una tabla con dos columnas, una con nombre completo y 
-la otra con el retraso medio.
+What are the full names of the destination airports with the highest average
+delay? Present a table with two columns, one with the full name and 
+the other with the average delay.
 
 
 ---
 # Mutating joins
 
-**Consejo**: utiliza siempre que puedas el `left_join`. Es la función más
-importante
+**Tip**: use `left_join` whenever you can. It is the most
+important function
 
 
 ---
@@ -1102,12 +1103,12 @@ class: center, middle, inverse
 ---
 # Filtering joins
 
-Similar a los mutating joins, pero afectan a observaciones, no a variables!
-Dos tipos
+Similar to mutating joins, but they affect observations, not variables!
+Two types
 
-* `semi_join(x,y)`: mantienen todas las observaciones de `x` que tienen pareja en
+* `semi_join(x,y)`: keeps all observations from `x` that have a match in
 `y`
-* `anti_join(x,y)`: elimina todas las observaciones de `x` que tienen pareja en
+* `anti_join(x,y)`: removes all observations from `x` that have a match in
 `y`
 
 ---
@@ -1118,10 +1119,10 @@ Dos tipos
 ---
 # `semi_join(x,y)`
 
-Útil para recuperar variables tras resumen.
+Useful for recovering variables after a summary.
 
-**Ejercicio**: extrae toda la información de los vuelos de `flights` cuyo destino 
-esté entre los 10 destinos con más observaciones.
+**Exercise**: extract all the information for the flights in `flights` whose destination 
+is among the 10 destinations with the most observations.
 
 
 ``` r
@@ -1138,7 +1139,7 @@ top_dest &lt;- flights %&gt;% count(dest) %&gt;% arrange(desc(n)) %&gt;%
 
 ---
 # `anti_join(x,y)`
-Útil para diagnosticar discordancias.
+Useful for diagnosing mismatches.
 
 ``` r
 flights %&gt;%
@@ -1171,14 +1172,14 @@ class: center, middle, inverse
 ---
 # Set operations
 
-Esperan `x` e `y` con las **mismas** variables.
-Tratan observaciones como conjuntos:
+They expect `x` and `y` with the **same** variables.
+They treat observations as sets:
 
-* `intersect(x,y)`: Devuelve observaciones presentes en ambos `x` e `y`.
+* `intersect(x,y)`: Returns observations present in both `x` and `y`.
 
-* `union(x,y)`: Devuelve observaciones únicas presentes en `x` o `y`.
+* `union(x,y)`: Returns unique observations present in `x` or `y`.
 
-* `setdiff(x,y)`: Devuelve observaciones presentes en `x` pero no en `y`.
+* `setdiff(x,y)`: Returns observations present in `x` but not in `y`.
 
 ---
 # Set operations
@@ -1239,9 +1240,9 @@ setdiff(df1, df2)
 
 
 ---
-## Bibliografía
+## Bibliography
 
-Este tema está fundamentalmente basado en  [R for Data Science](https://r4ds.had.co.nz/), Wickham and Grolemund (2016)
+This topic is largely based on  [R for Data Science](https://r4ds.had.co.nz/), Wickham and Grolemund (2016)
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
