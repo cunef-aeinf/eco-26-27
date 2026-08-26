@@ -184,7 +184,7 @@ To do so:
     * The numbers (15, 4, 2, 17, 6, 13, 11, 8, 10, 24, 33, 20, 31, 22, 29, 28, 35, 26) are black.
     * Zero has no colour.
     
-  - Finally, create a loop that simulates 10000 rounds of roulette, storing the gain generated in each one, and compute the mean. What do you observe?
+  - Finally, create a loop that simulates `K = 10000` rounds of roulette, storing the gain generated in each one, thus building a vector of length $K$. Call this vector `winnings`. Compute its mean. What do you observe?
   
 ### Solution
 
