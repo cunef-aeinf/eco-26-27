@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Tema 2.2</title>
+    <title>Topic 2.2</title>
     <meta charset="utf-8" />
     <meta name="author" content="Roi Naveiro" />
     <script src="libs/header-attrs-2.29/header-attrs.js"></script>
@@ -21,23 +21,24 @@ class: center, middle, inverse, title-slide
 
 &lt;br&gt;
 
-# Análisis y Explotación de la Información
+# Data Analysis and Information Extraction
 
-## Tema 2 - Análisis Exploratorio de los Datos
+## Topic 2 - Exploratory Data Analysis
 
-### 2.2 Transformación 
+### 2.2 Data Transformation 
 
 &lt;br&gt;
 .pull-left[
 ### Roi Naveiro
+#### Academic Year 2026-2027
 ]
 ---
 
-## Análisis Exploratioro de los Datos
+## Exploratory Data Analysis
 
-* El arte de observar los datos, generar hipótesis y testearlas.
+* The art of looking at the data, generating hypotheses and testing them.
 
-* **Objetivo**: generar preguntas prometedoras para, posteriormente, explorarlas en mayor profunidad
+* **Goal**: generate promising questions in order to explore them later in greater depth
 
 &lt;img src="img/data-science-explore.png" width="80%" style="display: block; margin: auto;" /&gt;
 
@@ -45,80 +46,80 @@ class: center, middle, inverse, title-slide
 ---
 class: center, middle, inverse
 
-## Transformación de datos
+## Data transformation
 
 ---
 
-## Transformación de datos
+## Data transformation
 
-La visualización es clave para un buen entendimiento de los datos...
+Visualization is key to a good understanding of the data...
 
-... no obstante, rara vez encontramos los datos en el formato necesario.
+... however, we rarely find the data in the format we need.
 
-En general, **necesitamos**
+In general, **we need** to
 
-- Crear nuevas variables
+- Create new variables
 
-- Resumir variables
+- Summarize variables
 
-- Renombrar
+- Rename
 
-- Reordenar observaciones
+- Reorder observations
 
-- Agrupar
+- Group
 
 - ...
 
 ---
 
-## Graḿatica de transformación de datos
+## Grammar of data transformation
 
-Aprenderemos cómo hacer esto de forma **reproducible** con el paquete `dplyr` 
+We will learn how to do this in a **reproducible** way with the `dplyr` package 
 
 
 &lt;img src="img/dplyr-part-of-tidyverse.png" width="30%" style="display: block; margin: auto;" /&gt;
 
-Similar a `ggplot2`, `dplyr` introduce una grámatica para la transformación de datos
+Similar to `ggplot2`, `dplyr` introduces a grammar for data transformation
 ---
 
-## Graḿatica de transformación de datos
+## Grammar of data transformation
 
-Algunas de las funciones (verbos) que aprenderemos
+Some of the functions (verbs) we will learn
 
 .small[
-- `select`: seleccionar columnas por nombre
-- `rename`: renombrar variables
-- `arrange`: ordenar filas según criterio
-- `slice`: escoger filas con índices
-- `filter`: escoger filas que cumplan cierta condición
-- `distinct`: filtrar por filas únicas
-- `mutate`: añadir nuevas variables
-- `summarise`: resumir variables según ciertos estadísticos
-- `group_by`: para realizar operaciones por grupos
+- `select`: select columns by name
+- `rename`: rename variables
+- `arrange`: sort rows according to a criterion
+- `slice`: choose rows by index
+- `filter`: choose rows that satisfy a certain condition
+- `distinct`: filter for unique rows
+- `mutate`: add new variables
+- `summarise`: summarize variables using certain statistics
+- `group_by`: to carry out operations by group
 - ... 
 ]
 
 ---
 
-## Reglas de `dplyr`
+## Rules of `dplyr`
 
-Todos los verbos funcionan de manera similar:
+All the verbs work in a similar way:
 
-- Primer argumento es el data frame
+- The first argument is the data frame
 
-- Lo siguientes argumentos especifican qué hacer con el data frame, usando los nombres de las variables (sin comillas)
+- The remaining arguments specify what to do with the data frame, using the variable names (without quotes)
 
-- La salida es otro data frame
+- The output is another data frame
 
-Los verbos pueden **concatenarse**
+The verbs can be **chained**
 
 
 ---
 
-## Datos
+## Data
 
-Para aprender las diferentes transformaciones que podemos hacer sobre los datos, usaremos de nuevo
-**gapminder** (más información en `?gapminder`)
+To learn the different transformations we can apply to the data, we will again use
+**gapminder** (more information in `?gapminder`)
 
 
 
@@ -145,21 +146,21 @@ glimpse(gapminder)
 ---
 class: center, middle, inverse
 
-## Transformación de datos: `select`
+## Data transformation: `select`
 ---
 
-## Verbo `select`
+## The `select` verb
 
-* En múltiples ocasiones tenemos conjuntos de datos con miles de variables
+* We often have datasets with thousands of variables
 
-* Nos puede interesar un subconjunto de las mismas
+* We may be interested in only a subset of them
 
-* Para esto utilizamos `select`
+* For this we use `select`
 ---
 
-## Seleccionar una columna
+## Selecting one column
 
-Observar únicamente la variable referente a esperanza de vida (`lifeExp`)
+Look only at the variable for life expectancy (`lifeExp`)
 
 
 .pull-left[
@@ -188,13 +189,13 @@ gapminder %&gt;%
 ]
 --
 .pull-right[ 
-- Pasamos el data frame a través del pipe (`%&gt;%`) a la función `select()`
-- El argumento es nombre de variable (sin comillas): `lifeExp`
-- Esto da lugar a un dataframe de 1704 filas y 1 columna
+- We pass the data frame through the pipe (`%&gt;%`) to the `select()` function
+- The argument is the variable name (without quotes): `lifeExp`
+- This gives a dataframe with 1704 rows and 1 column
 ]
 
 ---
-## Seleccionar múltiples columnas
+## Selecting several columns
 
 .pull-left[
 
@@ -246,15 +247,15 @@ gapminder %&gt;%
 ```
 ]
 
-**NOTA**: los verbos no modifican el data frames. Para guardar el output como un nuevo dataframe
+**NOTE**: the verbs do not modify the data frame. To save the output as a new dataframe
 
 ``` r
-esperanza_vida &lt;- gapminder %&gt;%
+life_expectancy &lt;- gapminder %&gt;%
   select(lifeExp) 
 ```
 
 ---
-## Selección inversa
+## Inverse selection
 
 .pull-left[
 
@@ -307,22 +308,22 @@ gapminder %&gt;%
 ]
 
 ---
-## Otras formas de selección
+## Other ways of selecting
 
-Las siguientes funciones son útiles
+The following functions are useful
 
-- `starts_with("abc")`: nombres que empiezan con "abc"
+- `starts_with("abc")`: names that start with "abc"
 
-- `ends_with("abc")`: nombres que terminan con "abc"
+- `ends_with("abc")`: names that end with "abc"
 
-- `contains("abc")`: nombres que contienen "abc"
+- `contains("abc")`: names that contain "abc"
 
-- `matches("(.)\\1"`) : selecciona según expresiones regulares
+- `matches("(.)\\1"`) : selects according to regular expressions
 
-- `num_range("x", 1:3)`: selecciona x1, x2 y x3
+- `num_range("x", 1:3)`: selects x1, x2 and x3
 
 ---
-## Ejemplo
+## Example
 
 
 
@@ -350,9 +351,9 @@ gapminder %&gt;%
 
 
 ---
-## Seleccionar todas
+## Selecting all of them
 
- `everything()` es útil para colocar ciertas variables al inicio del data frame
+ `everything()` is useful for placing certain variables at the start of the data frame
 
 
 ``` r
@@ -380,22 +381,22 @@ gapminder %&gt;%
 ---
 class: center, middle, inverse
 
-## Transformación de datos: `rename`
+## Data transformation: `rename`
 
 ---
-## Renombrar
+## Renaming
 
-Para renombrar variables, utilizar `rename`
+To rename variables, use `rename`
 
 
 ``` r
 gapminder %&gt;%
-* rename( pais = country )
+* rename( nation = country )
 ```
 
 ```
 ## # A tibble: 1,704 × 6
-##    pais        continent  year lifeExp      pop gdpPercap
+##    nation      continent  year lifeExp      pop gdpPercap
 ##    &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;
 ##  1 Afghanistan Asia       1952    28.8  8425333      779.
 ##  2 Afghanistan Asia       1957    30.3  9240934      821.
@@ -413,12 +414,12 @@ gapminder %&gt;%
 ---
 class: center, middle, inverse
 
-## Transformación de datos: `arrange`
+## Data transformation: `arrange`
 
 ---
-## Ordenar datos
+## Sorting data
 
-Seleccionemos país, año y esperanza de vida y ordenemos en orden **creciente** de esperanzada de vida
+Let us select country, year and life expectancy and sort in **increasing** order of life expectancy
 
 
 ``` r
@@ -444,9 +445,9 @@ gapminder %&gt;%
 ## # ℹ 1,694 more rows
 ```
 ---
-## Ordenar datos
+## Sorting data
 
-Seleccionemos país, año y esperanza de vida y ordenemos en orden **decreciente** de esperanzada de vida
+Let us select country, year and life expectancy and sort in **decreasing** order of life expectancy
 
 
 ``` r
@@ -473,9 +474,9 @@ gapminder %&gt;%
 ```
 
 ---
-## Ordenar datos
+## Sorting data
 
-¿Qué sucede?
+What is going on?
 
 
 ``` r
@@ -502,31 +503,31 @@ gapminder %&gt;%
 ```
 
 ---
-## Ordenar datos
+## Sorting data
 
-* `arrange` por defecto ordena de manera ascendente (si son números)
+* By default, `arrange` sorts in ascending order (if the values are numbers)
 
-* Ante strings, `arrange` ordena por defecto de manera alfabética
+* For strings, `arrange` sorts alphabetically by default
 
-* `desc()` cambia el orden 
+* `desc()` reverses the order 
 
-* Si se pasa más de una variable, se ordena en función de la primera. Las siguientes se utilizan, secuencialmente, para romper empates
+* If more than one variable is passed, the sorting is done according to the first one. The remaining ones are used, sequentially, to break ties
 
-* Los valores ausentes pasan al final
+* Missing values go to the end
 
 ---
 class: center, middle, inverse
 
-## Transformación de datos: pipes
+## Data transformation: pipes
 ---
 
-## Los pipes
+## Pipes
 
-* Un pipe es una técnica para pasar información de un proceso a otro
+* A pipe is a technique for passing information from one process to another
 
-* La estructura pipe está implementada en el paquete `magrittr` (que se carga con `tidyverse`)
+* The pipe structure is implemented in the `magrittr` package (which is loaded with `tidyverse`)
 
-1. Empezamos con todo el dataset
+1. We start with the whole dataset
 
 
 ``` r
@@ -536,13 +537,13 @@ class: center, middle, inverse
 ```
 ---
 
-## Los pipes
+## Pipes
 
-* Un pipe es una técnica para pasar información de un proceso a otro
+* A pipe is a technique for passing information from one process to another
 
-* La estructura pipe está implementada en el paquete `magrittr` (que se carga con `tidyverse`)
+* The pipe structure is implemented in the `magrittr` package (which is loaded with `tidyverse`)
 
-2. Este entra en `select`, que selecciona country, year, lifeExp
+2. This goes into `select`, which selects country, year, lifeExp
 
 
 ``` r
@@ -553,13 +554,13 @@ gapminder %&gt;%
 
 ---
 
-## Los pipes
+## Pipes
 
-* Un pipe es una técnica para pasar información de un proceso a otro
+* A pipe is a technique for passing information from one process to another
 
-* La estructura pipe está implementada en el paquete `magrittr` (que se carga con `tidyverse`)
+* The pipe structure is implemented in the `magrittr` package (which is loaded with `tidyverse`)
 
-3. Por útimo, el resultado del select pasa a `arrange`
+3. Finally, the result of the select goes into `arrange`
 
 
 ``` r
@@ -570,9 +571,9 @@ gapminder %&gt;%
 
 ---
 
-## Los pipes
+## Pipes
 
-Pasando la respuesta a `ggplot2`
+Passing the result to `ggplot2`
 
 ``` r
 gapminder %&gt;%
@@ -581,15 +582,15 @@ gapminder %&gt;%
   geom_density(alpha=0.5) + theme_minimal()
 ```
 
-&lt;img src="tema2-2_files/figure-html/unnamed-chunk-18-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="topic2-2_files/figure-html/unnamed-chunk-18-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 class: center, middle, inverse
 
-## Transformación de datos: `slice`
+## Data transformation: `slice`
 ---
 
-## Seleccionar filas
+## Selecting rows
 
 
 ``` r
@@ -609,9 +610,9 @@ gapminder %&gt;%
 
 ---
 
-## Seleccionar filas
+## Selecting rows
 
-Cómo seleccionarías las tres últimas filas de `gapminder` usando `slice`?
+How would you select the last three rows of `gapminder` using `slice`?
 
 --
 
@@ -632,9 +633,9 @@ gapminder %&gt;%
 
 ---
 
-## Seleccionar filas
+## Selecting rows
 
-También son útiles: `head()` y `tail()`
+Also useful: `head()` and `tail()`
 
 
 ``` r
@@ -672,14 +673,14 @@ gapminder %&gt;%
 ---
 class: center, middle, inverse
 
-## Transformación de datos: `filter`
+## Data transformation: `filter`
 ---
 
-## Filtrado
+## Filtering
 
-* Seleccionar filas en función de sus valores
+* Select rows according to their values
 
-* Los argumentos reflejan las condiciones del filtrado
+* The arguments express the filtering conditions
 
 
 ``` r
@@ -695,27 +696,27 @@ gapminder %&gt;%
 ```
 
 ---
-## Filtrado
+## Filtering
 
-Para construír filtros complejos, hay que manejar los operadores lógicos 
+To build complex filters, you need to master the logical operators 
 
 &lt;br&gt;
 
 
-Operador    | Definición                   || Operador     | Definición
+Operator    | Definition                   || Operator     | Definition
 ------------|------------------------------||--------------|----------------
-`&lt;`         | Menor que                    ||`x`&amp;nbsp;&amp;#124;&amp;nbsp;`y`     | `x` OR `y` 
-`&lt;=`        |	Menor o igual que            ||`is.na(x)`    | ¿es `x` is `NA`?
-`&gt;`         | Mayor que                    ||`!is.na(x)`   | ¿ `x` no es `NA`?
-`&gt;=`        |	Mayor o igual que            ||`x %in% y`    | `x` pertenece a `y`
-`==`        |	Igual a                      ||`!(x %in% y)` |`x` no pertenece `y`
-`!=`        |	Distinto a                   ||`!x`          | negación `x`
+`&lt;`         | Less than                    ||`x`&amp;nbsp;&amp;#124;&amp;nbsp;`y`     | `x` OR `y` 
+`&lt;=`        |	Less than or equal to        ||`is.na(x)`    | is `x` `NA`?
+`&gt;`         | Greater than                 ||`!is.na(x)`   | is `x` not `NA`?
+`&gt;=`        |	Greater than or equal to     ||`x %in% y`    | `x` belongs to `y`
+`==`        |	Equal to                     ||`!(x %in% y)` |`x` does not belong to `y`
+`!=`        |	Different from               ||`!x`          | negation of `x`
 `x &amp; y`     | `x` AND `y`                  ||              |
 
 ---
-## Filtrado
+## Filtering
 
-¿Qué está pasando?
+What is happening here?
 
 
 ``` r
@@ -737,7 +738,7 @@ near(sqrt(2)^2, 2)
 ```
 
 ---
-## Filtrado
+## Filtering
 
 &lt;br&gt;
 &lt;br&gt;
@@ -745,11 +746,11 @@ near(sqrt(2)^2, 2)
 &lt;img src="img/logical_operators.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
-## Filtrado
+## Filtering
 
-Por defecto, los múltiples argumentos de `filter` se combinan con el operador `AND`
+By default, the multiple arguments of `filter` are combined with the `AND` operator
 
-Ejemplo: seleccionar países de América que en el 2007 tuvieran esperanza de vida superior a 75 o un PIB per cápita inferior a 6000
+Example: select countries in the Americas that in 2007 had a life expectancy above 77 or a GDP per capita below 4000
 
 
 ``` r
@@ -776,15 +777,15 @@ gapminder %&gt;%
 ---
 class: center, middle, inverse
 
-## Transformación de datos: valores ausentes
+## Data transformation: missing values
 
 ---
 
-## Valores ausentes
+## Missing values
 
-* Muy comunes en ciencia de datos
+* Very common in data science
 
-* Casi todas las operaciones con NA devuelven NA
+* Almost every operation involving NA returns NA
 
 
 ``` r
@@ -812,11 +813,11 @@ NA == NA
 ```
 ---
 
-## Valores ausentes
+## Missing values
 
-* En el filtrado, solo se incluyen filas con valores `TRUE` de la condición (se excluyen pues los `FALSE` y los `NA`).
+* When filtering, only the rows for which the condition is `TRUE` are included (so the `FALSE` and the `NA` ones are excluded).
 
-* Es fácil preservarlos
+* It is easy to keep them
 
 
 ``` r
@@ -845,9 +846,9 @@ filter(df, is.na(x) | x &gt; 1)
 
 ---
 
-## Valores ausentes
+## Missing values
 
-Podemos eliminar las filas que contengan valores ausentes en una determinada variable con `!is.na()`
+We can remove the rows that contain missing values in a given variable with `!is.na()`
 
 
 ``` r
@@ -864,9 +865,9 @@ df %&gt;% filter(!is.na(y))
 ```
 ---
 
-## Valores ausentes
+## Missing values
 
-Para eliminar todas las filas con valores ausentes, usar `drop_na()`
+To remove all the rows with missing values, use `drop_na()`
 
 
 ``` r
@@ -884,12 +885,12 @@ df %&gt;% drop_na()
 ---
 class: center, middle, inverse
 
-## Transformación de datos: `distinct`
+## Data transformation: `distinct`
 
 ---
 
-## Valores únicos
-Filtrar valores únicos de filas
+## Distinct values
+Filter for unique rows
 
 
 ``` r
@@ -918,10 +919,10 @@ gapminder %&gt;%
 ---
 class: center, middle, inverse
 
-## Transformación de datos: `count`
+## Data transformation: `count`
 
 ---
-## Crear tablas de frecuencias
+## Creating frequency tables
 
 .pull-left[
 
@@ -965,7 +966,7 @@ gapminder %&gt;%
 
 ---
 
-## Contar y ordenar
+## Counting and sorting
 
 
 ``` r
@@ -987,7 +988,7 @@ gapminder %&gt;%
 ```
 ---
 
-## Contar más de una variable
+## Counting more than one variable
 
 
 ``` r
@@ -1015,11 +1016,11 @@ gapminder %&gt;%
 ---
 class: center, middle, inverse
 
-## Transformación de datos: `mutate`
+## Data transformation: `mutate`
 
 ---
 
-## Añadir nuevas columnas
+## Adding new columns
 
 
 ``` r
@@ -1046,31 +1047,31 @@ gapminder %&gt;%
 ## # ℹ 132 more rows
 ```
 
-* **NOTA 1**: se puede definir más de una variable
+* **NOTE 1**: more than one variable can be defined
 
-* **NOTA 2**: en la definición, se puede usar variable recién definida
-
----
-
-## Añadir nuevas columnas
-
-Múltiples funciones útiles para añadir columnas
-
-* Operadores aritméticos
-
-* Aritmética modular: división entera `%/%`, resto `%%` 
-
-* Logaritmos
-
-* Agregaciones acumulativas `cumsum()`, `cumprod()`, `cummin()`, `cummax()`
-
-* Comparaciones lógicas
-
-* Rankings: `minrank()`
+* **NOTE 2**: in the definition, a newly defined variable can be used
 
 ---
 
-## Ejemplos
+## Adding new columns
+
+Many useful functions for adding columns
+
+* Arithmetic operators
+
+* Modular arithmetic: integer division `%/%`, remainder `%%` 
+
+* Logarithms
+
+* Cumulative aggregations `cumsum()`, `cumprod()`, `cummin()`, `cummax()`
+
+* Logical comparisons
+
+* Rankings: `min_rank()`
+
+---
+
+## Examples
 
 
 ``` r
@@ -1102,10 +1103,10 @@ cumsum(x)
 ---
 class: center, middle, inverse
 
-## Transformación de datos: `summarise`
+## Data transformation: `summarise`
 
 ---
-## Creación de estadísticos de resumen
+## Creating summary statistics
 
 
 ``` r
@@ -1121,33 +1122,33 @@ gapminder %&gt;%
 ## 1             5484.
 ```
 
-`summarise()` colapsa todas las filas en un único estadístico de resumen y elimina las columnas no necesarias para el cálculo
+`summarise()` collapses all the rows into a single summary statistic and drops the columns that are not needed for the computation
 
 ---
 
-## Resúmenes más útiles
+## The most useful summaries
 
-* Localización: `mean()` y `median()`
+* Location: `mean()` and `median()`
 
-* Dispersión: `sd()`, `IQR()`
+* Spread: `sd()`, `IQR()`
 
-* Rango: `min()`, `quantile(x, 0.25)`, `max()`
+* Range: `min()`, `quantile(x, 0.25)`, `max()`
 
-* Cuenta: `n()`, `n_distinct()`
+* Count: `n()`, `n_distinct()`
 
 
 
 ---
 class: center, middle, inverse
 
-## Transformación de datos: `group_by`
+## Data transformation: `group_by`
 
 ---
 
-## Agrupaciones
+## Grouping
 
-`summarise()` es tremendamente útil cuando se utiliza conjuntamente con `group_by()`.
-Esto permite obtener estadísticos de resumen para diferentes grupos
+`summarise()` is extremely useful when it is used together with `group_by()`.
+This makes it possible to obtain summary statistics for different groups
 
 
 ``` r
@@ -1170,7 +1171,7 @@ gapminder %&gt;%
 
 ---
 
-## Agrupaciones
+## Grouping
 
 
 ``` r
@@ -1194,13 +1195,13 @@ gapminder %&gt;%
 ## 5 Oceania       2            14495.              14495.
 ```
 
-**NOTA**: si hay valores ausentes, añadir `na.rm = TRUE`, e.g. `mean(x, na.rm = TRUE)`
+**NOTE**: if there are missing values, add `na.rm = TRUE`, e.g. `mean(x, na.rm = TRUE)`
 
 ---
 
-## Agrupaciones por varias variables
+## Grouping by several variables
 
-Fíjate que al hacer un summarise se deshace el agrupamiento según la última variable indicada en group_by
+Note that when a summarise is applied, the grouping by the last variable given in group_by is undone
 
 
 ``` r
@@ -1233,13 +1234,13 @@ gapminder %&gt;%
 .
 ---
 
-## Agrupaciones
+## Grouping
 
-Para desagrupar completamente podemos usar `ungroup()`
+To ungroup completely we can use `ungroup()`
 
 
 ``` r
-# Agrupamos por una columna
+# We group by one column
 gapminder_g &lt;- gapminder %&gt;% 
   group_by(continent)
 
@@ -1261,17 +1262,17 @@ gapminder_g %&gt;% slice(1)
 
 ---
 
-## Agrupaciones
+## Grouping
 
-Para desagrupar completamente podemos usar `ungroup()`
+To ungroup completely we can use `ungroup()`
 
 
 ``` r
-# Desagrupamos el dataframe
-gampminder_ng &lt;- gapminder %&gt;% 
+# We ungroup the dataframe
+gapminder_ng &lt;- gapminder %&gt;% 
   ungroup()
 
-gampminder_ng %&gt;% slice(1)
+gapminder_ng %&gt;% slice(1)
 ```
 
 ```
@@ -1283,13 +1284,13 @@ gampminder_ng %&gt;% slice(1)
 
 ---
 
-## Agrupaciones
+## Grouping
 
-Ojo:
+Careful:
 
 
 ``` r
-# Agrupamos por una columna
+# We group by one column
 gapminder_g &lt;- gapminder %&gt;% 
   group_by(continent)
 
@@ -1307,9 +1308,9 @@ gapminder_g %&gt;% head(1)
 
 ---
 
-## Agrupaciones
+## Grouping
 
-¿Cuál es la diferencia entre estas dos formas de contar?
+What is the difference between these two ways of counting?
 
 
 ``` r
@@ -1335,9 +1336,9 @@ penguins %&gt;%
 
 ---
 
-## Agrupaciones
+## Grouping
 
-¿Cuál es la diferencia entre estas dos formas de contar?
+What is the difference between these two ways of counting?
 
 
 ``` r
@@ -1357,9 +1358,9 @@ penguins %&gt;%
 ```
 ---
 
-## Agrupaciones
+## Grouping
 
-¿Qué sucede?
+What is going on?
 
 
 ``` r
@@ -1383,9 +1384,9 @@ penguins %&gt;%
 
 ---
 
-## Agrupaciones
+## Grouping
 
-¿Qué sucede?
+What is going on?
 
 
 ``` r
@@ -1409,9 +1410,9 @@ penguins %&gt;%
 ---
 
 
-## Reto
+## Challenge
 
-Para cada continente, calcula la proporción de países que en el año 1967 tenían esperanza de vida entre  0-10, 10-20, 20-30, etc.  en relación con el total de países del continente.
+For each continent, compute the proportion of countries that in 1967 had a life expectancy between  0-10, 10-20, 20-30, etc.  relative to the total number of countries in the continent.
 
 
 
@@ -1419,7 +1420,7 @@ Para cada continente, calcula la proporción de países que en el año 1967 ten�
 
 ---
 
-## Bibliografía
+## Bibliography
 
 * [R for Data Science](https://r4ds.had.co.nz/), Wickham and Grolemund (2016)
     </textarea>

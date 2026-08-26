@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Tema 2.1</title>
+    <title>Topic 2.1</title>
     <meta charset="utf-8" />
     <meta name="author" content="Roi Naveiro" />
-    <script src="libs/header-attrs-2.25/header-attrs.js"></script>
+    <script src="libs/header-attrs-2.29/header-attrs.js"></script>
     <link rel="stylesheet" href="ds_slides.css" type="text/css" />
   </head>
   <body>
@@ -20,30 +20,31 @@ class: center, middle, inverse, title-slide
 &lt;div class="title-logo"&gt;&lt;/div&gt;
 
 &lt;br&gt;
-# Análisis y Explotación de la Información
+# Data Analysis and Information Extraction
 
-## Tema 2 - Análisis Exploratorio de los Datos
+## Topic 2 - Exploratory Data Analysis
 
-### 2.1 Visualización 
+### 2.1 Data Visualization 
 
 &lt;br&gt;
 .pull-left[
 ### Roi Naveiro
+#### Academic Year 2026-2027
 ]
 ---
 
-## Análisis Exploratioro de los Datos
+## Exploratory Data Analysis
 
-* El arte de observar los datos, generar hipótesis y testearlas.
+* The art of observing the data, generating hypotheses and testing them.
 
-* **Objetivo**: generar preguntas prometedoras para, posteriormente, explorarlas en mayor profunidad
+* **Goal**: generate promising questions in order to explore them later in greater depth
 
 &lt;img src="img/data-science-explore.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
 ## tidyverse
 
-Queremos analizar los datos de forma **reproducible**
+We want to analyze the data in a **reproducible** way
 
 .pull-left[
 ![](img/tidyverse.png)
@@ -54,38 +55,38 @@ Queremos analizar los datos de forma **reproducible**
 [tidyverse.org](https://www.tidyverse.org/)
 ]
 
-- Tidyverse es una colección de paquetes de R para ciencia de datos
-- Todos los paquetes comparten una filosofía y una gramática comunes
+- Tidyverse is a collection of R packages for data science
+- All the packages share a common philosophy and a common grammar
 ]
 
 
 ---
 class: center, middle, inverse
 
-# El objeto tibble
+# The tibble object
 
 ---
-## El objeto tibble
+## The tibble object
 
-* Todos los paquetes de tidyverse trabajan con tibbles
+* All tidyverse packages work with tibbles
 
-* El objeto tibble es similar al data frame que hemos visto
+* The tibble object is similar to the data frame we have already seen
 
-* No obstante, incluye algunas novedades que lo hacen especialmente conveniente para el análisis de datos.
+* However, it includes some new features that make it especially convenient for data analysis.
 
-* Antes de empezar, debemos cargar la librería `tidyverse`
+* Before we start, we must load the `tidyverse` library
 
 
-```r
+``` r
 library(tidyverse)
 ```
 ---
-## Creación de tibbles
+## Creating tibbles
 
-* Podemos crear un tibble desde un dataframe
+* We can create a tibble from a dataframe
 
 
-```r
+``` r
 as_tibble(iris)
 ```
 
@@ -107,12 +108,12 @@ as_tibble(iris)
 ```
 
 ---
-## Creación de tibbles
+## Creating tibbles
 
-* Podemos crear un tibble desde vectores, de manera similar a cómo hicimos con dataframes
+* We can create a tibble from vectors, in a similar way to how we did with dataframes
 
 
-```r
+``` r
 dt &lt;- tibble(
   p = c("A", "B", "C", "D", "E"),
   x = 1:5,
@@ -134,14 +135,14 @@ dt
 ```
 
 ---
-## Creación de tibbles
+## Creating tibbles
 
-* Podemos dar nombres complejos a las columnas de un tibble
+* We can give complex names to the columns of a tibble
 
 
-```r
+``` r
 dt &lt;- tibble(
-  `Número de :)` = 1:5,
+  `Number of :)` = 1:5,
   ` ` = 2,
   `300` = 300
 )
@@ -150,7 +151,7 @@ dt
 
 ```
 ## # A tibble: 5 × 3
-##   `Número de :)`   ` ` `300`
+##   `Number of :)`   ` ` `300`
 ##            &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
 ## 1              1     2   300
 ## 2              2     2   300
@@ -164,10 +165,10 @@ dt
 
 ### Printing
 
-Los tibble tienen un método `print` refinado que por defecto solo muestra las 10 primeras filas
+Tibbles have a refined `print` method that by default shows only the first 10 rows
 
 
-```r
+``` r
 iris
 ```
 
@@ -330,10 +331,10 @@ iris
 
 ### Printing
 
-Los tibble tienen un método `print` refinado que por defecto solo muestra las 10 primeras filas
+Tibbles have a refined `print` method that by default shows only the first 10 rows
 
 
-```r
+``` r
 dt &lt;- as_tibble(iris)
 ```
 
@@ -342,10 +343,10 @@ dt &lt;- as_tibble(iris)
 
 ### Printing
 
-Esto es así para no sobrecargar la consola con los prints. ¿Y si necesitamos más de 10 filas? ¡PIPES!
+This is done so as not to overload the console with prints. And what if we need more than 10 rows? PIPES!
 
 
-```r
+``` r
 dt %&gt;% print(n=11, width=Inf)
 ```
 
@@ -372,10 +373,10 @@ dt %&gt;% print(n=11, width=Inf)
 
 ### Printing
 
-En RStudio, esto nos permite explorar el dataframe en una pantalla diferente.
+In RStudio, this lets us explore the dataframe in a different window.
 
 
-```r
+``` r
 dt %&gt;% View()
 ```
 
@@ -384,10 +385,10 @@ dt %&gt;% View()
 
 ### Subsetting
 
-Para seleccionar una única variable usar `$` (por nombre) o `[[` (por nombre o posición)
+To select a single variable use `$` (by name) or `[[` (by name or position)
 
-```r
-# Extraer por nombre
+``` r
+# Extract by name
 dt$Species[1:10]
 ```
 
@@ -396,8 +397,8 @@ dt$Species[1:10]
 ## Levels: setosa versicolor virginica
 ```
 
-```r
-# Extraer por posicion
+``` r
+# Extract by position
 dt[[5]][1:10]
 ```
 
@@ -412,9 +413,9 @@ dt[[5]][1:10]
 
 ### Subsetting
 
-También en pipe
+Also with the pipe
 
-```r
+``` r
 dt %&gt;% .$Species
 ```
 
@@ -450,9 +451,9 @@ dt %&gt;% .$Species
 ---
 ## Tibbles vs Data Frames
 
-Convertir de nuevo a data frame
+Convert back to a data frame
 
-```r
+``` r
 class( as.data.frame(dt) )
 ```
 
@@ -464,51 +465,51 @@ class( as.data.frame(dt) )
 ---
 class: center, middle, inverse
 
-## Visualización
+## Data Visualization
 
 ---
 
-## Visualización
+## Data Visualization
 
-Creación y estudio de representaciones visuales de los datos
+Creating and studying visual representations of the data
 
-* En esta parte del curso nos centraremos en aprender a manejar `ggplot2` un paquete de tidyverse realmente útil para la visualización
+* In this part of the course we will focus on learning to use `ggplot2`, a tidyverse package that is really useful for visualization
 
-* EDA incluye, además de visualización, la manipulación de datos
+* EDA includes, in addition to visualization, data manipulation
 
-* EDA combina la visualización y la manipulación con la curiosidad y el escepticismo de cada uno para preguntar y responder cuestiones interesantes acerca de los datos
+* EDA combines visualization and manipulation with each person's own curiosity and skepticism in order to ask and answer interesting questions about the data
 
 ---
 
 ## ggplot2 
 
-- **ggplot2** es el paquete de visualización de tidyverse
--  `gg` significa Grammar of Graphics
-- Está inspirado en el libreo **Grammar of Graphics** de Leland Wilkinson
+- **ggplot2** is the tidyverse visualization package
+-  `gg` stands for Grammar of Graphics
+- It is inspired by the book **Grammar of Graphics** by Leland Wilkinson
 
 &lt;img src="img/grammar-of-graphics.png" width="60%" style="display: block; margin: auto;" /&gt;
 
-GG: herramienta que permite describir de forma secuencial los componentes de un gráfico
+GG: a tool that allows us to describe the components of a plot sequentially
 
 
 
 ---
-## Visualización
+## Data Visualization
 
-Primero cargamos las librerías necesarias
+First we load the required libraries
 
 
-```r
+``` r
 library(tidyverse)
 library(gapminder)
 ```
 
-Ojeamos los datos
+We take a look at the data
 
 
 
 
-```r
+``` r
 glimpse(gapminder)
 ```
 
@@ -527,16 +528,16 @@ glimpse(gapminder)
 
 class: center, middle, inverse
 
-# Visualización: Visualizando la relación entre PIB per capita  y esperanza de vida
+# Data Visualization: Visualizing the relationship between GDP per capita and life expectancy
 
 ---
 
 
-## Primera visualización
+## First visualization
 
-¿Qué hace cada línea?
+What does each line do?
 
-```r
+``` r
 *gapminder67 &lt;- gapminder %&gt;% filter(year == "1967")
 ggplot(gapminder67, 
      aes(gdpPercap, lifeExp, size = pop, color = continent)) + 
@@ -544,17 +545,17 @@ ggplot(gapminder67,
      scale_x_log10()  # convert to log scale
 ```
 
-&lt;img src="tema2-1_files/figure-html/unnamed-chunk-16-1.png" angle=90 style="display: block; margin: auto;" /&gt;
+&lt;img src="topic2-1_files/figure-html/unnamed-chunk-16-1.png" angle=90 style="display: block; margin: auto;" /&gt;
 
 
 ---
 
-## Primera visualización
+## First visualization
 
-¿Qué hace cada línea?
+What does each line do?
 
 
-```r
+``` r
 gapminder67 &lt;- gapminder %&gt;% filter(year == "1967") 
 ggplot(gapminder67,  
      aes(gdpPercap, lifeExp, size = pop, color = continent)) +  
@@ -562,16 +563,16 @@ ggplot(gapminder67,
      scale_x_log10()  # convert to log scale
 ```
 
-&lt;img src="tema2-1_files/figure-html/unnamed-chunk-17-1.png" angle=90 style="display: block; margin: auto;" /&gt;
+&lt;img src="topic2-1_files/figure-html/unnamed-chunk-17-1.png" angle=90 style="display: block; margin: auto;" /&gt;
 
 ---
 
-## Primera visualización
+## First visualization
 
-¿Qué hace cada línea?
+What does each line do?
 
 
-```r
+``` r
 gapminder67 &lt;- gapminder %&gt;% filter(year == "1967") 
 *ggplot(gapminder67,
 *    aes(gdpPercap, lifeExp, size = pop, color = continent)) +
@@ -579,33 +580,33 @@ gapminder67 &lt;- gapminder %&gt;% filter(year == "1967")
      scale_x_log10()  
 ```
 
-&lt;img src="tema2-1_files/figure-html/unnamed-chunk-18-1.png" angle=90 style="display: block; margin: auto;" /&gt;
+&lt;img src="topic2-1_files/figure-html/unnamed-chunk-18-1.png" angle=90 style="display: block; margin: auto;" /&gt;
 
 ---
 
-## Funcionamiento `ggplot2`
+## How `ggplot2` works
 
-- La estructura del código de `ggplot2` es la siguiente
+- The structure of `ggplot2` code is as follows
 
 
-```r
+``` r
 ggplot(data = [dataset], 
        mapping = aes(x = [x-variable], y = [y-variable])) +
    geom_xxx() +
-   otras opciones
+   other options
 ```
 
-* El `mapping`  define como las variables son mapeadas a propiedades visuales del gráfico.
+* The `mapping`  defines how the variables are mapped to visual properties of the plot.
 
-Documentación [ggplot2.tidyverse.org](http://ggplot2.tidyverse.org/)
+Documentation [ggplot2.tidyverse.org](http://ggplot2.tidyverse.org/)
 
 ---
-## Funcionamiento `ggplot2`
+## How `ggplot2` works
 
-- Alternativamente
+- Alternatively
 
 
-```r
+``` r
 ggplot(data = [dataset]) +
    geom_xxx( mapping = aes(x = [x-variable], y = [y-variable]) ) +
    other options
@@ -613,14 +614,14 @@ ggplot(data = [dataset]) +
 
 
 ---
-## Paso a Paso
+## Step by Step
 
-Ojeamos los datos
-
-
+We take a look at the data
 
 
-```r
+
+
+``` r
 glimpse(gapminder)
 ```
 
@@ -635,12 +636,12 @@ glimpse(gapminder)
 ## $ gdpPercap &lt;dbl&gt; 779.4453, 820.8530, 853.1007, 836.1971, …
 ```
 
-Miramos `?gapminder`
+We look at `?gapminder`
 
 ---
-## Paso a Paso
+## Step by Step
 
-```r
+``` r
 gapminder67 &lt;- gapminder %&gt;% filter(year == "1967") 
 gapminder67
 ```
@@ -664,36 +665,36 @@ gapminder67
 
 
 ---
-## Paso a Paso
+## Step by Step
 
-```r
+``` r
 ggplot(gapminder67, aes(x = gdpPercap, y = lifeExp) ) +  
      geom_point() 
 ```
 
-&lt;img src="tema2-1_files/figure-html/unnamed-chunk-24-1.png" angle=90 style="display: block; margin: auto;" /&gt;
+&lt;img src="topic2-1_files/figure-html/unnamed-chunk-24-1.png" angle=90 style="display: block; margin: auto;" /&gt;
 
-¿Cómo describirías la relación entre pib per capita y esperanza de vida?
+How would you describe the relationship between GDP per capita and life expectancy?
 
 ---
-## Paso a Paso
+## Step by Step
 
-```r
+``` r
 ggplot(gapminder67, aes(x = gdpPercap, y = lifeExp) ) +  
      geom_point() +
 *    scale_x_log10()
 ```
 
-&lt;img src="tema2-1_files/figure-html/unnamed-chunk-25-1.png" angle=90 style="display: block; margin: auto;" /&gt;
+&lt;img src="topic2-1_files/figure-html/unnamed-chunk-25-1.png" angle=90 style="display: block; margin: auto;" /&gt;
 
-¿Cómo describirías la relación entre pib per capita y esperanza de vida?
+How would you describe the relationship between GDP per capita and life expectancy?
 
 
 ---
-## Variables adicionales
+## Additional variables
 
-Es posible que queramos representar más de dos variables. Podemos hacerlo a través de otros elementos
-del gráfico (en mapping usamos solo x e y, podemos añadir más)
+We may want to represent more than two variables. We can do so through other elements
+of the plot (in mapping we use only x and y, we can add more)
 
 * **aesthetics**: 
 
@@ -701,19 +702,19 @@ del gráfico (en mapping usamos solo x e y, podemos añadir más)
   * color
   * size
 
-* **faceting**: varias gráficas
+* **faceting**: several plots
 
 ---
 class: center, middle, inverse
 
-# Visualización: Aesthetics
+# Data Visualization: Aesthetics
 
 ---
 
 ## Aesthetics
 
-Las siguientes características visuales del gráfico pueden ser utilizadas para representar 
-una variable extra
+The following visual features of the plot can be used to represent 
+an extra variable
 
 * shape
 * color
@@ -721,247 +722,247 @@ una variable extra
 
 
 ---
-## Representamos el continente
+## Representing the continent
 
 
-```r
+``` r
 *ggplot(gapminder67, mapping = aes(x = gdpPercap, y = lifeExp, color = continent) ) +
      geom_point() +
      scale_x_log10()
 ```
 
-&lt;img src="tema2-1_files/figure-html/unnamed-chunk-26-1.png" angle=90 style="display: block; margin: auto;" /&gt;
+&lt;img src="topic2-1_files/figure-html/unnamed-chunk-26-1.png" angle=90 style="display: block; margin: auto;" /&gt;
 
 ---
-## Representamos el continente
+## Representing the continent
 
 
-```r
+``` r
 *ggplot(gapminder67, mapping = aes(x = gdpPercap, y = lifeExp, color = continent,
 *                       shape = continent) ) +
      geom_point() +
      scale_x_log10()
 ```
 
-&lt;img src="tema2-1_files/figure-html/unnamed-chunk-27-1.png" angle=90 style="display: block; margin: auto;" /&gt;
+&lt;img src="topic2-1_files/figure-html/unnamed-chunk-27-1.png" angle=90 style="display: block; margin: auto;" /&gt;
 
 ---
-## Representamos el continente y la población
+## Representing the continent and the population
 
 
-```r
+``` r
 *ggplot(gapminder67, mapping = aes(x = gdpPercap, y = lifeExp, color = continent,
 *                       shape = continent, size = pop) ) +
      geom_point() +
      scale_x_log10()
 ```
 
-&lt;img src="tema2-1_files/figure-html/unnamed-chunk-28-1.png" angle=90 style="display: block; margin: auto;" /&gt;
+&lt;img src="topic2-1_files/figure-html/unnamed-chunk-28-1.png" angle=90 style="display: block; margin: auto;" /&gt;
 
 ---
-## Representamos el continente y la población
+## Representing the continent and the population
 
 
-```r
+``` r
 ggplot(gapminder67, mapping = aes(x = gdpPercap, y = lifeExp, color = continent, 
                         shape = continent, size = pop) ) +  
 *    geom_point(size=3) +
      scale_x_log10()
 ```
 
-&lt;img src="tema2-1_files/figure-html/unnamed-chunk-29-1.png" angle=90 style="display: block; margin: auto;" /&gt;
+&lt;img src="topic2-1_files/figure-html/unnamed-chunk-29-1.png" angle=90 style="display: block; margin: auto;" /&gt;
 
 ---
-## Resumen
+## Summary
 
-Según la naturaleza de la variable
+Depending on the nature of the variable
 
 .small[
-aesthetics    | discreta                 | contínua
+aesthetics    | discrete                 | continuous
 ------------- | ------------------------ | ------------
-color         | diferentes colores       | gradiente
-size          | pasos discretros         | mapeo lineal entre variable y radio
-shape         | diferentes formas        | no funciona
+color         | different colors         | gradient
+size          | discrete steps           | linear mapping between variable and radius
+shape         | different shapes         | does not work
 
 ]
 
 &lt;br&gt;
 
-.alert[`aes` para representar variables usando características del gráfico
+.alert[`aes` to represent variables using features of the plot
 
-`geom_xxx` para definir característica del gráfico
+`geom_xxx` to define the feature of the plot
 ]
 
 ---
 class: center, middle, inverse
 
-# Visualización: Faceting
+# Data Visualization: Faceting
 
 ---
 
 ## Faceting
 
-Múltiples gráficas en función de variable
+Multiple plots as a function of a variable
 
 
-```r
+``` r
 ggplot(data = gapminder67, aes(x = gdpPercap, y = lifeExp)) + 
   geom_point() +
-  labs(title = "PIB per Cápita vs Esperanza de Vida",
-       subtitle = "Por continente",
-       x = "PIB per Cápita ($)", y =  "Esperanza de vida (años)") +
+  labs(title = "GDP per Capita vs Life Expectancy",
+       subtitle = "By continent",
+       x = "GDP per Capita ($)", y =  "Life expectancy (years)") +
 * facet_grid(. ~ continent)
 ```
 
-&lt;img src="tema2-1_files/figure-html/unnamed-chunk-30-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="topic2-1_files/figure-html/unnamed-chunk-30-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
 ## Faceting
 
-Múltiples gráficas en función de variable
+Multiple plots as a function of a variable
 
 
-```r
+``` r
 ggplot(data = gapminder67, aes(x = gdpPercap, y = lifeExp)) + 
   geom_point() +
-  labs(title = "PIB per Cápita vs Esperanza de Vida",
-       subtitle = "Por continente",
-       x = "PIB per Cápita ($)", y =  "Esperanza de vida (años)") +
+  labs(title = "GDP per Capita vs Life Expectancy",
+       subtitle = "By continent",
+       x = "GDP per Capita ($)", y =  "Life expectancy (years)") +
 * facet_grid(continent ~ .)
 ```
 
-&lt;img src="tema2-1_files/figure-html/unnamed-chunk-31-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="topic2-1_files/figure-html/unnamed-chunk-31-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
 ## Faceting
 
-Múltiples gráficas en función de variable
+Multiple plots as a function of a variable
 
 
-```r
+``` r
 ggplot(data = gapminder67, aes(x = gdpPercap, y = lifeExp)) + 
   geom_point() +
-  labs(title = "PIB per Cápita vs Esperanza de Vida",
-       subtitle = "Por continente",
-       x = "PIB per Cápita ($)", y =  "Esperanza de vida (años)") +
+  labs(title = "GDP per Capita vs Life Expectancy",
+       subtitle = "By continent",
+       x = "GDP per Capita ($)", y =  "Life expectancy (years)") +
 * facet_wrap(continent ~ .)
 ```
 
-&lt;img src="tema2-1_files/figure-html/unnamed-chunk-32-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="topic2-1_files/figure-html/unnamed-chunk-32-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
 ## Faceting
 
-Múltiples gráficas en función de variable
+Multiple plots as a function of a variable
 
 
-```r
+``` r
 ggplot(data = gapminder67, aes(x = gdpPercap, y = lifeExp)) + 
   geom_point() +
-  labs(title = "PIB per Cápita vs Esperanza de Vida",
-       subtitle = "Por continente",
-       x = "PIB per Cápita ($)", y =  "Esperanza de vida (años)") +
+  labs(title = "GDP per Capita vs Life Expectancy",
+       subtitle = "By continent",
+       x = "GDP per Capita ($)", y =  "Life expectancy (years)") +
 * facet_wrap(continent ~ ., scales = "free_x")
 ```
 
-&lt;img src="tema2-1_files/figure-html/unnamed-chunk-33-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="topic2-1_files/figure-html/unnamed-chunk-33-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
-# Faceting - Resumen
+# Faceting - Summary
 
 
 - `facet_grid()`: 
-    - Red 2d
-    - `filas ~ columnas`
-    - `.` para evitar una de ellas
+    - 2d grid
+    - `rows ~ columns`
+    - `.` to leave one of them out
 
 --
 
 - `facet_wrap()`: 1d 
-    - fijar escalas con `scales = ` ("free_x", "free_y", "free")
+    - set the scales with `scales = ` ("free_x", "free_y", "free")
 
 ---
 
-## Ejercicio 1
+## Exercise 1
 
 
-Utilizando los datos de la librería `gapminder`:
+Using the data from the `gapminder` library:
 
-* Filtra las obserevaciones correspondientes a los años 1957, 1967, 1977, 1987, 1997, 2007
+* Filter the observations corresponding to the years 1957, 1967, 1977, 1987, 1997, 2007
 
-* Representa la relación entre PIB per cápita y esperanza de vida por continentes y por años
-en diferentes gráficas usando **faceting**. El tamaño de los puntos ha de ser proporcional a la población.
-El color debe reflejar el continente. 
+* Plot the relationship between GDP per capita and life expectancy by continent and by year
+in different plots using **faceting**. The size of the points must be proportional to the population.
+The color must reflect the continent. 
 
-* ¿Qué conlusiones extraes?
+* What conclusions do you draw?
 
 
 ---
 class: middle, center
 
-# Visualización: distintos tipos de datos
+# Data Visualization: different types of data
 
 ---
 
-## Número de variables a visualizar
+## Number of variables to visualize
 
-- .vocab[Análisis de datos univariante]: distribución de una variable
-
-&lt;br&gt; 
-
-- .vocab[Análisis de datos bivariante]: relación entre dos variables
+- .vocab[Univariate data analysis]: distribution of one variable
 
 &lt;br&gt; 
 
-- .vocab[Análisis de datos multivariantes]: relación entre varias variables, generalmente enfocándose en dos y condicionando por el resto
+- .vocab[Bivariate data analysis]: relationship between two variables
+
+&lt;br&gt; 
+
+- .vocab[Multivariate data analysis]: relationship between several variables, generally focusing on two of them and conditioning on the rest
 
 
 ---
 
-## Tipos de variables
+## Types of variables
 
-- .vocab[Variables numéricas] pueden ser .vocab[contínuas] o .vocab[discretas] 
-    - *altura* es ?
-    - *número de cigarros diarios* es ?
-    - *distancia* es ?
+- .vocab[Numerical variables] can be .vocab[continuous] or .vocab[discrete] 
+    - *height* is ?
+    - *number of cigarettes per day* is ?
+    - *distance* is ?
 
 --
 
-- .vocab[Variables categóricas], a su vez incluyen .vocab[ordinales] si existe un orden natural
-entre sus niveles o .vocab[no ordinales]
-    - *color de ojos*  es ?
-    - *talla de camiseta* es ?
+- .vocab[Categorical variables], in turn, include .vocab[ordinal] ones if a natural order exists
+between their levels, or .vocab[non-ordinal] ones
+    - *eye color*  is ?
+    - *t-shirt size* is ?
 
-Según tipo de variable tendremos un tipo de representación
+Depending on the type of variable we will use a different type of representation
 
 ---
 class: center, middle
 
-# Visualización: datos univariantes numéricos
+# Data Visualization: univariate numerical data
 
 ---
 
-## ¿Cómo podemos describir datos númericos univariantes?
+## How can we describe univariate numerical data?
 
-- .vocab[Forma:]
-    - asimetría: simétrico, asimétrico a la derecha, asimétrica a la izquierda
-    - número de modas: unimodal, bimodal, multimodal, uniforme
+- .vocab[Shape:]
+    - skewness: symmetric, right-skewed, left-skewed
+    - number of modes: unimodal, bimodal, multimodal, uniform
     
-- .vocab[Centralidad:] media, mediana, moda
+- .vocab[Centrality:] mean, median, mode
 
-- .vocab[Dispersión:] rango, desviación estándar, rango inter-cuartílico
+- .vocab[Spread:] range, standard deviation, inter-quartile range
 
-- .vocab[Outliers:] existen datos raros 
+- .vocab[Outliers:] there are unusual observations 
 
 ---
 
-## ¿Por qué visualizarlos?
+## Why visualize them?
 
 
-```r
+``` r
 library(Tmisc)
 ```
 
@@ -1010,10 +1011,10 @@ library(Tmisc)
 
 ---
 
-## Resumiendo Anscombe's quartet
+## Summarizing Anscombe's quartet
 
 
-```r
+``` r
 quartet %&gt;%
   group_by(set) %&gt;%
   summarise(
@@ -1035,188 +1036,188 @@ quartet %&gt;%
 
 ---
 
-## Visualizando Anscombe's quartet
+## Visualizing Anscombe's quartet
 
 
-```r
+``` r
 ggplot(quartet, aes(x = x, y = y)) +
   geom_point() +
   facet_wrap(~ set, ncol = 4)
 ```
 
-&lt;img src="tema2-1_files/figure-html/quartet-plot-1.png" width="75%" style="display: block; margin: auto;" /&gt;
+&lt;img src="topic2-1_files/figure-html/quartet-plot-1.png" width="75%" style="display: block; margin: auto;" /&gt;
 
 ---
 
-## Visualizando datos numéricos univariantes
-Histograma - ¿Qué revela este gráfico? (Apuestas...)
+## Visualizing univariate numerical data
+Histogram - What does this plot reveal? (Place your bets...)
 
 
-```r
+``` r
 ggplot(gapminder67, mapping = aes(x = gdpPercap)) + 
 *    geom_histogram(binwidth = 1000)
 ```
 
-&lt;img src="tema2-1_files/figure-html/unnamed-chunk-35-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="topic2-1_files/figure-html/unnamed-chunk-35-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
-## Visualizando datos numéricos univariantes
-Histograma - ¿Qué revela este gráfico? (Apuestas...)
+## Visualizing univariate numerical data
+Histogram - What does this plot reveal? (Place your bets...)
 
 
-```r
+``` r
 ggplot(gapminder67, mapping = aes(x = gdpPercap)) + 
 *    geom_histogram(bins = 100)
 ```
 
-&lt;img src="tema2-1_files/figure-html/unnamed-chunk-36-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="topic2-1_files/figure-html/unnamed-chunk-36-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
-## Visualizando datos numéricos univariantes
-A veces útil
+## Visualizing univariate numerical data
+Sometimes useful
 
 
-```r
+``` r
 ggplot(gapminder67, mapping = aes(x = gdpPercap)) + 
 *    geom_density()
 ```
 
-&lt;img src="tema2-1_files/figure-html/unnamed-chunk-37-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="topic2-1_files/figure-html/unnamed-chunk-37-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ---
 class: center, middle
 
-## Visualización: datos univariantes categóricos
+## Data Visualization: univariate categorical data
 
 ---
-## Visualización de datos univariantes categóricos
+## Visualizing univariate categorical data
 
-Gráfico de barras 
+Bar plot 
 
-```r
+``` r
 ggplot(gapminder67, mapping = aes(x = continent)) + 
 * geom_bar()
 ```
 
-&lt;img src="tema2-1_files/figure-html/unnamed-chunk-38-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="topic2-1_files/figure-html/unnamed-chunk-38-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 class: center, middle
 
-## Visualización: datos bivariantes
+## Data Visualization: bivariate data
 
 ---
 
-## Visualización: datos bivariantes contínuo - categórico
+## Data Visualization: continuous - categorical bivariate data
 
 
-```r
+``` r
 ggplot(gapminder67, mapping = aes(x = continent, y = gdpPercap)) + 
 * geom_boxplot()
 ```
 
-&lt;img src="tema2-1_files/figure-html/unnamed-chunk-39-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="topic2-1_files/figure-html/unnamed-chunk-39-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
-## Visualización: datos bivariantes contínuo - categórico
+## Data Visualization: continuous - categorical bivariate data
 &lt;img src="img/boxplot.png" width="50%" style="display: block; margin: auto;" /&gt;
 
 ---
-## Visualización: datos bivariantes contínuo - continuo
+## Data Visualization: continuous - continuous bivariate data
 
-A veces queda bien añadir un ajuste
+Sometimes it is nice to add a fit
 
-```r
+``` r
 ggplot(gapminder67, aes(x = gdpPercap, y = lifeExp) ) +  
      geom_point() +
      scale_x_log10() +
 *    geom_smooth()
 ```
 
-&lt;img src="tema2-1_files/figure-html/unnamed-chunk-41-1.png" angle=90 style="display: block; margin: auto;" /&gt;
+&lt;img src="topic2-1_files/figure-html/unnamed-chunk-41-1.png" angle=90 style="display: block; margin: auto;" /&gt;
 
 ---
-## Visualización: datos bivariantes categórico - categórico
+## Data Visualization: categorical - categorical bivariate data
 
 Dataset `diamonds`
 
 
-```r
+``` r
 ggplot(data = diamonds, mapping = aes(x = clarity, fill = cut)) + 
 * geom_bar()
 ```
 
-&lt;img src="tema2-1_files/figure-html/unnamed-chunk-42-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="topic2-1_files/figure-html/unnamed-chunk-42-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 ---
-## Visualización: datos bivariantes categórico - categórico
+## Data Visualization: categorical - categorical bivariate data
 
 Dataset `diamonds`
 
 
-```r
+``` r
 ggplot(data = diamonds, mapping = aes(x = clarity, fill = cut)) + 
 * geom_bar(position = "fill") +
   labs(y = "proportion") 
 ```
 
-&lt;img src="tema2-1_files/figure-html/unnamed-chunk-43-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="topic2-1_files/figure-html/unnamed-chunk-43-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 ---
 class: center, middle
 
-## Visualización: transformaciones estadísticas
+## Data Visualization: statistical transformations
 
 ---
 
-## Transformaciones estadísticas
+## Statistical transformations
 
-Los gráficos como histogramas, gráficos de barras o boxplots realizan transformaciones a los datos antes de representarlos
+Plots such as histograms, bar plots or boxplots apply transformations to the data before displaying them
 
-* Gráficos de barras e histogramas: parcelan los datos y representan un número por cada parcela
+* Bar plots and histograms: bin the data and display one number for each bin
 
-* Smoothers: ajustan un modelo y representan predicciones generadas por el mismo
+* Smoothers: fit a model and display the predictions it generates
 
-* Boxplots: calculan un resumen de la distribución y lo pintan en determinado formato
+* Boxplots: compute a summary of the distribution and draw it in a given format
 
-El argumento para especificar el estadistico de resumen es  `stat`. Puedes ver su valor por defect en, e.g. `?geom_bar`
+The argument used to specify the summary statistic is  `stat`. You can see its default value in, e.g. `?geom_bar`
 
 ---
 
-## Transformaciones estadísticas
+## Statistical transformations
 
 
-```r
+``` r
 ggplot(data = diamonds) + 
 * geom_bar(mapping = aes(x = cut))
 ```
 
-&lt;img src="tema2-1_files/figure-html/unnamed-chunk-44-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="topic2-1_files/figure-html/unnamed-chunk-44-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 ---
 
-## Transformaciones estadísticas
+## Statistical transformations
 
 
-```r
+``` r
 ggplot(data = diamonds) + 
 * geom_bar(mapping = aes(x = cut, y = stat(prop), group = 1) )
 ```
 
-&lt;img src="tema2-1_files/figure-html/unnamed-chunk-45-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="topic2-1_files/figure-html/unnamed-chunk-45-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 
 ---
 
-## Transformaciones estadísticas
+## Statistical transformations
 
-Podemos crear estadísticos propios
+We can create our own statistics
 
 
-```r
+``` r
 ggplot(data = diamonds) + 
 * stat_summary(
 *   mapping = aes(x = cut, y = depth),
@@ -1226,105 +1227,105 @@ ggplot(data = diamonds) +
   )
 ```
 
-&lt;img src="tema2-1_files/figure-html/unnamed-chunk-46-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="topic2-1_files/figure-html/unnamed-chunk-46-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 
 ---
 class: center, middle
 
-## Visualización: ajuste de posición
+## Data Visualization: position adjustment
 
 ---
-## Ajustes de posición
+## Position adjustments
 
 
-```r
+``` r
 ggplot(data = diamonds) + 
   geom_bar(mapping = aes(x = cut, fill = clarity) )
 ```
 
-&lt;img src="tema2-1_files/figure-html/unnamed-chunk-47-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="topic2-1_files/figure-html/unnamed-chunk-47-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
-El apilamiento se realiza automáticamente con el ajuste de posición especificado a través de la variable
+Stacking is done automatically with the position adjustment specified through the variable
 `position`
 
 ---
-## Ajustes de posición - "identity"
+## Position adjustments - "identity"
 
 
-```r
+``` r
 ggplot(data = diamonds, mapping = aes(x = cut, fill = clarity)) + 
 * geom_bar(alpha = 1/5, position = "identity")
 ```
 
-&lt;img src="tema2-1_files/figure-html/unnamed-chunk-48-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="topic2-1_files/figure-html/unnamed-chunk-48-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 ---
-## Ajustes de posición - "fill"
+## Position adjustments - "fill"
 
-¿Para qué es bueno este tipo de gráfico?
+What is this type of plot good for?
 
 
-```r
+``` r
 ggplot(data = diamonds, mapping = aes(x = cut, fill = clarity)) + 
 * geom_bar(position = "fill")
 ```
 
-&lt;img src="tema2-1_files/figure-html/unnamed-chunk-49-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="topic2-1_files/figure-html/unnamed-chunk-49-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 ---
-## Ajustes de posición - "dodge"
+## Position adjustments - "dodge"
 
-¿Y este?
+And this one?
 
 
-```r
+``` r
 ggplot(data = diamonds, mapping = aes(x = cut, fill = clarity)) + 
 * geom_bar(position = "dodge")
 ```
 
-&lt;img src="tema2-1_files/figure-html/unnamed-chunk-50-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="topic2-1_files/figure-html/unnamed-chunk-50-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 ---
 class: center, middle
 
-## Visualización: coordenadas
+## Data Visualization: coordinates
 
 ---
 
-##  Coordenadas
+##  Coordinates
 
-Funciones para modificar coordenadas: `coord_xxx()`
+Functions to modify the coordinates: `coord_xxx()`
 
 .pull-left[
 
-```r
+``` r
 ggplot(data = mpg, mapping = aes(x = class, y = hwy)) + 
   geom_boxplot()
 ```
 
-&lt;img src="tema2-1_files/figure-html/unnamed-chunk-51-1.png" width="90%" style="display: block; margin: auto;" /&gt;
+&lt;img src="topic2-1_files/figure-html/unnamed-chunk-51-1.png" width="90%" style="display: block; margin: auto;" /&gt;
 ]
 .pull-right[
 
-```r
+``` r
 ggplot(data = mpg, mapping = aes(x = class, y = hwy)) + 
   geom_boxplot() +
 * coord_flip()
 ```
 
-&lt;img src="tema2-1_files/figure-html/unnamed-chunk-52-1.png" width="90%" style="display: block; margin: auto;" /&gt;
+&lt;img src="topic2-1_files/figure-html/unnamed-chunk-52-1.png" width="90%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
 
-##  Coordenadas
+##  Coordinates
 
-`coord_quickmap()` calcula el ratio correcto para mapas
+`coord_quickmap()` computes the correct aspect ratio for maps
 
 .pull-left[
 
-```r
+``` r
 library(maps)
 nz &lt;- map_data("nz")
 
@@ -1332,28 +1333,28 @@ ggplot(nz, aes(long, lat, group = group)) +
   geom_polygon(fill = "white", colour = "black")
 ```
 
-&lt;img src="tema2-1_files/figure-html/unnamed-chunk-53-1.png" width="90%" style="display: block; margin: auto;" /&gt;
+&lt;img src="topic2-1_files/figure-html/unnamed-chunk-53-1.png" width="90%" style="display: block; margin: auto;" /&gt;
 ]
 .pull-right[
 
-```r
+``` r
 ggplot(nz, aes(long, lat, group = group)) +
   geom_polygon(fill = "white", colour = "black") +
 * coord_quickmap()
 ```
 
-&lt;img src="tema2-1_files/figure-html/unnamed-chunk-54-1.png" width="90%" style="display: block; margin: auto;" /&gt;
+&lt;img src="topic2-1_files/figure-html/unnamed-chunk-54-1.png" width="90%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
 
-##  Coordenadas
+##  Coordinates
 
 `coord_polar()`
 
 .pull-left[
 
-```r
+``` r
 bar &lt;- ggplot(data = diamonds) + 
   geom_bar(
     mapping = aes(x = cut, fill = cut), 
@@ -1366,21 +1367,21 @@ bar &lt;- ggplot(data = diamonds) +
 *bar + coord_flip()
 ```
 
-&lt;img src="tema2-1_files/figure-html/unnamed-chunk-55-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="topic2-1_files/figure-html/unnamed-chunk-55-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 ]
 .pull-right[
 
-```r
+``` r
 *bar + coord_polar()
 ```
 
-&lt;img src="tema2-1_files/figure-html/unnamed-chunk-56-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="topic2-1_files/figure-html/unnamed-chunk-56-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 ]
 ---
-## Resumen
+## Summary
 
 
-```r
+``` r
 ggplot(data = &lt;DATA&gt;) + 
   &lt;GEOM_FUNCTION&gt;(
      mapping = aes(&lt;MAPPINGS&gt;),
@@ -1394,16 +1395,16 @@ ggplot(data = &lt;DATA&gt;) +
 ---
 class: center, middle
 
-## Visualización: consejos
+## Data Visualization: tips
 
 ---
-## Consejos
+## Tips
 
 [https://blog.csgsolutions.com/6-tips-for-creating-effective-data-visualizations](https://blog.csgsolutions.com/6-tips-for-creating-effective-data-visualizations)
 ---
 
 
-## Bibliografía
+## Bibliography
 
 * [R for Data Science](https://r4ds.had.co.nz/), Wickham and Grolemund (2016)
 
@@ -1424,10 +1425,10 @@ class: center, middle
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
-"highlightLines": true,
-"highlightStyle": "github",
-"countIncrementalSlides": false,
-"slideNumberFormat": "%current%"
+  "highlightLines": true,
+  "highlightStyle": "github",
+  "countIncrementalSlides": false,
+  "slideNumberFormat": "%current%"
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));
