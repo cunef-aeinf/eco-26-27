@@ -1,7 +1,7 @@
 ---
-title: "Análisis y Explotación de la Información"
+title: "Data Analysis and Information Extraction"
 author: "Roi Naveiro"
-date: ""
+date: "Academic Year 2026-2027"
 output: 
    xaringan::moon_reader:
     css: "ds_slides.css"
@@ -27,9 +27,9 @@ class: center, middle, inverse, title-slide
 
 <div class="title-logo"></div>
 
-# Análisis y Explotación de la Información
+# Data Analysis and Information Extraction
 
-## Tema 0 - Introducción
+## Topic 0 - Introduction
 
 <br>
 <br>
@@ -38,13 +38,14 @@ class: center, middle, inverse, title-slide
 <br>
 .pull-left[
 ### Roi Naveiro
+#### Academic Year 2026-2027
 ]
 
 
 
 ---
 
-## ¿Qué es la Ciencia de Datos?
+## What is Data Science?
 
 *Data science is an interdisciplinary academic field that uses <font class="vocab">statistics, scientific computing, scientific methods, processing, scientific visualization, algorithms and systems</font> to **extract or extrapolate knowledge and insights** from potentially noisy, structured, or unstructured **data**.*
 
@@ -56,14 +57,14 @@ class: center, middle, inverse, title-slide
 
 ---
 
-## ¿Qué es la Ciencia de Datos?
+## What is Data Science?
 
 
 <img class=center src="img/DS_diag.png" height=400 />
 
 ---
 
-## ¿Qué son los Datos?
+## What is Data?
 
 *Data are a collection of discrete or continuous values that convey information, describing the quantity, quality, fact, statistics, other basic units of meaning, or simply sequences of symbols that may be further interpreted formally.* 
 
@@ -74,70 +75,70 @@ class: center, middle, inverse, title-slide
 --
 
 <br>
-<font class="vocab">¡Definición bastante vaga!</font>
+<font class="vocab">Quite a vague definition!</font>
 
 ---
 
-## Tipos de Datos
+## Types of Data
 
-* Cualquier unidad de información es un dato
+* Any unit of information is a data point
 
-* Una distinción importante
+* An important distinction
 
-  * Datos estructurados
-  * Datos no estructurados
+  * Structured data
+  * Unstructured data
   
 ---
 
-## Datos Estructurados
+## Structured Data
 
-Datos tabulares
+Tabular data
 
 <img class=center src="img/excel.png" height=400 />
 
 ---
 
-## Datos No Estructurados
+## Unstructured Data
 
-Todo lo demás
+Everything else
 
-* Imágenes
+* Images
 
 * Audio
 
-* Vídeo
+* Video
 
-* Texto
+* Text
 
 ---
 
 
-## Tipos de Análisis de Datos
+## Types of Data Analysis
 
-* Descriptivo
+* Descriptive
 
-* Exploratorio
+* Exploratory
 
-* Inferencial
+* Inferential
 
-* Predictivo
+* Predictive
 
 * Causal
 
 ---
 
-## Análisis Descriptivo
+## Descriptive Analysis
 
-**Objetivo**: resumir la información presente en un conjunto de datos
+**Goal**: to summarize the information contained in a dataset
 
-  * Primer tipo de análisis de datos a realizar
-  * En general, las descripciones no se pueden **generalizar** sin la ayuda de modelos estadísticos
+  * The first type of data analysis to carry out
+  * In general, descriptions cannot be **generalized** without the help of statistical models
   
 ---
 
-## Análisis Descriptivo
+## Descriptive Analysis
 
-La base de datos `mtcars` de R contiene información extraída de la *1974 Motor Trend US magazine* acerca de 10 aspectos de diseño de rendimiento de 32 vehículos. La variable `am` se refiere a la transmisión (0 = automática, 1 = manual)
+R's `mtcars` dataset contains information extracted from the *1974 Motor Trend US magazine* about 10 aspects of design and performance for 32 vehicles. The variable `am` refers to the transmission (0 = automatic, 1 = manual)
 
 ```{r,fig.align='center',out.extra='angle=90', echo=FALSE}
 
@@ -149,17 +150,17 @@ mtcars %>% explore(am)
 
 ---
 
-## Análisis Exploratorio
+## Exploratory Analysis
 
-**Objetivo**: descubrir relaciones entre características de los datos 
+**Goal**: to discover relationships between features of the data 
 
-  * Motiva preguntas de investigación
+  * It motivates research questions
 
 ---
 
-## Análisis Exploratorio
+## Exploratory Analysis
 
-La variable `wt` se refiere al peso del vehículo y `mpg` a las millas por galón
+The variable `wt` refers to the weight of the vehicle and `mpg` to miles per gallon
 
 ```{r,fig.align='center',out.extra='angle=90', echo=FALSE}
 
@@ -171,15 +172,15 @@ mtcars %>% explore(wt, mpg)
 
 ---
 
-## Análisis Inferencial
+## Inferential Analysis
 
-**Objetivo**: usar una muestra pequeña de datos acerca de una población para extraer alguna información acerca de la misma.
+**Goal**: to use a small sample of data from a population in order to draw information about that population.
 
-  * Aquí entra en juego la **estadística**
+  * This is where **statistics** comes into play
   
 ---
 
-## Análisis Inferencial
+## Inferential Analysis
 
 ```{r, echo=FALSE, out.width = '100%',  fig.align='center'}
 knitr::include_graphics("img/pollution.png")
@@ -187,30 +188,30 @@ knitr::include_graphics("img/pollution.png")
 
 
 ---
-## Análisis Predictivo
+## Predictive Analysis
 
-**Objetivo**: utilizar datos sobre un conjunto de objetos para predecir el valor de una variable en un objeto nunca antes visto
+**Goal**: to use data about a set of objects to predict the value of a variable in an object never seen before
 
-  * X predice Y no implica que X sea causa de Y
+  * X predicting Y does not imply that X causes Y
 
 ---
-## Análisis Predictivo
+## Predictive Analysis
 
 ```{r pressure, echo=FALSE, out.width = '80%',  fig.align='center'}
 knitr::include_graphics("img/soy.svg")
 ```
 
-[Fuente](https://www.r-bloggers.com/2020/11/time-series-demand-forecasting/)
+[Source](https://www.r-bloggers.com/2020/11/time-series-demand-forecasting/)
 
 ---
-## Análisis Causal
+## Causal Analysis
 
-**Objetivo**: encontrar qué le sucede a una variable cuando se modifica el valor de otra
+**Goal**: to find out what happens to one variable when the value of another is changed
 
-  * Las relaciones causales usualmente identifican efectos medios, no efectos individuales
+  * Causal relationships usually identify average effects, not individual effects
 
 ---
-## Análisis Causal
+## Causal Analysis
 
 
 $$\\[1in]$$
@@ -221,133 +222,133 @@ knitr::include_graphics("img/covid.png")
 
 
 ---
-## Este curso
+## This course
 
-Adentrarnos en la ciencia de datos a través de R. Nos centraremos exclusivamente en:
+Getting into data science through R. We will focus exclusively on:
 
-* Datos Tabulares (observaciones x variables)
+* Tabular data (observations x variables)
 
-* Análisis Descriptivo, Exploratorio, Inferencial
+* Descriptive, Exploratory and Inferential Analysis
 
 ```{r, echo=FALSE, out.width = '100%',  fig.align='center'}
 knitr::include_graphics("img/data-science-explore.png")
 ```
 
-Aprenderemos las herramientas fundamentales de R para las distintas fases de este esquema.
+We will learn the fundamental R tools for the different stages of this scheme.
 
 ---
-## Las fases de un proyecto de análisis de la información
+## The stages of an information analysis project
 
-1. **Importación**: cargar datos en R procedentes de: base de datos, fichero, aplicación web (API), etc.
+1. **Import**: load data into R coming from: a database, a file, a web application (API), etc.
 
-2. **Organización**: almacenar datos de manera consistente con análisis.
+2. **Organization**: store data in a way that is consistent with the analysis.
 
-3. **Transformación**: filtrado, creación de variables derivadas, etc.
+3. **Transformation**: filtering, creating derived variables, etc.
 
-4. **Visualización**:  generación de preguntas, descubrimiento de tendencias.
+4. **Visualization**:  generating questions, discovering trends.
 
-5. **Análisis Exploratorio**: Visualización + tranformación aplicados de forma sistemática.
+5. **Exploratory Analysis**: Visualization + transformation applied systematically.
 
-6. **Modelización**: confirmar hipótesis, responder preguntas.
+6. **Modeling**: confirming hypotheses, answering questions.
 
-7. **Comunicación**: comunicar resultados
+7. **Communication**: communicating results
 
 ---
-## Las fases de un proyecto de análisis de la información
+## The stages of an information analysis project
 
 
 - 1,2,3 $\rightarrow$ Data Wrangling
 - 3,4,5 $\rightarrow$ Data exploration
-- 6 $\rightarrow$ Modelización
-- 7 $\rightarrow$ Comunicación
+- 6 $\rightarrow$ Modeling
+- 7 $\rightarrow$ Communication
 
 
-Todo esto usando el **lenguaje de programación R**.
-
----
-
-## Programa
-
-- Tema 1 - Programación en R
-
-- Tema 2 - Análisis Exploratorio de los Datos
-
-- Tema 3 - Data Wrangling
-
-- Tema 4 - Modelización
-
-- Tema 5 - Comunicación de resultados 
-
+All of this using the **R programming language**.
 
 ---
 
-## R y RStudio
+## Program
+
+- Topic 1 - Programming in R
+
+- Topic 2 - Exploratory Data Analysis
+
+- Topic 3 - Data Wrangling
+
+- Topic 4 - Modeling
+
+- Topic 5 - Communication of Results 
 
 
-### ¿Qué es R/RStudio?
+---
 
-- R es un lenguaje de programación especializacido en estadística
-- RStudio es una interfaz para programar en R
+## R and RStudio
+
+
+### What is R/RStudio?
+
+- R is a programming language specialized in statistics
+- RStudio is an interface for programming in R
 
 ```{r, echo=FALSE, out.width = '80%',  fig.align='center'}
 knitr::include_graphics("img/r-rstudio.png")
 ```
 
 
-[Instalación de R y RStudio](https://rstudio-education.github.io/hopr/starting.html)
+[Installing R and RStudio](https://rstudio-education.github.io/hopr/starting.html)
 
 
 ---
 
-## Presentación
+## Course Information
 
-* Análisis y Explotación de la Información. 
+* Data Analysis and Information Extraction. 
 
-* Profesor: Roi Naveiro
+* Lecturer: Roi Naveiro
 
 * Email: roi.naveiro@cunef.edu
 
-* Web del curso: [https://cunef-aeinf-ecomat-spring2026.github.io/](https://cunef-aeinf-ecomat-spring2026.github.io/)
+* Course website: [https://cunef-aeinf.github.io/eco-26-27/](https://cunef-aeinf.github.io/eco-26-27/)
 
 ---
 
-## Horario
+## Schedule
 
-* *Horario clases*: 
+* *Class schedule*: 
 
-  - Lunes 8.30 - 10.30
-  - Jueves 8.30 - 9å.30
+  - Monday 16.00 - 17.00
+  - Thursday 16.00 - 18.00
 
-* *Asistencia:* Obligatoria, al menos 80%
+* *Attendance:* Mandatory, at least 80%
 ---
 
-## Evaluación
+## Assessment
 
-* **Convocatoria Ordinaria**
+* **Regular exam session**
 
-  - Evaluación contínua: Examen  1: 20%
-  - Evaluación contínua: Examen  2: 20%
-  - Examen Ordinario Final: 60% (toda la materia)
+  - Continuous assessment: Midterm 1: 20%
+  - Continuous assessment: Midterm 2: 20%
+  - Final Exam: 60% (all course content)
   
-* **Convocatoria Extraordinaria**: Examen Extraordinario Final (60%) + Evaluación contínua. La nota de la contínua para la convocatoria extraordinaria será la mejor entre:
+* **Resit exam session**: Resit Final Exam (60%) + continuous assessment. The continuous assessment grade for the resit session will be the better of:
 
-  - Evaluación contínua
-  - Media ponderada de la evaluación contínua y el examen ordinario final
+  - The continuous assessment grade
+  - The weighted average of the continuous assessment and the regular final exam
 
 ---
 
-## Recursos Interesantes
+## Useful Resources
 
-* [Análisis de datos acerca de la evolución de las tendencias musicales](https://towardsdatascience.com/billboard-hot-100-analytics-using-data-to-understand-the-shift-in-popular-music-in-the-last-60-ac3919d39b49)
+* [Data analysis on the evolution of music trends](https://towardsdatascience.com/billboard-hot-100-analytics-using-data-to-understand-the-shift-in-popular-music-in-the-last-60-ac3919d39b49)
 
 * [A year as told by FitBit](https://livefreeordichotomize.com/2017/12/27/a-year-as-told-by-fitbit/)
 
-* [Charla TED](https://www.youtube.com/watch?v=hVimVzgtD6w)
+* [TED Talk](https://www.youtube.com/watch?v=hVimVzgtD6w)
 
 * [RMarkDown](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)
 ---
 
-## Bibliografía
+## Bibliography
 
 * [Hands-On Programming with R](https://rstudio-education.github.io/hopr/), Grolemund (2014)
 

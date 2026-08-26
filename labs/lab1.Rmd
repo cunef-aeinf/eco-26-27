@@ -1,5 +1,5 @@
 ---
-title: "Lab 01 - Programación en R"
+title: "Lab 1 - Programming in R"
 output:
   html_document:
     css: ./ds_labs.css
@@ -21,84 +21,84 @@ knitr::opts_chunk$set(fig.width=8, fig.height=6)
 ```
 
 
-## Ejercicio 1
+## Exercise 1
 
-Escribe una función que devuelva $k$ números, donde cada número es
-la suma de $n$ números escogidos al azar entre 1 y 100 (con reemplazamiento), divido entre n.
+Write a function that returns $k$ numbers, where each number is
+the sum of $n$ numbers drawn at random between 1 and 100 (with replacement), divided by $n$.
 
-Pinta un histograma con los resultados de $k=10000$ para $n=1$, $n=2$, $n=10$ y $n=100$.
-Pista: puedes usar la función `hist()`.
+Plot a histogram of the results for $k=10000$ with $n=1$, $n=2$, $n=10$ and $n=100$.
+Hint: you can use the `hist()` function.
 
-¿Qué observas?
-
-
-## Ejercicio 2
-
-Utiliza la ayuda de la función `replicate()` para conocer su funcionamiento.
-Resuelve el Ejercicio 1 sin usar un bucle (si es que lo habías usado).
+What do you observe?
 
 
-## Ejercicio 3
+## Exercise 2
 
-La base de datos `mtcars` de R contiene información extraída de la *1974 Motor Trend US magazine* acerca de 10 aspectos de diseño de rendimiento de 32 vehículos. 
-Usando esta base de datos, calcula 
+Use the help page of the `replicate()` function to learn how it works.
+Solve Exercise 1 without using a loop (if you used one).
 
-**Pregunta 1.** La diferencia entre el consumo medio de los vehículos de transmisión automática y los de transmisión manual.
 
-**Pregunta 2.** La misma diferencia pero únicamente para vehículos de más de 3000 lbs.
+## Exercise 3
 
-Pista: la ayuda ?mtcars te puede ser útil
+R's `mtcars` dataset contains information extracted from the *1974 Motor Trend US magazine* about 10 aspects of design and performance for 32 vehicles. 
+Using this dataset, compute 
 
-## Ejercicio 4
+**Question 1.** The difference between the average fuel consumption of automatic-transmission vehicles and that of manual-transmission ones.
 
-Utilizando un bucle `for` y un `if`, suma los números pares entre 1 y 100 (ambos incluidos).
+**Question 2.** The same difference, but only for vehicles weighing more than 3000 lbs.
 
-## Ejercicio 5
+Hint: the `?mtcars` help page may be useful
 
-Calcula la ganancia esperada de la estrategia de ruleta que consiste en apostar 10 euros siempre al rojo.
+## Exercise 4
 
-Para ello:
+Using a `for` loop and an `if`, add up the even numbers between 1 and 100 (both included).
 
-  - Crea una función llamada `spin()` que devuelva un número muestreado al azar entre 0 y 36 (ambos incluidos).
-  - Crea otra función llamada `compute_gain()` que tenga un argumento `q` referido a la cantidad de dinero de la apuesta, con valor por defecto de 10. Esta función, ha de generar un tirada de la ruleta y, en función del resultado, calcular la ganancia y devolverla. Recuerda que
+## Exercise 5
+
+Compute the expected gain of the roulette strategy that consists of always betting 10 euros on red.
+
+To do so:
+
+  - Create a function called `spin()` that returns a number drawn at random between 0 and 36 (both included).
+  - Create another function called `compute_gain()` with an argument `q` for the amount of money bet, with a default value of 10. This function has to generate one spin of the roulette wheel and, depending on the outcome, compute the gain and return it. Remember that
   
-    * Los números (32, 19, 21, 25, 34, 27, 36, 30, 23, 5, 16, 1, 14, 9, 18, 7, 12, 3) tienen color rojo.
-    * Los números (15, 4, 2, 17, 6, 13, 11, 8, 10, 24, 33, 20, 31, 22, 29, 28, 35, 26) tienen color negro.
-    * El cero no tiene color.
+    * The numbers (32, 19, 21, 25, 34, 27, 36, 30, 23, 5, 16, 1, 14, 9, 18, 7, 12, 3) are red.
+    * The numbers (15, 4, 2, 17, 6, 13, 11, 8, 10, 24, 33, 20, 31, 22, 29, 28, 35, 26) are black.
+    * Zero has no colour.
     
-  - Por último, crea un bucle que simule `K=10.000` partidas de la ruleta, almacena la ganancia generada en cada una, creando así un vector de tamaño $K$. Llama `ganancias` a este vector. Calcula su media. ¿Qué observas?
+  - Finally, create a loop that simulates `K = 10000` rounds of roulette, storing the gain generated in each one, thus building a vector of length $K$. Call this vector `winnings`. Compute its mean. What do you observe?
   
-## Ejercicio 6
+## Exercise 6
 
-Utiliza el siguiente código para representar las ganancia acumulada frente al número de partida. Necesitarás haber creado el vector `ganancias` del ejercicio anterior y haber definido el parámetro `K` (número de partidas). Extrae una conclusión del gráfico.
+Use the following code to plot the cumulative winnings against the round number. You will need to have created the `winnings` vector from the previous exercise and to have defined the parameter `K` (number of rounds). Draw a conclusion from the plot.
 
 ```{r, eval=F}
 library(ggplot2)
 
-results = data.frame(Partida = 1:K, Ganancia_Acumulada = cumsum(ganancias) )
+results = data.frame(Round = 1:K, Cumulative_Winnings = cumsum(winnings) )
 
-p <- ggplot(results, aes(x=Partida, y=Ganancia_Acumulada)) +  
+p <- ggplot(results, aes(x=Round, y=Cumulative_Winnings)) +  
   geom_line() + theme_minimal()
 
 p
 ```
 
 
-## Ejercicio 7
+## Exercise 7
 
-Repite los dos ejercicios anteriores pero esta vez evaluando cualquier otra estrategia que se te ocurra. ¿Qué conclusión extraes?
+Repeat the two previous exercises, but this time evaluating any other strategy you can think of. What conclusion do you draw?
 
-## Ejercicio 8
+## Exercise 8
 
-Escribe un código en R para estimar el valor de $\pi$ utilizando el método de Monte Carlo. El método consiste en generar puntos aleatorios en un cuadrado unitario y contar cuántos de ellos caen dentro de un cuarto de círculo inscrito en dicho cuadrado.
+Write R code to estimate the value of $\pi$ using the Monte Carlo method. The method consists of generating random points in the unit square and counting how many of them fall inside a quarter circle inscribed in that square.
 
-1. Genera $N$ puntos aleatorios dentro de un cuadrado de lado 1, es decir, los puntos $(x, y)$ deben tener coordenadas $x$ y $y$ entre 0 y 1. Para ello, puedes usar la función `runif()`.
+1. Generate $N$ random points inside a square of side 1, that is, the points $(x, y)$ must have coordinates $x$ and $y$ between 0 and 1. You can use the `runif()` function for this.
 
-2. Calcula el número de puntos que caen dentro del círculo. 
+2. Compute the number of points that fall inside the quarter circle. 
 
-3. Utiliza el número calculado en el apartado anterior y el número total de puntos generados para estimar el valor de $\pi$.
+3. Use the number computed in the previous step and the total number of points generated to estimate the value of $\pi$.
 
-¿Qué observas al aumentar el número de puntos generados?
+What do you observe as you increase the number of points generated?
 
 
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Tema 1</title>
+    <title>Topic 1</title>
     <meta charset="utf-8" />
     <meta name="author" content="Roi Naveiro" />
     <script src="libs/header-attrs-2.29/header-attrs.js"></script>
@@ -19,15 +19,16 @@ class: center, middle, inverse, title-slide
 
 &lt;div class="title-logo"&gt;&lt;/div&gt;
 
-# Análisis y Explotación de la Información
+# Data Analysis and Information Extraction
 
-## Tema 1 - Programación en R
+## Topic 1 - Programming in R
 
 &lt;br&gt;
 &lt;br&gt;
 &lt;br&gt;
 .pull-left[
 ### Roi Naveiro
+#### Academic Year 2026-2027
 ]
 
 
@@ -35,35 +36,35 @@ class: center, middle, inverse, title-slide
 ---
 
 
-## R y RStudio
+## R and RStudio
 
 
-### ¿Qué es R/RStudio?
+### What is R/RStudio?
 
-- R es un lenguaje de programación especializacido en estadística
-- RStudio es una interfaz para programar en R
+- R is a programming language specialized in statistics
+- RStudio is an interface for programming in R
 
 &lt;img src="img/r-rstudio.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 
-[Instalación de R y RStudio](https://rstudio-education.github.io/hopr/starting.html)
+[Installing R and RStudio](https://rstudio-education.github.io/hopr/starting.html)
 
 ---
 
-## Interfaz de usuario de R
+## R user interface
 
-- RStudio: forma de comunicarse con máquina
-- R: lenguaje de comunicación
+- RStudio: the way we communicate with the machine
+- R: the language of communication
 
 &lt;img src="img/RGUI.png" width="70%" style="display: block; margin: auto;" /&gt;
 ---
 
 class: center, middle, inverse
 
-# Introducción
+# Introduction
 
 ---
-## Ejecutar comandos
+## Running commands
 
 
 ``` r
@@ -74,7 +75,7 @@ class: center, middle, inverse
 ## [1] 7995
 ```
 
-En consola aparece como
+In the console it appears as
 
 &lt;img src="img/console.png" width="20%" style="display: block; margin: auto;" /&gt;
 
@@ -91,7 +92,7 @@ En consola aparece como
 ## [12] 1011 1012 1013 1014 1015 1016 1017 1018 1019 1020
 ```
 
-Uso como calculadora
+Using it as a calculator
 
 
 ``` r
@@ -106,14 +107,14 @@ Uso como calculadora
 
 
 
-## Comentarios
+## Comments
 
-* Comentarios con `#`
+* Comments start with `#`
 
 
 ``` r
-# Esto es un comentario
-# Sumo los números del 1 al 100
+# This is a comment
+# I add up the numbers from 1 to 100
 sum(1:100)
 ```
 
@@ -121,24 +122,24 @@ sum(1:100)
 ## [1] 5050
 ```
 
-* Salida de código con `##`
+* Code output is prefixed with `##`
 
-* Comprueba que la siguiente expresión es cierta para `\(K=100\)` y `\(K=1000\)`
+* Check that the following expression holds for `\(K=100\)` and `\(K=1000\)`
 
   $$
   \sum_{i=1}^{K} i = \frac{K \cdot (K + 1)}{2}
   $$
 ---
-## Objetos
+## Objects
 
-* Si queremos un valor (o conjunto de valores) de forma recurrente hay que **guardarlos en memoria**, dándole un nombre.
+* If we need a value (or a set of values) repeatedly, we have to **store it in memory**, giving it a name.
 
 
 ``` r
-# Esto crea un objeto de R con valor pi
+# This creates an R object with the value pi
 a &lt;- pi
 
-# Sumo 3 al valor guardado
+# I add 3 to the stored value
 a + 3
 ```
 
@@ -146,11 +147,11 @@ a + 3
 ## [1] 6.141593
 ```
 
-* Podemos guardar múltiples valores
+* We can store multiple values
 
 
 ``` r
-b &lt;-1:10
+b &lt;- 1:10
 b
 ```
 
@@ -159,18 +160,18 @@ b
 ```
 
 ---
-## Objetos
+## Objects
 
-Los objetos guardados aparecen en la ventana de *Environment*
+Stored objects appear in the *Environment* pane
 
 &lt;img src="img/env.png" width="100%" style="display: block; margin: auto;" /&gt;
 
-El nombre de un objeto no puede empezar con un número, ni tampoco incluír ciertos caracteres especiales como `^`, `$`, `@`, etc.
+An object name cannot start with a number, nor can it include certain special characters such as `^`, `$`, `@`, etc.
 
 ---
-## Objetos
+## Objects
 
-R sobre-escribe
+R overwrites
 
 
 ``` r
@@ -191,7 +192,7 @@ c
 ## [1] 20
 ```
 
-La función `ls()` muestra nombres usados
+The `ls()` function shows the names in use
 
 
 ``` r
@@ -203,11 +204,11 @@ ls()
 ```
 
 ---
-## Operaciones sobre objetos
+## Operations on objects
 
-* R realiza operaciones *element-wise*
+* R performs operations *element-wise*
 
-* Vector - Número
+* Vector - Number
 
 ``` r
 b &lt;- 1:10
@@ -218,7 +219,7 @@ b + 7
 ##  [1]  8  9 10 11 12 13 14 15 16 17
 ```
 
-* Vector - Vector (misma longitud)
+* Vector - Vector (same length)
 
 ``` r
 b * b
@@ -229,14 +230,14 @@ b * b
 ```
 
 ---
-## Operaciones sobre objetos
+## Operations on objects
 
-* Vector - Vector (diferente longitud)
+* Vector - Vector (different length)
 
 
 ``` r
-# R repite el vector corto hasta alcanzar la longitud del largo
-# Si la longitud del corto no es múltiplo de la del largo lanza un warning
+# R recycles the short vector until it reaches the length of the long one
+# If the short length is not a multiple of the long one, it throws a warning
 d &lt;- 1:2
 e &lt;- 1:4
 
@@ -247,14 +248,14 @@ d * e
 ## [1] 1 4 3 8
 ```
 
-¡Pruébalo!
+Try it out!
 
 ---
 
-## La función `c()`
+## The `c()` function
 
-Esta función nos ayuda a combinar objetos.
-Por ejemplo, podemos crear un vector de enteros de la siguiente forma
+This function helps us combine objects.
+For example, we can create a vector of integers as follows
 
 
 ``` r
@@ -266,7 +267,7 @@ a
 ## [1] 1 2 3
 ```
 
-También podemos añadir elementos a un vector existente
+We can also add elements to an existing vector
 
 ``` r
 a &lt;- c(a, 4,5)
@@ -277,30 +278,30 @@ a
 ## [1] 1 2 3 4 5
 ```
 
-No solo podemos crear vectores de números!
+We are not limited to vectors of numbers!
 
 
 ``` r
-a &lt;- c('adiós', 'hola')
+a &lt;- c('goodbye', 'hello')
 a
 ```
 
 ```
-## [1] "adiós" "hola"
+## [1] "goodbye" "hello"
 ```
 ---
 
 class: center, middle, inverse
 
-# Funciones
+# Functions
 
 ---
-## Funciones
+## Functions
 
-R tiene muchas funciones predefinidas 
+R has many built-in functions 
 
 ``` r
-# Calcula la media de los números del 1 al 10
+# Computes the mean of the numbers from 1 to 10
 mean(1:10)
 ```
 
@@ -309,7 +310,7 @@ mean(1:10)
 ```
 
 ``` r
-# El argumento de una función puede ser el resultado de otra función
+# The argument of a function can be the result of another function
 round(mean(1:10))
 ```
 
@@ -318,35 +319,35 @@ round(mean(1:10))
 ```
 
 ---
-## Funciones
+## Functions
 
-Algunas funciones tienen múltiples argumentos. Cada uno tiene un nombre
+Some functions take multiple arguments. Each one has a name
 
 
 ``` r
-# Muestrea un número del 1 al 10
+# Draws one number at random from 1 to 10
 sample(x = 1:10, size = 1)
 ```
 
 ```
-## [1] 10
+## [1] 1
 ```
 
 ``` r
-# Nombre opcional
+# The name is optional
 sample(1:10, 1)
 ```
 
 ```
-## [1] 6
+## [1] 1
 ```
 
-Si no escribimos el nombre de los argumentos, debemos incluirlos en el orden correcto especificado en la documentación de la función.
+If we do not write the argument names, we must supply them in the correct order specified in the function documentation.
 
 ---
-## Funciones
+## Functions
 
-La función `args()` muestra los argumentos de una función
+The `args()` function shows the arguments of a function
 
 ``` r
 args(sample)
@@ -357,39 +358,39 @@ args(sample)
 ## NULL
 ```
 
-¡Algunas tienen valores por defecto! Esto significa que si no especificamos un argumento, R usará el valor por defecto.
+Some have default values! This means that if we do not specify an argument, R will use the default value.
 
-Pregunta, ¿qué valores tiene por defecto la función `round()`?
+Question: what default values does the `round()` function have?
 
-**Buena práctica**: escribir nombre de argumentos (salvo quizás el primero).
+**Good practice**: write out the argument names (except perhaps the first one).
 
 ---
-## Algunas Funciones 
+## Some Functions 
 
-| Función   | Significado                   | 
+| Function  | Meaning                       | 
 |:----------|:------------------------------| 
-| `log`      | Logaritmo Nat.               | 
-| `exp`      | Exponencial                  | 
-| `min`      | Elem. mínimo                 | 
-| `max`      | Elem. máximo                 | 
-| `sum`      | Suma                         | 
-| `mean`     | Media                        | 
-| `median`   | Mediana                      | 
-| `var`      | Variaza                      | 
-| `sd`       | Dev. Est.                    | 
-| `quantile` | Cuantiles 0, 25, 50, 75, 100 | 
-| `cor`      | Correlación                  | 
+| `log`      | Natural log                  | 
+| `exp`      | Exponential                  | 
+| `min`      | Minimum element              | 
+| `max`      | Maximum element              | 
+| `sum`      | Sum                          | 
+| `mean`     | Mean                         | 
+| `median`   | Median                       | 
+| `var`      | Variance                     | 
+| `sd`       | Std. Dev.                    | 
+| `quantile` | Percentiles 0,25,50,75,100   | 
+| `cor`      | Correlation                  | 
 
 ---
-## Definiendo funciones propias
+## Defining our own functions
 
-* Permiten definir operaciones de uso recurrente (no implementadas en R).
+* They let us define operations we use repeatedly (and that are not built into R).
 
 ``` r
-una_funcion &lt;- function(){}
+a_function &lt;- function(){}
 ```
 
-* Función que genera 2 números entre 1 y 100 y devuelva su suma
+* A function that generates 2 numbers between 1 and 100 and returns their sum
 
 --
 
@@ -403,9 +404,9 @@ gen2_1_100 &lt;- function(){
 ```
 
 ---
-## Definiendo funciones propias
+## Defining our own functions
 
-* La probamos
+* Let us try it out
 
 
 ``` r
@@ -413,7 +414,7 @@ a &lt;- gen2_1_100()
 ```
 
 ```
-## [1] 39 35
+## [1] 30 53
 ```
 
 ``` r
@@ -421,18 +422,18 @@ a
 ```
 
 ```
-## [1] 74
+## [1] 83
 ```
 
 ---
-## Definiendo funciones propias
+## Defining our own functions
 
-* Argumentos
+* Arguments
 
 
 ``` r
-# Pasamos el tamaño como argumento
-# 2 es el valor por defecto
+# We pass the size as an argument
+# 2 is the default value
 gen2_1_100 &lt;- function(n=2){
   nums &lt;- sample(1:100, size = n, replace = TRUE)
   print(nums)
@@ -440,7 +441,7 @@ gen2_1_100 &lt;- function(n=2){
 }
 ```
 
-* La probamos sin argumento
+* Let us try it without an argument
 
 
 ``` r
@@ -448,28 +449,28 @@ gen2_1_100()
 ```
 
 ```
-## [1] 65 94
+## [1] 76 54
 ```
 
 ```
-## [1] 159
+## [1] 130
 ```
 
 ---
-## Definiendo funciones propias
+## Defining our own functions
 
-* La probamos con argumento
+* Let us try it with an argument
 
 ``` r
 gen2_1_100(10)
 ```
 
 ```
-##  [1] 35 24 38 59 19 13  8 22 55 89
+##  [1] 90 54 41 24 51 29 75 65 88 46
 ```
 
 ```
-## [1] 362
+## [1] 563
 ```
 
 
@@ -477,30 +478,30 @@ gen2_1_100(10)
 
 class: center, middle, inverse
 
-# Paquetes y ayudas
+# Packages and help
 
 ---
-## Paquetes y ayudas
+## Packages and help
 
-* **Importante**: el primer paso en la creación (de cualquier cosa) consiste en comprobar si alguien ya la ha creado...
+* **Important**: the first step in creating (anything) is to check whether someone has already created it...
 
-* ...lo mismo para funciones en R.
+* ...the same goes for functions in R.
 
-* Muchas funciones de R han sido creadas y encapsuladas en **paquetes**.
+* Many R functions have been written and bundled into **packages**.
 
-* [Aquí](https://rstudio-education.github.io/hopr/packages2.html) podéis ver cómo instalar y actualizar paquetes en R.
+* [Here](https://rstudio-education.github.io/hopr/packages2.html) you can see how to install and update packages in R.
 
 ---
-## Paquetes y ayudas
+## Packages and help
 
-* Ejemplo, instalar `tidyverse`
+* For example, installing `tidyverse`
 
 
 ``` r
 install.packages("tidyverse")
 ```
 
-* Para usar paquetes en R hay que cargarlos
+* To use packages in R we have to load them
 
 
 ``` r
@@ -508,13 +509,13 @@ library("tidyverse")
 ```
 
 ---
-## Paquetes y ayudas
+## Packages and help
 
-* Existen infinidad de funciones en R y sus paquetes...
+* There are countless functions in R and its packages...
 
-* ...memorizar todo es complicado (y absurdo).
+* ...memorising them all is hard (and pointless).
 
-* Las funciones cuentan con ayudas, que se invocan de la siguiente manera
+* Functions come with help pages, which are called as follows
 
 
 ``` r
@@ -522,44 +523,44 @@ library("tidyverse")
 ```
 
 ---
-## Paquetes y ayudas
+## Packages and help
 
-* La mejor fuente de ayuda es internet.
+* The best source of help is the internet.
 
-* Por ejemplo, [Stack Overflow](https://stackoverflow.co/).
+* For example, [Stack Overflow](https://stackoverflow.co/).
 
-* Otro recurso interesante es [community.rstudio.com](https://community.rstudio.com).
+* Another useful resource is [community.rstudio.com](https://community.rstudio.com).
 
 
 ---
 
 class: center, middle, inverse
 
-# Objetos de R
+# R objects
 
 ---
-## Objetos de R
+## R objects
 
-Un objeto de R es una estructura de datos que tiene algunos métodos y atributos asociados.
+An R object is a data structure that has some methods and attributes associated with it.
 
-Estudiaremos los siguientes objetos:
-1. Vectores atómicos
+We will study the following objects:
+1. Atomic vectors
 2. Matrices
 3. Arrays
-4. Fecha y hora
-5. Factores
-6. Listas
+4. Dates and times
+5. Factors
+6. Lists
 7. Data frames
 ---
-## 1. Vectores atómicos
+## 1. Atomic vectors
 
-No son más que vectores de datos. Ya hemos visto cómo crearlos.
+They are simply vectors of data. We have already seen how to create them.
 
 
 ``` r
 a = c(1,2,3)
 
-# Comprueba si es vector
+# Checks whether it is a vector
 is.vector(a)
 ```
 
@@ -568,7 +569,7 @@ is.vector(a)
 ```
 
 ``` r
-# Devuelve la longitud del vector
+# Returns the length of the vector
 length(a)
 ```
 
@@ -576,19 +577,19 @@ length(a)
 ## [1] 3
 ```
 
-Cada vector sólo guarda un tipo de dato
+Each vector stores only one type of data
 
 ---
-## 1. Vectores atómicos
-### Tipos de datos - Doubles
+## 1. Atomic vectors
+### Data types - Doubles
 
-Los vectores tipo double almacenan números reales
+Double vectors store real numbers
 
 
 ``` r
 a = c(1.7,2,3.5)
 
-# Devuelve el tipo de vector
+# Returns the type of the vector
 typeof(a)
 ```
 
@@ -597,16 +598,16 @@ typeof(a)
 ```
 
 ---
-## 1. Vectores atómicos
-### Tipos de datos - Enteros
+## 1. Atomic vectors
+### Data types - Integers
 
-Los vectores tipo entero almacenan números enteros
+Integer vectors store whole numbers
 
 
 ``` r
 a = c(1L,-2L,3L)
 
-# Devuelve el tipo de vector
+# Returns the type of the vector
 typeof(a)
 ```
 
@@ -614,16 +615,16 @@ typeof(a)
 ## [1] "integer"
 ```
 ---
-## 1. Vectores atómicos
-### Tipos de datos - Caracteres
+## 1. Atomic vectors
+### Data types - Characters
 
-Los vectores tipo caracter (string) almacenan texto
+Character vectors (strings) store text
 
 
 ``` r
-a = c("Hola", "Adiós")
+a = c("Hello", "Goodbye")
 
-# Devuelve el tipo de vector
+# Returns the type of the vector
 typeof(a)
 ```
 
@@ -631,24 +632,24 @@ typeof(a)
 ## [1] "character"
 ```
 
-OJO: ¿Qué está sucediendo?
+WATCH OUT: what is going on here?
 
 ``` r
-a = c(1,2,3,"Hola")
+a = c(1,2,3,"Hello")
 a
 ```
 
 ```
-## [1] "1"    "2"    "3"    "Hola"
+## [1] "1"     "2"     "3"     "Hello"
 ```
 
-Este fenómeno se llama **coerción**. Es importante que leas sobre el mismo en
+This phenomenon is called **coercion**. It is important that you read about it at
 [https://rstudio-education.github.io/hopr/r-objects.html#coercion](https://rstudio-education.github.io/hopr/r-objects.html#coercion).
 
 ---
-## 1. Vectores atómicos
-### Tipos de datos - Lógicos
-Los vectores tipo lógico almacenan `TRUE` o `FALSE` (datos Booleanos).
+## 1. Atomic vectors
+### Data types - Logicals
+Logical vectors store `TRUE` or `FALSE` (Boolean data).
 
 
 ``` r
@@ -669,25 +670,25 @@ a
 ```
 
 ---
-## Operaciones lógicas
+## Logical operations
 
 &lt;br&gt;
 &lt;br&gt;
 
-| Operador  | Significado       | 
+| Operator  | Meaning           | 
 |:----------|:------------------| 
-| `==`      | Igual a           | 
-| `!=`      | Distinto de       | 
-| `&gt;`       | Mayor             | 
-| `&gt;=`      | Mayor o igual     | 
-| `&lt;`       | Menor             | 
-| `&lt;=`      | Menor o igual     | 
-| `%in%`    | Está en conjunto  |
+| `==`      | Equal to          | 
+| `!=`      | Not equal to      | 
+| `&gt;`       | Greater than      | 
+| `&gt;=`      | Greater or equal  | 
+| `&lt;`       | Less than         | 
+| `&lt;=`      | Less or equal     | 
+| `%in%`    | Is in the set     |
 
 ---
-## Inciso: Atributos
+## Aside: Attributes
 
-Son piezas de información que se pueden adjuntar a los objetos de R.
+These are pieces of information that can be attached to R objects.
 
 
 ``` r
@@ -699,42 +700,42 @@ attributes(a)
 ## NULL
 ```
 
-Algunos atributos importantes: nombres y dimensión.
+Some important attributes: names and dimension.
 
 ---
-## Atributos - Nombres
+## Attributes - Names
 
 ``` r
 a = 1:3
-# Asigno nombres al vector a
-names(a) &lt;- c("uno", "dos", "tres")
+# I assign names to the vector a
+names(a) &lt;- c("one", "two", "three")
 names(a)
 ```
 
 ```
-## [1] "uno"  "dos"  "tres"
+## [1] "one"   "two"   "three"
 ```
 
 ``` r
-#Compruebo que se ha guardado el atributo
+#I check that the attribute has been stored
 attributes(a)
 ```
 
 ```
 ## $names
-## [1] "uno"  "dos"  "tres"
+## [1] "one"   "two"   "three"
 ```
 
 ---
-## Atributos - Dimensión
+## Attributes - Dimension
 
 ``` r
 a = 1:10
-# Asigno dimensión, esto convierte a en matriz
+# I assign a dimension; this turns a into a matrix
 
 dim(a) = c(2,5)
 
-#Compruebo la dimensión
+#I check the dimension
 dim(a)
 ```
 
@@ -744,7 +745,7 @@ dim(a)
 
 ---
 ## 2. Matrices
-Se utilizan para almacenar matrices bi-dimensionales
+They are used to store two-dimensional matrices
 
 
 ``` r
@@ -771,7 +772,7 @@ m
 
 ---
 ## 3. Arrays
-Se utilizan para almacenar matrices n-dimensionales
+They are used to store n-dimensional arrays
 
 ``` r
 m &lt;- array(1:12, dim = c(2,2,3))
@@ -799,11 +800,11 @@ m
 ```
 
 ---
-## Inciso: Clases
+## Aside: Classes
 
-Una clase es simplemente la huella de un objeto de R.
-Representa el conjunto de propiedades o métodos que son comunes a todos los objetos de un tipo.
-La función `class` describe el tipo de clase correspondiente al objeto.
+A class is simply the fingerprint of an R object.
+It represents the set of properties or methods common to all objects of a given type.
+The `class` function describes the class the object belongs to.
 
 
 ``` r
@@ -816,19 +817,19 @@ class(m)
 ```
 
 ---
-## 4. Fechas y Horas
+## 4. Dates and Times
 
 ``` r
-hora &lt;- Sys.time()
-hora
+current_time &lt;- Sys.time()
+current_time
 ```
 
 ```
-## [1] "2025-08-29 17:18:38 CEST"
+## [1] "2026-08-26 13:23:38 CEST"
 ```
 
 ``` r
-class(hora)
+class(current_time)
 ```
 
 ```
@@ -836,19 +837,19 @@ class(hora)
 ```
 
 ---
-## 5.  Factores
+## 5.  Factors
 
-Se utilizan para almacenar variables categóricas, con un nivel de categorías fijo.
+They are used to store categorical variables, with a fixed set of levels (categories).
 
 
 ``` r
-fumador &lt;- factor( c("SI", "NO", "NO", "SI") )
-attributes(fumador)
+smoker &lt;- factor( c("YES", "NO", "NO", "YES") )
+attributes(smoker)
 ```
 
 ```
 ## $levels
-## [1] "NO" "SI"
+## [1] "NO"  "YES"
 ## 
 ## $class
 ## [1] "factor"
@@ -857,9 +858,9 @@ attributes(fumador)
 
 
 ``` r
-# Convertimos factor a caracter
-fumador &lt;- as.character(fumador)
-class(fumador)
+# We convert the factor to character
+smoker &lt;- as.character(smoker)
+class(smoker)
 ```
 
 ```
@@ -867,14 +868,14 @@ class(fumador)
 ```
 
 ---
-## 6. Listas
+## 6. Lists
 
-Hemos visto que los vectores atómicos agrupan valores individuales (del mismo tipos).
-Las listas almacenan objetos de R.
+We have seen that atomic vectors group individual values (of the same type).
+Lists store R objects.
 
 ``` r
-milista &lt;- list(c("A", "B"), 1:10, Sys.time())
-milista
+mylist &lt;- list(c("A", "B"), 1:10, Sys.time())
+mylist
 ```
 
 ```
@@ -885,31 +886,31 @@ milista
 ##  [1]  1  2  3  4  5  6  7  8  9 10
 ## 
 ## [[3]]
-## [1] "2025-08-29 17:18:38 CEST"
+## [1] "2026-08-26 13:23:38 CEST"
 ```
 
 ---
 ## 7. Data Frames
-Versión bi-dimensional de una lista. Distintas columnas del data frame puede pueden contener tipos de datos. No obstante, todos los datos de cada columna han de ser del mismo tipo.
-Un dataframe se crea especificando las columnas (que son vectores atómicos)
+The two-dimensional version of a list. Different columns of a data frame can contain different types of data. However, all the data within a given column must be of the same type.
+A data frame is created by specifying its columns (which are atomic vectors)
 
 
 ``` r
-df &lt;- data.frame(paciente = c("MARIANO", "IRENE", "INES"), fumador = c("SI", "NO", "SI"), edad = c(64, 32, 38))
+df &lt;- data.frame(patient = c("MARIANO", "IRENE", "INES"), smoker = c("YES", "NO", "YES"), age = c(64, 32, 38))
 df
 ```
 
 ```
-##   paciente fumador edad
-## 1  MARIANO      SI   64
-## 2    IRENE      NO   32
-## 3     INES      SI   38
+##   patient smoker age
+## 1 MARIANO    YES  64
+## 2   IRENE     NO  32
+## 3    INES    YES  38
 ```
 ---
 ## 7. Data Frames
 
 ``` r
-# Comprobamos la clase
+# We check the class
 class(df)
 ```
 
@@ -918,144 +919,144 @@ class(df)
 ```
 
 ``` r
-# Resumimos la información
+# We summarise the information
 str(df)
 ```
 
 ```
 ## 'data.frame':	3 obs. of  3 variables:
-##  $ paciente: chr  "MARIANO" "IRENE" "INES"
-##  $ fumador : chr  "SI" "NO" "SI"
-##  $ edad    : num  64 32 38
+##  $ patient: chr  "MARIANO" "IRENE" "INES"
+##  $ smoker : chr  "YES" "NO" "YES"
+##  $ age    : num  64 32 38
 ```
 
-Podemos acceder al dataframe desde el *Environment*
+We can inspect the data frame from the *Environment* pane
 
 ---
 
 class: center, middle, inverse
 
-# Selección y modificación de valores
+# Selecting and modifying values
 
 
 ---
-## Seleccionar valores
+## Selecting values
 
-### Indexación por posición
+### Indexing by position
 
-| Sintáxis    | Significado                   | 
+| Syntax      | Meaning                       | 
 |:------------|:------------------------------| 
-| `x[3]`      | Tercer elemento               | 
-| `x[-3]`     | Todos menos terceros          | 
-| `x[2:4]`    | Elementos 2,3,4               | 
-| `x[-(2:4)]` | Todos menos 2,3,4             | 
-| `x[c(1,5)]` | Elementos 1 y 5               | 
+| `x[3]`      | Third element                 | 
+| `x[-3]`     | All but the third             | 
+| `x[2:4]`    | Elements 2,3,4                | 
+| `x[-(2:4)]` | All but 2,3,4                 | 
+| `x[c(1,5)]` | Elements 1 and 5              | 
 
 ---
-## Seleccionar valores
+## Selecting values
 
-### Indexación por valor
+### Indexing by value
 
 
-| Sintáxis             | Significado                         | 
+| Syntax               | Meaning                             | 
 |:---------------------|:------------------------------------| 
-| `x[x==10]`           | Elementos de valor 10               | 
-| `x[x&lt;0]`             | Elementos menores a 0               | 
-| `x[x %in% c(1,2,5)]` | Elementos que sean o bien 1 o 2 o 5 | 
+| `x[x==10]`           | Elements equal to 10                | 
+| `x[x&lt;0]`             | Elements smaller than 0             | 
+| `x[x %in% c(1,2,5)]` | Elements that are either 1, 2 or 5  | 
 
 
 ---
-## Seleccionar valores
+## Selecting values
 
-### Indexación por nombre
+### Indexing by name
 
-| Sintáxis             | Significado                         | 
+| Syntax               | Meaning                             | 
 |:---------------------|:------------------------------------| 
-| `x["paciente1"]`     | Elementos con nombre paciente1      | 
+| `x["patient1"]`      | Elements named patient1             | 
 
 
 ---
-## Seleccionar valores 
+## Selecting values 
 
-En un dataframe
+In a data frame
 
 
 ``` r
-# Selección con números enteros
+# Selection with integers
 df[1,2]
 ```
 
 ```
-## [1] "SI"
+## [1] "YES"
 ```
 
 ``` r
-# Más de un elemento
+# More than one element
 df[1:2, 2:3]
 ```
 
 ```
-##   fumador edad
-## 1      SI   64
-## 2      NO   32
+##   smoker age
+## 1    YES  64
+## 2     NO  32
 ```
 
 ---
-## Seleccionar valores 
+## Selecting values 
 
-En un dataframe
+In a data frame
 
 
 ``` r
-# Selección con enteros negativos
+# Selection with negative integers
 df[-c(1,2),1:3]
 ```
 
 ```
-##   paciente fumador edad
-## 3     INES      SI   38
+##   patient smoker age
+## 3    INES    YES  38
 ```
 
 ``` r
-# Selección con espacios
+# Selection leaving a blank space
 df[,-2]
 ```
 
 ```
-##   paciente edad
-## 1  MARIANO   64
-## 2    IRENE   32
-## 3     INES   38
+##   patient age
+## 1 MARIANO  64
+## 2   IRENE  32
+## 3    INES  38
 ```
 
 ``` r
-# Selección con variables lógicas
+# Selection with logical variables
 df[1,c(TRUE, TRUE, FALSE)]
 ```
 
 ```
-##   paciente fumador
-## 1  MARIANO      SI
+##   patient smoker
+## 1 MARIANO    YES
 ```
 
 ---
-## Seleccionar valores 
+## Selecting values 
 
-En un dataframe
+In a data frame
 
-
-``` r
-# Selección con nombres
-df[c(1,3), "fumador"]
-```
-
-```
-## [1] "SI" "SI"
-```
 
 ``` r
-# Selección de columnas con $
-df$paciente
+# Selection with names
+df[c(1,3), "smoker"]
+```
+
+```
+## [1] "YES" "YES"
+```
+
+``` r
+# Selecting columns with $
+df$patient
 ```
 
 ```
@@ -1063,34 +1064,34 @@ df$paciente
 ```
 
 ---
-## Seleccionar valores 
-¡Con expresiones lógicas!
+## Selecting values 
+With logical expressions!
 
 
 ``` r
-# Seleccinar los fumadores
-df[df$fumador == "SI", ]
+# Select the smokers
+df[df$smoker == "YES", ]
 ```
 
 ```
-##   paciente fumador edad
-## 1  MARIANO      SI   64
-## 3     INES      SI   38
+##   patient smoker age
+## 1 MARIANO    YES  64
+## 3    INES    YES  38
 ```
 
 ``` r
-# Seleccinar los menores de 33
-df[df$edad &lt; 33, ]
+# Select those younger than 33
+df[df$age &lt; 33, ]
 ```
 
 ```
-##   paciente fumador edad
-## 2    IRENE      NO   32
+##   patient smoker age
+## 2   IRENE     NO  32
 ```
 
 ---
-## Seleccionar valores 
-Se pueden combinar expresiones lógicas con operadores Booleanos
+## Selecting values 
+Logical expressions can be combined with Boolean operators
 
 ``` r
 exp1 &lt;- 5&gt;3
@@ -1115,7 +1116,7 @@ exp1 | exp2
 ```
 
 ``` r
-# Negación
+# Negation
 !exp1
 ```
 
@@ -1123,8 +1124,8 @@ exp1 | exp2
 ## [1] FALSE
 ```
 ---
-## Seleccionar valores 
-Se pueden combinar expresiones lógicas con operadores Booleanos
+## Selecting values 
+Logical expressions can be combined with Boolean operators
 
 
 ``` r
@@ -1146,39 +1147,39 @@ all(exp1, exp2, exp3)
 ```
 
 ---
-## Seleccionar valores 
-Se pueden combinar expresiones lógicas con operadores Booleanos
+## Selecting values 
+Logical expressions can be combined with Boolean operators
 
 
 ``` r
-# Seleccionar los fumadores mayores de 60
-df[df$fumador == "SI" &amp; df$edad &lt; 60,]
+# Select the smokers younger than 60
+df[df$smoker == "YES" &amp; df$age &lt; 60,]
 ```
 
 ```
-##   paciente fumador edad
-## 3     INES      SI   38
+##   patient smoker age
+## 3    INES    YES  38
 ```
 
 
 ---
-## Seleccionar valores 
-En una lista
+## Selecting values 
+In a list
 
 
 ``` r
-milista &lt;- list(letras = c("A", "B"), numeros = 1:10, tiempo = Sys.time())
+mylist &lt;- list(letters = c("A", "B"), numbers = 1:10, time = Sys.time())
 
-milista[1]
+mylist[1]
 ```
 
 ```
-## $letras
+## $letters
 ## [1] "A" "B"
 ```
 
 ``` r
-milista[[1]]
+mylist[[1]]
 ```
 
 ```
@@ -1186,16 +1187,16 @@ milista[[1]]
 ```
 
 ``` r
-milista["letras"]
+mylist["letters"]
 ```
 
 ```
-## $letras
+## $letters
 ## [1] "A" "B"
 ```
 
 ``` r
-milista[["letras"]]
+mylist[["letters"]]
 ```
 
 ```
@@ -1204,13 +1205,13 @@ milista[["letras"]]
 
 
 ---
-## Modificar valores
+## Modifying values
 
 
 ``` r
 vec &lt;- 1:10
 
-# Modificar valores con enteros
+# Modify values with integers
 vec[3] &lt;- 300
 vec
 ```
@@ -1220,7 +1221,7 @@ vec
 ```
 
 ``` r
-# Modificar valores con selección
+# Modify values with a selection
 vec[c(1,4)] &lt;- c(100, 400)
 vec
 ```
@@ -1230,7 +1231,7 @@ vec
 ```
 
 ``` r
-# Modificar valores con selección
+# Modify values with a selection
 vec[c(5:6)] &lt;- vec[c(5:6)] + 100 
 vec
 ```
@@ -1240,114 +1241,114 @@ vec
 ```
 
 ---
-## Modificar valores
+## Modifying values
 
 
 ``` r
-# Añadimos variable a dataframe
-df$hipertenso &lt;- c("SI", "NO", "NO")
+# We add a variable to the data frame
+df$hypertensive &lt;- c("YES", "NO", "NO")
 df
 ```
 
 ```
-##   paciente fumador edad hipertenso
-## 1  MARIANO      SI   64         SI
-## 2    IRENE      NO   32         NO
-## 3     INES      SI   38         NO
+##   patient smoker age hypertensive
+## 1 MARIANO    YES  64          YES
+## 2   IRENE     NO  32           NO
+## 3    INES    YES  38           NO
 ```
 
 ``` r
-# Eliminamos la columna
-df$hipertenso &lt;- NULL
+# We delete the column
+df$hypertensive &lt;- NULL
 
-# Modificamos un valor específico
-df[1, "edad"] &lt;- 57
+# We modify a specific value
+df[1, "age"] &lt;- 57
 df
 ```
 
 ```
-##   paciente fumador edad
-## 1  MARIANO      SI   57
-## 2    IRENE      NO   32
-## 3     INES      SI   38
+##   patient smoker age
+## 1 MARIANO    YES  57
+## 2   IRENE     NO  32
+## 3    INES    YES  38
 ```
 
 ---
 
 class: center, middle, inverse
 
-# Bucles y condicionales
+# Loops and conditionals
 
 ---
 
-## Condicionales y bucles
+## Conditionals and loops
 
-Las condicionales y los bucles son las dos estructuras de programación más importantes cualquiera sea el lenguajes que utilicemos.
+Conditionals and loops are the two most important programming structures, whatever language we use.
 
-1. Las condicionales permiten ejecutar cierto código en función de si se cumple una condición lógica.
+1. Conditionals let us run a piece of code depending on whether a logical condition holds.
 
-2. Los bucles permiten repetir cierto código un número específíco de veces.
+2. Loops let us repeat a piece of code a specific number of times.
 
 ---
-## 1. Condicionales
+## 1. Conditionals
 
-Mandan a R realizar una tarea si se cumple una condición
+They tell R to carry out a task if a condition holds
 
 
 ``` r
-if (se cumple esto) {
-  haz esto
+if (this holds) {
+  do this
 }
 ```
 
-Los `if` reciben una expresión lógica (`TRUE` o `FALSE`).
+`if` takes a logical expression (`TRUE` or `FALSE`).
 
-Pueden anidarse
+They can be nested
 
 ``` r
 x &lt;- 7
 if(x &lt;= 8){
   if(x&gt;=5){
-    print("Número en [5,8]")
+    print("Number in [5,8]")
   }
 }
 ```
 
 ```
-## [1] "Número en [5,8]"
+## [1] "Number in [5,8]"
 ```
-Haz lo anterior con un único `if`.
+Do the above with a single `if`.
 
 ---
-## 1. Condicionales
+## 1. Conditionals
 
-`if` se complementa con `else`
+`if` is complemented by `else`
 
 ``` r
-if (se cumple esto) {
-  haz esto
+if (this holds) {
+  do this
 } else{
-  Sino haz esto otro
+  otherwise, do this instead
 }
 ```
 
-Si hay más de dos condiciones, se puede usar `else if`
+If there are more than two conditions, we can use `else if`
 
 
 ``` r
-if (se cumple esto) {
-  haz esto
-} else if(si se cumple esto){
-  haz esto otro
+if (this holds) {
+  do this
+} else if(this other thing holds){
+  do this other thing
 } else{
-  sino haz esto
+  otherwise do this
 }
 ```
 
 ---
-## 1. Condicionales
+## 1. Conditionals
 
-Ejemplo
+Example
 
 ``` r
 x &lt;- 7
@@ -1361,55 +1362,55 @@ if (x&gt;7) {
 ```
 
 ---
-## 1. Condicionales
+## 1. Conditionals
 
-La operación if-else puede realizarse en una línea con la función `ifelse`, que tiene la siguiente estructura.
+The if-else operation can be done in a single line with the `ifelse` function, which has the following structure.
 
 
 ``` r
-ifelse(condicion, valor si TRUE, valor si FALSE)
+ifelse(condition, value if TRUE, value if FALSE)
 ```
 
-Por ejemplo
+For example
 
 
 ``` r
 x &lt;- 4
-ifelse(x==3, "es tres", "no es tres")
+ifelse(x==3, "it is three", "it is not three")
 ```
 
 ```
-## [1] "no es tres"
+## [1] "it is not three"
 ```
 
 ---
-## 1. Condicionales
+## 1. Conditionals
 
-La operación `ifelse`, a diferencia de `if`; **está vectorizada**.
-Esto quiere decir que se aplica elemento a elemento sobre vectores. Por ejemplo
+The `ifelse` operation, unlike `if`, **is vectorised**.
+This means it is applied element by element over vectors. For example
 
 
 ``` r
 x &lt;- sample(1:10, 5, replace=T)
-ifelse(x%%2==0, "Par", "Impar")
+ifelse(x%%2==0, "Even", "Odd")
 ```
 
 ```
-## [1] "Par"   "Par"   "Par"   "Impar" "Par"
+## [1] "Even" "Odd"  "Odd"  "Even" "Odd"
 ```
 
-Con `if-else` esto daría error. 
+With `if-else` this would throw an error. 
 
 ---
-## 1. Condicionales
+## 1. Conditionals
 
-La generalización de `ifelse` a multiples condiciones es `case_when` de la librería `dplyr`.
+The generalisation of `ifelse` to multiple conditions is `case_when` from the `dplyr` package.
 
 
 ``` r
 case_when(
-  condicion1 ~ valor1,
-  condicion2 ~ valor2,
+  condition1 ~ value1,
+  condition2 ~ value2,
   ...
 )
 ```
@@ -1421,55 +1422,56 @@ Por ejemplo
 library(dplyr)
 x &lt;- c(3,4,5)
 case_when(
-  x == 3 ~ "es tres",
-  x == 4 ~ "es cuatro",
-  TRUE ~ "no es ni tres ni cuatro"
+  x == 3 ~ "it is three",
+  x == 4 ~ "it is four",
+  TRUE ~ "it is neither three nor four"
 )
 ```
 
 ```
-## [1] "es tres"                 "es cuatro"              
-## [3] "no es ni tres ni cuatro"
+## [1] "it is three"                 
+## [2] "it is four"                  
+## [3] "it is neither three nor four"
 ```
 
 ---
-## 2. Bucles
+## 2. Loops
 
-Permiten repetir operaciones un cierto número de veces. 
-Estudiaremos los bucles `for` y `while`.
+They let us repeat operations a certain number of times. 
+We will study `for` and `while` loops.
 
 ---
-## 2. Bucles - For
+## 2. Loops - For
 
-Repite un trozo de código muchas veces, una por cada elemento en un conjunto de entrada
+It repeats a piece of code many times, once for each element of an input set
 
 ``` r
-for(valor in conjunto){
-  haz esto
+for(value in set){
+  do this
 }
 ```
 
 ---
-## 2. Bucles - For
+## 2. Loops - For
 
-Ejemplo
+Example
 
 
 ``` r
 for(valor in c("A", "B", "C")){
-  print("Iterando")
+  print("Iterating")
 }
 ```
 
 ```
-## [1] "Iterando"
-## [1] "Iterando"
-## [1] "Iterando"
+## [1] "Iterating"
+## [1] "Iterating"
+## [1] "Iterating"
 ```
 
 ``` r
-for(valor in c("A", "B", "C")){
-  print(valor)
+for(value in c("A", "B", "C")){
+  print(value)
 }
 ```
 
@@ -1480,18 +1482,18 @@ for(valor in c("A", "B", "C")){
 ```
 
 ---
-## 2. Bucles - While
+## 2. Loops - While
 
-Ejecuta un trozo de código mientras se cumple la condición de entrada
+It runs a piece of code while the input condition holds
 
 
 ``` r
-while(condicion){
-  haz esto
+while(condition){
+  do this
 }
 ```
 
-Ejemplo
+Example
 
 ``` r
 x &lt;- 1
@@ -1514,9 +1516,9 @@ while(x &lt; 8){
 
 ---
 
-## Bibliografía
+## Bibliography
 
-Este tema está fundamentalmente basado en  [Hands-On Programming with R](https://rstudio-education.github.io/hopr/), Grolemund (2014)
+This topic is largely based on  [Hands-On Programming with R](https://rstudio-education.github.io/hopr/), Grolemund (2014)
 
 
     </textarea>

@@ -1,7 +1,7 @@
 ---
-title: "**Análisis y Explotación de la Información**"
+title: "**Data Analysis and Information Extraction**"
 subtitle: "CUNEF Universidad"
-date: "Página actualizada: `r format.Date(file.mtime('index.Rmd'),'%Y-%m-%d')`"
+date: "Last updated: `r format.Date(file.mtime('index.Rmd'),'%Y-%m-%d')`"
 output:
   html_document:
     css: ./index.css
@@ -25,83 +25,83 @@ knitr::opts_chunk$set(fig.width=8, fig.height=6)
 
 <br />
 
-Bienvenido al sitio web de la asignatura de **Análisis y Explotación de la Información** del primer cuatrimestre del curso 2025-2026 en CUNEF Universidad. En este sitio web encontrarás el material y los laboratorios que usaremos durante el curso. La página se actualizará con frecuencia durante el cuatrimestre, así que acostúmbrate a visitarla a menudo.
+Welcome to the website for **Data Analysis and Information Extraction**, taught in the first semester of the 2026-2027 academic year at CUNEF Universidad. Here you will find the materials and labs that we will use during the course. This page will be updated frequently throughout the semester, so get into the habit of checking it often.
 
-## **Contenido**
+## **Contents**
 
-### Tema 0 : Introducción
-  - [Diapositivas](./topic0/topic0.html)
-
-
-
-### Tema 1 : Programación en R
-  - [Diapositivas](./topic1/topic1.html)
+### Topic 0 : Introduction
+  - [Slides](./topic0/topic0.html)
 
 
-### Tema 2 : Análisis Exploratorio de los Datos
-- 2.1: Visualización de datos
-  - [Diapositivas](./topic2/topic2-1.html)
+
+### Topic 1 : Programming in R
+  - [Slides](./topic1/topic1.html)
 
 
-- 2.2: Transformación de datos
-  - [Diapositivas](./topic2/topic2-2.html)
+### Topic 2 : Exploratory Data Analysis
+- 2.1: Data Visualization
+  - [Slides](./topic2/topic2-1.html)
 
 
-- 2.3: Análisis Exploratorio de datos
-  - [Diapositivas](./topic2/topic2-3.html)
+- 2.2: Data Transformation
+  - [Slides](./topic2/topic2-2.html)
+
+
+- 2.3: Exploratory Data Analysis
+  - [Slides](./topic2/topic2-3.html)
  
 
-### Tema 3 : Data Wrangling
+### Topic 3 : Data Wrangling
 
-  - 3.1: Importación de datos
-    - [Diapositivas](./topic3/topic3-1.html)
-
-
-  - 3.2: Organización de datos
-    - [Diapositivas](./topic3/topic3-2.html)
-
- 
-  - 3.3: Transformación de datos
-    - [Diapositivas](./topic3/topic3-3.html)
+  - 3.1: Data Importation
+    - [Slides](./topic3/topic3-1.html)
 
 
-### Tema 4 : Modelización
-  - [Diapositivas](./topic4/topic4.html)
+  - 3.2: Data Organization
+    - [Slides](./topic3/topic3-2.html)
 
  
-### Tema 5 : Comunicación de Resultados
-  - [Diapositivas](./topic5/topic5.html)
+  - 3.3: Strings, Factors and Dates
+    - [Slides](./topic3/topic3-3.html)
+
+
+### Topic 4 : Modeling
+  - [Slides](./topic4/topic4.html)
+
+ 
+### Topic 5 : Communication of Results
+  - [Slides](./topic5/topic5.html)
   
 
 
 
-## **Laboratorios**
+## **Labs**
 
 
-### Lab 1 - Programación en R 
-  - [Ejercicios](./labs/lab1.html)
+### Lab 1 - Programming in R 
+  - [Exercises](./labs/lab1.html)
 
 
-### Lab 2.1 - Visualización 
-  - [Ejercicios](./labs/lab2.html)
+### Lab 2.1 - Data Visualization 
+  - [Exercises](./labs/lab2.html)
   
 
-### Lab 2.2 - Transformación
-  - [Ejercicios](./labs/lab3.html)
+### Lab 2.2 - Data Transformation
+  - [Exercises](./labs/lab3.html)
   
 
-### Lab 3.1 - Importación
-  - [Ejercicios](./labs/lab4.html)
+### Lab 3.1 - Data Importation
+  - [Exercises](./labs/lab4.html)
 
 
 ### Lab 3.2 - Data Wrangling
-  - [Ejercicios](./labs/lab5.html)
+  - [Exercises](./labs/lab5.html)
 
 
-### Lab 3.3 - Strings, Factores y Fechas
-  - [Ejercicios](./labs/lab6.html)
+### Lab 3.3 - Strings, Factors and Dates
+  - [Exercises](./labs/lab6.html)
 
 
-### Lab 4 - Modelos
-  - [Ejercicios](./labs/lab7.html)
+### Lab 4 - Models
+  - [Exercises](./labs/lab7.html)
 
