@@ -330,7 +330,7 @@ sample(x = 1:10, size = 1)
 ```
 
 ```
-## [1] 1
+## [1] 4
 ```
 
 ``` r
@@ -339,7 +339,7 @@ sample(1:10, 1)
 ```
 
 ```
-## [1] 1
+## [1] 10
 ```
 
 If we do not write the argument names, we must supply them in the correct order specified in the function documentation.
@@ -414,7 +414,7 @@ a &lt;- gen2_1_100()
 ```
 
 ```
-## [1] 30 53
+## [1] 86 68
 ```
 
 ``` r
@@ -422,7 +422,7 @@ a
 ```
 
 ```
-## [1] 83
+## [1] 154
 ```
 
 ---
@@ -449,11 +449,11 @@ gen2_1_100()
 ```
 
 ```
-## [1] 76 54
+## [1] 92 44
 ```
 
 ```
-## [1] 130
+## [1] 136
 ```
 
 ---
@@ -466,11 +466,11 @@ gen2_1_100(10)
 ```
 
 ```
-##  [1] 90 54 41 24 51 29 75 65 88 46
+##  [1] 65 83 74 29  9  9 83 95 91 28
 ```
 
 ```
-## [1] 563
+## [1] 566
 ```
 
 
@@ -825,7 +825,7 @@ current_time
 ```
 
 ```
-## [1] "2026-08-26 13:23:38 CEST"
+## [1] "2026-08-26 13:33:05 CEST"
 ```
 
 ``` r
@@ -886,7 +886,7 @@ mylist
 ##  [1]  1  2  3  4  5  6  7  8  9 10
 ## 
 ## [[3]]
-## [1] "2026-08-26 13:23:38 CEST"
+## [1] "2026-08-26 13:33:05 CEST"
 ```
 
 ---
@@ -1396,7 +1396,7 @@ ifelse(x%%2==0, "Even", "Odd")
 ```
 
 ```
-## [1] "Even" "Odd"  "Odd"  "Even" "Odd"
+## [1] "Odd" "Odd" "Odd" "Odd" "Odd"
 ```
 
 With `if-else` this would throw an error. 
@@ -1415,7 +1415,7 @@ case_when(
 )
 ```
 
-Por ejemplo
+For example
 
 
 ``` r
@@ -1458,7 +1458,7 @@ Example
 
 
 ``` r
-for(valor in c("A", "B", "C")){
+for(value in c("A", "B", "C")){
   print("Iterating")
 }
 ```

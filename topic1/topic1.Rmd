@@ -954,7 +954,7 @@ case_when(
 )
 ```
 
-Por ejemplo
+For example
 
 ```{r}
 library(dplyr)
@@ -988,7 +988,7 @@ for(value in set){
 Example
 
 ```{r}
-for(valor in c("A", "B", "C")){
+for(value in c("A", "B", "C")){
   print("Iterating")
 }
 
