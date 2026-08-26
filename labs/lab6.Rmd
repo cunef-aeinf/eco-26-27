@@ -1,5 +1,5 @@
 ---
-title: "Lab 3.3 - Strings, factores y fechas"
+title: "Lab 3.3 - Strings, Factors and Dates"
 output:
   html_document:
     css: ./ds_labs.css
@@ -30,122 +30,122 @@ library(tidyquant)
 ```
 
 
-## Ejercicio 1
+## Exercise 1
 
-En la base de datos `flights` las variables `dep_time`, `arr_time`, `sched_dep_time`
-y `sched_arr_time` contienen las horas en format de tres o cuatro dígitos.
-Así, 830 son las 8 y media de la mañana y 2030 las ocho y media de la tarde.
-Una posbilidad para extraer la hora y los minutos de estas fechas es la siguiente:
+In the `flights` dataset the variables `dep_time`, `arr_time`, `sched_dep_time`
+and `sched_arr_time` contain the times in three- or four-digit format.
+Thus, 830 is half past eight in the morning and 2030 is half past eight in the evening.
+One way to extract the hour and the minutes from these times is the following:
 
 ```{r}
 time <- 2030
-hora <- time%/%100
-minutos <- time%%100
-print(hora)
-print(minutos)
+hour <- time%/%100
+minutes <- time%%100
+print(hour)
+print(minutes)
 ```
 
-Entiende y describe el funcionamiento de estas líneas de código. Crea un dataframe llamado `flights_dt` en el que las variables `dep_time`, `arr_time`, `sched_dep_time`
-y `sched_arr_time` contengan las fechas exactas a las que se refieren en formato `datetime`.
+Understand and describe how these lines of code work. Create a dataframe called `flights_dt` in which the variables `dep_time`, `arr_time`, `sched_dep_time`
+and `sched_arr_time` contain the exact dates they refer to, in `datetime` format.
 
-### Solución
-
-
-## Ejercicio 2
-
-Visualiza la distribución de vuelos según el **día de la semana** en el que despegan.
-¿Qué conclusión extraes?
-
-### Solución
+### Solution
 
 
-## Ejercicio 3
+## Exercise 2
 
-Visualiza la distribución de vuelos según el **minuto** en el que despegan y según el **minuto**
-de la hora prevista para el despegue.
-¿Qué patrón aparece? ¿Cómo lo explicarías?
+Visualize the distribution of flights by the **day of the week** on which they take off.
+What conclusion do you draw?
 
-### Solución
+### Solution
 
 
-## Ejercicio 4
+## Exercise 3
 
-Crea una nueva variable que corresponda a la diferencia entre `arr_time` y
+Visualize the distribution of flights by the **minute** at which they take off and by the **minute**
+of the scheduled departure time.
+What pattern appears? How would you explain it?
+
+### Solution
+
+
+## Exercise 4
+
+Create a new variable corresponding to the difference between `arr_time` and
 `dep_time`. 
-Visualiza la covariación entre esta variable y `air_time`.
-¿Qué observas? ¿Qué está sucediendo?
+Visualize the covariation between this variable and `air_time`.
+What do you observe? What is happening?
 
-### Solución
+### Solution
 
-## Ejercicio 5
+## Exercise 5
 
-Repite la visualización anterior, pero usando un color diferente para cada zona 
-horaria del aeropuerto de destino. ¿Qué observas?
+Repeat the previous visualization, but using a different color for each time 
+zone of the destination airport. What do you observe?
 
-**Pista**: la zona horaria de los diferentes aeropuertos está en la 
-base de datos `airport` y se llama `tzone`.
-
-
-### Solución
+**Hint**: the time zone of the different airports is in the 
+`airports` dataset and is called `tzone`.
 
 
-## Ejercicio 6
+### Solution
 
-La libraría `tidyquant` se puede utilizar para importar a R infinidad de datos económicos. En particular, se puede usar para importar datos sobre el precio
-de diferentes acciones.
 
-Extraer el histórico de precios de AMZN desde el año 2000 es muy sencillo:
+## Exercise 6
+
+The `tidyquant` library can be used to import countless economic datasets into R. In particular, it can be used to import data on the price
+of different stocks.
+
+Extracting the price history of AMZN since the year 2000 is very simple:
 
 ```{r}
 prices  <- tq_get("AMZN", get = "stock.prices", from = " 2000-01-01")
 prices 
 ```
 
-Crea una visualización para que permita estudiar la variación del precio de 
-apertura de la acción de AMZN en el tiempo. ¿En qué fechas se alcazan precios de 
-apertura máximos y mínimos?
+Create a visualization that allows you to study the variation of the AMZN 
+opening price over time. On what dates are the maximum and minimum 
+opening prices reached?
 
-Al inicio de la pandemia, a causa de la cuarentena obligatoria establecida por
-numerosos países, las expectativas del mercado sobre Amazon se dispararon.
-Imagina que hubiéses comprado acciones de Amazon el día 2 de Marzo de 2020 por
-un valor de 5000 euros. Calcula las ganancias netas obtenidas si hubieses vendido
-esas acciones un año después. (Utiliza los precios de apertura).
+At the start of the pandemic, because of the mandatory lockdowns imposed by
+many countries, market expectations for Amazon soared.
+Imagine you had bought Amazon shares on 2 March 2020 for
+a value of 5000 euros. Compute the net gains you would have obtained if you had sold
+those shares one year later. (Use the opening prices).
 
-### Solución
+### Solution
 
 
-## Ejercicio 7
+## Exercise 7
 
-Al usar expresiones regulares, el signo `+` indica repetición.
-Así, si queremos detectar un patrón que se repite un número indefinido de veces,
-por ejemplo, detectar todas las C en CCCCCCCMMD, lo haremos como sigue.
+When using regular expressions, the `+` sign indicates repetition.
+Thus, if we want to detect a pattern that repeats an indefinite number of times,
+for example, detect all the Cs in CCCCCCCMMD, we proceed as follows.
 
 ```{r}
 str_view("CCCCCCCMMD", pattern = "C+")
 ```
-Además, la función `str_extract` permite extraer los patrones detectados. Por ejemplo
+In addition, the `str_extract` function extracts the detected patterns. For example
 ```{r}
 str_extract("CCCCCCCMMD", pattern = "C+")
 ```
 
-Usando expresiones regulares, extrae las edades de las siguientes frases.
-El resultado debe ser un vector que contenga los números 57, 36, 23 y 1.
+Using regular expressions, extract the ages from the following sentences.
+The result must be a vector containing the numbers 57, 36, 23 and 1.
 ```{r}
-x1 <- "El paciente tiene 57 años"
-x2 <- "La edad de mi hermana es 36 años"
-x3 <- "A sus 23 años, tenía talla 36"
-x4 <- "Tan solo tiene 1 año!"
+x1 <- "The patient is 57 years old"
+x2 <- "My sister's age is 36 years"
+x3 <- "At 23 years of age, she wore a size 36 dress"
+x4 <- "He is only 1 year old!"
 
-datos <- c(x1,x2,x3,x4)
+texts <- c(x1,x2,x3,x4)
 ```
 
 
-### Solución
+### Solution
 
-## Ejercicio 8
-Usando los datos `gss_cat` de tidyverse, visualiza la distribución de la variable `rincome`.
-Para mejorar la visualización, recodifica los niveles de esta variable para que sean
-`Unknown`, `<$15000` y `>$15000`.
+## Exercise 8
+Using the `gss_cat` data from tidyverse, visualize the distribution of the `rincome` variable.
+To improve the visualization, recode the levels of this variable so that they are
+`Unknown`, `<$15000` and `>$15000`.
 
-### Solución
+### Solution
 

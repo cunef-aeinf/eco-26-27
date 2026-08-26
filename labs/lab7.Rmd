@@ -1,5 +1,5 @@
 ---
-title: "Lab 4 - Modelos"
+title: "Lab 4 - Models"
 output:
   html_document:
     css: ./ds_labs.css
@@ -28,204 +28,204 @@ library(modelr)
 ```
 
 
-## Ejercicio 1
+## Exercise 1
 
-Utilizando la base de datos `diamonds`, visualiza la relación entre los siguientes
-pares de variables:
+Using the `diamonds` dataset, visualize the relationship between the following
+pairs of variables:
 
-* `cut` y `price`
-* `color` y `price`
-* `clarity` y `price`
+* `cut` and `price`
+* `color` and `price`
+* `clarity` and `price`
 
-¿Encuentras un patrón atípico?
+Do you find an unusual pattern?
 
-**Pista**: el color de menor calidad para un diamante es J (ligeramente amarillo), la peor claridad es I1 y el peor corte es Fair.
-
-
-### Solución
-
-## Ejercicio 2
-
-Ajusta un modelo lineal donde la variable predictora sea `carat` (el peso de los diamantes ) y la variable dependiente sea `price`. Obtén el valor de los coeficientes e interprétalos. ¿Qué conclusión extraes?
+**Hint**: the lowest-quality color for a diamond is J (slightly yellow), the worst clarity is I1 and the worst cut is Fair.
 
 
-### Solución
+### Solution
 
-## Ejercicio 3
+## Exercise 2
 
-Visualiza las predicciones del modelo anterior, así como los residuos.
-Extrae conclusiones.
-
-
-### Solución
+Fit a linear model where the predictor variable is `carat` (the weight of the diamonds) and the dependent variable is `price`. Obtain the value of the coefficients and interpret them. What conclusion do you draw?
 
 
-## Ejercicio 4
+### Solution
 
-Crea un nuevo conjunto de datos llamado `diamonds2` donde elimines todos los
-diamantes de carat mayor que 2.5. Añade dos variables a este conjunto de datos
-llamandas `lcarat` y `lprice` que correspondan respectivamente a logaritmo en base 
-dos de `carat` y `price`.
+## Exercise 3
 
-### Solución
+Visualize the predictions of the previous model, as well as the residuals.
+Draw conclusions.
 
 
-## Ejercicio 5
-
-Utilizando los datos creados en el ejercicio anterior, ajusta un modelo lineal donde la variable predictora sea `lcarat` y la variable dependiente sea `lprice`. Obtén el valor de los coeficientes e interprétalos. Según este modelo, que le sucede al precio de un diamante si multiplico por dos su `carat`.
-
-### Solución
-
-## Ejercicio 6
-
-Visualiza las predicciones del modelo anterior, así como los residuos.
-Extrae conclusiones. ¿Se ajusta este modelo mejor que el anterior a los datos?
-
-### Solución
+### Solution
 
 
-## Ejercicio 7
+## Exercise 4
 
-Utilizando la base de datos `diamonds2`, visualiza la relación entre las siguientes variables y el residuo calculado en el ejercicio anterior.
+Create a new dataset called `diamonds2` in which you remove all
+diamonds with carat greater than 2.5. Add two variables to this dataset
+called `lcarat` and `lprice` corresponding respectively to the base-two 
+logarithm of `carat` and `price`.
+
+### Solution
+
+
+## Exercise 5
+
+Using the data created in the previous exercise, fit a linear model where the predictor variable is `lcarat` and the dependent variable is `lprice`. Obtain the value of the coefficients and interpret them. According to this model, what happens to the price of a diamond if I double its `carat`?
+
+### Solution
+
+## Exercise 6
+
+Visualize the predictions of the previous model, as well as the residuals.
+Draw conclusions. Does this model fit the data better than the previous one?
+
+### Solution
+
+
+## Exercise 7
+
+Using the `diamonds2` dataset, visualize the relationship between the following variables and the residual computed in the previous exercise.
 * `cut` 
 * `color`
 * `clarity`
 
-¿Qué conclusión extraes?
+What conclusion do you draw?
 
-### Solución
-
-
-## Ejercicio 8
-
-Explora los datos `sim3`  de `modelr`. ¿De qué tipo son las variables `x1` y `x2`? ¿Y la `y`?
-Ajusta un modelo lineal con variable respuesta `y` y predictores `x1` y `x2`  y visualiza
-sus predicciones.
-
-Interpreta los coeficientes de este modelo.
-
-### Solución
+### Solution
 
 
-## Ejercicio 9
+## Exercise 8
 
-Con los datos anteriores, ajusta el siguiente modelo
+Explore the `sim3`  data from `modelr`. What type are the variables `x1` and `x2`? And `y`?
+Fit a linear model with response variable `y` and predictors `x1` and `x2`  and visualize
+its predictions.
+
+Interpret the coefficients of this model.
+
+### Solution
+
+
+## Exercise 9
+
+With the previous data, fit the following model
 
 $$
 y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_{12} x_1 x_2
 $$
 
-en R este modelo se corresponde con la fórmula `y ~ x1 * x2`.
-Visualiza las predicciones del modelo, e interpreta sus coeficientes.
+in R this model corresponds to the formula `y ~ x1 * x2`.
+Visualize the predictions of the model, and interpret its coefficients.
 
-### Solución
+### Solution
 
-## Ejercicio 10
+## Exercise 10
 
-Para este ejercicio necesitas cargar la librería `infer`
+For this exercise you need to load the `infer` package
 
 ```{r load-packages, warning = FALSE, message = FALSE}
 library(infer)
 ```
 
-### Datos 
+### Data 
 
 
-La Encuesta Social General (GSS) recopila datos sobre la sociedad estadounidense contemporánea con el fin de comprender y explicar las tendencias y constantes en actitudes, comportamientos y atributos. Se han monitorizado cientos de tendencias desde 1972. 
+The General Social Survey (GSS) collects data on contemporary American society in order to understand and explain trends and constants in attitudes, behaviors and attributes. Hundreds of trends have been monitored since 1972. 
 
-La GSS contiene un núcleo estándar de preguntas demográficas, de comportamiento y sobre actitudes, además de temas de interés especial. Entre los temas tratados se encuentran las libertades civiles, el crimen y la violencia, la tolerancia entre grupos, la moralidad, las prioridades nacionales de gasto, el bienestar psicológico, la movilidad social y el estrés y los eventos traumáticos.
+The GSS contains a standard core of demographic, behavioral and attitudinal questions, plus topics of special interest. Among the topics covered are civil liberties, crime and violence, intergroup tolerance, morality, national spending priorities, psychological well-being, social mobility and stress and traumatic events.
 
-Analizaremos datos de la GSS de 2018 para entender cuánto tiempo pasan los adultos estadounidenses en el correo electrónico.
+We will analyze GSS data from 2018 to understand how much time American adults spend on email.
 
 ```{r load-data, message = FALSE}
 gss_email <- read_csv("data/gss_email_2018.csv")
 ```
 
 
-Utilizaremos la variable `email`: el número de minutos que los encuestados pasan en el correo electrónico semanalmente. 
+We will use the `email` variable: the number of minutes that respondents spend on email weekly. 
 
-El objetivo de este ejercicio es calcular el intervalo de confianza del 95% para el tiempo medio que los americanos gastan en el correo.
+The goal of this exercise is to compute the 95% confidence interval for the mean time that Americans spend on email.
 
 
 ### 10.1
 
-Fija una semilla para controlar el proceso aleatorio.
+Set a seed to control the random process.
 
 ### 10.2
 
-Calcula la distribución bootstrap
+Compute the bootstrap distribution
 
 ### 10.3
 
-Calcula y visualiza el IC
+Compute and visualize the CI
 
 ### 10.4 
 
-Interpreta el resultado
+Interpret the result
 
-## Ejercicio 11
+## Exercise 11
 
-Hasta ahora hemos trabajado únicamente con modelos en los que la variable respuesta es cuantitativa.
-Existen modelos análogos que se pueden utilizar para casos en los que la variable respuesta es cualitativa. Uno de estos modelos es la regresión logística.
-No explicaremos el funcionamiento de la regresión logística, pero vamos a aprender cómo se ajusta una regresión logística en R.
+So far we have worked only with models in which the response variable is quantitative.
+There are analogous models that can be used for cases in which the response variable is qualitative. One of these models is logistic regression.
+We will not explain how logistic regression works, but we are going to learn how a logistic regression is fitted in R.
 
-Si nuestra variable respuesta `y` es cualitativa y tenemos, por ejemplo, dos predictores `x1` y `x2`, ajustamos una regresión logística como sigue:
+If our response variable `y` is qualitative and we have, for example, two predictors `x1` and `x2`, we fit a logistic regression as follows:
 
 ```{r, eval=F}
 log_reg <- glm( y ~ x1 + x2, data = data, family = binomial(link='logit'))
 ```
 
-Vamos a utilizar una regresión logística para intentar predecir si los pasajeros del titanic sobrevivieron o no, utilizando como variables predictores por ejemplo el sexo, la edad, la clase de su ticket, etc.
+We are going to use a logistic regression to try to predict whether the Titanic passengers survived or not, using as predictor variables, for example, sex, age, the class of their ticket, etc.
 
-Primero instala la librería `titanic` y carga los datos:
+First install the `titanic` package and load the data:
 
 ```{r}
 library(titanic)
 data("titanic_train")
 ```
 
-Selecciona las variables Survived, Age, Sex, Embarked, SibSp, Parch, Fare, Pclass.
-Convierte a variables de tipo factor aquellas que consideres que son factores. Además
-añade una variable id que indique el número de fila. Guarda esto en un nuevo data frame llamado `titanic`.
+Select the variables Survived, Age, Sex, Embarked, SibSp, Parch, Fare, Pclass.
+Convert to factor variables those that you consider to be factors. In addition,
+add an id variable indicating the row number. Save this in a new data frame called `titanic`.
 
-**Pista:** usa `?titanic_train` para ver qué significa cada variable.
+**Hint:** use `?titanic_train` to see what each variable means.
 
-### Solución
-
-
-## Ejercicio 12
-
-Crea dos conjuntos de datos llamados `train` y `test`.
-El primero, debe contener observaciones (filas) seleccionadas al azar del dataframe
-titanic del ejercicio anterior. Su número de filas ha de ser el 70% del número de filas de titanic. El segundo conjunto de datos ha de contener todas las observaciones que están en el conjunto de datos titanic pero que no están en `train`.
-
-**Pista:** usa la función `sample_frac()`
-
-### Solución
+### Solution
 
 
-## Ejercicio 13
+## Exercise 12
 
-Ajusta un modelo de regresión logística usando los datos `train` donde la variable
-respuesta sea `Survived` y la variable predictora sea `Sex`.
+Create two datasets called `train` and `test`.
+The first must contain observations (rows) selected at random from the titanic
+data frame from the previous exercise. Its number of rows must be 70% of the number of rows of titanic. The second dataset must contain all the observations that are in the titanic dataset but are not in `train`.
 
-### Solución
+**Hint:** use the `sample_frac()` function
 
-
-## Ejercicio 14
-
-La predicción de una regresión logística es una probabilidad correspondiente a la probabilidad de que la variable respuesta tome valor 1 (en nuestro caso que el pasajero correspondiente sobreviva) según el modelo.
-
-Calcula las predicciones del modelo anterior sobre los datos `test`. Necesitarás añadir type="response" a la funcion add_predictions. Construye una nueva variable que tome valor 1 si la probabilidad predicha es mayor o igual a 0.5 y cero en caso contrario.
-
-Finalmente, calcula el procentaje de aciertos comparando la variable recién creada y la variable Survived.
-
-### Solución
+### Solution
 
 
-## Ejercicio 15
+## Exercise 13
 
-Intenta mejorar el model anterior añadiendo más variables. ¿Qué variable crees que tiene más poder predictivo?
+Fit a logistic regression model using the `train` data where the response
+variable is `Survived` and the predictor variable is `Sex`.
 
-### Solución
+### Solution
+
+
+## Exercise 14
+
+The prediction of a logistic regression is a probability corresponding to the probability that the response variable takes value 1 (in our case that the corresponding passenger survives) according to the model.
+
+Compute the predictions of the previous model on the `test` data. You will need to add type="response" to the add_predictions function. Build a new variable that takes value 1 if the predicted probability is greater than or equal to 0.5 and zero otherwise.
+
+Finally, compute the percentage of correct predictions by comparing the newly created variable and the Survived variable.
+
+### Solution
+
+
+## Exercise 15
+
+Try to improve the previous model by adding more variables. Which variable do you think has the most predictive power?
+
+### Solution
 

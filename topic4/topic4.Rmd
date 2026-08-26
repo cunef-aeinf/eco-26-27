@@ -1,7 +1,7 @@
 ---
-title: "Tema 4"
+title: "Topic 4"
 author: "Roi Naveiro"
-date: ""
+date: "Academic Year 2026-2027"
 output: 
    xaringan::moon_reader:
     css: "ds_slides.css"
@@ -27,26 +27,27 @@ class: center, middle, inverse, title-slide
 
 <div class="title-logo"></div>
 
-# Análisis y Explotación de la Información
+# Data Analysis and Information Extraction
  
-## Tema 4 - Modelización
+## Topic 4 - Modeling
 
 <br>
 <br>
 .pull-left[
 ### Roi Naveiro
+#### Academic Year 2026-2027
 ]
 ---
-## Modelización
+## Modeling
 
-Las herramientas de modelización tienen tres objetivos fundamentales:
+Modeling tools have three fundamental goals:
 
-* **Explorar** los datos: los modelos a veces revelan patrones que no son evidentes en
-las visualizaciónes (>3D)
+* **Exploring** the data: models sometimes reveal patterns that are not evident in
+visualizations (>3D)
 
-* **Generalizar** hallazgos de una muestra a una población determinada (inferencia)
+* **Generalizing** findings from a sample to a given population (inference)
 
-* Determinar **relaciones causa-efecto** (inferencia causal)
+* Determining **cause-effect relationships** (causal inference)
 
 
 ```{r, echo=FALSE, out.width = '100%',  fig.align='center'}
@@ -56,66 +57,66 @@ library(patchwork)
 ```
 
 ---
-## Modelización
+## Modeling
 
-Los patrones descubiertos por las herramientas de modelización pueden ser:
+The patterns discovered by modeling tools can be:
 
-* Patrones de asociación
-* Relaciones causa-efecto
+* Association patterns
+* Cause-effect relationships
 
-Además, estos patrones pueden:
+In addition, these patterns can:
 
-* Darse únicamente en los datos observados
-* Generalizarse a la población de la que proceden los datos
+* Occur only in the observed data
+* Generalize to the population the data come from
 
 ---
-## Modelización
+## Modeling
 
-La forma de recolectar los datos afecta al tipo de generalización de las 
-conclusiones:
+The way the data are collected affects the kind of generalization of the 
+conclusions:
 
-* Si queremos que las conclusiones extraídas a partir de una muestra de datos
-sean generalizables a una población determinada, debemos muestrear los sujetos **al azar** de la población.
+* If we want the conclusions drawn from a sample of data to be generalizable to a
+given population, we must sample the subjects **at random** from the population.
 
 ```{r, echo=FALSE, out.width = '100%',  fig.align='center'}
 knitr::include_graphics("img/bdl.png")
 ```
 
-[Fuente](https://www.huffingtonpost.es/2016/03/28/troleo-en-la-red-para-bautizar-blas-de-lezo-a-un-buque-brita_n_9556114.html)
+[Source, in Spanish](https://www.huffingtonpost.es/2016/03/28/troleo-en-la-red-para-bautizar-blas-de-lezo-a-un-buque-brita_n_9556114.html)
 
 ---
-## Modelización
+## Modeling
 
-¿Muestrear datos al azar nos garantiza que los patrones detectados sean relaciones 
-causa-efecto reales?
+Does sampling data at random guarantee that the detected patterns are real 
+cause-effect relationships?
 
 ---
 ## Study: Cereal Keeps Girls Slim
  
-Se observó que las participantes que desayunaban tenían un **índice de masa corporal promedio más bajo**, un indicador común de obesidad, que las que no desayunaban. El índice fue aún más bajo para las que **desayunaban cereales**, según los hallazgos del **estudio realizado por el Instituto de Investigación Médica de Maryland con fondos de NIH y el fabricante de cereales General Mills**.
+Participants who ate breakfast were observed to have a **lower average body mass index**, a common indicator of obesity, than those who did not eat breakfast. The index was even lower for those who **ate cereal for breakfast**, according to the findings of the **study carried out by the Maryland Medical Research Institute with funding from the NIH and the cereal manufacturer General Mills**.
 
 [...]
 
-Los resultados se obtuvieron de una encuesta de NIH de 2379 mujeres en California, Ohio y Maryland.
+The results came from an NIH survey of 2379 women in California, Ohio and Maryland.
 
 [...]
 
-Como parte de la encuesta, se preguntaba a las participantes una vez al año qué habían comido durante los tres días anteriores...
+As part of the survey, participants were asked once a year what they had eaten during the previous three days...
 
-[Fuente](https://www.cbsnews.com/news/study-cereal-keeps-girls-slim/)
+[Source](https://www.cbsnews.com/news/study-cereal-keeps-girls-slim/)
 
 ---
 ## Study: Cereal Keeps Girls Slim
 
-Existen tres posibles explicaciones de esta asociación entre comer cereales y tener un índice de masa corporal más bajo:
+There are three possible explanations for this association between eating cereal and having a lower body mass index:
 
-* Comer cereales es la causa de que las mujeres estén delgadas
+* Eating cereal is the cause of women being slim
 
-* Que las mujeres estén delgadas es la causa de que coman cerales
+* Women being slim is the cause of them eating cereal
 
-* Existe una tercera variable que es causa de estas dos, **variable de confusión**
+* There is a third variable that is the cause of these two, a **confounding variable**
 
-Una **variable de confusión** es una variable exógena que es causa tanto a la variable explicativa como a la de respuesta, y que hace que parezca que existe una relación entre ellas.
+A **confounding variable** is an exogenous variable that is a cause of both the explanatory variable and the response variable, and that makes it look as if a relationship existed between them.
 
 ---
 ## Study: Cereal Keeps Girls Slim
@@ -127,54 +128,54 @@ John Kirwan, a professor of medicine at Case Western Reserve University's Schwar
 ---
 ## Study: Cereal Keeps Girls Slim
 
-¿Por qué se publica esto?
+Why is this published?
 
 ```{r, echo=FALSE, out.width = '100%',  fig.align='center'}
 knitr::include_graphics("img/follow-money.jpeg")
 ```
 
 ---
-## Estudios científicos
+## Scientific studies
 
-Según el proceso de recolección de los datos, distinguimos estudios:
+Depending on the data collection process, we distinguish between studies that are:
 
-* **Observacionales**
+* **Observational**
 
-  * Se recogen datos de forma que no se altera el proceso de generación de los mismos
+  * Data are collected in a way that does not alter the process that generates them
 
-  * Sirven para determinar **asociación**
+  * They serve to determine **association**
 
-* **Experimentales**
+* **Experimental**
 
-  * Se asignan diferentes tratamientos a distintos individuos 
+  * Different treatments are assigned to different individuals 
 
-  * Establecer relaciones **causa-efecto**
+  * To establish **cause-effect** relationships
 
 ---
-## Estudios científicos
+## Scientific studies
 
 ```{r, echo=FALSE, out.width = '100%',  fig.align='center'}
 knitr::include_graphics("img/studies.png")
 ```
 
 ---
-## Correlación no implica necesariamente causalidad
+## Correlation does not necessarily imply causation
 
 ```{r, echo=FALSE, out.width = '90%',  fig.align='center'}
 knitr::include_graphics("img/margarina.png")
 ```
 
 ---
-## Modelización
+## Modeling
 
-Las herramientas de modelización tienen tres objetivos fundamentales:
+Modeling tools have three fundamental goals:
 
-* **Explorar** los datos: los modelos a veces revelan patrones que no son evidentes en
-las visualizaciónes (>3D)
+* **Exploring** the data: models sometimes reveal patterns that are not evident in
+visualizations (>3D)
 
-* **Generalizar** hallazgos de una muestra a la población (inferencia)
+* **Generalizing** findings from a sample to the population (inference)
 
-* Determinar **relaciones causa-efecto** (inferencia causal)
+* Determining **cause-effect relationships** (causal inference)
 
 ```{r, echo=FALSE, out.width = '100%',  fig.align='center'}
 knitr::include_graphics("img/data-science-model.png")
@@ -184,61 +185,61 @@ knitr::include_graphics("img/data-science-model.png")
 ---
 class: center, middle, inverse
 
-# Modelos para Análisis Exploratorio
+# Models for Exploratory Analysis
 
 ---
-## Modelización
+## Modeling
 
-* En esta parte del curso, introduciremos herramientas básicas de modelización, poniendo
-el foco en su uso como **técnicas de exploración** de datos.
+* In this part of the course, we will introduce basic modeling tools, focusing
+on their use as data **exploration techniques**.
 
-* No hay nada malo con la exploración, pero nunca debes vender un análisis exploratorio como un análisis confirmatorio porque es **engañoso**.
-
----
-## ¿Qué son los modelos estadísticos?
-
-* Herramientas que nos permiten extraer patrones de los datos.
-
-* Patrones vs residuos
-
-* Estudiaremos modelos que relacionan un serie de variables (variables predictoras)
-coon una variable de interés (variable respuesta)
+* There is nothing wrong with exploration, but you must never sell an exploratory analysis as a confirmatory analysis, because that is **misleading**.
 
 ---
-## ¿Qué son los modelos estadísticos?
+## What are statistical models?
 
-Un modelo estadístico es un modelo matemático que incorpora un conjunto de supuestos estadísticos relacionados con la generación de datos de una muestra (observaciones) y datos similares de una población más grande. Un modelo estadístico representa, a menudo de forma idealizada, el proceso de generación de datos.
+* Tools that allow us to extract patterns from the data.
+
+* Patterns vs residuals
+
+* We will study models that relate a series of variables (predictor variables)
+to a variable of interest (response variable)
 
 ---
-## ¿Qué son los modelos estadísticos?
+## What are statistical models?
 
-* Formalmente, un modelo estadísticos es un par $(S, \mathcal{P})$: $S$ es el conjunto de posibles observaciones y $\mathcal{P}$ es una familia de distribuciones de probabilidad.
+A statistical model is a mathematical model that incorporates a set of statistical assumptions concerning the generation of the data of a sample (observations) and of similar data from a larger population. A statistical model represents, often in an idealized form, the data-generating process.
 
-* Asumimos que hay una distribución de probabilidad verdadera que gobierna la generación de datos.
+---
+## What are statistical models?
 
-* Se asume que la familia de distribuciones $\mathcal{P}$ contiene una distribución que aproxima de forma adecuada la distribución real.
+* Formally, a statistical model is a pair $(S, \mathcal{P})$: $S$ is the set of possible observations and $\mathcal{P}$ is a family of probability distributions.
+
+* We assume that there is a true probability distribution governing the generation of the data.
+
+* The family of distributions $\mathcal{P}$ is assumed to contain a distribution that adequately approximates the real distribution.
 
 * "A model is a simplification or approximation of reality and hence will not reflect all of reality."
 
 ---
-## ¿Qué son los modelos estadísticos?
+## What are statistical models?
 
-* Los modelos suelen ser paramétricos: $\mathcal {P}=\{F_{\theta }:\theta \in \Theta \}$
+* Models are usually parametric: $\mathcal {P}=\{F_{\theta }:\theta \in \Theta \}$
 
-* Dados unos datos, el objetivo es encontrar el valor de $\theta$ que mejor se ajusta a los datos.
+* Given some data, the goal is to find the value of $\theta$ that best fits the data.
 
-
----
-## ¿Qué son los modelos estadísticos?
-
-* Nos vamos a centrar en modelos que relacionan una variable respuesta con una o más variables predictoras.
-
-* Estos modelos se conocen como **modelos de regresión**.
-
-* Empecemos con un ejemplo sencillo: la variable respuesta es continua y hay una sola variable predictora.
 
 ---
-## ¿Qué son los modelos estadísticos?
+## What are statistical models?
+
+* We are going to focus on models that relate a response variable to one or more predictor variables.
+
+* These models are known as **regression models**.
+
+* Let us start with a simple example: the response variable is continuous and there is a single predictor variable.
+
+---
+## What are statistical models?
 
 ```{r}
 ggplot(mtcars, aes(x=wt, y=mpg)) + geom_point() + theme_minimal() +
@@ -246,71 +247,71 @@ ggplot(mtcars, aes(x=wt, y=mpg)) + geom_point() + theme_minimal() +
 ```
 
 ---
-## ¿Qué son los modelos estadísticos?
+## What are statistical models?
 
 
-* En este caso $S = \mathbb{R}^2$. Una posibilidad para $\mathcal{P}$ es la familia de modelos lineales:
+* In this case $S = \mathbb{R}^2$. One possibility for $\mathcal{P}$ is the family of linear models:
 $$
 \mathcal{P} = \{y \sim \mathcal{N}(\beta_0 + \beta_1 x, \sigma^2)\}
 $$
 
-* También podemos escribirlo como $y = \beta_0 + \beta_1 x + \epsilon$, donde $\epsilon \sim \mathcal{N}(0, \sigma^2)$
+* We can also write it as $y = \beta_0 + \beta_1 x + \epsilon$, where $\epsilon \sim \mathcal{N}(0, \sigma^2)$
 
-* Este modelo se conoce como **modelo de regresión lineal simple**.
+* This model is known as the **simple linear regression model**.
 
-* ¿Cuáles son los parámetros de este modelo?
+* What are the parameters of this model?
 
 
 ---
-## ¿Qué son los modelos estadísticos?
+## What are statistical models?
 
 $$
 \mathcal{P} = \{y \sim \mathcal{N}(\beta_0 + \beta_1 x, \sigma^2)\}
 $$
 
-El modelo de regresión lineal simple hace, implíctamente, 4 asunciones
+The simple linear regression model implicitly makes 4 assumptions
 
-1. **Linealidad**: el valor esperado de la variable respuesta corresponde con una función lineal de la covariable.
+1. **Linearity**: the expected value of the response variable corresponds to a linear function of the covariate.
 
-2. Independencia de los errores.
+2. Independence of the errors.
 
-3. Homocedasticidad: la varianza de los errores es constante.
+3. Homoscedasticity: the variance of the errors is constant.
 
-4. Normalidad: los errores siguen una distribución normal.
+4. Normality: the errors follow a normal distribution.
 
-En este curso, no vamos a entrar en el estudio de estas asunciones, pero tened en cuenta que existen.
-
----
-## Regresión lineal simple
-
-* Una vez observamos datos $(x_i, y_i) \in \mathcal{S}$, podemos ajustar el modelo para encontrar los valores de los parámetros que mejor se ajustan a los datos.
-
-* El modelo resultante se denomina **modelo ajustado**.
-
-
-**OJO**: el mejor modelo de la familia no tiene por qué ser la realidad. Los modelos son
-simplificaciones de la realidad que nos sirven de algún propósito
+In this course we are not going to go into the study of these assumptions, but bear in mind that they exist.
 
 ---
-## Regresión lineal simple
+## Simple linear regression
+
+* Once we observe data $(x_i, y_i) \in \mathcal{S}$, we can fit the model to find the parameter values that best fit the data.
+
+* The resulting model is called the **fitted model**.
+
+
+**WATCH OUT**: the best model in the family need not be reality. Models are
+simplifications of reality that serve some purpose for us
+
+---
+## Simple linear regression
 
 ```{r, echo=FALSE, out.width = '100%',  fig.align='center'}
 knitr::include_graphics("img/box.jpeg")
 ```
 
 ---
-## Vocabulario
+## Vocabulary
 
-* **Variable respuesta**: Variable cuyo comportamiento o variación se está tratando de entender. También llamada variable dependiente. Eje y.
+* **Response variable**: variable whose behavior or variation we are trying to understand. Also called the dependent variable. y axis.
 
-* **Variables explicativas**: otras variables que desea utilizar para explicar la variación en la respuesta. También llamadas variables independientes, covariables, predictores o *features*. Eje x.
+* **Explanatory variables**: other variables that you want to use to explain the variation in the response. Also called independent variables, covariates, predictors or *features*. x axis.
 
-* **Valor predicho**: output del **modelo** para cierto valor de las covariables.
+* **Predicted value**: output of the **model** for a certain value of the covariates.
 
 ---
-## Vocabulario
+## Vocabulary
 
-Discute los elementos anteriores en este ejemplo.
+Discuss the elements above in this example.
 
 ```{r}
 ggplot(mtcars, aes(x=wt, y=mpg)) + geom_point() + theme_minimal() +
@@ -318,27 +319,27 @@ ggplot(mtcars, aes(x=wt, y=mpg)) + geom_point() + theme_minimal() +
 ```
 
 ---
-## Ajustando modelos
+## Fitting models
 
 ```{r}
 ggplot(mtcars, aes(x=wt, y=mpg)) + geom_point() + theme_minimal()
 ```
 
 ---
-## Ajustando modelos
+## Fitting models
 
-* Los datos anteriores presentan un patrón claro
+* The data above show a clear pattern
 
-* Usaremos un modelo para capturar ese patrón y hacerlo explícito
+* We will use a model to capture that pattern and make it explicit
 
-* Un modelo de regresión lineal simple parece razonable $y = \beta_0 + \beta_1 x + \epsilon$ con $\epsilon \sim \mathcal{N}(0, \sigma^2)$.
+* A simple linear regression model seems reasonable $y = \beta_0 + \beta_1 x + \epsilon$ with $\epsilon \sim \mathcal{N}(0, \sigma^2)$.
 
-* Vamos a asumir que $\sigma^2$ es conocido luego los parámetros de interés son $\beta_0$ y $\beta_1$.
+* We are going to assume that $\sigma^2$ is known, so the parameters of interest are $\beta_0$ and $\beta_1$.
 
-* Existen infinitos modelos en esta familia
+* There are infinitely many models in this family
 
 ---
-## Ajustando modelos
+## Fitting models
 
 ```{r}
 models <- tibble(
@@ -352,17 +353,17 @@ ggplot(mtcars, aes(wt, mpg)) +
 ```
 
 ---
-## Ajustando modelos
+## Fitting models
 
-* La mayoría de estos modelos son **malos**, no capturan el patrón
+* Most of these models are **bad**, they do not capture the pattern
 
-* Necesitamos determinar qué modelos son **más cercanos** a los datos
+* We need to determine which models are **closer** to the data
 
-* Una opción, usar el modelo que minimice suma de las distancias verticales de cada
-punto a la recta del modelo
+* One option: use the model that minimizes the sum of the vertical distances from each
+point to the model line
 
 ---
-## Ajustando modelos
+## Fitting models
 
 ```{r, echo=F}
 fit <- lm(mpg ~ wt, data = mtcars)
@@ -375,81 +376,81 @@ ggplot(mtcars, aes(wt, mpg)) + geom_smooth(method="lm", se=F, color="red") +
 
 
 ---
-## Regresión lineal simple
+## Simple linear regression
 
-Para obtener el valor de los coeficientes usando R, hacemos
+To obtain the value of the coefficients using R, we do
 
 ```{r}
 reg_mod <- lm(mpg ~ wt, data = mtcars)
 coef(reg_mod)
 ```
 
-* El objeto `mpg ~ wt` es una fórmula. Equivale a 
+* The object `mpg ~ wt` is a formula. It is equivalent to 
 
 $$
 \text{mpg} = \beta_0 + \beta_1 \cdot \text{wt}
 $$
 
-* Intercept es la estimación del coeficiente $\beta_0$ y el otro número es la estimación de $\beta_1$
+* Intercept is the estimate of the coefficient $\beta_0$ and the other number is the estimate of $\beta_1$
 
 
 ---
-## Regresión lineal
+## Linear regression
 
-* Para estimar los valores de $\beta_0$ y $\beta_1$, usamos los datos.
+* To estimate the values of $\beta_0$ and $\beta_1$, we use the data.
 
-* Llamamos a las estimaciones $\hat{\beta}_0$ y $\hat{\beta}_1$.
+* We call the estimates $\hat{\beta}_0$ and $\hat{\beta}_1$.
 
-* Llamamos valor predicho a $\hat{y} = \hat{\beta}_0 + \hat{\beta}_1 x$.
+* We call $\hat{y} = \hat{\beta}_0 + \hat{\beta}_1 x$ the predicted value.
 
-* $\hat{\beta}_0$ y $\hat{\beta}_1$ son aquellos valores que hacen que las distancias verticales vistas anteriormente sean mínimas
+* $\hat{\beta}_0$ and $\hat{\beta}_1$ are the values that make the vertical distances seen above minimal
 
 \begin{equation}
 \arg \min_{\beta_0, \beta_1} \sum_{i=1}^n [y_i - (\beta_0 + \beta_1 x_i)]^2
 \end{equation}
 
 ---
-## Regresión lineal
+## Linear regression
 
-1. Demostrar que los valores que minimizan la expresión anterior son los estimadores de maxima verosimilitud de $\beta_0$ y $\beta_1$.
+1. Show that the values that minimize the expression above are the maximum likelihood estimators of $\beta_0$ and $\beta_1$.
 
-2. Calcular expresiones para los estimadores de $\beta_0$ y $\beta_1$.
-
----
-## Regresión lineal
-
-* Los estimadores $\hat{\beta}_0$ y $\hat{\beta}_1$ tienen una distribución.
-
-* Podemos estudiar la distribución de estos estimadores para obtener sus propiedades: sesgo, varianza, etc.
-
-* Así como calcular intervalos de confianza para estos estimadores.
-
-* En este curso no nos centraremos en este aspecto. Únicamente trabajaremos con los estimadores puntuales y nos centraremos en cómo usarlos para explorar los datos.
+2. Compute expressions for the estimators of $\beta_0$ and $\beta_1$.
 
 ---
-## Regresión lineal - Residuos
+## Linear regression
 
-Los residuos nos dicen cómo de lejos está cada valor predicho de su valore observado
+* The estimators $\hat{\beta}_0$ and $\hat{\beta}_1$ have a distribution.
+
+* We can study the distribution of these estimators to obtain their properties: bias, variance, etc.
+
+* As well as compute confidence intervals for these estimators.
+
+* In this course we will not focus on this aspect. We will only work with the point estimates and focus on how to use them to explore the data.
+
+---
+## Linear regression - Residuals
+
+The residuals tell us how far each predicted value is from its observed value
 
 $e_i = y_i - \hat{y}_i$
 
-* Los estimadores $\hat{\beta}_0$ y $\hat{\beta}_1$ son aquellos valores que minimizan la suma de los residuos al cuadrado.
+* The estimators $\hat{\beta}_0$ and $\hat{\beta}_1$ are the values that minimize the sum of the squared residuals.
 
 ---
-## Visualización de modelos
+## Model visualization
 
-Podemos visualizar:
+We can visualize:
 
-* Las predicciones de los modelos
+* The predictions of the models
 
-* Los residuos de los modelos
+* The residuals of the models
 
-Para esto, utilizamos `modelr` de `tidyverse`
+For this, we use `modelr` from `tidyverse`
 
 ---
-## Visualización de modelos
+## Model visualization
 
-* Primero creamos una red de puntos de la variable predictora
+* First we create a grid of points of the predictor variable
 
 ```{r}
 library(modelr)
@@ -460,9 +461,9 @@ grid
 ```
 
 ---
-## Visualización de modelos
+## Model visualization
 
-* Con el modelo, podemos añadir predicciones
+* With the model, we can add predictions
 
 ```{r}
 reg_mod <- lm(mpg ~ wt, data = mtcars)
@@ -474,7 +475,7 @@ grid
 ```
 
 ---
-## Visualización de modelos
+## Model visualization
 
 ```{r}
 ggplot(mtcars, aes(wt)) +
@@ -484,9 +485,9 @@ ggplot(mtcars, aes(wt)) +
 
 
 ---
-## Visualización de modelos
+## Model visualization
 
-Añadimos residuos usando
+We add residuals using
 
 ```{r}
 reg_mod <- lm(mpg ~ wt, data = mtcars)
@@ -495,7 +496,7 @@ mtcars <- mtcars %>% add_residuals(reg_mod)
 ```
 
 ---
-## Visualización de modelos
+## Model visualization
 
 ```{r}
 ggplot(mtcars, aes(wt, resid)) + 
@@ -504,25 +505,25 @@ ggplot(mtcars, aes(wt, resid)) +
 ```
 
 ---
-## Visualización de modelos
+## Model visualization
 
-* Las predicciones nos dicen qué patrón hemos capturado
+* The predictions tell us which pattern we have captured
 
-* Los residuos indican qué patrón queda sin capturar
-
----
-## ¿Qué hacer con los modelos?
-
-* **Explicación**: caracterizar la relación entre $y$ y $x$ a través de los parámetros
-$\beta_0$ y $\beta_1$
-
-* **Predicción**: para un nuevo valor de $x$, obtener su valor $y$
+* The residuals indicate which pattern is left uncaptured
 
 ---
-## Interpretación de la regresión lineal
+## What to do with models?
 
-Volvamos a la regresión anterior. La librería `broom` de tidyverse, sirve para 
-ordenar los resultados de `lm`. **OJO**: no se carga automáticamente al cargar `tidyverse`.
+* **Explanation**: characterize the relationship between $y$ and $x$ through the parameters
+$\beta_0$ and $\beta_1$
+
+* **Prediction**: for a new value of $x$, obtain its $y$ value
+
+---
+## Interpreting linear regression
+
+Let us go back to the previous regression. The `broom` library from tidyverse serves to 
+tidy the results of `lm`. **WATCH OUT**: it is not loaded automatically when loading `tidyverse`.
 
 ```{r}
 library(broom)
@@ -531,15 +532,15 @@ tidy(mod_reg)
 ```
 
 ---
-## Interpretación de la regresión lineal - Pendiente
+## Interpreting linear regression - Slope
 
-El modelo de regresión lineal es
+The linear regression model is
 
 $$
 \widehat{ \text{mpg} } = \beta_0 + \beta_1 \text{wt}  
 $$
 
-Aumentemos wt en una unidad
+Let us increase wt by one unit
 
 \begin{eqnarray}
 && \beta_0 + \beta_1 ( \text{wt} + 1) = \\
@@ -547,29 +548,29 @@ Aumentemos wt en una unidad
 && \widehat{ \text{mpg} } + \beta_1
 \end{eqnarray}
 
-¿Cómo se interpreta $\beta_1$?
+How is $\beta_1$ interpreted?
 
 ---
-## Interpretación de la regresión lineal - Ordenada en el orign
+## Interpreting linear regression - Intercept
 
-El modelo de regresión lineal es
+The linear regression model is
 
 $$
 \widehat{ \text{mpg} } = \beta_0 + \beta_1 \text{wt}
 $$
 
-Sustituímos wt por cero
+We substitute zero for wt
 
 \begin{eqnarray}
 \widehat{ \text{mpg} } = \beta_0 + \beta_1 \times 0 = \beta_0
 \end{eqnarray}
 
-¿Cómo se interpreta $\beta_0$?
+How is $\beta_0$ interpreted?
 
 ---
-## Interpretación de la Regresión Lineal
+## Interpreting Linear Regression
 
-Vamos a modelizar cómo afectan los años de experiencia en el salario de un profesor
+We are going to model how years of experience affect a teacher's salary
 
 ```{r}
 library(openintro)
@@ -582,23 +583,23 @@ teacher <- teacher %>%
 ```
 
 ---
-## Interpretación de la Regresión Lineal
+## Interpreting Linear Regression
 
-Vamos a modelizar cómo afectan los años de experiencia en el salario de un profesor
+We are going to model how years of experience affect a teacher's salary
 
 ```{r}
 ggplot(teacher, aes(x=years, y=base)) + geom_point() + theme_minimal()
 ```
 
 ---
-## Interpretación de la Regresión Lineal
+## Interpreting Linear Regression
 
-Ajusta un modelo lineal, obtén los coeficientes e interprétalos.
+Fit a linear model, obtain the coefficients and interpret them.
 
-Determina la predicción del salario de un profesor con 15 años de experiencia.
+Determine the predicted salary of a teacher with 15 years of experience.
 
 ---
-## Interpretación de la Regresión Lineal
+## Interpreting Linear Regression
 
 ```{r}
 ggplot(teacher, aes(x=years, y=base)) + geom_point() +
@@ -607,22 +608,22 @@ ggplot(teacher, aes(x=years, y=base)) + geom_point() +
 
 
 ---
-## Regresión Lineal: Predictores Categóricos
+## Linear Regression: Categorical Predictors
 
-* Hasta ahora hemos considerado la $x$ contínua. ¿Qué sucede si es categórica?
+* So far we have considered $x$ to be continuous. What happens if it is categorical?
 
-* Imaginemos que la $x$ se refiere a género y toma dos valores: masculino y femenino.
+* Suppose that $x$ refers to gender and takes two values: male and female.
 
-* $y = \beta_0 + \beta_1 x + \epsilon$ no tendría sentido, $x$ no es un número!
+* $y = \beta_0 + \beta_1 x + \epsilon$ would not make sense, $x$ is not a number!
 
-* Podemos hacer $y = \beta_0 +\beta_1 \text{gen}\_\text{masc} + \epsilon$, donde $\text{gen}\_\text{masc}$ toma valor 1 para hombres y cero para mujeres. 
+* We can write $y = \beta_0 +\beta_1 \text{gender}\_\text{male} + \epsilon$, where $\text{gender}\_\text{male}$ takes value 1 for men and zero for women. 
 
 ---
-## Regresión Lineal: Predictores Categóricos
+## Linear Regression: Categorical Predictors
 
-* Salario frente a grado. ¿Qué niveles tiene la variable degree?
+* Salary versus degree. What levels does the degree variable have?
 
-* Ajustamos un modelo
+* We fit a model
 
 ```{r}
 mod_base_degree <- lm(base ~ degree, data=teacher)
@@ -630,29 +631,29 @@ tidy(mod_base_degree)
 ```
 
 ---
-## Regresión Lineal: Predictores Categóricos
+## Linear Regression: Categorical Predictors
 
-* R ha creado una **variable indicatriz**  degreeBA: si el grado es BA toma valor 1,
-sino 0.
+* R has created an **indicator variable**  degreeBA: if the degree is BA it takes value 1,
+otherwise 0.
 
-* Si la variable tuviese tres niveles A, B y C, R crearía dos variables indicatrices, e.g. para A y B.
+* If the variable had three levels A, B and C, R would create two indicator variables, e.g. for A and B.
 
-* El nivel base es el nivel que toma la variable cuando todas las indicatrices son 0.
+* The base level is the level the variable takes when all the indicators are 0.
 
-* Los coeficientes se interpretan respecto al nivel base.
+* The coefficients are interpreted with respect to the base level.
 
 
 ---
-## Regresión Lineal: Predictores Categóricos
+## Linear Regression: Categorical Predictors
 
 ```{r}
 mod_base_degree <- lm(base ~ degree, data=teacher)
 tidy(mod_base_degree)
 ```
-Interpreta cada coeficiente
+Interpret each coefficient
 
 ---
-## Regresión Lineal: Visualizamos las predicciones
+## Linear Regression: Visualizing the predictions
 
 ```{r}
 mod_base_degree <- lm(base ~ degree, data=teacher)
@@ -664,7 +665,7 @@ grid
 ```
 
 ---
-## Regresión Lineal: Visualizamos las predicciones
+## Linear Regression: Visualizing the predictions
 
 ```{r}
 ggplot(teacher, aes(x=degree)) + geom_point(aes(y=base)) + theme_minimal() +
@@ -672,38 +673,38 @@ ggplot(teacher, aes(x=degree)) + geom_point(aes(y=base)) + theme_minimal() +
 ```
 
 ---
-## Regresión Lineal: Visualizamos las predicciones
+## Linear Regression: Visualizing the predictions
 
-Predecimos la media para cada grupo!
+We predict the mean for each group!
 
 ---
-## Regresión Lineal Múltiple
+## Multiple Linear Regression
 
-* En múltiples ocasiones, tenemos más de una variable predictora.
+* On many occasions, we have more than one predictor variable.
 
-* El modelo lineal más sencillo para este caso, es la **regresión lineal múltiple**
+* The simplest linear model for this case is **multiple linear regression**
 
 \begin{equation}
 y_i = \textbf{x}_i^\top\boldsymbol{\beta} + \epsilon = \beta_{0} + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_p x_{ip} + \epsilon
 \end{equation}
 
-* Los efectos de diferentes covariables sobre el valor esperado de la variable dependiente son aditivos.
+* The effects of different covariates on the expected value of the dependent variable are additive.
 
 ---
-## Regresión Lineal Múltiple - Interpretación
+## Multiple Linear Regression - Interpretation
 
-* ¿Cómo se interpreta $\beta_0$? 
+* How is $\beta_0$ interpreted? 
 
-* ¿Cómo se interpreta $\beta_1$? 
+* How is $\beta_1$ interpreted? 
 
 * ...
 
-* ¿Cómo se interpreta $\beta_p$?
+* How is $\beta_p$ interpreted?
 
 ---
-## Regresión Lineal Múltiple 
+## Multiple Linear Regression 
 
-En R
+In R
 
 ```{r}
 mod_reg <- lm(base ~ years + degree, data = teacher)
@@ -711,9 +712,9 @@ tidy(mod_reg)
 ```
 
 ---
-## Regresión Lineal Múltiple 
+## Multiple Linear Regression 
 
-Visualizamos las predicciones
+We visualize the predictions
 
 ```{r}
 grid <- teacher %>% 
@@ -723,9 +724,9 @@ grid
 ```
 
 ---
-## Regresión Lineal Múltiple 
+## Multiple Linear Regression 
 
-Visualizamos las predicciones
+We visualize the predictions
 
 ```{r}
 ggplot(teacher, aes(years, base, colour = degree)) + 
@@ -736,111 +737,111 @@ ggplot(teacher, aes(years, base, colour = degree)) +
 
 
 ---
-## Regresión Lineal Múltiple
+## Multiple Linear Regression
 
-¿Cómo interpretas los coeficientes?
+How do you interpret the coefficients?
 
 
 ---
 class: center, middle, inverse
 
-# Inferencia 
+# Inference 
 
 ---
 
-## Terminología
+## Terminology
 
-.vocab[Población]: grupo de individuos a estudiar
+.vocab[Population]: group of individuals to be studied
 
-.vocab[Parámetro]: cantidad numérica derivada de la población
-(casi siempre desconocida)
+.vocab[Parameter]: numerical quantity derived from the population
+(almost always unknown)
 
-Si tuviéramos datos de cada unidad de la población, podríamos simplemente calcular
-el parámetro de población y ¡listo!
+If we had data on every unit of the population, we could simply compute
+the population parameter and that would be it!
 
 --
 
-**Desafortunadamente, en general no podemos hacer esto. 
-En cambio, trabajamos con**
+**Unfortunately, in general we cannot do this. 
+Instead, we work with**
 
-.vocab[Muestra]: un subconjunto de nuestra población de interés
+.vocab[Sample]: a subset of our population of interest
 
-.vocab[Estadístico]: una cantidad numérica derivada de una muestra
-
-
----
-
-## Inferencia
-
-Si la muestra es .vocab[representativa] (escogida al azar de la población de interés), entonces podemos utilizar 
-la probabilidad y la inferencia estadística para obtener
-conclusiones .vocab[generalizables] a la población de interés.
-
+.vocab[Statistic]: a numerical quantity derived from a sample
 
 
 ---
 
-## Inferencia estadística
+## Inference
 
-La .vocab[inferencia estadística] es el proceso que permite, a través de
-datos de una muestra, obtener conclusiones sobre la población de la cual procede
-la misma.
+If the sample is .vocab[representative] (chosen at random from the population of interest), then we can use 
+probability and statistical inference to draw
+conclusions that are .vocab[generalizable] to the population of interest.
 
-- .vocab[Estimación]: utilizar la muestra para estimar un rango plausible de 
-valores de un parámetro poblacional desconocido
 
-- .vocab[Contraste de hipótesis]: evaluar si la muestra observada proporciona evidencia 
-a favor o en contra de alguna afirmación sobre la población
 
-Nos enfocaremos en la **estimación**.
+---
+
+## Statistical inference
+
+.vocab[Statistical inference] is the process that allows us, through
+data from a sample, to draw conclusions about the population the sample
+comes from.
+
+- .vocab[Estimation]: use the sample to estimate a plausible range of 
+values of an unknown population parameter
+
+- .vocab[Hypothesis test]: assess whether the observed sample provides evidence 
+for or against some claim about the population
+
+We will focus on **estimation**.
 
 ---
 
 class: center, middle
 
-# Estimación
+# Estimation
 
 ---
 
-## Viajamos a Asheville! 
+## We travel to Asheville! 
 
 ```{r echo=FALSE,out.width=450, fig.align="center"}
 knitr::include_graphics("img/asheville.jpg")
 ```
 
-**¿Cuánto deberíamos esperar pagar por un Airbnb en Asheville?**
+**How much should we expect to pay for an Airbnb in Asheville?**
 
 
 ---
 
-## Datos de Asheville
+## Asheville data
 
-[Inside Airbnb](http://insideairbnb.com/) extrajo todos los listados de Airbnb en 
-Asheville, NC, que estaban activos el 25 de junio de 2020.
+[Inside Airbnb](http://insideairbnb.com/) scraped all the Airbnb listings in 
+Asheville, NC, that were active on 25 June 2020.
 
-**Población de interés**: airbnbs en Asheville con al menos diez reseñas.
+**Population of interest**: Airbnbs in Asheville with at least ten reviews.
 
-**Parámetro de interés**: Precio promedio por huésped por noche en estos 
+**Parameter of interest**: Average price per guest per night in these 
 Airbnbs.
 
 
-.pregunta[
-¿Cuál es el precio promedio por huésped por noche de los alquileres de Airbnb en junio de 2020, 
-con al menos diez reseñas en Asheville (códigos postales 28801 - 28806)?
+.question[
+What is the average price per guest per night of the Airbnb rentals in June 2020, 
+with at least ten reviews, in Asheville (zip codes 28801 - 28806)?
 ]
 
-Tenemos datos sobre el precio por huésped (`ppg`) para una muestra aleatoria de 50 listados de Airbnb.
+We have data on the price per guest (`ppg`) for a random sample of 50 Airbnb listings.
 
 
 ---
 
-## Estimación puntual
+## Point estimation
 
-Un .vocab[estimador puntual] es un solo valor calculado a partir de los datos de 
-la muestra para servir como la "mejor estimación" para el parámetro poblacional.
+A .vocab[point estimate] is a single value computed from the sample 
+data to serve as the "best estimate" of the population parameter.
 
-Nuestro estimador puntual para el precio promedio por huésped en la población es 
-la media observada en la muestra:
+Our point estimate for the average price per guest in the population is 
+the mean observed in the sample:
 
 ```{r}
 abb <- read_csv("data/asheville.csv")
@@ -850,16 +851,16 @@ abb %>%
 
 ---
 
-## Visualización de nuestra muestra
+## Visualizing our sample
 
 ```{r, echo = F, out.width = "80%"}
 ggplot(data = abb, aes(ppg)) +
   geom_histogram(binwidth = 25,
                  color = "darkblue",
                  fill = "skyblue") +
-  labs(title = "Distribución sesgada a la derecha del precio por huésped",
-       x = "Precio por huésped por noche ($)",
-       y = "Recuento") +
+  labs(title = "Right-skewed distribution of the price per guest",
+       x = "Price per guest per night ($)",
+       y = "Count") +
   scale_y_continuous(breaks = seq(0, 20, by = 5)) + 
   ylim(0, 20) +
   theme_minimal()
@@ -867,60 +868,60 @@ ggplot(data = abb, aes(ppg)) +
 
 ---
 
-## ¿Estimador puntual?
+## Point estimate?
 
-.pregunta[
-Si quieres estimar un parámetro de la población, ¿prefieres informar un rango de valores en los que podría estar el parámetro, o un solo valor?
+.question[
+If you want to estimate a population parameter, would you rather report a range of values in which the parameter might lie, or a single value?
 ]
 
 
 --
 
-- Si únicamente aportamos un estimador puntual, probablemente no acertemos 
-exactamente el valor real del parámetro de la población.
+- If we only provide a point estimate, we will probably not hit 
+the true value of the population parameter exactly.
 
-- Si aportamos un rango de valores plausibles,
-tenemos mayor probabilidad de capturar el valor real parámetro.
+- If we provide a range of plausible values,
+we have a higher probability of capturing the true value of the parameter.
 
 
 ---
 
 class: middle, center
 
-## Intervalos de confianza
+## Confidence intervals
 
 ---
 
-## Variabilidad de los estadísticos muestrales
+## Variability of the sample statistics
 
-Para construír un intervalo de confianza para la media de la población, 
-necesitamos crear un rango de valores plausibles alrededor de la media muestral observada.
+To build a confidence interval for the population mean, 
+we need to create a range of plausible values around the observed sample mean.
 
-- Recuerda que las muestras aleatorias pueden diferir entre sí. Si tomamos otra
-muestra aleatoria de 50 listados de Airbnb en Asheville, probablemente no obtendríamos la misma
-media de precio por huésped.
+- Remember that random samples can differ from one another. If we took another
+random sample of 50 Airbnb listings in Asheville, we would probably not obtain the same
+mean price per guest.
 
 --
 
-- Existe cierta .vocab[variabilidad] en la media muestral.
+- There is a certain .vocab[variability] in the sample mean.
 
-- Para construir un intervalo de confianza, debemos cuantificar esta variabilidad. Esto
-nos da una medida de cuánto esperamos que varíe la media muestral de
-muestra a muestra.
+- To build a confidence interval, we must quantify this variability. This
+gives us a measure of how much we expect the sample mean to vary from
+sample to sample.
 
 
 
 ---
 
-## Cuantificación de la variabilidad
+## Quantifying the variability
 
-Podemos cuantificar la variabilidad de los estadísticos muestrales mediante enfoques diferentes:
+We can quantify the variability of the sample statistics through different approaches:
 
-- **Simulación**: mediante técnicas como "bootstrap" o "remuestreo" (**lo que haremos aquí**)
+- **Simulation**: through techniques such as "bootstrap" or "resampling" (**what we will do here**)
 
-o
+or
 
-- **Teoría**: mediante el Teorema del Límite Central
+- **Theory**: through the Central Limit Theorem
 
 ---
 
@@ -930,40 +931,40 @@ class: center, middle
 
 ---
 
-## El principio del bootstrap
+## The bootstrap principle
 
 <img src="img/boot.png" style="float:right">
 
-- El término .vocab[bootstrap] proviene de la frase "levantarse a uno mismo 
-tirando de la hebilla de las 
-botas", que es una metáfora para lograr una tarea imposible sin 
-ninguna ayuda externa.
+- The term .vocab[bootstrap] comes from the phrase "to pull oneself up 
+by one's own 
+bootstraps", which is a metaphor for accomplishing an impossible task without 
+any outside help.
 
-- En este caso, la tarea imposible es estimar un parámetro de la población, y lo 
-lograremos utilizando datos solo de la muestra dada.
+- In this case, the impossible task is estimating a population parameter, and we 
+will accomplish it using data from the given sample only.
 
-- Esta noción de decir algo sobre un parámetro de la población usando 
-solo información de una muestra observada es la esencia de la inferencia estadística;
-no se limita al bootstrap.
-
----
-
-## El procedimiento del bootstrap
-
-1. Tomar una .vocab[muestra bootstrap] - una muestra aleatoria tomada **con reemplazo**
-de la muestra original, **del mismo tamaño** que la muestra original.
-
-2. Calcular el .vocab[estadístico bootstrap]:  el estadístico de interés (la 
-media, la mediana, la correlación, etc.) usando la muestra bootstrap.
-
-3. Repetir los pasos (1) y (2) muchas veces para crear una .vocab[distribución bootstrap] - una distribución de estadísticos bootstrap.
-
-4. Calcular los límites del intervalo de confianza del XX% como la región que alberga el
-XX% de la distribución bootstrap.
+- This notion of saying something about a population parameter using 
+only information from an observed sample is the essence of statistical inference;
+it is not limited to the bootstrap.
 
 ---
 
-## La muestra original
+## The bootstrap procedure
+
+1. Take a .vocab[bootstrap sample] - a random sample drawn **with replacement**
+from the original sample, **of the same size** as the original sample.
+
+2. Compute the .vocab[bootstrap statistic]:  the statistic of interest (the 
+mean, the median, the correlation, etc.) using the bootstrap sample.
+
+3. Repeat steps (1) and (2) many times to create a .vocab[bootstrap distribution] - a distribution of bootstrap statistics.
+
+4. Compute the bounds of the XX% confidence interval as the region that holds the
+XX% of the bootstrap distribution.
+
+---
+
+## The original sample
 
 <br><br>
 
@@ -986,11 +987,11 @@ ggplot(data = abb, aes(ppg)) +
 
 ---
 
-## Paso a paso
+## Step by step
 
-**Paso 1.** Tomar una .vocab[muestra bootstrap]: una muestra aleatoria tomada 
-**con reemplazamiento** de la muestra original, **del mismo tamaño** que la 
-muestra original:
+**Step 1.** Take a .vocab[bootstrap sample]: a random sample drawn 
+**with replacement** from the original sample, **of the same size** as the 
+original sample:
 
 
 ```{r, echo = F, out.width = "70%"}
@@ -1019,10 +1020,10 @@ ggplot(data = boot_samp_1, aes(ppg)) +
 
 ---
 
-## Paso a paso
+## Step by step
 
-**Paso 2.** Calcular el estadístico bootstrap (en este caso, la media de la muestra) 
-usando la muestra bootstrap:
+**Step 2.** Compute the bootstrap statistic (in this case, the sample mean) 
+using the bootstrap sample:
 
 
 ```{r, echo = F, out.width = "70%"}
@@ -1044,10 +1045,10 @@ ggplot(data = boot_samp_1, aes(ppg)) +
 
 ---
 
-## Paso a paso
+## Step by step
 
-**Paso 3.** Repetir los pasos 1 y 2 varias veces para crear una distribución bootstrap 
-de medias de muestra:
+**Step 3.** Repeat steps 1 and 2 several times to create a bootstrap distribution 
+of sample means:
 
 .pull-left[
 ```{r, echo = F}
@@ -1114,10 +1115,10 @@ samp4 <- ggplot(data = temp, aes(ppg)) +
 
 ---
 
-## Paso a paso
+## Step by step
 
-**Paso 3.** En este gráfico, hemos tomado 500 muestras bootstrap, calculado la
-media de la muestra para cada una y las hemos representado en un histograma:
+**Step 3.** In this plot, we have taken 500 bootstrap samples, computed the
+sample mean for each one and represented them in a histogram:
 
 ```{r, echo = F, out.width = "70%"}
 boot_dist <- tibble(boot_mean = numeric(500))
@@ -1137,7 +1138,7 @@ ggplot(data = boot_dist, aes(boot_mean)) +
 
 ---
 
-**Aquí comparamos la distribución bootstrap de las medias de la muestra con la distribución de los datos originales. ¿Qué observas?**
+**Here we compare the bootstrap distribution of the sample means with the distribution of the original data. What do you observe?**
 
 ```{r, echo = F}
 boot_dist <- tibble(boot_mean = numeric(500))
@@ -1174,9 +1175,9 @@ p1 / p2
 
 ---
 
-## Paso a paso
+## Step by step
 
-**Paso 4.** Calcula los límites del intervalo bootstrap utilizando percentiles de la distribución bootstrap
+**Step 4.** Compute the bounds of the bootstrap interval using percentiles of the bootstrap distribution
 
 ```{r, echo = F, out.width = "70%"}
 boot_dist <- tibble(boot_mean = numeric(500))
@@ -1202,11 +1203,11 @@ ggplot(data = boot_dist, aes(boot_mean)) +
 
 class: center, middle
 
-# Bootstrapping en R
+# Bootstrapping in R
 
 ---
 
-## Paquete `infer`
+## The `infer` package
 
 .pull-left[
 ![](img/infer.png)
@@ -1214,8 +1215,8 @@ class: center, middle
 
 .pull-right[
 <br/><br/><br/><br/>
-El objetivo del paquete infer es realizar inferencia estadística utilizando una
-gramática que se integra con el marco de diseño tidyverse.
+The goal of the infer package is to perform statistical inference using a
+grammar that integrates with the tidyverse design framework.
 
 ```{r}
 library(infer)
@@ -1227,20 +1228,20 @@ library(infer)
 
 ---
 
-## Elige una semilla
+## Choose a seed
 
 
 ```{r}
 set.seed(123)
 ```
 
-La función `set.seed()` es una función base de R que nos permite controlar la generación de números aleatorios en R. Úsala para hacer que tu simulación sea reproducible.
+The `set.seed()` function is a base R function that allows us to control random number generation in R. Use it to make your simulation reproducible.
 
-En otras palabras, asegura que obtendremos la misma muestra aleatoria cada vez que ejecutemos el código o compilemos.
+In other words, it ensures that we will obtain the same random sample every time we run the code or knit.
 
 ---
 
-## Generar medias bootstrap
+## Generating bootstrap means
 
 ```{r eval=FALSE}
 abb %>%
@@ -1248,14 +1249,14 @@ abb %>%
   specify(response = ppg) #<<
 ```
 
-- `specify()` se utiliza para especificar qué variable en nuestro dataset es la
-variable respuesta relevante (es decir, la variable que estamos sobre la que haremos
+- `specify()` is used to specify which variable in our dataset is the
+relevant response variable (that is, the variable on which we are going to do the
 bootstrap).
 
 
 ---
 
-## Generar medias bootstrap
+## Generating bootstrap means
 
 ```{r eval=FALSE}
 abb %>%
@@ -1265,11 +1266,11 @@ abb %>%
   generate(reps = 15000, type = "bootstrap") #<<
 ```
 
-- `generate()` generar las medias bootstrap
+- `generate()` generates the bootstrap means
 
 ---
 
-## Generar medias bootstrap
+## Generating bootstrap means
 
 ```{r eval=FALSE}
 abb %>%
@@ -1281,13 +1282,13 @@ abb %>%
   calculate(stat = "mean") #<<
 ```
 
-- `calculate()` calcula el estadístico muestra. En este caso usamos la media, pero podríamos calcular, por ejemplo,
-las medianas bootstrap.
+- `calculate()` computes the sample statistic. In this case we use the mean, but we could compute, for example,
+the bootstrap medians.
 
 
 ---
 
-## Generar medias bootstrap
+## Generating bootstrap means
 
 ```{r include=FALSE}
 set.seed(834782)
@@ -1310,10 +1311,10 @@ boot_dist <- abb %>% #<<
 
 ---
 
-## Medias muestrales
+## Sample means
 
 
-¿Cuántas observaciones hay en `boot_dist`? ¿Qué representa cada observación?
+How many observations are there in `boot_dist`? What does each observation represent?
 
 --
 
@@ -1323,26 +1324,26 @@ boot_dist
 
 ---
 
-## Visualizando la distribución
+## Visualizing the distribution
 
 ```{r echo=FALSE}
 ggplot(data = boot_dist, mapping = aes(x = stat)) +
   geom_histogram(binwidth = 5) +
-  labs(title = "Distribución Bootstrap centrada alrededor de 75",
-       x = "Precio por cliente", y = "Número", caption = "Binwidth of 5") +
+  labs(title = "Bootstrap distribution centered around 75",
+       x = "Price per guest", y = "Count", caption = "Binwidth of 5") +
   theme_minimal()
 ```
 
 ---
 
-## Cálculo del intervalo de confianza
+## Computing the confidence interval
 
-Un intervalo de confianza del 95% contiene el 95% central de la distribución bootstrap. Para obtener el 95% central, queremos omitir el 2.5% en la izquierda y en la derecha.
+A 95% confidence interval contains the central 95% of the bootstrap distribution. To obtain the central 95%, we want to leave out 2.5% on the left and 2.5% on the right.
 
 
 --
 
-Usando `dplyr`:
+Using `dplyr`:
 
 ```{r}
 ci <- boot_dist %>%
@@ -1353,9 +1354,9 @@ ci
 
 ---
 
-## Visualizar un intervalo de confianza (Opción 1)
+## Visualizing a confidence interval (Option 1)
 
-Utilizando `geom_vline()` para marcar los límites del intervalo de confianza
+Using `geom_vline()` to mark the bounds of the confidence interval
 
 
 ```{r eval = F, out.width = "75%"}
@@ -1365,15 +1366,15 @@ ggplot(data = boot_dist, mapping = aes(x = stat)) + #<<
              color = "steelblue", lty = 2, size = 1) + 
   geom_vline(xintercept = ci$upper_b, #<<
              color = "steelblue", lty = 2, size = 1) +
-  labs(title = "Distribución Bootstrap de la media de precio por cliente",
-       subtitle = "con IC de 95%",
-       x = "Medias", y = "Num") +
+  labs(title = "Bootstrap distribution of the mean price per guest",
+       subtitle = "with 95% CI",
+       x = "Means", y = "Count") +
   theme_minimal()
 ```
 
 ---
 
-## Visualizar un intervalo de confianza (Opción 1)
+## Visualizing a confidence interval (Option 1)
 
 
 ```{r echo=FALSE, out.width = "75%"}
@@ -1383,44 +1384,44 @@ ggplot(data = boot_dist, mapping = aes(x = stat)) + #<<
              color = "steelblue", lty = 2, size = 1) + 
   geom_vline(xintercept = ci$upper_b, #<<
              color = "steelblue", lty = 2, size = 1) +
-  labs(title = "Distribución Bootstrap de la media de precio por cliente",
-       subtitle = "con IC de 95%",
-       x = "Medias", y = "Num") +
+  labs(title = "Bootstrap distribution of the mean price per guest",
+       subtitle = "with 95% CI",
+       x = "Means", y = "Count") +
   theme_minimal()
 ```
 
 ---
 
-## Visualizar un intervalo de confianza (Opción 2)
+## Visualizing a confidence interval (Option 2)
 
 ```{r eval = F, out.width = "75%"}
 visualize(boot_dist) + #<<
   shade_confidence_interval(endpoints = ci)+ #<<
-  labs(title = "Distribución Bootstrap de la media de precio por cliente",
-       subtitle = "con IC de 95%",
-       x = "Medias", y = "Num") 
+  labs(title = "Bootstrap distribution of the mean price per guest",
+       subtitle = "with 95% CI",
+       x = "Means", y = "Count") 
 ```
 ---
 
-## Visualizar un intervalo de confianza (Opción 2)
+## Visualizing a confidence interval (Option 2)
 
 ```{r echo = F, out.width = "75%"}
 visualize(boot_dist) + #<<
   shade_confidence_interval(endpoints = ci)+ #<<
-  labs(title = "Distribución Bootstrap de la media de precio por cliente",
-       subtitle = "con IC de 95%",
-       x = "Medias", y = "Num") 
+  labs(title = "Bootstrap distribution of the mean price per guest",
+       subtitle = "with 95% CI",
+       x = "Means", y = "Count") 
 ```
 ---
 
 
-## Interpretación de un intervalo de confianza
+## Interpreting a confidence interval
 
-Nuestro intervalo de confianza del 95% (IC) es 
+Our 95% confidence interval (CI) is 
 (`r round(ci$lower_b, 1)`, `r round(ci$upper_b, 1)`).
 
 .question[
-¿Significa esto que hay un 95% de probabilidad de que la media del precio por noche en la población esté contenida en el intervalo (`r round(ci$lower_b, 1)`, `r round(ci$upper_b, 1)`)? 
+Does this mean that there is a 95% probability that the population mean price per night is contained in the interval (`r round(ci$lower_b, 1)`, `r round(ci$upper_b, 1)`)? 
 ]
 
 ---
@@ -1428,63 +1429,63 @@ Nuestro intervalo de confianza del 95% (IC) es
 class: center, middle
 
 .question[
-**¡No!**
+**No!**
 ]
 
 ---
 
-## Interpretación de un intervalo de confianza
+## Interpreting a confidence interval
 
-- El parámetro de la población está o no está en nuestro intervalo. No puede tener una "probabilidad del 95%" de estar en algún intervalo específico.
-
---
-
-- La distribución bootstrap captura la variabilidad de la media de la muestra, pero se basa en nuestra muestra original. Si comenzáramos con una muestra diferente, tal vez nuestro intervalo de confianza estimado del 95%  fuese diferente.
+- The population parameter either is or is not in our interval. It cannot have a "95% probability" of being in some specific interval.
 
 --
 
-- Todo lo que podemos decir es que, si tomáramos muestras repetidas de manera independiente de esta población y calculáramos un IC del 95% para la media de la misma manera, entonces *esperaríamos* que el 95% de estos intervalos contuvieran la media de la población.
+- The bootstrap distribution captures the variability of the sample mean, but it is based on our original sample. If we started with a different sample, our estimated 95% confidence interval  might be different.
 
 --
 
-- Sin embargo, ¡nunca sabemos si algún intervalo en particular realmente lo hace!
+- All we can say is that, if we took repeated independent samples from this population and computed a 95% CI for the mean in the same way, then we would *expect* 95% of these intervals to contain the population mean.
+
+--
+
+- However, we never know whether any particular interval actually does!
 
 ---
 
-## Interpretación 
+## Interpretation 
 
 .question[
-**Tenemos un 95% de confianza en que el precio medio por huésped por noche para Airbnbs en Asheville, NC está entre `r round(ci$lower_b,1)` y `r round(ci$upper_b,1)` dólares.**
+**We are 95% confident that the mean price per guest per night for Airbnbs in Asheville, NC is between `r round(ci$lower_b,1)` and `r round(ci$upper_b,1)` dollars.**
 ]
 
 ---
-## Fundamentos teóricos: intuición 
+## Theoretical foundations: intuition 
 
-- Suponemos que nuestros datos vienen de una distribución desconocida $F$.  
-- A partir de la muestra observada, construimos la **distribución empírica** $\hat{F}$, que básicamente otorga la misma probabilidad a cada dato observado.  
-- El **bootstrap** consiste en tomar muchas muestras con reemplazo de $\hat{F}$, lo que, de forma intuitiva, “simula” volver a muestrear de $F$.  
-- Al recalcular el estadístico de interés en cada muestra bootstrap, logramos una aproximación de cómo variaría ese estadístico si realmente volviéramos a tomar muestras de la población original.
+- We assume that our data come from an unknown distribution $F$.  
+- From the observed sample, we build the **empirical distribution** $\hat{F}$, which basically assigns the same probability to each observed data point.  
+- The **bootstrap** consists of taking many samples with replacement from $\hat{F}$, which, intuitively, “simulates” sampling from $F$ again.  
+- By recomputing the statistic of interest on each bootstrap sample, we obtain an approximation of how that statistic would vary if we really took new samples from the original population.
 
 ---
 
-## Fundamentos teóricos: por qué funciona
+## Theoretical foundations: why it works
 
-- **Idea principal**: En muestras grandes, $\hat{F}$ se acerca cada vez más a $F$.  
-  - (Ley de Grandes Números / Consistencia de la distribución empírica).  
-- **Consecuencia**: Muestrear de $\hat{F}$ imita suficientemente bien el acto de muestrear de $F$.  
+- **Main idea**: In large samples, $\hat{F}$ gets closer and closer to $F$.  
+  - (Law of Large Numbers / Consistency of the empirical distribution).  
+- **Consequence**: Sampling from $\hat{F}$ mimics the act of sampling from $F$ well enough.  
 - **Bootstrap**:  
-  - Genera la **distribución bootstrap** del estimador, que (bajo condiciones razonables) se aproxima a la distribución real que tendría dicho estimador si muestrasemos repetidamente de la población.  
-  - Esta aproximación permite estimar errores estándar, intervalos de confianza, etc., **sin** conocer $F$ ni recurrir a fórmulas complicadas.
+  - It generates the **bootstrap distribution** of the estimator, which (under reasonable conditions) approximates the real distribution that estimator would have if we sampled repeatedly from the population.  
+  - This approximation makes it possible to estimate standard errors, confidence intervals, etc., **without** knowing $F$ or resorting to complicated formulas.
 
 
 ---
 
-## Fundamentos teóricos: por qué funciona
+## Theoretical foundations: why it works
 
-**Conclusión**: Pese a que estamos “inventando” datos muestreando de $\hat{F}$, resulta que, cuando $n$ es grande, este procedimiento es **estadísticamente confiable** y converge a la misma respuesta que obtendríamos de $F$.
+**Conclusion**: Even though we are “inventing” data by sampling from $\hat{F}$, it turns out that, when $n$ is large, this procedure is **statistically reliable** and converges to the same answer we would obtain from $F$.
 
 
 ---
-## Bibliografía
+## Bibliography
 
-Este tema está fundamentalmente basado en  [R for Data Science](https://r4ds.had.co.nz/), Wickham and Grolemund (2016)
+This topic is largely based on  [R for Data Science](https://r4ds.had.co.nz/), Wickham and Grolemund (2016)

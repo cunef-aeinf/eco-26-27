@@ -28,16 +28,16 @@ library(nycflights13)
 ```
 
 
-En 2017, la plataforma Kaggle realizó una encuesta en toda la industria para establecer una visión integral del estado de la ciencia de datos y el aprendizaje automático. La encuesta recibió más de 16.000 respuestas y arrojó luz acerca de quién está trabajando con datos, qué está sucediendo en la vanguardia del aprendizaje automático en todos los sectores industriales y cómo los nuevos científicos de datos pueden entrar mejor en este campo.
+In 2017, the Kaggle platform ran an industry-wide survey to establish a comprehensive view of the state of data science and machine learning. The survey received more than 16,000 responses and shed light on who is working with data, what is happening at the cutting edge of machine learning across all industrial sectors, and how new data scientists can best break into this field.
 
-“La mayoría de nuestros encuestados se encontraron principalmente a través de los canales de Kaggle, como su lista de correo electrónico, foros de discusión y canales de redes sociales. La encuesta estuvo disponible del 7 al 25 de agosto. El tiempo medio de respuesta de quienes participaron en la encuesta fue de 16,4 minutos. Permitimos que los encuestados completaran la encuesta en cualquier momento durante ese período. Recibimos datos de salarios preguntando primero a los encuestados por su tipo de divisa y luego pidiéndoles que escribieran su compensación total”.
+“Most of our respondents were found primarily through Kaggle channels, such as our email list, discussion forums and social media channels. The survey was open from August 7 to August 25. The median response time of those who took part in the survey was 16.4 minutes. We allowed respondents to complete the survey at any time during that period. We received salary data by first asking respondents for their currency type and then asking them to write in their total compensation”.
 
-Los datos proporcionados aquí son un subconjunto de los resultados de la encuesta de Kaggle, conservando únicamente las observaciones con respuestas completas para las variables seleccionadas.
-Más información aquí:
+The data provided here are a subset of the results of the Kaggle survey, keeping only the observations with complete answers for the selected variables.
+More information here:
 [https://www.kaggle.com/datasets/kaggle/kaggle-survey-2017](https://www.kaggle.com/datasets/kaggle/kaggle-survey-2017)
 
 
-Aquí tenéis un diccionario de las variables presentes en los datos
+Here is a dictionary of the variables present in the data
 
 |variable              |class     |description |
 |:---------------------|:---------|:-----------|
@@ -56,90 +56,90 @@ Aquí tenéis un diccionario de las variables presentes en los datos
 |WorkDataVisualizations|character | Proportion of job dedicated to creating data visualizations, broken into pre-determined categories|
 |JobSatisfaction       |character |  Rating of job satisfcation one scale of 1-10, where 1 is not satisfied and 10 is highly satisfied|
 
-## Ejercicio 1
+## Exercise 1
 
-Carga en R los ficheros `kaggle_survey_subset.csv` y `kaggle_conversionRates.csv`.
-¿Qué contiene el dataset `kaggle_conversionRates.csv`?
+Load the files `kaggle_survey_subset.csv` and `kaggle_conversionRates.csv` into R.
+What does the `kaggle_conversionRates.csv` dataset contain?
 
-### Solución
+### Solution
 
-## Ejercicio 2
+## Exercise 2
 
-Para comparar salarios en distinta moneda, nos guataría agregar a los datos de 
-`kaggle_survey_subset.csv` una columna llamada `exchangeRate` con la tasa de 
-conversión a la divisa correspondiente. Esta columna se encuentra en el 
-dataset `kaggle_conversionRates.csv`.
+To compare salaries in different currencies, we would like to add to the 
+`kaggle_survey_subset.csv` data a column called `exchangeRate` with the 
+conversion rate to the corresponding currency. This column is in the 
+`kaggle_conversionRates.csv` dataset.
 
-Escriba código que haga esto. Guarda el nuevo conjunto de datos usando el nombre
+Write code that does this. Save the new dataset under the name
 `datascience`.
 
-### Solución
+### Solution
 
 
-## Ejercicio 3
+## Exercise 3
 
-Ahora crea una nueva variable llamada `compensationUSD` que convierta el
-`CompensationAmount` original a USD. Esto se logra multiplicando 
-`CompensationAmount` por el `exchangeRate`. 
-Guarda el nuevo conjunto de datos usando el nombre
+Now create a new variable called `compensationUSD` that converts the original
+`CompensationAmount` to USD. This is done by multiplying 
+`CompensationAmount` by `exchangeRate`. 
+Save the new dataset under the name
 `datascience`.
 
-### Solución
+### Solution
 
-## Ejercicio 4
+## Exercise 4
 
-Crea un nuevo conjunto de datos llamado `compensation_summary` que contenga la
-remuneración mediana en USD por cada `Major`.
-Además, ordena los resultados en orden descendente de mediana de salario.
-Comenta lo que observas.
+Create a new dataset called `compensation_summary` containing the median
+compensation in USD for each `Major`.
+Also, sort the results in decreasing order of median salary.
+Comment on what you observe.
 
-### Solución
+### Solution
 
-## Ejercicio 5
+## Exercise 5
 
-Recrea el siguiente gráfico. 
+Recreate the following plot. 
 
-**Pista**: para ordenar los major según salario mediano, deberás usar
-`fct_reorder`. Busca en internet su uso.
+**Hint**: to sort the majors by median salary, you will need to use
+`fct_reorder`. Look up how to use it on the internet.
 
-**Pista**: para crear un gráfico de barras **bivariante**, especifica
-el eje x e y en aes y añande `geom_bar(stat="identity")`. Recuerda que puedes
-invertir las coordenadas con `coord_flip()`.
+**Hint**: to create a **bivariate** bar plot, specify
+the x and y axes in aes and add `geom_bar(stat="identity")`. Remember that you can
+flip the coordinates with `coord_flip()`.
 
-### Solución
+### Solution
 
 ```{r echo = F, fig.align="center", fig.width=6, fig.height=4}
 knitr::include_graphics("img/median_comp.png")
 ```
 
-## Ejercicio 6
+## Exercise 6
 
-Ordena los datos presentes en la base de datos de tidyverse `us_rent_income`.
-Las variables en esta base de datos son `GEOID`, `NAME`, `estimate_income`, 
+Tidy the data in the tidyverse dataset `us_rent_income`.
+The variables in this dataset are `GEOID`, `NAME`, `estimate_income`, 
 `estimate_rent`, `moe_income`, `moe_rent`.
 
-### Solución
+### Solution
 
 
-## Ejercicio 7
+## Exercise 7
 
-Extrae los aeropuertos de la base de datos `airports` para los cuales existe
-algún vuelo cuyo destino sea ese aeropuesto dentro de la base de datos `flights`.
+Extract the airports from the `airports` dataset for which there is some
+flight whose destination is that airport in the `flights` dataset.
 
-### Solución
+### Solution
 
-## Ejercicio 8
+## Exercise 8
 
-Representa un mapa de los Estados Unidos donde cada aeropuerto de destino aparezca como un punto.
-El tamaño del punto ha de ser proporcional al valor medio del tiempo de vuelo (`air_time`)
-a ese aeropuerto (desde cualquier aeropuerto de NYC).
-Repite el ejercicio excluyendo el aeropuerto de Alaska y el de Hawaii.
+(Hard) Draw a map of the United States where each destination airport appears as a point.
+The size of the point must be proportional to the mean value of the flight time (`air_time`)
+to that airport (from any NYC airport).
+Repeat the exercise excluding the Alaska airport and the Hawaii airport.
 
-¿Qué observas?
+What do you observe?
 
-**Pista:** Para representar el mapa de EEUU puedes usar la siguiente función, donde
-`data` contiene al menos dos columnas llamadas lat (la latitud del aeropuerto) y
-lon (su longitud). 
+**Hint:** To draw the map of the US you can use the following function, where
+`data` contains at least two columns called lat (the latitude of the airport) and
+lon (its longitude). 
 
 ```{r, eval=F}
 ggplot(data, aes(lon, lat)) +
@@ -148,27 +148,27 @@ ggplot(data, aes(lon, lat)) +
     coord_quickmap()
 ```
 
-**Pista:** Las coordenadas de cada aeropuerto de destino están en la base de datos
-`airports`.
+**Hint:** The coordinates of each destination airport are in the `airports`
+dataset.
 
-### Solución
+### Solution
 
-## Ejercicio 9
+## Exercise 9
 
-Elabora una visualización similar a la anterior donde muestres la distribución espacial del retraso medio de los vuelos del día 13 de Junio. Compara esta distribución la de otro día, por ejemplo el 13 de Mayo. ¿Qué observas? Intenta determinar el origen del patrón (buscando en Google). Representa ambos mapas en el mismo gráfico para mayor claridad.
+Produce a visualization similar to the previous one showing the spatial distribution of the mean delay of flights on June 13. Compare this distribution with that of another day, for example May 13. What do you observe? Try to determine the origin of the pattern (by searching on Google). Draw both maps in the same plot for greater clarity.
 
-### Solución
-
-
-## Ejercicio 10
-
-Estudia la relación entre las condiciones climáticas en el origen y el retraso medio de los vuelos. ¿Qué condiciones climáticas parecen afectar más a los retrasos? Justifica tu respuesta con una tabla o una visualización.
-
-### Solución
+### Solution
 
 
-## Ejercicio 11
+## Exercise 10
 
-Estudia la relación entre la edad de los aviones y el retraso medio de los vuelos. Para ello, tendrás que juntar la base de datos `planes` con `flights`, y crear una nueva variable llamada `age`, que corresponda a la edad del avión que realizó el vuelo, en años. Asigna edad 25 a los aviones con más de 25 años antes de estudiar la relación entre el retraso medio y la variable `age`. ¿Qué observas? Justifica tu respuesta con una visualización y tratar de dar una posible explicación al fenómeno observado.
+Study the relationship between the weather conditions at the origin and the mean delay of flights. Which weather conditions seem to affect delays most? Justify your answer with a table or a visualization.
 
-### Solución
+### Solution
+
+
+## Exercise 11
+
+Study the relationship between the age of the planes and the mean delay of flights. To do so, you will have to join the `planes` dataset with `flights`, and create a new variable called `age` corresponding to the age, in years, of the plane that operated the flight. Assign age 25 to planes more than 25 years old before studying the relationship between the mean delay and the `age` variable. What do you observe? Justify your answer with a visualization and try to give a possible explanation for the observed phenomenon.
+
+### Solution

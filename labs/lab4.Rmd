@@ -1,5 +1,5 @@
 ---
-title: "Lab 3.1 - Importación de datos"
+title: "Lab 3.1 - Data Importation"
 output:
   html_document:
     css: ./ds_labs.css
@@ -26,65 +26,65 @@ knitr::opts_chunk$set(fig.width=8, fig.height=6)
 library(tidyverse)
 ```
 
-## Ejercicio 1
+## Exercise 1
 
-Simula la lectura de un conjunto de datos escritos en csv que contenga cuatro variables:
-nombre, edad, género y fumador (con valores posibles si/no), y dos observaciones la tuya y la de 
-un amigo/a. Incluye una línea de metadatos al principio con un comentario que describa los datos.
-Por ejemplo:
+Simulate reading a dataset written in csv containing four variables:
+name, age, gender and smoker (with possible values yes/no), and two observations, yours and that of 
+a friend. Include a metadata line at the beginning with a comment describing the data.
+For example:
 
 
 ```{r}
-datos <- "# Datos de Ana y Pedro
-nombre,edad,genero,fuma
-Pedro,29,hombre,no
-Ana,26,mujer,si"
+data_text <- "# Data for Ana and Pedro
+name,age,gender,smokes
+Pedro,29,male,no
+Ana,26,female,yes"
 ```
 
 
-Lee los datos en un tibble. A continuación, guárdalos en formato csv dentro de una carpeta que se llame `data`.
-Una vez guardados, vuelve a leerlos (esta vez desde el fichero).
-Finalmente, guárdalos de nuevo en formato excel.
+Read the data into a tibble. Then save them in csv format inside a folder called `data`.
+Once saved, read them again (this time from the file).
+Finally, save them again in excel format.
 
 
 
-## Ejercicio 2
+## Exercise 2
 
-Federal Reserve Economic Data (FRED) es una base de datos mantenida por la Reserva Federal de St. Louis (USA). Contiene casi un millón de series de datos en el tiempo que muestran la evolución de diferentes medidas económicas.
+Federal Reserve Economic Data (FRED) is a database maintained by the Federal Reserve Bank of St. Louis (USA). It contains almost a million time series showing the evolution of different economic measures.
 
-Accede a la web de FRED [https://fred.stlouisfed.org/](https://fred.stlouisfed.org/). Exporta los datos sobre la evolución del IPC Mediano en csv (en inglés Median Consumer Price Index).
-Cárgalos en R y haz lo siguiente:
+Go to the FRED website [https://fred.stlouisfed.org/](https://fred.stlouisfed.org/). Export the data on the evolution of the Median Consumer Price Index in csv.
+Load them into R and do the following:
 
-* Representa gráficamente la evolución del IPC Mediano desde el año 2000.
+* Plot the evolution of the Median Consumer Price Index since the year 2000.
 
-* ¿En qué fecha se alcanzó el máximo IPC Mediano? ¿Y el mínimo? 
+* On what date was the maximum Median Consumer Price Index reached? And the minimum? 
 
 
-## Ejercicio 3
+## Exercise 3
 
-Our World in Data es una inicitiva de la Universidad de Oxford que pretende liberar datos acerca de múltiples fenómenos sociales. En particular ofrece resultados empíricos acerca del cambio de condiciones de vida en el planeta a lo largo del tiempo. Los datos son de diversos ámbitos: económico, social, judicial, ecológico, etc.
+Our World in Data is an initiative of the University of Oxford that aims to release data about multiple social phenomena. In particular, it offers empirical results about the change in living conditions on the planet over time. The data come from various fields: economic, social, judicial, ecological, etc.
 
-¿Cuántas veces has escuchado, en la cena de nochevieja, a un familiar decir: "en mis tiempos se vivía mejor, no había tanto paro!"? Bien, en esta práctica haremos uso de Our World in Data junto con R para que puedas rebatir esos comentarios con datos empíricos. 
+How many times have you heard, at the New Year's Eve dinner, a relative say: "things were better in my day, there was not so much unemployment!"? Well, in this lab we will use Our World in Data together with R so that you can rebut those comments with empirical data. 
 
-Lo primero que has de hacer es acceder a la página [https://ourworldindata.org/](https://ourworldindata.org/). Verás una pestaña que dice "Browse by Topic". Busca en esa pestaña un tópico de interés.
-Al seleccionarlo, llegarás a un artículo que, seguramente, contendrá alguna gráfica. En el gráfico aparecerá una pestaña Download, púlsala y descarga los datos en csv.
+The first thing you have to do is go to the page [https://ourworldindata.org/](https://ourworldindata.org/). You will see a tab that says "Browse by Topic". Look for a topic of interest in that tab.
+When you select it, you will reach an article that will most likely contain some plot. A Download tab will appear in the plot; click it and download the data in csv.
 
-Una vez descargados, cárgalos en R e intenta reproducir el gráfico que aparece en el artículo.
+Once downloaded, load them into R and try to reproduce the plot that appears in the article.
 
-Aquí os pongo un ejemplo con datos sobre la evolución del precio del gas en diferentes regiones.
-La gráfica es esta:
+Here is an example with data on the evolution of gas prices in different regions.
+The plot is this one:
 [https://ourworldindata.org/grapher/natural-gas-prices](https://ourworldindata.org/grapher/natural-gas-prices).
 
 
 
-## Ejercicio 4
+## Exercise 4
 
-Busca en FRED algún dato de tu interés. Descárgalo en **excel**, impórtalo en R,
-construye una gráfica y extrae alguna conclusión.
+Look in FRED for some data of interest to you. Download it in **excel**, import it into R,
+build a plot and draw some conclusion.
 
-## Ejercicio 5
+## Exercise 5
 
-Parsea cada una de estas fechas/horas
+Parse each of these dates/times
 
 ```{r}
 d1 <- "January 01, 2010"
@@ -97,32 +97,32 @@ t2 <- "11:15:10.12 PM"
 ```
 
 
-## Ejercicio 6
+## Exercise 6
 
-Elabora un código que haga lo siguiente:
+Write code that does the following:
 
-* Compruebe si existe una carpeta llamada "datos_paro", si no existe, ha de crearla.
+* Check whether a folder called "unemployment_data" exists; if it does not exist, it must create it.
 
-* Descargue los datos de desempleo de España de FRED (en FRED estos datos se denominan: "Unemployment Rate: Aged 15-74: All Persons for Spain") y los guarde en la carpeta "datos_paro".
+* Download the Spanish unemployment data from FRED (in FRED these data are called: "Unemployment Rate: Aged 15-74: All Persons for Spain") and save them in the "unemployment_data" folder.
 
-* Lea los datos recién descargados.
+* Read the data just downloaded.
 
-* Si la tasa de desempleo más reciente es inferior a 10 % imprima el mensaje
-`"La tasa de desempleo ha bajado del 10%"`, de lo contrario, se imprimirá
-`"La tasa de desempleo se mantiente por encima del 10%"`
+* If the most recent unemployment rate is below 10 % print the message
+`"The unemployment rate has fallen below 10%"`, otherwise, print
+`"The unemployment rate remains above 10%"`
 
 
 
-## Ejercicio 7
+## Exercise 7
 
-Weyland Yutani Manufacturing quiere realizar un análisis de costes. Para ello, se te proporciona un informe en Excel con los costes por región.
+Weyland Yutani Manufacturing wants to carry out a cost analysis. To this end, you are provided with an Excel report with the costs by region.
 
-1. Lee el archivo Excel **weyland_cost_results.xlsx**.
-2. Notarás que la tabla tiene muchos valores NA y filas innecesarias, necesitamos hacer una limpieza:
+1. Read the Excel file **weyland_cost_results.xlsx**.
+2. You will notice that the table has many NA values and unnecessary rows; we need to clean it up:
 
-    - Existen filas que muestran subtotales de cada `region` (por ejemplo, "Central Total" o "East Total") y de toda la compañía ("Grand Total"). Filtra el data frame para que no tenga estas filas de subtotales. Las filas con valores NA deben permanecer después de este filtrado. *Sugerencia:* Puedes utilizar la función `endsWith()` para filtrar estos datos.
+    - There are rows showing subtotals for each `region` (for example, "Central Total" or "East Total") and for the whole company ("Grand Total"). Filter the data frame so that it does not contain these subtotal rows. The rows with NA values must remain after this filtering. *Hint:* You can use the `endsWith()` function to filter these data.
     
-    - Ahora necesitamos llenar los valores NA. Ten en cuenta que la `region` es la misma que la fila anterior, por lo que necesitarás completar con el mismo valor que la fila superior de la fila en la que te encuentras. Investiga el uso de `fill` para este propósito. 
+    - Now we need to fill in the NA values. Note that the `region` is the same as in the previous row, so you will need to fill in the same value as the row above the one you are on. Look into the use of `fill` for this purpose. 
 
 
 
