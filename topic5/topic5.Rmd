@@ -1,7 +1,7 @@
 ---
-title: "Tema 5"
+title: "Topic 5"
 author: "Roi Naveiro"
-date: ""
+date: "Academic Year 2026-2027"
 output: 
    xaringan::moon_reader:
     css: "ds_slides.css"
@@ -27,19 +27,20 @@ class: center, middle, inverse, title-slide
 
 <div class="title-logo"></div>
 
-# Análisis y Explotación de la Información
+# Data Analysis and Information Extraction
  
-## Tema 5 - Comunicación de Resultados
+## Topic 5 - Communication of Results
 
 <br>
 <br>
 .pull-left[
 ### Roi Naveiro
+#### Academic Year 2026-2027
 ]
 ---
-## Informes
+## Reports
 
-Aprenderemos cómo realizar informes en R Markdown
+We will learn how to produce reports in R Markdown
 
 ```{r, echo=FALSE, out.width = '100%',  fig.align='center'}
 knitr::include_graphics("img/data-science-communicate.png")
@@ -50,15 +51,15 @@ library(tidyverse)
 ---
 ## RMD
 
-R Markdown es un formato para escribir informes reproducibles con R. Se utiliza para incrustar código R y resultados en presentaciones de diapositivas, archivos PDF, documentos html, etc. Para hacer un informe:
+R Markdown is a format for writing reproducible reports with R. It is used to embed R code and results in slide presentations, PDF files, html documents, etc. To produce a report:
 
-1. Abre un fichero Rmd
-2. Escribe **contenido**
-3. Incluye **código**
-4. Renderizalo en el formato deseado
+1. Open an Rmd file
+2. Write **content**
+3. Include **code**
+4. Render it in the format you want
 
 ---
-## Abrir fichero RMD
+## Opening an RMD file
 
 * **File** - **New File** - **R Markdown...**
 
@@ -67,101 +68,101 @@ knitr::include_graphics("img/1.png")
 library(tidyverse)
 ```
 
-* Elegir format que interese: pdf o html para este curso.
+* Choose the format you need: pdf or html for this course.
 
 ---
-## Rellenar el encabezado
+## Filling in the header
 
 ```{r, echo=FALSE, out.width = '70%',  fig.align='center'}
 knitr::include_graphics("img/2.png")
 library(tidyverse)
 ```
 
-* `output: pdf_document`: para PDF
-* `output: html_document`: para HTML
+* `output: pdf_document`: for PDF
+* `output: html_document`: for HTML
 
 ---
-## Renderizar
+## Rendering
 
-* Para renderizar
+* To render
 
 ```{r, echo=FALSE, out.width = '70%',  fig.align='center'}
 knitr::include_graphics("img/3.png")
 ```
 
 ---
-## Renderizar
+## Rendering
 
-Cuando renderizas, R hace lo siguiente:
+When you render, R does the following:
 
-* Ejecutará cada fragmento de código incrustado e insertará los resultados en el informe 
+* It runs every embedded code chunk and inserts the results into the report 
 
-* Construirá una nueva versión del informe en el tipo de archivo de salida
+* It builds a new version of the report in the output file type
 
-* Abrirá una vista previa del archivo de salida 
+* It opens a preview of the output file 
 
-* Guardará el archivo de salida en tu **directorio de trabajo**
+* It saves the output file in your **working directory**
 
-* **INSTALAR tinytex PARA PDF**!!!!
-
----
-## Escribir contenido
-
-Muy sencillo, tan solo unas pocas reglas
-
-`# Título`
-# Título
-
-`## Subtítulo`
-## Subtítulo
-
-`### Subsubtítulo`
-### Subsubtítulo
+* **INSTALL tinytex FOR PDF**!!!!
 
 ---
-## Escribir contenido
+## Writing content
 
-`**Negrita**`
-**Negrita**
+Very simple, just a few rules
 
-`*Cursiva*`
-*Cursiva*
+`# Title`
+# Title
+
+`## Subtitle`
+## Subtitle
+
+`### Sub-subtitle`
+### Sub-subtitle
+
+---
+## Writing content
+
+`**Bold**`
+**Bold**
+
+`*Italics*`
+*Italics*
 
 `[link](www.rstudio.com)`
 [link](www.rstudio.com)   
 
 ---
-## Escribir contenido
+## Writing content
 
-`*` Puntos
+`*` Bullets
 
-* Puntos
+* Bullets
 
-`1.` Enumeración
+`1.` Numbered list
 
-1. Enumeración 
+1. Numbered list 
 
-2. Bla 
+2. Blah 
 
 ---
-## Escribir código
+## Writing code
 
-**Siempre en bloque de código**
+**Always inside a code chunk**
 
 ```{r, echo=FALSE, out.width = '80%',  fig.align='center'}
 knitr::include_graphics("img/4.png")
 ```
 
 ---
-## Escribir código
+## Writing code
 
-* `echo = FALSE`: el código se evalúa, se muestra su salida, pero no se muestra el bloque de código
+* `echo = FALSE`: the code is evaluated and its output is shown, but the code chunk is not shown
 
-* `eval = FALSE`: el código NO se evalúa, NO se muestra su salida, pero SÍ se muestra el bloque de código
+* `eval = FALSE`: the code is NOT evaluated and its output is NOT shown, but the code chunk IS shown
 
-* Por defecto, ambos son `TRUE`
+* By default, both are `TRUE`
 ---
 
-## Bibliografía
+## Bibliography
 
-Este tema está basado en  [Rmd Cheat Sheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)
+This topic is based on  [Rmd Cheat Sheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)
