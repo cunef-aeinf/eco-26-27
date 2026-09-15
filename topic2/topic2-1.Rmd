@@ -723,7 +723,7 @@ class: center, middle
 
 ---
 
-## Data Visualization: continuous - categorical bivariate data
+## Bivariate data: continuous - categorical
 
 ```{r}
 ggplot(gapminder67, mapping = aes(x = continent, y = gdpPercap)) + 
@@ -731,13 +731,13 @@ ggplot(gapminder67, mapping = aes(x = continent, y = gdpPercap)) +
 ```
 
 ---
-## Data Visualization: continuous - categorical bivariate data
+## Bivariate data: continuous - categorical
 ```{r, echo=FALSE, out.width = '50%',  fig.align='center'}
 knitr::include_graphics("img/boxplot.png")
 ```
 
 ---
-## Data Visualization: continuous - continuous bivariate data
+## Bivariate data: continuous - continuous
 
 Sometimes it is nice to add a fit
 ```{r, fig.align='center',out.extra='angle=90', fig.width=6, fig.height=4}
@@ -748,7 +748,7 @@ ggplot(gapminder67, aes(x = gdpPercap, y = lifeExp) ) +
 ```
 
 ---
-## Data Visualization: categorical - categorical bivariate data
+## Bivariate data: categorical - categorical
 
 Dataset `diamonds`
 
@@ -758,7 +758,7 @@ ggplot(data = diamonds, mapping = aes(x = clarity, fill = cut)) +
 ```
 
 ---
-## Data Visualization: categorical - categorical bivariate data
+## Bivariate data: categorical - categorical
 
 Dataset `diamonds`
 
