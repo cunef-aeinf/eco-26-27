@@ -196,10 +196,12 @@ gapminder %>%
 ]
 
 **NOTE**: the verbs do not modify the data frame. To save the output as a new dataframe
+.midi[
 ```{r, eval=F}
 life_expectancy <- gapminder %>%
   select(lifeExp) 
 ```
+]
 
 ---
 ## Inverse selection
@@ -495,7 +497,8 @@ Example: select countries in the Americas that in 2007 had a life expectancy abo
 
 ```{r}
 gapminder %>%
-    filter(year == 2007, continent == "Americas", (lifeExp > 77 | gdpPercap < 4000) ) #<<
+    filter(year == 2007, continent == "Americas",   #<<
+           (lifeExp > 77 | gdpPercap < 4000) )      #<<
 ```
 
 ---
@@ -736,6 +739,7 @@ gapminder %>%
 
 Note that when a summarise is applied, the grouping by the last variable given in group_by is undone
 
+.midi[
 ```{r}
 gapminder %>%
   group_by(continent, year) %>%
@@ -745,8 +749,7 @@ gapminder %>%
             ) %>% 
   filter(year %in% c(1967, 2007))
 ```
-
-.
+]
 ---
 
 ## Grouping
