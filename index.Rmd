@@ -47,8 +47,6 @@ Welcome to the website for **Data Analysis and Information Extraction**, taught 
   - [Slides](./topic2/topic2-2.html)
 
 
-<!-- NOT YET RELEASED: uncomment each topic as the course progresses.
-
 - 2.3: Exploratory Data Analysis
   - [Slides](./topic2/topic2-3.html)
 
@@ -58,6 +56,8 @@ Welcome to the website for **Data Analysis and Information Extraction**, taught 
   - 3.1: Data Importation
     - [Slides](./topic3/topic3-1.html)
 
+
+<!-- NOT YET RELEASED: uncomment each topic as the course progresses.
 
   - 3.2: Data Organization
     - [Slides](./topic3/topic3-2.html)
@@ -94,11 +94,11 @@ Welcome to the website for **Data Analysis and Information Extraction**, taught 
   - [Exercises](./labs/lab2-2.html)
 
 
-<!-- NOT YET RELEASED: uncomment each lab as the course progresses.
-
 ### Lab 3.1 - Data Importation
   - [Exercises](./labs/lab3-1.html)
 
+
+<!-- NOT YET RELEASED: uncomment each lab as the course progresses.
 
 ### Lab 3.2 - Data Wrangling
   - [Exercises](./labs/lab3-2.html)
