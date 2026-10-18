@@ -212,9 +212,11 @@ Use `pivot_longer()` to tidy the `table4b` dataset
 
 * Each one takes up two rows
 
+.midi[
 ```{r}
 table2
 ```
+]
 ---
 # `pivot_wider()`
 
@@ -433,13 +435,16 @@ flights_key %>%
 
 If `customer_id` **is repeated** in the `customers` table:
 
+.pull-left[
 | customer_id (**PK?**) | name   |
 |-----------------------|--------|
 | 1                     | Ana    |
 | 1                     | Alicia |
 | 2                     | Luis   |
 | 3                     | Marta  |
+]
 
+.pull-right[
 Remember, the orders table was
 
 | order_id | customer_id (**FK**) | product  |
@@ -447,6 +452,7 @@ Remember, the orders table was
 | 1001     | 1                    | Book     |
 | 1002     | 2                    | Pencil   |
 | 1003     | 1                    | Notebook |
+]
 
 ---
 
@@ -657,6 +663,7 @@ knitr::include_graphics("img/join-one-to-many.png")
 
 Typical case!
 
+.midi[
 ```{r}
 x <- tribble(
   ~key, ~val_x,
@@ -672,6 +679,7 @@ y <- tribble(
 )
 left_join(x, y, by = "key")
 ```
+]
 
 ---
 # Duplicate keys - Case 1

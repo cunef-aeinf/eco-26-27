@@ -301,6 +301,7 @@ Use `pivot_longer()` to tidy the `table4b` dataset
 
 * Each one takes up two rows
 
+.midi[
 
 ``` r
 table2
@@ -323,6 +324,7 @@ table2
 ## 11 China        2000 cases          213766
 ## 12 China        2000 population 1280428583
 ```
+]
 ---
 # `pivot_wider()`
 
@@ -653,13 +655,16 @@ flights_key %&gt;%
 
 If `customer_id` **is repeated** in the `customers` table:
 
+.pull-left[
 | customer_id (**PK?**) | name   |
 |-----------------------|--------|
 | 1                     | Ana    |
 | 1                     | Alicia |
 | 2                     | Luis   |
 | 3                     | Marta  |
+]
 
+.pull-right[
 Remember, the orders table was
 
 | order_id | customer_id (**FK**) | product  |
@@ -667,6 +672,7 @@ Remember, the orders table was
 | 1001     | 1                    | Book     |
 | 1002     | 2                    | Pencil   |
 | 1003     | 1                    | Notebook |
+]
 
 ---
 
@@ -918,6 +924,7 @@ x %&gt;%
 
 Typical case!
 
+.midi[
 
 ``` r
 x &lt;- tribble(
@@ -944,6 +951,7 @@ left_join(x, y, by = "key")
 ## 3     2 x3    y2   
 ## 4     1 x4    y1
 ```
+]
 
 ---
 # Duplicate keys - Case 1
