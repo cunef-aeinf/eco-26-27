@@ -21,6 +21,8 @@ output:
 ```{r packages_setup, echo=FALSE, message=FALSE, warning=FALSE}
 knitr::opts_chunk$set(echo = T, warning = F, message = F)
 knitr::opts_chunk$set(fig.width=8, fig.height=6, fig.retina=3) 
+# English month and weekday names in month(label = TRUE) and wday(label = TRUE)
+invisible(Sys.setlocale("LC_TIME", "en_US.UTF-8"))
 ```
 
 class: center, middle, inverse, title-slide
@@ -302,7 +304,8 @@ str_view(x, "GB\\d\\d")
 **Exercise**: Detect the valid motorways
 
 ```{r}
-x <- c("I always drive on the A1", "A12", "A14", "The A6 goes to Manchester", "EA5", "A3", "F2")
+x <- c("I always drive on the A1", "A12", "A14", "The A6 goes to Manchester",
+       "EA5", "A3", "F2")
 ```
 
 
@@ -635,6 +638,7 @@ What can we do with dates and times?
 ---
 ## Dates and times - Components
 
+.midi[
 ```{r}
 datetime <- ymd_hms("2016-07-08 12:34:56")
 
@@ -648,6 +652,7 @@ yday(datetime)
 
 wday(datetime)
 ```
+]
 
 ---
 ## Dates and times - Components
