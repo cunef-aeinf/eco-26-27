@@ -65,11 +65,11 @@ Welcome to the website for **Data Analysis and Information Extraction**, taught 
     - [Slides](./topic3/topic3-3.html)
 
 
-<!-- NOT YET RELEASED: uncomment each topic as the course progresses.
-
 ### Topic 4 : Modeling
   - [Slides](./topic4/topic4.html)
 
+
+<!-- NOT YET RELEASED: uncomment each topic as the course progresses.
 
 ### Topic 5 : Communication of Results
   - [Slides](./topic5/topic5.html)
@@ -106,10 +106,7 @@ Welcome to the website for **Data Analysis and Information Extraction**, taught 
   - [Exercises](./labs/lab3-3.html)
 
 
-<!-- NOT YET RELEASED: uncomment each lab as the course progresses.
-
 ### Lab 4 - Models
   - [Exercises](./labs/lab4.html)
 
--->
 

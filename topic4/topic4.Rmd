@@ -20,7 +20,7 @@ output:
 
 ```{r packages_setup, echo=FALSE, message=FALSE, warning=FALSE}
 knitr::opts_chunk$set(echo = T, warning = F, message = F)
-knitr::opts_chunk$set(fig.width=8, fig.height=6, fig.retina=3) 
+knitr::opts_chunk$set(fig.width=8, fig.height=4.5, fig.retina=3) 
 ```
 
 class: center, middle, inverse, title-slide
@@ -97,7 +97,7 @@ Participants who ate breakfast were observed to have a **lower average body mass
 
 [...]
 
-The results came from an NIH survey of 2379 women in California, Ohio and Maryland.
+The results came from an NIH survey of 2379 girls aged 9 to 19 in California, Ohio and Maryland.
 
 [...]
 
@@ -110,9 +110,9 @@ As part of the survey, participants were asked once a year what they had eaten d
 
 There are three possible explanations for this association between eating cereal and having a lower body mass index:
 
-* Eating cereal is the cause of women being slim
+* Eating cereal is the cause of girls being slim
 
-* Women being slim is the cause of them eating cereal
+* Girls being slim is the cause of them eating cereal
 
 * There is a third variable that is the cause of these two, a **confounding variable**
 
@@ -149,7 +149,7 @@ Depending on the data collection process, we distinguish between studies that ar
 
   * Different treatments are assigned to different individuals 
 
-  * To establish **cause-effect** relationships
+  * They serve to establish **cause-effect** relationships
 
 ---
 ## Scientific studies
@@ -219,12 +219,16 @@ A statistical model is a mathematical model that incorporates a set of statistic
 
 * The family of distributions $\mathcal{P}$ is assumed to contain a distribution that adequately approximates the real distribution.
 
+* In words: $\mathcal{P}$ is a list of candidate mechanisms that could have generated the data, and we hope one of them is close to the real one.
+
 * "A model is a simplification or approximation of reality and hence will not reflect all of reality."
 
 ---
 ## What are statistical models?
 
 * Models are usually parametric: $\mathcal {P}=\{F_{\theta }:\theta \in \Theta \}$
+
+* That is, each distribution in the family is fully described by a few numbers, the **parameters** $\theta$ (for example, a mean and a variance).
 
 * Given some data, the goal is to find the value of $\theta$ that best fits the data.
 
@@ -257,6 +261,8 @@ $$
 
 * We can also write it as $y = \beta_0 + \beta_1 x + \epsilon$, where $\epsilon \sim \mathcal{N}(0, \sigma^2)$
 
+* In words: for each value of $x$, $y$ is scattered around the line $\beta_0 + \beta_1 x$, and the errors $\epsilon$ follow a normal distribution with mean 0 and variance $\sigma^2$.
+
 * This model is known as the **simple linear regression model**.
 
 * What are the parameters of this model?
@@ -284,7 +290,7 @@ In this course we are not going to go into the study of these assumptions, but b
 ---
 ## Simple linear regression
 
-* Once we observe data $(x_i, y_i) \in \mathcal{S}$, we can fit the model to find the parameter values that best fit the data.
+* Once we observe data $(x_i, y_i) \in S$, we can fit the model to find the parameter values that best fit the data.
 
 * The resulting model is called the **fitted model**.
 
@@ -359,8 +365,8 @@ ggplot(mtcars, aes(wt, mpg)) +
 
 * We need to determine which models are **closer** to the data
 
-* One option: use the model that minimizes the sum of the vertical distances from each
-point to the model line
+* One option: use the model that minimizes the sum of the squared vertical distances
+from each point to the model line
 
 ---
 ## Fitting models
@@ -403,18 +409,22 @@ $$
 
 * We call $\hat{y} = \hat{\beta}_0 + \hat{\beta}_1 x$ the predicted value.
 
-* $\hat{\beta}_0$ and $\hat{\beta}_1$ are the values that make the vertical distances seen above minimal
+* $\hat{\beta}_0$ and $\hat{\beta}_1$ are the values that minimize the sum of the squared vertical distances seen above
 
 \begin{equation}
 \arg \min_{\beta_0, \beta_1} \sum_{i=1}^n [y_i - (\beta_0 + \beta_1 x_i)]^2
 \end{equation}
 
+* In words: among all possible lines, we choose the one for which this sum is smallest.
+
 ---
 ## Linear regression
 
+**Optional exercises**, for those who want to go deeper into the maths:
+
 1. Show that the values that minimize the expression above are the maximum likelihood estimators of $\beta_0$ and $\beta_1$.
 
-2. Compute expressions for the estimators of $\beta_0$ and $\beta_1$.
+2. Compute expressions for the estimators of $\beta_0$ and $\beta_1$. *Hint*: set the derivatives of the sum with respect to $\beta_0$ and $\beta_1$ equal to zero.
 
 ---
 ## Linear regression
@@ -480,7 +490,7 @@ grid
 ```{r}
 ggplot(mtcars, aes(wt)) +
   geom_point(aes(y = mpg)) + theme_minimal() +
-  geom_line(aes(y = pred), data = grid, colour = "red", size = 1)
+  geom_line(aes(y = pred), data = grid, colour = "red", linewidth = 1)
 ```
 
 
@@ -537,18 +547,18 @@ tidy(mod_reg)
 The linear regression model is
 
 $$
-\widehat{ \text{mpg} } = \beta_0 + \beta_1 \text{wt}  
+\widehat{ \text{mpg} } = \hat{\beta}_0 + \hat{\beta}_1 \text{wt}  
 $$
 
 Let us increase wt by one unit
 
 \begin{eqnarray}
-&& \beta_0 + \beta_1 ( \text{wt} + 1) = \\
-&& \beta_0 + \beta_1 \text{wt} + \beta_1 = \\
-&& \widehat{ \text{mpg} } + \beta_1
+&& \hat{\beta}_0 + \hat{\beta}_1 ( \text{wt} + 1) = \\
+&& \hat{\beta}_0 + \hat{\beta}_1 \text{wt} + \hat{\beta}_1 = \\
+&& \widehat{ \text{mpg} } + \hat{\beta}_1
 \end{eqnarray}
 
-How is $\beta_1$ interpreted?
+How is $\hat{\beta}_1$ interpreted?
 
 ---
 ## Interpreting linear regression - Intercept
@@ -556,21 +566,21 @@ How is $\beta_1$ interpreted?
 The linear regression model is
 
 $$
-\widehat{ \text{mpg} } = \beta_0 + \beta_1 \text{wt}
+\widehat{ \text{mpg} } = \hat{\beta}_0 + \hat{\beta}_1 \text{wt}
 $$
 
 We substitute zero for wt
 
 \begin{eqnarray}
-\widehat{ \text{mpg} } = \beta_0 + \beta_1 \times 0 = \beta_0
+\widehat{ \text{mpg} } = \hat{\beta}_0 + \hat{\beta}_1 \times 0 = \hat{\beta}_0
 \end{eqnarray}
 
-How is $\beta_0$ interpreted?
+How is $\hat{\beta}_0$ interpreted?
 
 ---
 ## Interpreting Linear Regression
 
-We are going to model how years of experience affect a teacher's salary
+We are going to model the relationship between years of experience and a teacher's salary
 
 ```{r}
 library(openintro)
@@ -585,7 +595,7 @@ teacher <- teacher %>%
 ---
 ## Interpreting Linear Regression
 
-We are going to model how years of experience affect a teacher's salary
+We are going to model the relationship between years of experience and a teacher's salary
 
 ```{r}
 ggplot(teacher, aes(x=years, y=base)) + geom_point() + theme_minimal()
@@ -636,7 +646,7 @@ tidy(mod_base_degree)
 * R has created an **indicator variable**  degreeBA: if the degree is BA it takes value 1,
 otherwise 0.
 
-* If the variable had three levels A, B and C, R would create two indicator variables, e.g. for A and B.
+* If the variable had three levels A, B and C, R would create two indicator variables, by default for B and C (the first level, A, acts as the base level).
 
 * The base level is the level the variable takes when all the indicators are 0.
 
@@ -685,8 +695,10 @@ We predict the mean for each group!
 * The simplest linear model for this case is **multiple linear regression**
 
 \begin{equation}
-y_i = \textbf{x}_i^\top\boldsymbol{\beta} + \epsilon = \beta_{0} + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_p x_{ip} + \epsilon
+y_i = \beta_{0} + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_p x_{ip} + \epsilon_i
 \end{equation}
+
+* Here $x_{ij}$ is the value of predictor $j$ for observation $i$.
 
 * The effects of different covariates on the expected value of the dependent variable are additive.
 
@@ -960,7 +972,7 @@ mean, the median, the correlation, etc.) using the bootstrap sample.
 3. Repeat steps (1) and (2) many times to create a .vocab[bootstrap distribution] - a distribution of bootstrap statistics.
 
 4. Compute the bounds of the XX% confidence interval as the region that holds the
-XX% of the bootstrap distribution.
+central XX% of the bootstrap distribution.
 
 ---
 
@@ -1137,6 +1149,8 @@ ggplot(data = boot_dist, aes(boot_mean)) +
 
 
 ---
+
+## Bootstrap means versus the original data
 
 **Here we compare the bootstrap distribution of the sample means with the distribution of the original data. What do you observe?**
 
@@ -1329,7 +1343,7 @@ boot_dist
 ```{r echo=FALSE}
 ggplot(data = boot_dist, mapping = aes(x = stat)) +
   geom_histogram(binwidth = 5) +
-  labs(title = "Bootstrap distribution centered around 75",
+  labs(title = paste0("Bootstrap distribution centered around ", round(mean(boot_dist$stat))),
        x = "Price per guest", y = "Count", caption = "Binwidth of 5") +
   theme_minimal()
 ```
@@ -1363,9 +1377,9 @@ Using `geom_vline()` to mark the bounds of the confidence interval
 ggplot(data = boot_dist, mapping = aes(x = stat)) + #<<
   geom_histogram(binwidth = 5, alpha = .5) +
   geom_vline(xintercept = ci$lower_b, #<<
-             color = "steelblue", lty = 2, size = 1) + 
+             color = "steelblue", lty = 2, linewidth = 1) + 
   geom_vline(xintercept = ci$upper_b, #<<
-             color = "steelblue", lty = 2, size = 1) +
+             color = "steelblue", lty = 2, linewidth = 1) +
   labs(title = "Bootstrap distribution of the mean price per guest",
        subtitle = "with 95% CI",
        x = "Means", y = "Count") +
@@ -1381,9 +1395,9 @@ ggplot(data = boot_dist, mapping = aes(x = stat)) + #<<
 ggplot(data = boot_dist, mapping = aes(x = stat)) + #<<
   geom_histogram(binwidth = 5, alpha = .5) +
   geom_vline(xintercept = ci$lower_b, #<<
-             color = "steelblue", lty = 2, size = 1) + 
+             color = "steelblue", lty = 2, linewidth = 1) + 
   geom_vline(xintercept = ci$upper_b, #<<
-             color = "steelblue", lty = 2, size = 1) +
+             color = "steelblue", lty = 2, linewidth = 1) +
   labs(title = "Bootstrap distribution of the mean price per guest",
        subtitle = "with 95% CI",
        x = "Means", y = "Count") +

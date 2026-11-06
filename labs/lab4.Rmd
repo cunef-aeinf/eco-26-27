@@ -74,6 +74,8 @@ logarithm of `carat` and `price`.
 
 Using the data created in the previous exercise, fit a linear model where the predictor variable is `lcarat` and the dependent variable is `lprice`. Obtain the value of the coefficients and interpret them. According to this model, what happens to the price of a diamond if I double its `carat`?
 
+**Hint**: since `lcarat` is the base-two logarithm of `carat`, doubling `carat` increases `lcarat` by exactly 1.
+
 ### Solution
 
 ## Exercise 6
