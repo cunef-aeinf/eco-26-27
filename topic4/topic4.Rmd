@@ -48,7 +48,7 @@ name: project-workflow
 knitr::include_graphics("img/data-science-model.png")
 ```
 
-A **statistical model** is a hypothesis about how the data were generated. We use plots to suggest a pattern, fit a model, and return to the data to see what the model missed.
+A **statistical model** is a hypothesis about how the data were generated.
 
 ---
 name: modelling-goals
@@ -56,15 +56,13 @@ name: modelling-goals
 
 First-year students are offered an **optional, ungraded practice quiz** a week before their common **final exam** (marked out of 10). Afterwards, only **40 students volunteer** to report their exam mark and whether they took the quiz. These 40 are our **sample**.
 
-1. **Exploratory data analysis (EDA).** Among these 40 volunteers, how do mean exam marks differ between those who took the quiz and those who skipped it?
-2. **Inference.** Can we use this sample to estimate the same gap for the **whole population** of first-year students who sat the final exam?
-3. **Causality.** Would 15 minutes on the quiz improve final exam marks compared with 15 minutes of usual revision?
-
-Inference and causality each need suitable statistical methods. They also depend on **who enters the sample** and **who decides which students take the quiz**.
+1. **Complement exploratory data analysis (EDA).** Among these 40 volunteers, how do mean exam marks differ between those who took the quiz and those who skipped it?
+2. **Statistical inference.** Can we use this sample to estimate the same gap for the **whole population** of first-year students who sat the final exam?
+3. **Causal inference.** Would 15 minutes on the quiz improve final exam marks compared with 15 minutes of usual revision?
 ---
 ## EDA in the volunteer sample
 
-Once final exam marks are released, 40 students volunteer for a survey. Each reports whether they took the practice quiz and the mark they received on the final exam.
+The volunteers reported their final exam marks and whether they took the practice quiz. A simple model summarises their marks with two numbers, one mean for each group.
 
 | Took the practice quiz? | Volunteers | Mean final exam mark (out of 10) |
 |:---|---:|---:|
@@ -115,6 +113,13 @@ knitr::include_graphics("img/studies.png")
 
 .question[For the 40 volunteers, what conclusions does the design alone support?]
 ---
+name: models-in-this-course
+## How will we use models in this course?
+
+Statistical and causal inference need suitable methods and some **control over how the data are generated**. In the quiz example, random sampling lets us estimate the gap for the whole class. Random assignment lets us estimate the effect of the revision activity.
+
+**In this course, we use models to complement EDA.** We will use regression to quantify how mpg varies with car weight, compare salaries across groups and see which observations lie far from the model's predictions.
+---
 name: regression
 class: center, middle, inverse
 
@@ -138,19 +143,20 @@ ggplot(mtcars, aes(wt, mpg)) +
 .question[How many fewer mpg would you expect for an extra 1,000 lb?]
 
 ---
+name: why-regression
 ## What does regression add?
 
-Three cars in our sample weigh exactly 3,440 lb. They get **17.8, 18.7 and 19.2 mpg**. At 3,000 lb, we have no car at all. What mpg should we predict there?
+We want to **predict mpg for a 3,000 lb car** and say how much that prediction changes for a car **1,000 lb heavier**.
 
-A **regression model** uses the whole sample to estimate how the typical value of one variable changes with another. Here, mpg is our **response** and weight is our **predictor**.
+None of our 32 cars weighs exactly 3,000 lb. Even at 3,440 lb, where we have three cars, their mpg values differ (17.8, 18.7 and 19.2).
 
-With a straight line we can quantify the change in predicted mpg per 1,000 lb and predict mpg for a 3,000 lb car.
+A **regression model** uses all 32 cars to estimate typical mpg at a given weight. We can read the prediction from the fitted line and the change per 1,000 lb from its slope. Here mpg is the **response** and weight is the **predictor**.
 
 ---
 name: regression-model
 ## A model for mpg
 
-Suppose mean mpg changes linearly with weight, and cars of the same weight vary around that mean. For car $i$, this hypothesis gives
+A **statistical model** is a hypothesis about how the data were generated. Here we suppose that mean mpg changes linearly with weight and that cars of the same weight vary around that mean. For car $i$, we write
 
 $$
 y_i = \beta_0 + \beta_1 x_i + \varepsilon_i.
@@ -333,20 +339,7 @@ resid_plot +
              colour = "#006975", label.size = 0, size = 3.5)
 ```
 
-The Corolla sits above zero and the Mazda below. Now read all 32 cars from left to right. **At which weights do the residuals tend to stay on one side of zero?**
-
----
-## What pattern did the line miss?
-
-| Weight range | Where are the dots? | What did the line do? |
-|:---|:---|:---|
-| Below 2,300 lb | All 6 above zero | Predicted too few mpg |
-| 3,400–3,800 lb | 9 of 10 below zero | Usually predicted too many mpg |
-| Above 5,000 lb | All 3 above zero | Predicted too few mpg |
-
-The line captures the overall drop in mpg with weight. The pattern left in the residuals shows where a single slope falls short. It predicts too few mpg for the lightest and heaviest cars, and too many for most cars in the middle range shown.
-
-Only three cars weigh more than 5,000 lb. More observations at that end would help us judge how general the pattern is.
+The lightest cars sit above zero, so they get **more mpg than predicted**. Many cars around 3,500 lb sit below zero and get **fewer mpg than predicted**.
 
 ---
 name: salary
@@ -373,7 +366,7 @@ ggplot(teacher, aes(x=years, y=base)) + geom_point() +
 name: reading-coefficients
 ## Reading the salary coefficients
 
-`tidy(fit_years)`, from the **broom** package, puts the fitted model's results in a table with one row per coefficient. We keep `term` (the coefficient name) and `estimate` (its fitted value).
+Load **broom** with `library(broom)` before using `tidy()`. Its table has one row per coefficient. We keep `term` (the coefficient name) and `estimate` (its fitted value).
 
 ```{r}
 tidy(fit_years) %>% select(term, estimate)
@@ -418,23 +411,31 @@ Each black point is a teacher's salary. Each red point is that group's mean.
 ---
 ## Two ways to compare degrees
 
-The BA teachers have **17.1 years** of experience on average. The MA teachers have **14.4 years**.
-
-* `base ~ degree` compares the two groups **as we found them**, with their different mixes of experience.
-* `base ~ years + degree` lets us compare a BA and an MA teacher **at the same number of years**.
+The **&#36;352.46** gap compares the two groups as we found them. The BA teachers have **17.1 years** of experience on average, and the MA teachers have **14.4 years**.
 
 .question[If salary typically rises with experience, how might the extra experience of the BA group affect the raw difference?]
 ---
+name: multiple-regression
+## From one predictor to several
+
+The same tools let us build a **multiple regression**. We keep one response and add a term for each predictor. With two predictors, the model is
+
+`\[y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \varepsilon_i.\]`
+
+We can combine a number, such as **years of experience**, with an indicator, such as **degreeMA**. Changing one predictor at a time gives two comparisons.
+
+* Hold degree fixed to compare salaries at different experience levels.
+* Hold experience fixed to compare salaries for BA and MA teachers.
+---
 ## Salary, experience and degree
 
-Fit a multiple regression with one numerical predictor and one categorical predictor.
+Use `+` in the R formula to fit both predictors together.
 
 ```{r}
 fit_salary <- lm(base ~ years + degree, data = teacher)
 tidy(fit_salary) %>% select(term, estimate)
 ```
 
-We can now change one predictor at a time when calculating a fitted salary.
 ---
 ## Reading the three coefficients
 
@@ -506,29 +507,6 @@ $$
 * In R, use `log(x)` for the natural logarithm. Any other predictors stay fixed in the comparison.
 * For example, if $b_1=20$ dollars, increasing $x$ by 10% changes the prediction by $20\log(1.10)$, or about 1.91 dollars.
 ---
-## What if both variables are logged?
-
-In [Lab 4, Exercise 5](../labs/lab4.html#exercise-5), price and carat are both on a base-two log scale.
-
-```{r}
-small_diamonds <- diamonds %>% filter(carat <= 2.5)
-fit_log <- lm(log2(price) ~ log2(carat), data = small_diamonds)
-unname(2^coef(fit_log)[2])
-```
-
-Doubling carat adds one to `log2(carat)`. The fitted `log2(price)` increases by the slope. On the original scale the fitted price is multiplied by $2^{b_1}$, about **3.21** here.
----
-name: regression-practice
-## Your turn
-
-Use `sim3` from `modelr` in [Lab 4, Exercise 8](../labs/lab4.html#exercise-8).
-
-1. Fit `y ~ x1 + x2` and identify the reference group.
-2. Compare two groups at the same `x1`. Give the two predicted values and their difference.
-3. Plot the observations and the fitted lines by group. Compare the residuals with those from `y ~ x1`. What pattern does adding `x2` explain?
-
-For more practice, try [Lab 4, Exercises 2–6](../labs/lab4.html#exercise-2) on diamond prices. The remaining slides are [optional reading on inference and bootstrap](#optional-inference).
----
 name: optional-inference
 class: center, middle, inverse
 
@@ -536,7 +514,7 @@ class: center, middle, inverse
 
 ## Inference and bootstrap
 
-[Back to regression practice](#regression-practice)
+[Back to regression](#regression)
 
 ---
 
