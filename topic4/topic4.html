@@ -236,7 +236,7 @@ A **residual** is what the fitted model leaves unexplained for one observation. 
 | Mazda RX4 | 2,620 | 21.00 | 23.28 | −2.28 |
 | Toyota Corolla | 1,835 | 33.90 | 27.48 | +6.42 |
 
-The Mazda gets **2.28 fewer mpg** than predicted, so the line overpredicts its mpg. The Corolla gets **6.42 more mpg** than predicted, so the line underpredicts its mpg.
+The Mazda gets 21.00 mpg. The line predicts 23.28, so its prediction is **2.28 mpg too high** (negative residual). For the Corolla, the prediction is **6.42 mpg too low** (positive residual).
 
 ---
 ## Drawing the residual plot
@@ -446,6 +446,8 @@ cases %&gt;% add_predictions(fit_salary)
 
 Both predictions include 15 years of experience. Switching the indicator from 0 to 1 takes the fitted salary from **&amp;#36;54,548** for BA to **&amp;#36;57,108** for MA.
 
+One MA teacher actually earned **&amp;#36;60,649**. The prediction of **&amp;#36;57,108** was **&amp;#36;3,541 too low**, so this teacher's residual is **+&amp;#36;3,541**.
+
 .question[At five years of experience, what gap would this model predict?]
 ---
 ## A grid for both groups
@@ -482,6 +484,7 @@ ggplot(teacher, aes(years, base, colour = degree)) +
 
 At **any fixed year**, the vertical gap is about **&amp;#36;2,560**. The lines are parallel because both degree groups have the same fitted slope of &amp;#36;818 per year.
 ---
+name: salary-residuals
 ## Salary residuals
 
 
@@ -494,9 +497,9 @@ teacher %&gt;% add_residuals(fit_years, var = "simple") %&gt;%
   facet_wrap(~ model) + ylab("Salary residual ($)") + theme_minimal()
 ```
 
-&lt;img src="topic4_files/figure-html/salary-residuals-by-degree-1.png" width="65%" /&gt;
+&lt;img src="topic4_files/figure-html/salary-residuals-by-degree-1.png" width="60%" /&gt;
 
-With experience alone, MA salaries are underpredicted on average. Adding degree centres each group at zero. Both fits still underpredict many mid-career salaries.
+Above zero means the teacher earned more than predicted. The average MA residual is **+&amp;#36;1,384** with experience alone and **&amp;#36;0** after adding degree. Both models predict too little for many mid-career teachers.
 ---
 name: log-predictor
 ## When the predictor is a logarithm
