@@ -33,7 +33,7 @@ name: project-workflow
 
 &lt;img src="img/data-science-model.png" alt="A data analysis project moves from importing and tidying data to a cycle of transforming, visualising and modelling, then communicating results. The Model step is highlighted." width="100%" style="display: block; margin: auto;" /&gt;
 
-We have used plots to explore patterns in our data. Now we fit models to describe those patterns and use plots again to see what the models missed.
+A **statistical model** is a hypothesis about how the data were generated. We use plots to suggest a pattern, fit a model, and return to the data to see what the model missed.
 
 ---
 name: modelling-goals
@@ -79,7 +79,24 @@ Next year, **randomly assign** students to two revision groups. One spends 15 mi
 
 **Compare mean final exam marks in the two assigned groups.** Random assignment balances prior preparation on average, so the difference estimates the effect of assigning quiz practice to these students.
 
-We now use regression for **exploration**, starting with a pattern in the data we have.
+---
+name: study-types
+## Observational and experimental studies
+
+**Observational study.** Students choose whether to take the quiz. The lecturer records their choices and final exam marks. The 0.8-point gap describes an **association**. Students who were already better prepared may have been more likely to take the quiz.
+
+**Experimental study.** The lecturer assigns the revision activity. When students are **randomly assigned** to quiz practice or usual revision, the difference in mean final exam marks estimates the **effect of the assigned activity** for these students.
+
+.question[Suppose the lecturer draws 40 names at random and lets each student choose how to revise. Which type of study is this?]
+---
+name: sampling-and-assignment
+## Random sampling and random assignment
+
+**Random sampling** selects students from the class by chance. **Random assignment** allocates revision activities by chance.
+
+&lt;img src="img/studies.png" alt="Rows distinguish random and nonrandom sampling. Columns distinguish random assignment and no random assignment. Random sampling supports generalising to the population. Random assignment supports estimating a causal effect for the participants." width="77%" style="display: block; margin: auto;" /&gt;
+
+.question[For the 40 volunteers, what conclusions does the design alone support?]
 ---
 name: regression
 class: center, middle, inverse
@@ -106,6 +123,40 @@ A **regression model** uses the whole sample to estimate how the typical value o
 With a straight line we can quantify the change in predicted mpg per 1,000 lb and predict mpg for a 3,000 lb car.
 
 ---
+name: regression-model
+## A model for mpg
+
+Suppose mean mpg changes linearly with weight, and cars of the same weight vary around that mean. For car `\(i\)`, this hypothesis gives
+
+$$
+y_i = \beta_0 + \beta_1 x_i + \varepsilon_i.
+$$
+
+Here `\(y_i\)` is the car's observed mpg and `\(x_i\)` is its weight in thousands of pounds. The line has intercept `\(\beta_0\)` and slope `\(\beta_1\)`. The error `\(\varepsilon_i\)` is the car's departure from the line.
+
+After estimating the intercept and slope, we predict mpg with `\(\hat y_i = \hat\beta_0 + \hat\beta_1 x_i\)`. Inference requires assumptions about the errors. Here we use the line to explore these 32 cars.
+
+---
+name: candidate-lines
+## Which line fits the cars?
+
+&lt;img src="topic4_files/figure-html/mpg-candidate-lines-1.png" alt="The same 32 cars with many straight lines of different intercepts and slopes. The highlighted line predicts 35 minus 4 times weight." width="76%" style="display: block; margin: auto;" /&gt;
+
+Each choice of intercept and slope gives a different line. The teal line predicts `\(35-4x_i\)` mpg. How could we compare its fit with the others using all 32 cars?
+
+---
+name: least-squares
+## How is the line chosen?
+
+&lt;img src="topic4_files/figure-html/mpg-candidate-gaps-1.png" alt="Vertical segments connect each observed mpg to the prediction from the teal trial line at the same weight." width="58%" style="display: block; margin: auto;" /&gt;
+
+Each vertical gap is observed minus predicted mpg. **Least squares** chooses the intercept `\(b_0\)` and slope `\(b_1\)` with the smallest sum of squared gaps across all cars.
+
+For our 32 cars, `\(\displaystyle \mathrm{SSE}(b_0,b_1) = \sum_{i=1}^{32}\bigl(y_i-(b_0+b_1 x_i)\bigr)^2\)`.
+
+Squaring keeps positive and negative gaps from cancelling and gives larger gaps more weight.
+
+---
 ## Fitting the line in R
 
 
@@ -122,20 +173,9 @@ coef(reg_mod)
 ##   37.285126   -5.344472
 ```
 
-In `mpg ~ wt` the response is on the left and the predictor on the right. Using the estimated intercept and slope, the fitted line is
+In `mpg ~ wt` the response is on the left and the predictor on the right. `lm()` finds the least-squares line among **all** possible intercepts and slopes.
 
-$$
-\widehat{\mathrm{mpg}} = 37.29 - 5.34\,\mathrm{wt}.
-$$
-
----
-## How is the line chosen?
-
-&lt;img src="topic4_files/figure-html/mpg-gaps-1.png" width="72%" style="display: block; margin: auto;" /&gt;
-
-Each vertical segment measures the gap between a car's observed mpg and the line's prediction. **Least squares** chooses the intercept and slope that minimize the sum of these squared gaps.
-
-Using the model for inference requires assumptions about the errors. We set those aside here and use the line to describe these 32 cars.
+The teal line's sum of squared gaps was **465.19**. With the coefficients returned by R, the sum falls to **278.32**.
 
 ---
 ## Interpreting the fitted line
@@ -189,7 +229,7 @@ ggplot(mtcars, aes(wt, mpg)) +
 name: prediction-residual
 ## What does one residual tell us?
 
-A **residual** is the vertical distance from the line to the point, including its sign, `\(e_i=y_i-\hat y_i\)`. It has the same units as the response.
+A **residual** is what the fitted model leaves unexplained for one observation. For a car, `\(e_i=y_i-\hat y_i\)` is its observed mpg minus the mpg predicted from its weight. On the scatterplot, this is the signed vertical gap from the line to the point.
 
 | Car | Weight (lb) | Observed mpg | Predicted mpg | Residual (mpg) |
 |:---|---:|---:|---:|---:|
@@ -201,13 +241,11 @@ The Mazda gets **2.28 fewer mpg** than predicted, so the line overpredicts its m
 ---
 ## Drawing the residual plot
 
-Keep weight on the horizontal axis. On the vertical axis, replace each car's observed mpg with its residual. A car lying on the fitted line now appears at zero.
+Keep weight on the horizontal axis and subtract each car's predicted mpg from its observed mpg. This turns the sloping fitted line into a **horizontal line at zero**. We can now see whether weight still tells us anything about the errors.
 
 
 ``` r
-car_fit &lt;- mtcars %&gt;%
-  rownames_to_column("car") %&gt;%
-  add_residuals(reg_mod)
+car_fit &lt;- mtcars %&gt;% add_residuals(reg_mod)
 
 resid_plot &lt;- ggplot(car_fit, aes(wt, resid)) +
   geom_hline(yintercept = 0, colour = "grey60") +
@@ -218,11 +256,22 @@ resid_plot
 ```
 
 ---
+name: residual-patterns
+## What do residuals reveal?
+
+&lt;img src="topic4_files/figure-html/residual-pattern-examples-1.png" alt="Three residual plots on identical axes. All dots lie at zero for an exact fit. Dots scatter around zero when the mean trend is captured. A U-shaped pattern remains when the trend is missed." width="97%" style="display: block; margin: auto;" /&gt;
+
+* **Exact fit.** Every prediction is correct. Every residual is zero.
+* **Trend captured.** Individual cars differ, but the residuals scatter around zero across the weight range. Weight gives no clear clue about the next error.
+* **Trend missed.** The curve shows where the model predicts too low (positive residuals) or too high (negative residuals).
+
+---
+name: mpg-residuals
 ## Reading the residual plot
 
 &lt;img src="topic4_files/figure-html/mpg-residual-plot-1.png" width="78%" style="display: block; margin: auto;" /&gt;
 
-Near zero, the prediction is close. Farther away, the error is larger. Read from left to right. **At which weights does the line consistently underpredict or overpredict mpg?**
+The Corolla sits above zero and the Mazda below. Now read all 32 cars from left to right. **At which weights do the residuals tend to stay on one side of zero?**
 
 ---
 ## What pattern did the line miss?
@@ -233,7 +282,7 @@ Near zero, the prediction is close. Farther away, the error is larger. Read from
 | 3,400–3,800 lb | 9 of 10 below zero | Usually predicted too many mpg |
 | Above 5,000 lb | All 3 above zero | Predicted too few mpg |
 
-If the line described the average pattern well, we would expect a band scattered around zero across the weight range. Here the residuals tend to rise at the ends and fall in the middle. A single slope misses some of the shape.
+The line captures the overall drop in mpg with weight. The pattern left in the residuals shows where a single slope falls short. It predicts too few mpg for the lightest and heaviest cars, and too many for most cars in the middle range shown.
 
 Only three cars weigh more than 5,000 lb. More observations at that end would help us judge how general the pattern is.
 
@@ -248,8 +297,6 @@ The `teacher` data record each teacher's base salary in dollars, years of experi
 library(openintro)
 library(broom)
 data("teacher")
-teacher &lt;- teacher %&gt;%
-  mutate(degree = factor(degree, levels = c("MA", "BA")))
 ```
 
 .question[Start with experience alone. Fit `base ~ years` and predict the salary for a teacher with 15 years of experience.]
@@ -265,7 +312,10 @@ ggplot(teacher, aes(x=years, y=base)) + geom_point() +
 
 &lt;img src="topic4_files/figure-html/unnamed-chunk-2-1.png" width="70%" /&gt;
 ---
-## Salary and years of experience
+name: reading-coefficients
+## Reading the salary coefficients
+
+`tidy(fit_years)`, from the **broom** package, puts the fitted model's results in a table with one row per coefficient. We keep `term` (the coefficient name) and `estimate` (its fitted value).
 
 
 ``` r
@@ -289,11 +339,12 @@ predict(fit_years, newdata = data.frame(years = 15))
 ## 55714.66
 ```
 
-Each additional year of experience is associated with about **&amp;#36;803 more** in predicted base salary. The prediction for 15 years is about **&amp;#36;55,715**.
+The `years` row gives about **&amp;#36;803 more** in predicted salary per additional year. `predict()` uses the intercept and slope to give **&amp;#36;55,715** at 15 years.
 ---
-## Using degree as a predictor
+name: degree-indicators
+## Why does degree need an indicator?
 
-What salary would we predict if all we knew about a teacher was their degree? Fit one mean salary for each group.
+BA and MA are labels with no numerical distance between them. A **0/1 indicator** lets the regression start with one group's salary and add a difference for the other.
 
 
 ``` r
@@ -305,42 +356,22 @@ tidy(mod_base_degree) %&gt;% select(term, estimate)
 ## # A tibble: 2 × 2
 ##   term        estimate
 ##   &lt;chr&gt;          &lt;dbl&gt;
-## 1 (Intercept)   56610.
-## 2 degreeBA       -352.
-```
-
-We put MA first in `levels`, so R uses it as the **reference group**. The row labelled `degreeBA` gives the difference **BA minus MA**.
----
-## From coefficients to salaries
-
-Let `\(D_{\rm BA}\)` be 1 for a BA teacher and 0 for an MA teacher. The fitted salary in dollars is `\(56{,}609.56 - 352.46\,D_{\rm BA}\)`.
-
-| Degree | Indicator | Calculation | Predicted salary |
-|:---|:---:|:---|---:|
-| MA | 0 | `\(56{,}609.56 - 352.46 \times 0\)` | &amp;#36;56,609.56 |
-| BA | 1 | `\(56{,}609.56 - 352.46 \times 1\)` | &amp;#36;56,257.10 |
-
-The intercept is the **MA mean salary**. The minus sign tells us that the **BA mean salary is &amp;#36;352.46 lower** in these data.
----
-## Choosing the reference group
-
-Suppose we choose BA first instead. The starting salary is now the BA mean, **&amp;#36;56,257.10**. Moving from BA to MA **adds &amp;#36;352.46**.
-
-
-``` r
-teacher_ba &lt;- teacher %&gt;% mutate(degree = relevel(degree, ref = "BA"))
-tidy(lm(base ~ degree, data = teacher_ba)) %&gt;% select(term, estimate)
-```
-
-```
-## # A tibble: 2 × 2
-##   term        estimate
-##   &lt;chr&gt;          &lt;dbl&gt;
 ## 1 (Intercept)   56257.
 ## 2 degreeMA        352.
 ```
 
-With three degree levels, R reports an intercept for the reference group and **two differences**, one for each other group. In general, `\(k\)` levels give `\(k-1\)` differences.
+Since `degree` is a factor, **R's `lm()` creates the indicator automatically**. BA is the first level and the **reference group**. The indicator `degreeMA` equals **0 for BA** and **1 for MA**.
+---
+## From coefficients to salaries
+
+Write `\(D_{\rm MA}\)` for the indicator `degreeMA`. The fitted salary in dollars is `\(56{,}257.10 + 352.46\,D_{\rm MA}\)`.
+
+| Degree | Indicator | Calculation | Predicted salary |
+|:---|:---:|:---|---:|
+| BA | 0 | `\(56{,}257.10 + 352.46 \times 0\)` | &amp;#36;56,257.10 |
+| MA | 1 | `\(56{,}257.10 + 352.46 \times 1\)` | &amp;#36;56,609.56 |
+
+The intercept is the **BA mean salary**. The **MA mean is &amp;#36;352.46 higher**. With `\(k\)` groups, the intercept gives the reference mean and `\(k-1\)` indicators give the differences from it.
 ---
 ## The two group means
 
@@ -352,7 +383,7 @@ ggplot(teacher, aes(degree, base)) + geom_point() +
   theme_minimal()
 ```
 
-&lt;img src="topic4_files/figure-html/unnamed-chunk-6-1.png" width="68%" /&gt;
+&lt;img src="topic4_files/figure-html/degree-salary-means-1.png" width="68%" /&gt;
 
 Each black point is a teacher's salary. Each red point is that group's mean.
 ---
@@ -379,9 +410,9 @@ tidy(fit_salary) %&gt;% select(term, estimate)
 ## # A tibble: 3 × 2
 ##   term        estimate
 ##   &lt;chr&gt;          &lt;dbl&gt;
-## 1 (Intercept)   44838.
+## 1 (Intercept)   42278.
 ## 2 years           818.
-## 3 degreeBA      -2560.
+## 3 degreeMA       2560.
 ```
 
 We can now change one predictor at a time when calculating a fitted salary.
@@ -390,18 +421,18 @@ We can now change one predictor at a time when calculating a fitted salary.
 
 The fitted salary in dollars is approximately
 $$
-44{,}838 + 818 \times \mathrm{years} - 2{,}560 \times D_{\rm BA}.
+42{,}278 + 818 \times \mathrm{years} + 2{,}560 \times D_{\rm MA}.
 $$
 
-* **Intercept.** Set years and the indicator to zero. The model predicts **&amp;#36;44,838** for an MA teacher with no experience.
+* **Intercept.** Set years and the indicator to zero. The model predicts **&amp;#36;42,278** for a BA teacher with no experience.
 * **Years.** For two teachers with the **same degree**, one extra year corresponds to **&amp;#36;818 more** in predicted salary.
-* **Degree.** For two teachers with the **same experience**, the model predicts **&amp;#36;2,560 less** for BA than for MA.
+* **Degree.** For two teachers with the **same experience**, the model predicts **&amp;#36;2,560 more** for MA than for BA.
 ---
 ## Compare two teachers at 15 years
 
 
 ``` r
-cases &lt;- tibble(years = c(15, 15), degree = c("MA", "BA"))
+cases &lt;- tibble(years = c(15, 15), degree = c("BA", "MA"))
 cases %&gt;% add_predictions(fit_salary)
 ```
 
@@ -409,11 +440,11 @@ cases %&gt;% add_predictions(fit_salary)
 ## # A tibble: 2 × 3
 ##   years degree   pred
 ##   &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;
-## 1    15 MA     57108.
-## 2    15 BA     54548.
+## 1    15 BA     54548.
+## 2    15 MA     57108.
 ```
 
-Both predictions include 15 years of experience. Switching the indicator from 0 to 1 takes the fitted salary from **&amp;#36;57,108** for MA to **&amp;#36;54,548** for BA.
+Both predictions include 15 years of experience. Switching the indicator from 0 to 1 takes the fitted salary from **&amp;#36;54,548** for BA to **&amp;#36;57,108** for MA.
 
 .question[At five years of experience, what gap would this model predict?]
 ---
@@ -433,10 +464,10 @@ head(grid, 4)
 ## # A tibble: 4 × 3
 ##   years degree   pred
 ##   &lt;dbl&gt; &lt;fct&gt;   &lt;dbl&gt;
-## 1     0 MA     44838.
-## 2     0 BA     42278.
-## 3     1 MA     45656.
-## 4     1 BA     43096.
+## 1     0 BA     42278.
+## 2     0 MA     44838.
+## 3     1 BA     43096.
+## 4     1 MA     45656.
 ```
 ---
 ## Reading the fitted lines
@@ -447,7 +478,7 @@ ggplot(teacher, aes(years, base, colour = degree)) +
   geom_point() + geom_line(data = grid, aes(y = pred)) + theme_minimal()
 ```
 
-&lt;img src="topic4_files/figure-html/unnamed-chunk-10-1.png" width="68%" /&gt;
+&lt;img src="topic4_files/figure-html/salary-fitted-by-degree-1.png" width="68%" /&gt;
 
 At **any fixed year**, the vertical gap is about **&amp;#36;2,560**. The lines are parallel because both degree groups have the same fitted slope of &amp;#36;818 per year.
 ---
@@ -463,7 +494,7 @@ teacher %&gt;% add_residuals(fit_years, var = "simple") %&gt;%
   facet_wrap(~ model) + ylab("Salary residual ($)") + theme_minimal()
 ```
 
-&lt;img src="topic4_files/figure-html/unnamed-chunk-11-1.png" width="65%" /&gt;
+&lt;img src="topic4_files/figure-html/salary-residuals-by-degree-1.png" width="65%" /&gt;
 
 With experience alone, MA salaries are underpredicted on average. Adding degree centres each group at zero. Both fits still underpredict many mid-career salaries.
 ---
