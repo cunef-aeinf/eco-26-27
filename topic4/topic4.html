@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="author" content="Roi Naveiro" />
     <script src="libs/header-attrs-2.29/header-attrs.js"></script>
-    <link rel="stylesheet" href="ds_slides.css" type="text/css" />
+    <link rel="stylesheet" href="ds_slides.css?v=632947620ef87433608355f890c8455e" type="text/css" />
   </head>
   <body>
     <textarea id="source">
@@ -20,6 +20,7 @@ class: center, middle, inverse, title-slide
  
 ## Topic 4 - Modeling
 
+&lt;br&gt;
 &lt;br&gt;
 &lt;br&gt;
 .pull-left[
@@ -38,47 +39,47 @@ We have used plots to explore patterns in our data. Now we fit models to describ
 name: modelling-goals
 ## What do we want a model to tell us?
 
-Models serve three purposes. Consider a lecturer who offers an optional practice quiz before a test.
+A lecturer offers first-year students an **optional, ungraded practice quiz**. A week later, everyone sits the **same final exam**, marked out of 10. Models can help us answer three questions.
 
-1. **Exploratory data analysis (EDA).** What pattern do we see among the students in our data?
-2. **Inference.** How large is the gap between quiz users and other students across the whole first-year class?
-3. **Causality.** Would spending 15 minutes on the quiz improve scores compared with 15 minutes of usual revision?
+1. **Exploratory data analysis (EDA).** In our data, how do final exam marks compare for students who took the quiz and those who skipped it?
+2. **Inference.** How large is that gap in the whole first-year class?
+3. **Causality.** Would 15 minutes on the quiz improve final exam marks compared with 15 minutes of usual revision?
 
-Inference and causality each need their own statistical methods. What those methods can tell us depends on **who entered the sample** and **how students came to use the quiz**.
+Inference and causality each need suitable statistical methods. They also depend on **who enters the sample** and **who decides which students take the quiz**.
 ---
 ## EDA in the volunteer sample
 
-Imagine 40 first-year students volunteer to tell us whether they used the quiz and share their scores on the same test.
+Once final exam marks are released, 40 students volunteer for a survey. Each reports whether they took the practice quiz and the mark they received on the final exam.
 
-| Used the practice quiz? | Students | Mean test score (out of 10) |
+| Took the practice quiz? | Volunteers | Mean final exam mark (out of 10) |
 |:---|---:|---:|
 | Yes | 20 | 7.4 |
 | No  | 20 | 6.6 |
 
-Among **these 40 students**, quiz users scored **0.8 points higher on average**. The two means give us a simple model of the pattern in these responses.
+Among **these 40 volunteers**, those who took the quiz averaged **0.8 points more on the final exam** than those who skipped it (7.4 − 6.6).
 
-.question[What would we need to know before reporting that gap for the whole class?]
+.question[Would we see the same gap among everyone who sat the final exam?]
 ---
 ## Inference about the whole class
 
-Suppose quiz users were especially likely to volunteer **when they had done well**. Their mean of 7.4 could be higher than the mean for all quiz users. Asking more volunteers in the same way can preserve that bias.
+Suppose students who took the quiz were especially likely to volunteer **if they earned a high final exam mark**. Their mean of 7.4 in the survey could exceed the mean for everyone who took the quiz, even with many responses.
 
-To learn about **all first-year students who took the test**, we could change the study design.
+How could we estimate the gap for the whole class?
 
-* Draw a random sample from the class list. Record quiz use and the test score for every sampled student.
-* Estimate the difference in mean scores. Use a confidence interval that accounts for how the sample was drawn to express its uncertainty.
+* Draw a **random sample** from the list of everyone who sat the final exam. For each selected student, record quiz participation and the final exam mark.
+* Compare the two sample means. A confidence interval based on the sampling design expresses uncertainty about the gap in the class.
 
-.question[Even if we surveyed the entire class, would the gap tell us how much the quiz helped?]
+.question[Even if we knew the exact gap for the class, would we know how much the quiz helped?]
 ---
-## Would taking the quiz improve scores?
+## Did the practice quiz help?
 
-Even if the whole class showed a gap of 0.8 points, students who chose the quiz might already have studied more. Prior preparation could explain some or all of the gap.
+Students who chose to take the quiz may already have studied more. That extra preparation could explain some or all of the gap in final exam marks.
 
-**Change how the data are generated.** Before the next test, randomly assign students to spend 15 minutes on the quiz or 15 minutes on their usual revision. Give both groups the same test.
+Next year, **randomly assign** students to two revision groups. One spends 15 minutes on the practice quiz. The other spends 15 minutes revising as usual. Both then sit the same final exam.
 
-**Compare the assigned groups.** Random assignment balances prior preparation on average. The difference in mean scores estimates the effect of the assigned activity for these students, and the random assignment lets us quantify uncertainty in that estimate.
+**Compare mean final exam marks in the two assigned groups.** Random assignment balances prior preparation on average, so the difference estimates the effect of assigning quiz practice to these students.
 
-In this class we use regression for **exploration**. We start by looking for a pattern in the data we have.
+We now use regression for **exploration**, starting with a pattern in the data we have.
 ---
 name: regression
 class: center, middle, inverse
