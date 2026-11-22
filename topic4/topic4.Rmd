@@ -6,6 +6,8 @@ output:
    xaringan::moon_reader:
     css: "ds_slides.css"
     lib_dir: libs
+    chakra: libs/remark-0.14.1/remark.min.js
+    mathjax: libs/mathjax/tex-svg.js
     seal: false
     includes:
       after_body: insert-logo.html
@@ -116,7 +118,7 @@ knitr::include_graphics("img/studies.png")
 ---
 ## Correlation does not necessarily imply causation
 
-```{r, echo=FALSE, out.width = '90%',  fig.align='center'}
+```{r, echo=FALSE, out.width = '76%',  fig.align='center'}
 knitr::include_graphics("img/margarina.png")
 ```
 ---
