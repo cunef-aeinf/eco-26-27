@@ -22,7 +22,7 @@ class: center, middle, inverse, title-slide
 
 &lt;br&gt;
 
-[Linear regression](#regression) &amp;nbsp; · &amp;nbsp; [Optional reading on inference and bootstrap](#optional-inference)
+[Modeling goals](#modelling-goals) · [Regression](#regression) · [Optional reading on bootstrap](#optional-inference)
 
 &lt;br&gt;
 .pull-left[
@@ -30,218 +30,83 @@ class: center, middle, inverse, title-slide
 #### Academic Year 2026-2027
 ]
 ---
-## Modeling
+name: modelling-goals
+## What do we want a model to tell us?
 
-Modeling tools have three fundamental goals:
+Models serve three purposes. Consider a lecturer who offers an optional practice quiz before a test.
 
-* **Exploring** the data: models sometimes reveal patterns that are not evident in
-visualizations (&gt;3D)
+1. **Exploratory data analysis (EDA).** What pattern do we see among the students in our data?
+2. **Inference.** How large is the gap between quiz users and other students across the whole first-year class?
+3. **Causality.** Would spending 15 minutes on the quiz improve scores compared with 15 minutes of usual revision?
 
-* **Generalizing** findings from a sample to a given population (inference)
-
-* Determining **cause-effect relationships** (causal inference)
-
-
-&lt;img src="img/data-science-model.png" width="100%" style="display: block; margin: auto;" /&gt;
+Inference and causality each need their own statistical methods. What those methods can tell us depends on **who entered the sample** and **how students came to use the quiz**.
 ---
-## Modeling
+## EDA in the volunteer sample
 
-How were the observations selected? **Random sampling** helps us generalize from a sample to the population it came from. A voluntary online poll can attract people with particularly strong views.
+Imagine 40 first-year students volunteer to tell us whether they used the quiz and share their scores on the same test.
 
-&lt;img src="img/bdl.png" width="100%" style="display: block; margin: auto;" /&gt;
+| Used the practice quiz? | Students | Mean test score (out of 10) |
+|:---|---:|---:|
+| Yes | 20 | 7.4 |
+| No  | 20 | 6.6 |
 
-[Source, in Spanish](https://www.huffingtonpost.es/2016/03/28/troleo-en-la-red-para-bautizar-blas-de-lezo-a-un-buque-brita_n_9556114.html)
+Among **these 40 students**, quiz users scored **0.8 points higher on average**. The two means give us a simple model of the pattern in these responses.
+
+.question[What would we need to know before reporting that gap for the whole class?]
 ---
-## Study: Cereal Keeps Girls Slim
- 
-Participants who ate breakfast were observed to have a **lower average body mass index**, a common indicator of obesity, than those who did not eat breakfast. The index was even lower for those who **ate cereal for breakfast**, according to the findings of the **study carried out by the Maryland Medical Research Institute with funding from the NIH and the cereal manufacturer General Mills**.
+## Inference about the whole class
 
-[...]
+Suppose quiz users were especially likely to volunteer **when they had done well**. Their mean of 7.4 could be higher than the mean for all quiz users. Asking more volunteers in the same way can preserve that bias.
 
-The results came from an NIH survey of 2379 girls aged 9 to 19 in California, Ohio and Maryland.
+To learn about **all first-year students who took the test**, we could change the study design.
 
-[...]
+* Draw a random sample from the class list. Record quiz use and the test score for every sampled student.
+* Estimate the difference in mean scores. Use a confidence interval that accounts for how the sample was drawn to express its uncertainty.
 
-As part of the survey, participants were asked once a year what they had eaten during the previous three days...
-
-[Source](https://www.cbsnews.com/news/study-cereal-keeps-girls-slim/)
+.question[Even if we surveyed the entire class, would the gap tell us how much the quiz helped?]
 ---
-## Study: Cereal Keeps Girls Slim
+## Would taking the quiz improve scores?
 
-There are three possible explanations for this association between eating cereal and having a lower body mass index:
+Even if the whole class showed a gap of 0.8 points, students who chose the quiz might already have studied more. Prior preparation could explain some or all of the gap.
 
-* Eating cereal is the cause of girls being slim
+**Change how the data are generated.** Before the next test, randomly assign students to spend 15 minutes on the quiz or 15 minutes on their usual revision. Give both groups the same test.
 
-* Girls being slim is the cause of them eating cereal
+**Compare the assigned groups.** Random assignment balances prior preparation on average. The difference in mean scores estimates the effect of the assigned activity for these students, and the random assignment lets us quantify uncertainty in that estimate.
 
-* There is a third variable that is the cause of these two, a **confounding variable**
-
-For example, regular eating habits could influence both breakfast choices and body mass index. What additional information would help distinguish these explanations?
----
-## Scientific studies
-
-Depending on the data collection process, we distinguish between studies that are:
-
-* **Observational**
-
-  * Data are collected in a way that does not alter the process that generates them
-
-  * They serve to determine **association**
-
-* **Experimental**
-
-  * Individuals are assigned to different treatments
-
-  * Random assignment can support a **causal** interpretation
----
-## Scientific studies
-
-&lt;img src="img/studies.png" width="100%" style="display: block; margin: auto;" /&gt;
----
-## Correlation does not necessarily imply causation
-
-&lt;img src="img/margarina.png" width="76%" style="display: block; margin: auto;" /&gt;
+In this class we use regression for **exploration**. We start by looking for a pattern in the data we have.
 ---
 name: regression
 class: center, middle, inverse
 
 # Models for Exploratory Analysis
+
 ---
-## What are statistical models?
+name: fuel-economy
+## How does mpg vary with weight?
 
-* Tools that allow us to extract patterns from the data.
+Each dot is one of the 32 cars in `mtcars`. We have its weight (`wt`, in thousands of pounds) and its **mpg**, the miles it travels per US gallon.
 
-* The fitted values describe the pattern. The residuals measure the variation around it.
+&lt;img src="topic4_files/figure-html/mpg-scatter-1.png" width="72%" style="display: block; margin: auto;" /&gt;
 
-* We will study models that relate a series of variables (predictor variables)
-to a variable of interest (response variable). These are **regression models**.
+.question[How many fewer mpg would you expect for an extra 1,000 lb?]
+
 ---
-## A model and its parameters
+## What does regression add?
 
-A parametric model describes a family of possible patterns with a few numbers, its **parameters**. The data help us choose values for those numbers.
+Three cars in our sample weigh exactly 3,440 lb. They get **17.8, 18.7 and 19.2 mpg**. At 3,000 lb, we have no car at all. What mpg should we predict there?
 
-For a straight line, the two numbers are its intercept and slope. Once we estimate them from a sample, we have a **fitted model**. Other samples can give other estimates.
+A **regression model** uses the whole sample to estimate how the typical value of one variable changes with another. Here, mpg is our **response** and weight is our **predictor**.
 
-&lt;img src="img/box.jpeg" width="48%" style="display: block; margin: auto;" /&gt;
+With a straight line we can quantify the change in predicted mpg per 1,000 lb and predict mpg for a 3,000 lb car.
+
 ---
-## Vocabulary
-
-* **Response variable**: variable whose behavior or variation we are trying to understand. Also called the dependent variable. y axis.
-
-* **Explanatory variables**: other variables that you want to use to explain the variation in the response. Also called independent variables, covariates, predictors or *features*. x axis.
-
-* **Predicted value**: output of the **model** for a certain value of the covariates.
----
-## Working with the examples
+## Fitting the line in R
 
 
 ``` r
 library(tidyverse)
 library(modelr)
-head(mtcars[c("wt", "mpg")], 3)
-```
 
-```
-##                  wt  mpg
-## Mazda RX4     2.620 21.0
-## Mazda RX4 Wag 2.875 21.0
-## Datsun 710    2.320 22.8
-```
-
-Each row is a car. Which variable will we use to predict the other? What sign would you expect for the slope?
----
-name: fuel-economy
-## Fuel economy and weight
-
-
-``` r
-ggplot(mtcars, aes(x=wt, y=mpg)) + geom_point() + theme_minimal() +
-  geom_smooth(method="lm", se=FALSE, color='red')
-```
-
-&lt;img src="topic4_files/figure-html/unnamed-chunk-7-1.png" width="78%" /&gt;
----
-## Simple linear regression
-
-
-* Write the response as `\(y = \beta_0 + \beta_1 x + \epsilon\)`, where `\(\epsilon \sim \mathcal{N}(0, \sigma^2)\)`
-
-* At a given weight `\(x\)`, cars vary around the mean fuel economy `\(\beta_0 + \beta_1x\)`.
-
-* The intercept sets the height of the line at zero. The slope gives the change in mean fuel economy per unit of weight.
-
-* In `mtcars`, fuel economy is measured in miles per US gallon and one unit of `wt` is 1,000 lb.
----
-## Model assumptions
-
-$$
-Y_i \mid X_i=x_i \sim \mathcal{N}(\beta_0 + \beta_1 x_i,\; \sigma^2)
-$$
-
-For the usual normal-error model we assume
-
-1. **Linearity**: the expected value of the response variable corresponds to a linear function of the covariate.
-
-2. Independence of the errors.
-
-3. Homoscedasticity: the variance of the errors is constant.
-
-4. Normality: the errors follow a normal distribution.
-
-We will use residual plots to look for curvature and changes in spread.
----
-## Fitting models
-
-
-``` r
-set.seed(4)
-models &lt;- tibble(
-  a1 = runif(250, -20, 40),
-  a2 = runif(250, -5, 5)
-)
-
-ggplot(mtcars, aes(wt, mpg)) + 
-  geom_abline(aes(intercept = a1, slope = a2), data = models, alpha = 1/4) +
-  geom_point() + theme_minimal()
-```
-
-&lt;img src="topic4_files/figure-html/unnamed-chunk-8-1.png" width="576" /&gt;
----
-## Fitting models
-
-* Most of these models are **bad**, they do not capture the pattern
-
-* We need to determine which models are **closer** to the data
-
-* One option: use the model that minimizes the sum of the squared vertical distances
-from each point to the model line
----
-## Fitting models
-
-&lt;img src="topic4_files/figure-html/unnamed-chunk-9-1.png" width="576" /&gt;
----
-## Least squares
-
-* To estimate the values of `\(\beta_0\)` and `\(\beta_1\)`, we use the data.
-
-* We call the estimates `\(\hat{\beta}_0\)` and `\(\hat{\beta}_1\)`.
-
-* We call `\(\hat{y} = \hat{\beta}_0 + \hat{\beta}_1 x\)` the predicted value.
-
-* `\(\hat{\beta}_0\)` and `\(\hat{\beta}_1\)` are the values that minimize the sum of the squared vertical distances seen above
-
-`\begin{equation}
-\arg \min_{\beta_0, \beta_1} \sum_{i=1}^n [y_i - (\beta_0 + \beta_1 x_i)]^2
-\end{equation}`
-
-* In words: among all possible lines, we choose the one for which this sum is smallest.
----
-## Fitting the line in R
-
-To obtain the value of the coefficients using R, we do
-
-
-``` r
 reg_mod &lt;- lm(mpg ~ wt, data = mtcars)
 coef(reg_mod)
 ```
@@ -251,13 +116,21 @@ coef(reg_mod)
 ##   37.285126   -5.344472
 ```
 
-* The object `mpg ~ wt` is a formula. It is equivalent to
+In `mpg ~ wt` the response is on the left and the predictor on the right. Using the estimated intercept and slope, the fitted line is
 
 $$
-\widehat{\text{mpg}} = \hat{\beta}_0 + \hat{\beta}_1 \cdot \text{wt}
+\widehat{\mathrm{mpg}} = 37.29 - 5.34\,\mathrm{wt}.
 $$
 
-* Intercept is the estimate of the coefficient `\(\beta_0\)` and the other number is the estimate of `\(\beta_1\)`
+---
+## How is the line chosen?
+
+&lt;img src="topic4_files/figure-html/mpg-gaps-1.png" width="72%" style="display: block; margin: auto;" /&gt;
+
+Each vertical segment measures the gap between a car's observed mpg and the line's prediction. **Least squares** chooses the intercept and slope that minimize the sum of these squared gaps.
+
+Using the model for inference requires assumptions about the errors. We set those aside here and use the line to describe these 32 cars.
+
 ---
 ## Interpreting the fitted line
 
@@ -265,137 +138,104 @@ $$
 \widehat{\mathrm{mpg}} = 37.29 - 5.34\,\mathrm{wt}.
 $$
 
-* **Slope.** Cars that weigh 1,000 lb more have a predicted fuel economy about **5.34 mpg lower**. A difference of 500 lb corresponds to about 2.67 mpg.
+* **Slope.** One unit of `wt` is 1,000 lb. The heavier of two cars whose weights differ by 1,000 lb is predicted to get **5.34 fewer mpg**. For a 500 lb difference, the predicted gap is half as large.
+* **Intercept.** The line predicts **37.29 mpg** at zero weight. Our lightest car weighs 1,513 lb, so this intercept has little practical meaning.
 
-* **Intercept.** The fitted line predicts 37.29 mpg at zero weight. A weight of zero is outside the observed range, so the intercept has little practical meaning here.
+.question[Estimate the mpg for a 3,000 lb car. What would change at 3,500 lb?]
 
-.question[What would the model predict for a car weighing 3,000 lb?]
+---
+## Predicting mpg at a given weight
+
+Enter the new weights in the same units as `wt` in the fitted model.
+
+
+``` r
+new_cars &lt;- data.frame(wt = c(3, 3.5))
+new_cars$predicted_mpg &lt;- predict(reg_mod, newdata = new_cars)
+new_cars
+```
+
+```
+##    wt predicted_mpg
+## 1 3.0      21.25171
+## 2 3.5      18.57948
+```
+
+The predicted mpg drops from **21.25** to **18.58**, a difference of **2.67 mpg**. Individual cars at either weight may lie above or below the fitted line.
+
+---
+## Plotting the fitted values
+
+To reproduce the line, predict at each observed weight and connect the predictions in order of weight.
+
+
+``` r
+grid &lt;- mtcars %&gt;% data_grid(wt) %&gt;% add_predictions(reg_mod)
+ggplot(mtcars, aes(wt, mpg)) +
+  geom_point() +
+  geom_line(data = grid, aes(y = pred), colour = "#A52A2A") +
+  labs(x = "Weight (1,000 lb)", y = "mpg") + theme_minimal()
+```
+
+&lt;img src="topic4_files/figure-html/mpg-grid-1.png" width="66%" style="display: block; margin: auto;" /&gt;
+
 ---
 name: prediction-residual
-## A prediction and a residual
+## What does one residual tell us?
 
+A **residual** is the vertical distance from the line to the point, including its sign, `\(e_i=y_i-\hat y_i\)`. It has the same units as the response.
 
-``` r
-predict(reg_mod, newdata = data.frame(wt = 3))
-```
+| Car | Weight (lb) | Observed mpg | Predicted mpg | Residual (mpg) |
+|:---|---:|---:|---:|---:|
+| Mazda RX4 | 2,620 | 21.00 | 23.28 | −2.28 |
+| Toyota Corolla | 1,835 | 33.90 | 27.48 | +6.42 |
 
-```
-##        1 
-## 21.25171
-```
+The Mazda gets **2.28 fewer mpg** than predicted, so the line overpredicts its mpg. The Corolla gets **6.42 more mpg** than predicted, so the line underpredicts its mpg.
 
-The prediction for 3,000 lb is 21.25 mpg. For the first car in `mtcars` (2,620 lb), the model predicts 23.28 mpg. We observe 21 mpg.
-
-$$
-e_i = y_i-\hat y_i = 21-23.28 = -2.28\ \mathrm{mpg}.
-$$
-
-
-``` r
-round(resid(reg_mod)[1], 2)
-```
-
-```
-## Mazda RX4 
-##     -2.28
-```
-
-The model **overpredicts** fuel economy for this car. A positive residual would mean the model underpredicts it.
 ---
-## Plotting predictions
+## Drawing the residual plot
 
-Create a grid of weights and use the fitted model to predict at each one.
-
-
-``` r
-grid &lt;- mtcars %&gt;%
-  data_grid(wt) %&gt;%
-  add_predictions(reg_mod)
-head(grid, 3)
-```
-
-```
-## # A tibble: 3 × 2
-##      wt  pred
-##   &lt;dbl&gt; &lt;dbl&gt;
-## 1  1.51  29.2
-## 2  1.62  28.7
-## 3  1.84  27.5
-```
----
-## Observations and fitted values
+Keep weight on the horizontal axis. On the vertical axis, replace each car's observed mpg with its residual. A car lying on the fitted line now appears at zero.
 
 
 ``` r
-ggplot(mtcars, aes(wt)) +
-  geom_point(aes(y = mpg)) + theme_minimal() +
-  geom_line(aes(y = pred), data = grid, colour = "red", linewidth = 1)
-```
+car_fit &lt;- mtcars %&gt;%
+  rownames_to_column("car") %&gt;%
+  add_residuals(reg_mod)
 
-&lt;img src="topic4_files/figure-html/unnamed-chunk-14-1.png" width="576" /&gt;
----
-## Plotting residuals
-
-
-``` r
-mtcars %&gt;% add_residuals(reg_mod) %&gt;%
-  ggplot(aes(wt, resid)) +
+resid_plot &lt;- ggplot(car_fit, aes(wt, resid)) +
   geom_hline(yintercept = 0, colour = "grey60") +
-  geom_point() + theme_minimal()
+  geom_point() +
+  labs(x = "Weight (1,000 lb)", y = "Observed − predicted mpg") +
+  theme_minimal()
+resid_plot
 ```
 
-&lt;img src="topic4_files/figure-html/unnamed-chunk-15-1.png" width="72%" /&gt;
-
-Look across the range of weights. A curved pattern suggests the straight line has missed part of the relationship.
 ---
-## Does a curve fit better?
+## Reading the residual plot
 
+&lt;img src="topic4_files/figure-html/mpg-residual-plot-1.png" width="78%" style="display: block; margin: auto;" /&gt;
 
-``` r
-mod_curve &lt;- lm(mpg ~ wt + I(wt^2), data = mtcars)
-mtcars %&gt;% add_residuals(reg_mod, var = "Linear") %&gt;%
-  add_residuals(mod_curve, var = "Quadratic") %&gt;%
-  pivot_longer(c(Linear, Quadratic), names_to = "model", values_to = "resid") %&gt;%
-  ggplot(aes(wt, resid)) + geom_hline(yintercept = 0, colour = "grey60") +
-  geom_point() + facet_wrap(~ model) + theme_minimal()
-```
+Near zero, the prediction is close. Farther away, the error is larger. Read from left to right. **At which weights does the line consistently underpredict or overpredict mpg?**
 
-&lt;img src="topic4_files/figure-html/unnamed-chunk-16-1.png" width="68%" /&gt;
-
-Compare the curvature and vertical spread on the same scale. How do the residuals for the lightest and heaviest cars change?
 ---
-## A quadratic term
+## What pattern did the line miss?
 
-The formula `mpg ~ wt + I(wt^2)` fits `\(\hat y=b_0+b_1 x+b_2 x^2\)`.
+| Weight range | Where are the dots? | What did the line do? |
+|:---|:---|:---|
+| Below 2,300 lb | All 6 above zero | Predicted too few mpg |
+| 3,400–3,800 lb | 9 of 10 below zero | Usually predicted too many mpg |
+| Above 5,000 lb | All 3 above zero | Predicted too few mpg |
 
-* To compare two weights, subtract their fitted values. The change depends on the starting weight.
+If the line described the average pattern well, we would expect a band scattered around zero across the weight range. Here the residuals tend to rise at the ends and fall in the middle. A single slope misses some of the shape.
 
-* The turning point solves `\(b_1+2b_2 x=0\)`, so `\(x^*=-b_1/(2b_2)\)`. It is a minimum if `\(b_2&gt;0\)` and a maximum if `\(b_2&lt;0\)`.
+Only three cars weigh more than 5,000 lb. More observations at that end would help us judge how general the pattern is.
 
-
-``` r
-b &lt;- coef(mod_curve)
-round(unname(-b[2] / (2 * b[3])), 2)
-```
-
-```
-## [1] 5.71
-```
-
-``` r
-range(mtcars$wt)
-```
-
-```
-## [1] 1.513 5.424
-```
-
-Is the turning point within the range of weights in our sample?
 ---
 name: salary
 ## Teachers' salaries
 
-We will use the `teacher` data to model **base salary in dollars** using years of experience and degree. Set MA as the reference level.
+The `teacher` data record each teacher's base salary in dollars, years of experience and highest degree. The two degrees are a master's (MA) and a bachelor's (BA).
 
 
 ``` r
@@ -406,7 +246,7 @@ teacher &lt;- teacher %&gt;%
   mutate(degree = factor(degree, levels = c("MA", "BA")))
 ```
 
-.question[Fit `base ~ years`. Interpret the slope and predict the base salary for a teacher with 15 years of experience.]
+.question[Start with experience alone. Fit `base ~ years` and predict the salary for a teacher with 15 years of experience.]
 ---
 ## Salary and years of experience
 
@@ -417,7 +257,7 @@ ggplot(teacher, aes(x=years, y=base)) + geom_point() +
   geom_smooth(method="lm", color='red', se=FALSE) + theme_minimal()
 ```
 
-&lt;img src="topic4_files/figure-html/unnamed-chunk-19-1.png" width="70%" /&gt;
+&lt;img src="topic4_files/figure-html/unnamed-chunk-2-1.png" width="70%" /&gt;
 ---
 ## Salary and years of experience
 
@@ -445,15 +285,13 @@ predict(fit_years, newdata = data.frame(years = 15))
 
 Each additional year of experience is associated with about **&amp;#36;803 more** in predicted base salary. The prediction for 15 years is about **&amp;#36;55,715**.
 ---
-## Salary and degree
+## Using degree as a predictor
 
-* What levels does `degree` have? Which did we put first?
-
-* We fit a model
+What salary would we predict if all we knew about a teacher was their degree? Fit one mean salary for each group.
 
 
 ``` r
-mod_base_degree &lt;- lm(base ~ degree, data=teacher)
+mod_base_degree &lt;- lm(base ~ degree, data = teacher)
 tidy(mod_base_degree) %&gt;% select(term, estimate)
 ```
 
@@ -464,61 +302,66 @@ tidy(mod_base_degree) %&gt;% select(term, estimate)
 ## 1 (Intercept)   56610.
 ## 2 degreeBA       -352.
 ```
+
+We put MA first in `levels`, so R uses it as the **reference group**. The row labelled `degreeBA` gives the difference **BA minus MA**.
 ---
-## Reading a factor coefficient
+## From coefficients to salaries
 
-R creates `degreeBA`, an indicator equal to 1 for BA and 0 for MA.
+Let `\(D_{\rm BA}\)` be 1 for a BA teacher and 0 for an MA teacher. The fitted salary in dollars is `\(56{,}609.56 - 352.46\,D_{\rm BA}\)`.
 
-* **MA** is the reference group. Its predicted salary is the intercept, **&amp;#36;56,610**.
-* **BA** has a predicted salary about **&amp;#36;352 lower** than MA. Add the coefficient of `degreeBA` to the intercept to get the BA prediction.
+| Degree | Indicator | Calculation | Predicted salary |
+|:---|:---:|:---|---:|
+| MA | 0 | `\(56{,}609.56 - 352.46 \times 0\)` | &amp;#36;56,609.56 |
+| BA | 1 | `\(56{,}609.56 - 352.46 \times 1\)` | &amp;#36;56,257.10 |
 
-With three degrees, R would use two indicators. Each compares its group with the same reference group.
+The intercept is the **MA mean salary**. The minus sign tells us that the **BA mean salary is &amp;#36;352.46 lower** in these data.
 ---
-## Predicting each group mean
+## Choosing the reference group
+
+Suppose we choose BA first instead. The starting salary is now the BA mean, **&amp;#36;56,257.10**. Moving from BA to MA **adds &amp;#36;352.46**.
 
 
 ``` r
-grid &lt;- teacher %&gt;% 
-  data_grid(degree) %&gt;% 
-  add_predictions(mod_base_degree)
-grid
+teacher_ba &lt;- teacher %&gt;% mutate(degree = relevel(degree, ref = "BA"))
+tidy(lm(base ~ degree, data = teacher_ba)) %&gt;% select(term, estimate)
 ```
 
 ```
 ## # A tibble: 2 × 2
-##   degree   pred
-##   &lt;fct&gt;   &lt;dbl&gt;
-## 1 MA     56610.
-## 2 BA     56257.
+##   term        estimate
+##   &lt;chr&gt;          &lt;dbl&gt;
+## 1 (Intercept)   56257.
+## 2 degreeMA        352.
 ```
+
+With three degree levels, R reports an intercept for the reference group and **two differences**, one for each other group. In general, `\(k\)` levels give `\(k-1\)` differences.
 ---
-## Two fitted group means
+## The two group means
 
 
 ``` r
-ggplot(teacher, aes(x=degree)) + geom_point(aes(y=base)) + theme_minimal() +
-  geom_point(data = grid, aes(y = pred), colour = "red", size = 4)
+grid &lt;- teacher %&gt;% data_grid(degree) %&gt;% add_predictions(mod_base_degree)
+ggplot(teacher, aes(degree, base)) + geom_point() +
+  geom_point(data = grid, aes(y = pred), colour = "red", size = 4) +
+  theme_minimal()
 ```
 
-&lt;img src="topic4_files/figure-html/unnamed-chunk-23-1.png" width="576" /&gt;
+&lt;img src="topic4_files/figure-html/unnamed-chunk-6-1.png" width="68%" /&gt;
+
+Each black point is a teacher's salary. Each red point is that group's mean.
 ---
-## Multiple Linear Regression
+## Two ways to compare degrees
 
-* On many occasions, we have more than one predictor variable.
+The BA teachers have **17.1 years** of experience on average. The MA teachers have **14.4 years**.
 
-* The simplest linear model for this case is **multiple linear regression**
+* `base ~ degree` compares the two groups **as we found them**, with their different mixes of experience.
+* `base ~ years + degree` lets us compare a BA and an MA teacher **at the same number of years**.
 
-`\begin{equation}
-y_i = \beta_{0} + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_p x_{ip} + \epsilon_i
-\end{equation}`
-
-* Here `\(x_{ij}\)` is the value of predictor `\(j\)` for observation `\(i\)`.
-
-* The effects of different covariates on the expected value of the dependent variable are additive.
+.question[If salary typically rises with experience, how might the extra experience of the BA group affect the raw difference?]
 ---
 ## Salary, experience and degree
 
-Fit both predictors in one model.
+Fit a multiple regression with one numerical predictor and one categorical predictor.
 
 
 ``` r
@@ -534,16 +377,21 @@ tidy(fit_salary) %&gt;% select(term, estimate)
 ## 2 years           818.
 ## 3 degreeBA      -2560.
 ```
----
-## Reading the adjusted coefficients
 
-* **Intercept (&amp;#36;44,838).** Predicted base salary for an MA teacher with zero years of experience.
-* **Years (&amp;#36;818).** At the same degree level, one more year of experience is associated with about &amp;#36;818 more in predicted salary.
-* **BA (−&amp;#36;2,560).** At the same experience level, the predicted salary for BA is about &amp;#36;2,560 lower than for MA.
-
-.question[The degree-only model gave a gap of about &amp;#36;352. What are you holding fixed in the new comparison?]
+We can now change one predictor at a time when calculating a fitted salary.
 ---
-## Predicting two salaries
+## Reading the three coefficients
+
+The fitted salary in dollars is approximately
+$$
+44{,}838 + 818 \times \mathrm{years} - 2{,}560 \times D_{\rm BA}.
+$$
+
+* **Intercept.** Set years and the indicator to zero. The model predicts **&amp;#36;44,838** for an MA teacher with no experience.
+* **Years.** For two teachers with the **same degree**, one extra year corresponds to **&amp;#36;818 more** in predicted salary.
+* **Degree.** For two teachers with the **same experience**, the model predicts **&amp;#36;2,560 less** for BA than for MA.
+---
+## Compare two teachers at 15 years
 
 
 ``` r
@@ -559,7 +407,9 @@ cases %&gt;% add_predictions(fit_salary)
 ## 2    15 BA     54548.
 ```
 
-For 15 years of experience, the predicted salaries are about **&amp;#36;57,108 (MA)** and **&amp;#36;54,548 (BA)**. In this additive model the gap is the same at five years. Why?
+Both predictions include 15 years of experience. Switching the indicator from 0 to 1 takes the fitted salary from **&amp;#36;57,108** for MA to **&amp;#36;54,548** for BA.
+
+.question[At five years of experience, what gap would this model predict?]
 ---
 ## A grid for both groups
 
@@ -583,34 +433,33 @@ head(grid, 4)
 ## 4     1 BA     43096.
 ```
 ---
-## Observed salaries and fitted lines
-
-Each line joins predictions for one degree. What does the distance between the lines represent?
+## Reading the fitted lines
 
 
 ``` r
-ggplot(teacher, aes(years, base, colour = degree)) + 
-  geom_point() + 
-  geom_line(data = grid, aes(y = pred)) + theme_minimal()
+ggplot(teacher, aes(years, base, colour = degree)) +
+  geom_point() + geom_line(data = grid, aes(y = pred)) + theme_minimal()
 ```
 
-&lt;img src="topic4_files/figure-html/unnamed-chunk-27-1.png" width="76%" /&gt;
+&lt;img src="topic4_files/figure-html/unnamed-chunk-10-1.png" width="68%" /&gt;
+
+At **any fixed year**, the vertical gap is about **&amp;#36;2,560**. The lines are parallel because both degree groups have the same fitted slope of &amp;#36;818 per year.
 ---
-## What does degree explain?
+## Salary residuals
 
 
 ``` r
 teacher %&gt;% add_residuals(fit_years, var = "simple") %&gt;%
   add_residuals(fit_salary, var = "with_degree") %&gt;%
-  pivot_longer(c(simple, with_degree), names_to = "model", values_to = "error") %&gt;%
-  ggplot(aes(years, error, colour = degree)) +
+  pivot_longer(c(simple, with_degree), names_to = "model") %&gt;%
+  ggplot(aes(years, value, colour = degree)) +
   geom_hline(yintercept = 0, colour = "grey60") + geom_point() +
-  facet_wrap(~ model) + theme_minimal()
+  facet_wrap(~ model) + ylab("Salary residual ($)") + theme_minimal()
 ```
 
-&lt;img src="topic4_files/figure-html/unnamed-chunk-28-1.png" width="68%" /&gt;
+&lt;img src="topic4_files/figure-html/unnamed-chunk-11-1.png" width="65%" /&gt;
 
-Look for a systematic difference between degrees before and after adding `degree`. Which pattern over years of experience is still visible?
+With experience alone, MA salaries are underpredicted on average. Adding degree centres each group at zero. Both fits still underpredict many mid-career salaries.
 ---
 name: log-predictor
 ## When the predictor is a logarithm
