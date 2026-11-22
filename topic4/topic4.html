@@ -12,9 +12,6 @@
 
 
 
-
-
-
 class: center, middle, inverse, title-slide
 
 &lt;div class="title-logo"&gt;&lt;/div&gt;
@@ -24,6 +21,9 @@ class: center, middle, inverse, title-slide
 ## Topic 4 - Modeling
 
 &lt;br&gt;
+
+[Linear regression](#regression) &amp;nbsp; · &amp;nbsp; [Optional reading on inference and bootstrap](#optional-inference)
+
 &lt;br&gt;
 .pull-left[
 ### Roi Naveiro
@@ -43,39 +43,14 @@ visualizations (&gt;3D)
 
 
 &lt;img src="img/data-science-model.png" width="100%" style="display: block; margin: auto;" /&gt;
-
 ---
 ## Modeling
 
-The patterns discovered by modeling tools can be:
-
-* Association patterns
-* Cause-effect relationships
-
-In addition, these patterns can:
-
-* Occur only in the observed data
-* Generalize to the population the data come from
-
----
-## Modeling
-
-The way the data are collected affects the kind of generalization of the 
-conclusions:
-
-* If we want the conclusions drawn from a sample of data to be generalizable to a
-given population, we must sample the subjects **at random** from the population.
+How were the observations selected? **Random sampling** helps us generalize from a sample to the population it came from. A voluntary online poll can attract people with particularly strong views.
 
 &lt;img src="img/bdl.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 [Source, in Spanish](https://www.huffingtonpost.es/2016/03/28/troleo-en-la-red-para-bautizar-blas-de-lezo-a-un-buque-brita_n_9556114.html)
-
----
-## Modeling
-
-Does sampling data at random guarantee that the detected patterns are real 
-cause-effect relationships?
-
 ---
 ## Study: Cereal Keeps Girls Slim
  
@@ -90,7 +65,6 @@ The results came from an NIH survey of 2379 girls aged 9 to 19 in California, Oh
 As part of the survey, participants were asked once a year what they had eaten during the previous three days...
 
 [Source](https://www.cbsnews.com/news/study-cereal-keeps-girls-slim/)
-
 ---
 ## Study: Cereal Keeps Girls Slim
 
@@ -102,22 +76,7 @@ There are three possible explanations for this association between eating cereal
 
 * There is a third variable that is the cause of these two, a **confounding variable**
 
-A **confounding variable** is an exogenous variable that is a cause of both the explanatory variable and the response variable, and that makes it look as if a relationship existed between them.
-
----
-## Study: Cereal Keeps Girls Slim
-
-John Kirwan, a professor of medicine at Case Western Reserve University's Schwartz Center for Nutrition and Metabolism, said the findings might be **"more reflective of overall eating habits and quality of food consumed."**
-
-"Those who eat breakfast on a regular basis are **more likely to have a structured eating plan throughout the day** and consequently are less likely to snack between meals and consume empty calories," said Kirwan, who has studied the effect of breakfast consumption on exercise performance and was not involved in the study.
-
----
-## Study: Cereal Keeps Girls Slim
-
-Why is this published?
-
-&lt;img src="img/follow-money.jpeg" width="100%" style="display: block; margin: auto;" /&gt;
-
+For example, regular eating habits could influence both breakfast choices and body mass index. What additional information would help distinguish these explanations?
 ---
 ## Scientific studies
 
@@ -131,97 +90,68 @@ Depending on the data collection process, we distinguish between studies that ar
 
 * **Experimental**
 
-  * Different treatments are assigned to different individuals 
+  * Individuals are assigned to different treatments
 
-  * They serve to establish **cause-effect** relationships
-
+  * Random assignment can support a **causal** interpretation
 ---
 ## Scientific studies
 
 &lt;img src="img/studies.png" width="100%" style="display: block; margin: auto;" /&gt;
-
 ---
 ## Correlation does not necessarily imply causation
 
 &lt;img src="img/margarina.png" width="90%" style="display: block; margin: auto;" /&gt;
-
 ---
-## Modeling
-
-Modeling tools have three fundamental goals:
-
-* **Exploring** the data: models sometimes reveal patterns that are not evident in
-visualizations (&gt;3D)
-
-* **Generalizing** findings from a sample to the population (inference)
-
-* Determining **cause-effect relationships** (causal inference)
-
-&lt;img src="img/data-science-model.png" width="100%" style="display: block; margin: auto;" /&gt;
-
-
----
+name: regression
 class: center, middle, inverse
 
 # Models for Exploratory Analysis
-
----
-## Modeling
-
-* In this part of the course, we will introduce basic modeling tools, focusing
-on their use as data **exploration techniques**.
-
-* There is nothing wrong with exploration, but you must never sell an exploratory analysis as a confirmatory analysis, because that is **misleading**.
-
 ---
 ## What are statistical models?
 
 * Tools that allow us to extract patterns from the data.
 
-* Patterns vs residuals
+* The fitted values describe the pattern. The residuals measure the variation around it.
 
 * We will study models that relate a series of variables (predictor variables)
-to a variable of interest (response variable)
-
+to a variable of interest (response variable). These are **regression models**.
 ---
-## What are statistical models?
+## A model and its parameters
 
-A statistical model is a mathematical model that incorporates a set of statistical assumptions concerning the generation of the data of a sample (observations) and of similar data from a larger population. A statistical model represents, often in an idealized form, the data-generating process.
+A parametric model describes a family of possible patterns with a few numbers, its **parameters**. The data help us choose values for those numbers.
 
+For a straight line, the two numbers are its intercept and slope. Once we estimate them from a sample, we have a **fitted model**. Other samples can give other estimates.
+
+&lt;img src="img/box.jpeg" width="48%" style="display: block; margin: auto;" /&gt;
 ---
-## What are statistical models?
+## Vocabulary
 
-* Formally, a statistical model is a pair `\((S, \mathcal{P})\)`: `\(S\)` is the set of possible observations and `\(\mathcal{P}\)` is a family of probability distributions.
+* **Response variable**: variable whose behavior or variation we are trying to understand. Also called the dependent variable. y axis.
 
-* We assume that there is a true probability distribution governing the generation of the data.
+* **Explanatory variables**: other variables that you want to use to explain the variation in the response. Also called independent variables, covariates, predictors or *features*. x axis.
 
-* The family of distributions `\(\mathcal{P}\)` is assumed to contain a distribution that adequately approximates the real distribution.
-
-* In words: `\(\mathcal{P}\)` is a list of candidate mechanisms that could have generated the data, and we hope one of them is close to the real one.
-
-* "A model is a simplification or approximation of reality and hence will not reflect all of reality."
-
+* **Predicted value**: output of the **model** for a certain value of the covariates.
 ---
-## What are statistical models?
-
-* Models are usually parametric: `\(\mathcal {P}=\{F_{\theta }:\theta \in \Theta \}\)`
-
-* That is, each distribution in the family is fully described by a few numbers, the **parameters** `\(\theta\)` (for example, a mean and a variance).
-
-* Given some data, the goal is to find the value of `\(\theta\)` that best fits the data.
+## Working with the examples
 
 
+``` r
+library(tidyverse)
+library(modelr)
+head(mtcars[c("wt", "mpg")], 3)
+```
+
+```
+##                  wt  mpg
+## Mazda RX4     2.620 21.0
+## Mazda RX4 Wag 2.875 21.0
+## Datsun 710    2.320 22.8
+```
+
+Each row is a car. Which variable will we use to predict the other? What sign would you expect for the slope?
 ---
-## What are statistical models?
-
-* We are going to focus on models that relate a response variable to one or more predictor variables.
-
-* These models are known as **regression models**.
-
-* Let us start with a simple example: the response variable is continuous and there is a single predictor variable.
-
----
-## What are statistical models?
+name: fuel-economy
+## Fuel economy and weight
 
 
 ``` r
@@ -229,34 +159,26 @@ ggplot(mtcars, aes(x=wt, y=mpg)) + geom_point() + theme_minimal() +
   geom_smooth(method="lm", se=FALSE, color='red')
 ```
 
-&lt;img src="topic4_files/figure-html/unnamed-chunk-7-1.png" width="576" /&gt;
-
+&lt;img src="topic4_files/figure-html/unnamed-chunk-7-1.png" width="78%" /&gt;
 ---
-## What are statistical models?
+## Simple linear regression
 
 
-* In this case `\(S = \mathbb{R}^2\)`. One possibility for `\(\mathcal{P}\)` is the family of linear models:
-$$
-\mathcal{P} = \{y \sim \mathcal{N}(\beta_0 + \beta_1 x, \sigma^2)\}
-$$
+* Write the response as `\(y = \beta_0 + \beta_1 x + \epsilon\)`, where `\(\epsilon \sim \mathcal{N}(0, \sigma^2)\)`
 
-* We can also write it as `\(y = \beta_0 + \beta_1 x + \epsilon\)`, where `\(\epsilon \sim \mathcal{N}(0, \sigma^2)\)`
+* At a given weight `\(x\)`, cars vary around the mean fuel economy `\(\beta_0 + \beta_1x\)`.
 
-* In words: for each value of `\(x\)`, `\(y\)` is scattered around the line `\(\beta_0 + \beta_1 x\)`, and the errors `\(\epsilon\)` follow a normal distribution with mean 0 and variance `\(\sigma^2\)`.
+* The intercept sets the height of the line at zero. The slope gives the change in mean fuel economy per unit of weight.
 
-* This model is known as the **simple linear regression model**.
-
-* What are the parameters of this model?
-
-
+* In `mtcars`, fuel economy is measured in miles per US gallon and one unit of `wt` is 1,000 lb.
 ---
-## What are statistical models?
+## Model assumptions
 
 $$
-\mathcal{P} = \{y \sim \mathcal{N}(\beta_0 + \beta_1 x, \sigma^2)\}
+Y_i \mid X_i=x_i \sim \mathcal{N}(\beta_0 + \beta_1 x_i,\; \sigma^2)
 $$
 
-The simple linear regression model implicitly makes 4 assumptions
+For the usual normal-error model we assume
 
 1. **Linearity**: the expected value of the response variable corresponds to a linear function of the covariate.
 
@@ -266,74 +188,13 @@ The simple linear regression model implicitly makes 4 assumptions
 
 4. Normality: the errors follow a normal distribution.
 
-In this course we are not going to go into the study of these assumptions, but bear in mind that they exist.
-
----
-## Simple linear regression
-
-* Once we observe data `\((x_i, y_i) \in S\)`, we can fit the model to find the parameter values that best fit the data.
-
-* The resulting model is called the **fitted model**.
-
-
-**WATCH OUT**: the best model in the family need not be reality. Models are
-simplifications of reality that serve some purpose for us
-
----
-## Simple linear regression
-
-&lt;img src="img/box.jpeg" width="100%" style="display: block; margin: auto;" /&gt;
-
----
-## Vocabulary
-
-* **Response variable**: variable whose behavior or variation we are trying to understand. Also called the dependent variable. y axis.
-
-* **Explanatory variables**: other variables that you want to use to explain the variation in the response. Also called independent variables, covariates, predictors or *features*. x axis.
-
-* **Predicted value**: output of the **model** for a certain value of the covariates.
-
----
-## Vocabulary
-
-Discuss the elements above in this example.
-
-
-``` r
-ggplot(mtcars, aes(x=wt, y=mpg)) + geom_point() + theme_minimal() +
-  geom_smooth(method="lm", se=FALSE, color='red')
-```
-
-&lt;img src="topic4_files/figure-html/unnamed-chunk-9-1.png" width="576" /&gt;
-
+We will use residual plots to look for curvature and changes in spread.
 ---
 ## Fitting models
 
 
 ``` r
-ggplot(mtcars, aes(x=wt, y=mpg)) + geom_point() + theme_minimal()
-```
-
-&lt;img src="topic4_files/figure-html/unnamed-chunk-10-1.png" width="576" /&gt;
-
----
-## Fitting models
-
-* The data above show a clear pattern
-
-* We will use a model to capture that pattern and make it explicit
-
-* A simple linear regression model seems reasonable `\(y = \beta_0 + \beta_1 x + \epsilon\)` with `\(\epsilon \sim \mathcal{N}(0, \sigma^2)\)`.
-
-* We are going to assume that `\(\sigma^2\)` is known, so the parameters of interest are `\(\beta_0\)` and `\(\beta_1\)`.
-
-* There are infinitely many models in this family
-
----
-## Fitting models
-
-
-``` r
+set.seed(4)
 models &lt;- tibble(
   a1 = runif(250, -20, 40),
   a2 = runif(250, -5, 5)
@@ -344,8 +205,7 @@ ggplot(mtcars, aes(wt, mpg)) +
   geom_point() + theme_minimal()
 ```
 
-&lt;img src="topic4_files/figure-html/unnamed-chunk-11-1.png" width="576" /&gt;
-
+&lt;img src="topic4_files/figure-html/unnamed-chunk-8-1.png" width="576" /&gt;
 ---
 ## Fitting models
 
@@ -355,40 +215,12 @@ ggplot(mtcars, aes(wt, mpg)) +
 
 * One option: use the model that minimizes the sum of the squared vertical distances
 from each point to the model line
-
 ---
 ## Fitting models
 
-&lt;img src="topic4_files/figure-html/unnamed-chunk-12-1.png" width="576" /&gt;
-
-
+&lt;img src="topic4_files/figure-html/unnamed-chunk-9-1.png" width="576" /&gt;
 ---
-## Simple linear regression
-
-To obtain the value of the coefficients using R, we do
-
-
-``` r
-reg_mod &lt;- lm(mpg ~ wt, data = mtcars)
-coef(reg_mod)
-```
-
-```
-## (Intercept)          wt 
-##   37.285126   -5.344472
-```
-
-* The object `mpg ~ wt` is a formula. It is equivalent to 
-
-$$
-\text{mpg} = \beta_0 + \beta_1 \cdot \text{wt}
-$$
-
-* Intercept is the estimate of the coefficient `\(\beta_0\)` and the other number is the estimate of `\(\beta_1\)`
-
-
----
-## Linear regression
+## Least squares
 
 * To estimate the values of `\(\beta_0\)` and `\(\beta_1\)`, we use the data.
 
@@ -403,112 +235,95 @@ $$
 \end{equation}`
 
 * In words: among all possible lines, we choose the one for which this sum is smallest.
-
 ---
-## Linear regression
+## Fitting the line in R
 
-**Optional exercises**, for those who want to go deeper into the maths:
-
-1. Show that the values that minimize the expression above are the maximum likelihood estimators of `\(\beta_0\)` and `\(\beta_1\)`.
-
-2. Compute expressions for the estimators of `\(\beta_0\)` and `\(\beta_1\)`. *Hint*: set the derivatives of the sum with respect to `\(\beta_0\)` and `\(\beta_1\)` equal to zero.
-
----
-## Linear regression
-
-* The estimators `\(\hat{\beta}_0\)` and `\(\hat{\beta}_1\)` have a distribution.
-
-* We can study the distribution of these estimators to obtain their properties: bias, variance, etc.
-
-* As well as compute confidence intervals for these estimators.
-
-* In this course we will not focus on this aspect. We will only work with the point estimates and focus on how to use them to explore the data.
-
----
-## Linear regression - Residuals
-
-The residuals tell us how far each predicted value is from its observed value
-
-`\(e_i = y_i - \hat{y}_i\)`
-
-* The estimators `\(\hat{\beta}_0\)` and `\(\hat{\beta}_1\)` are the values that minimize the sum of the squared residuals.
-
----
-## Model visualization
-
-We can visualize:
-
-* The predictions of the models
-
-* The residuals of the models
-
-For this, we use `modelr` from `tidyverse`
-
----
-## Model visualization
-
-* First we create a grid of points of the predictor variable
-
-
-``` r
-library(modelr)
-grid &lt;- mtcars %&gt;% 
-  data_grid(wt) 
-
-grid
-```
-
-```
-## # A tibble: 29 × 1
-##       wt
-##    &lt;dbl&gt;
-##  1  1.51
-##  2  1.62
-##  3  1.84
-##  4  1.94
-##  5  2.14
-##  6  2.2 
-##  7  2.32
-##  8  2.46
-##  9  2.62
-## 10  2.77
-## # ℹ 19 more rows
-```
-
----
-## Model visualization
-
-* With the model, we can add predictions
+To obtain the value of the coefficients using R, we do
 
 
 ``` r
 reg_mod &lt;- lm(mpg ~ wt, data = mtcars)
-
-grid &lt;- grid %&gt;% 
-  add_predictions(reg_mod)
-
-grid
+coef(reg_mod)
 ```
 
 ```
-## # A tibble: 29 × 2
-##       wt  pred
-##    &lt;dbl&gt; &lt;dbl&gt;
-##  1  1.51  29.2
-##  2  1.62  28.7
-##  3  1.84  27.5
-##  4  1.94  26.9
-##  5  2.14  25.8
-##  6  2.2   25.5
-##  7  2.32  24.9
-##  8  2.46  24.1
-##  9  2.62  23.3
-## 10  2.77  22.5
-## # ℹ 19 more rows
+## (Intercept)          wt 
+##   37.285126   -5.344472
 ```
 
+* The object `mpg ~ wt` is a formula. It is equivalent to
+
+$$
+\widehat{\text{mpg}} = \hat{\beta}_0 + \hat{\beta}_1 \cdot \text{wt}
+$$
+
+* Intercept is the estimate of the coefficient `\(\beta_0\)` and the other number is the estimate of `\(\beta_1\)`
 ---
-## Model visualization
+## Interpreting the fitted line
+
+$$
+\widehat{\mathrm{mpg}} = 37.29 - 5.34\,\mathrm{wt}.
+$$
+
+* **Slope.** Cars that weigh 1,000 lb more have a predicted fuel economy about **5.34 mpg lower**. A difference of 500 lb corresponds to about 2.67 mpg.
+
+* **Intercept.** The fitted line predicts 37.29 mpg at zero weight. A weight of zero is outside the observed range, so the intercept has little practical meaning here.
+
+.question[What would the model predict for a car weighing 3,000 lb?]
+---
+name: prediction-residual
+## A prediction and a residual
+
+
+``` r
+predict(reg_mod, newdata = data.frame(wt = 3))
+```
+
+```
+##        1 
+## 21.25171
+```
+
+The prediction for 3,000 lb is 21.25 mpg. For the first car in `mtcars` (2,620 lb), the model predicts 23.28 mpg. We observe 21 mpg.
+
+$$
+e_i = y_i-\hat y_i = 21-23.28 = -2.28\ \mathrm{mpg}.
+$$
+
+
+``` r
+round(resid(reg_mod)[1], 2)
+```
+
+```
+## Mazda RX4 
+##     -2.28
+```
+
+The model **overpredicts** fuel economy for this car. A positive residual would mean the model underpredicts it.
+---
+## Plotting predictions
+
+Create a grid of weights and use the fitted model to predict at each one.
+
+
+``` r
+grid &lt;- mtcars %&gt;%
+  data_grid(wt) %&gt;%
+  add_predictions(reg_mod)
+head(grid, 3)
+```
+
+```
+## # A tibble: 3 × 2
+##      wt  pred
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1  1.51  29.2
+## 2  1.62  28.7
+## 3  1.84  27.5
+```
+---
+## Observations and fitted values
 
 
 ``` r
@@ -517,222 +332,152 @@ ggplot(mtcars, aes(wt)) +
   geom_line(aes(y = pred), data = grid, colour = "red", linewidth = 1)
 ```
 
-&lt;img src="topic4_files/figure-html/unnamed-chunk-16-1.png" width="576" /&gt;
-
-
+&lt;img src="topic4_files/figure-html/unnamed-chunk-14-1.png" width="576" /&gt;
 ---
-## Model visualization
-
-We add residuals using
+## Plotting residuals
 
 
 ``` r
-reg_mod &lt;- lm(mpg ~ wt, data = mtcars)
-
-mtcars &lt;- mtcars %&gt;% add_residuals(reg_mod)
+mtcars %&gt;% add_residuals(reg_mod) %&gt;%
+  ggplot(aes(wt, resid)) +
+  geom_hline(yintercept = 0, colour = "grey60") +
+  geom_point() + theme_minimal()
 ```
 
+&lt;img src="topic4_files/figure-html/unnamed-chunk-15-1.png" width="72%" /&gt;
+
+Look across the range of weights. A curved pattern suggests the straight line has missed part of the relationship.
 ---
-## Model visualization
+## Does a curve fit better?
 
 
 ``` r
-ggplot(mtcars, aes(wt, resid)) + 
-  geom_ref_line(h = 0) +
-  geom_point() 
+mod_curve &lt;- lm(mpg ~ wt + I(wt^2), data = mtcars)
+mtcars %&gt;% add_residuals(reg_mod, var = "Linear") %&gt;%
+  add_residuals(mod_curve, var = "Quadratic") %&gt;%
+  pivot_longer(c(Linear, Quadratic), names_to = "model", values_to = "resid") %&gt;%
+  ggplot(aes(wt, resid)) + geom_hline(yintercept = 0, colour = "grey60") +
+  geom_point() + facet_wrap(~ model) + theme_minimal()
 ```
 
-&lt;img src="topic4_files/figure-html/unnamed-chunk-18-1.png" width="576" /&gt;
+&lt;img src="topic4_files/figure-html/unnamed-chunk-16-1.png" width="68%" /&gt;
 
+Compare the curvature and vertical spread on the same scale. How do the residuals for the lightest and heaviest cars change?
 ---
-## Model visualization
+## A quadratic term
 
-* The predictions tell us which pattern we have captured
+The formula `mpg ~ wt + I(wt^2)` fits `\(\hat y=b_0+b_1 x+b_2 x^2\)`.
 
-* The residuals indicate which pattern is left uncaptured
+* To compare two weights, subtract their fitted values. The change depends on the starting weight.
 
----
-## What to do with models?
-
-* **Explanation**: characterize the relationship between `\(y\)` and `\(x\)` through the parameters
-`\(\beta_0\)` and `\(\beta_1\)`
-
-* **Prediction**: for a new value of `\(x\)`, obtain its `\(y\)` value
-
----
-## Interpreting linear regression
-
-Let us go back to the previous regression. The `broom` library from tidyverse serves to 
-tidy the results of `lm`. **WATCH OUT**: it is not loaded automatically when loading `tidyverse`.
+* The turning point solves `\(b_1+2b_2 x=0\)`, so `\(x^*=-b_1/(2b_2)\)`. It is a minimum if `\(b_2&gt;0\)` and a maximum if `\(b_2&lt;0\)`.
 
 
 ``` r
-library(broom)
-mod_reg &lt;- lm(mpg ~ wt, data=mtcars)
-tidy(mod_reg)
+b &lt;- coef(mod_curve)
+round(unname(-b[2] / (2 * b[3])), 2)
 ```
 
 ```
-## # A tibble: 2 × 5
-##   term        estimate std.error statistic  p.value
-##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-## 1 (Intercept)    37.3      1.88      19.9  8.24e-19
-## 2 wt             -5.34     0.559     -9.56 1.29e-10
+## [1] 5.71
 ```
 
+``` r
+range(mtcars$wt)
+```
+
+```
+## [1] 1.513 5.424
+```
+
+Is the turning point within the range of weights in our sample?
 ---
-## Interpreting linear regression - Slope
+name: salary
+## Teachers' salaries
 
-The linear regression model is
-
-$$
-\widehat{ \text{mpg} } = \hat{\beta}_0 + \hat{\beta}_1 \text{wt}  
-$$
-
-Let us increase wt by one unit
-
-`\begin{eqnarray}
-&amp;&amp; \hat{\beta}_0 + \hat{\beta}_1 ( \text{wt} + 1) = \\
-&amp;&amp; \hat{\beta}_0 + \hat{\beta}_1 \text{wt} + \hat{\beta}_1 = \\
-&amp;&amp; \widehat{ \text{mpg} } + \hat{\beta}_1
-\end{eqnarray}`
-
-How is `\(\hat{\beta}_1\)` interpreted?
-
----
-## Interpreting linear regression - Intercept
-
-The linear regression model is
-
-$$
-\widehat{ \text{mpg} } = \hat{\beta}_0 + \hat{\beta}_1 \text{wt}
-$$
-
-We substitute zero for wt
-
-`\begin{eqnarray}
-\widehat{ \text{mpg} } = \hat{\beta}_0 + \hat{\beta}_1 \times 0 = \hat{\beta}_0
-\end{eqnarray}`
-
-How is `\(\hat{\beta}_0\)` interpreted?
-
----
-## Interpreting Linear Regression
-
-We are going to model the relationship between years of experience and a teacher's salary
+We will use the `teacher` data to model **base salary in dollars** using years of experience and degree. Set MA as the reference level.
 
 
 ``` r
 library(openintro)
+library(broom)
 data("teacher")
-set.seed(1)
-grade &lt;- sample(c(rep("elementary", 20), rep("middle", 25), rep("high", 26)))
 teacher &lt;- teacher %&gt;%
-  mutate(degree = factor(degree, c("MA","BA")),
-         grade = grade)
+  mutate(degree = factor(degree, levels = c("MA", "BA")))
 ```
 
+.question[Fit `base ~ years`. Interpret the slope and predict the base salary for a teacher with 15 years of experience.]
 ---
-## Interpreting Linear Regression
-
-We are going to model the relationship between years of experience and a teacher's salary
+## Salary and years of experience
 
 
 ``` r
-ggplot(teacher, aes(x=years, y=base)) + geom_point() + theme_minimal()
-```
-
-&lt;img src="topic4_files/figure-html/unnamed-chunk-21-1.png" width="576" /&gt;
-
----
-## Interpreting Linear Regression
-
-Fit a linear model, obtain the coefficients and interpret them.
-
-Determine the predicted salary of a teacher with 15 years of experience.
-
----
-## Interpreting Linear Regression
-
-
-``` r
+fit_years &lt;- lm(base ~ years, data = teacher)
 ggplot(teacher, aes(x=years, y=base)) + geom_point() +
   geom_smooth(method="lm", color='red', se=FALSE) + theme_minimal()
 ```
 
-&lt;img src="topic4_files/figure-html/unnamed-chunk-22-1.png" width="576" /&gt;
-
-
+&lt;img src="topic4_files/figure-html/unnamed-chunk-19-1.png" width="70%" /&gt;
 ---
-## Linear Regression: Categorical Predictors
+## Salary and years of experience
 
-* So far we have considered `\(x\)` to be continuous. What happens if it is categorical?
 
-* Suppose that `\(x\)` refers to gender and takes two values: male and female.
+``` r
+tidy(fit_years) %&gt;% select(term, estimate)
+```
 
-* `\(y = \beta_0 + \beta_1 x + \epsilon\)` would not make sense, `\(x\)` is not a number!
+```
+## # A tibble: 2 × 2
+##   term        estimate
+##   &lt;chr&gt;          &lt;dbl&gt;
+## 1 (Intercept)   43668.
+## 2 years           803.
+```
 
-* We can write `\(y = \beta_0 +\beta_1 \text{gender}\_\text{male} + \epsilon\)`, where `\(\text{gender}\_\text{male}\)` takes value 1 for men and zero for women. 
+``` r
+predict(fit_years, newdata = data.frame(years = 15))
+```
 
+```
+##        1 
+## 55714.66
+```
+
+Each additional year of experience is associated with about **&amp;#36;803 more** in predicted base salary. The prediction for 15 years is about **&amp;#36;55,715**.
 ---
-## Linear Regression: Categorical Predictors
+## Salary and degree
 
-* Salary versus degree. What levels does the degree variable have?
+* What levels does `degree` have? Which did we put first?
 
 * We fit a model
 
 
 ``` r
 mod_base_degree &lt;- lm(base ~ degree, data=teacher)
-tidy(mod_base_degree)
+tidy(mod_base_degree) %&gt;% select(term, estimate)
 ```
 
 ```
-## # A tibble: 2 × 5
-##   term        estimate std.error statistic  p.value
-##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-## 1 (Intercept)   56610.     1777.    31.8   5.44e-43
-## 2 degreeBA       -352.     2398.    -0.147 8.84e- 1
+## # A tibble: 2 × 2
+##   term        estimate
+##   &lt;chr&gt;          &lt;dbl&gt;
+## 1 (Intercept)   56610.
+## 2 degreeBA       -352.
 ```
-
 ---
-## Linear Regression: Categorical Predictors
+## Reading a factor coefficient
 
-* R has created an **indicator variable**  degreeBA: if the degree is BA it takes value 1,
-otherwise 0.
+R creates `degreeBA`, an indicator equal to 1 for BA and 0 for MA.
 
-* If the variable had three levels A, B and C, R would create two indicator variables, by default for B and C (the first level, A, acts as the base level).
+* **MA** is the reference group. Its predicted salary is the intercept, **&amp;#36;56,610**.
+* **BA** has a predicted salary about **&amp;#36;352 lower** than MA. Add the coefficient of `degreeBA` to the intercept to get the BA prediction.
 
-* The base level is the level the variable takes when all the indicators are 0.
-
-* The coefficients are interpreted with respect to the base level.
-
-
+With three degrees, R would use two indicators. Each compares its group with the same reference group.
 ---
-## Linear Regression: Categorical Predictors
+## Predicting each group mean
 
 
 ``` r
-mod_base_degree &lt;- lm(base ~ degree, data=teacher)
-tidy(mod_base_degree)
-```
-
-```
-## # A tibble: 2 × 5
-##   term        estimate std.error statistic  p.value
-##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-## 1 (Intercept)   56610.     1777.    31.8   5.44e-43
-## 2 degreeBA       -352.     2398.    -0.147 8.84e- 1
-```
-Interpret each coefficient
-
----
-## Linear Regression: Visualizing the predictions
-
-
-``` r
-mod_base_degree &lt;- lm(base ~ degree, data=teacher)
-
 grid &lt;- teacher %&gt;% 
   data_grid(degree) %&gt;% 
   add_predictions(mod_base_degree)
@@ -746,9 +491,8 @@ grid
 ## 1 MA     56610.
 ## 2 BA     56257.
 ```
-
 ---
-## Linear Regression: Visualizing the predictions
+## Two fitted group means
 
 
 ``` r
@@ -756,13 +500,7 @@ ggplot(teacher, aes(x=degree)) + geom_point(aes(y=base)) + theme_minimal() +
   geom_point(data = grid, aes(y = pred), colour = "red", size = 4)
 ```
 
-&lt;img src="topic4_files/figure-html/unnamed-chunk-26-1.png" width="576" /&gt;
-
----
-## Linear Regression: Visualizing the predictions
-
-We predict the mean for each group!
-
+&lt;img src="topic4_files/figure-html/unnamed-chunk-23-1.png" width="576" /&gt;
 ---
 ## Multiple Linear Regression
 
@@ -777,72 +515,77 @@ y_i = \beta_{0} + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_p x_{ip} + \ep
 * Here `\(x_{ij}\)` is the value of predictor `\(j\)` for observation `\(i\)`.
 
 * The effects of different covariates on the expected value of the dependent variable are additive.
-
 ---
-## Multiple Linear Regression - Interpretation
+## Salary, experience and degree
 
-* How is `\(\beta_0\)` interpreted? 
-
-* How is `\(\beta_1\)` interpreted? 
-
-* ...
-
-* How is `\(\beta_p\)` interpreted?
-
----
-## Multiple Linear Regression 
-
-In R
+Fit both predictors in one model.
 
 
 ``` r
-mod_reg &lt;- lm(base ~ years + degree, data = teacher)
-tidy(mod_reg)
+fit_salary &lt;- lm(base ~ years + degree, data = teacher)
+tidy(fit_salary) %&gt;% select(term, estimate)
 ```
 
 ```
-## # A tibble: 3 × 5
-##   term        estimate std.error statistic  p.value
-##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-## 1 (Intercept)   44838.    1156.      38.8  4.11e-48
-## 2 years           818.      54.0     15.2  1.75e-23
-## 3 degreeBA      -2560.    1164.      -2.20 3.12e- 2
+## # A tibble: 3 × 2
+##   term        estimate
+##   &lt;chr&gt;          &lt;dbl&gt;
+## 1 (Intercept)   44838.
+## 2 years           818.
+## 3 degreeBA      -2560.
 ```
-
 ---
-## Multiple Linear Regression 
+## Reading the adjusted coefficients
 
-We visualize the predictions
+* **Intercept (&amp;#36;44,838).** Predicted base salary for an MA teacher with zero years of experience.
+* **Years (&amp;#36;818).** At the same degree level, one more year of experience is associated with about &amp;#36;818 more in predicted salary.
+* **BA (−&amp;#36;2,560).** At the same experience level, the predicted salary for BA is about &amp;#36;2,560 lower than for MA.
+
+.question[The degree-only model gave a gap of about &amp;#36;352. What are you holding fixed in the new comparison?]
+---
+## Predicting two salaries
+
+
+``` r
+cases &lt;- tibble(years = c(15, 15), degree = c("MA", "BA"))
+cases %&gt;% add_predictions(fit_salary)
+```
+
+```
+## # A tibble: 2 × 3
+##   years degree   pred
+##   &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;
+## 1    15 MA     57108.
+## 2    15 BA     54548.
+```
+
+For 15 years of experience, the predicted salaries are about **&amp;#36;57,108 (MA)** and **&amp;#36;54,548 (BA)**. In this additive model the gap is the same at five years. Why?
+---
+## A grid for both groups
+
+Use a common grid of years and predict for each degree.
 
 
 ``` r
 grid &lt;- teacher %&gt;% 
   data_grid(years, degree) %&gt;% 
-  add_predictions(mod_reg)
-grid
+  add_predictions(fit_salary)
+head(grid, 4)
 ```
 
 ```
-## # A tibble: 76 × 3
-##    years degree   pred
-##    &lt;dbl&gt; &lt;fct&gt;   &lt;dbl&gt;
-##  1     0 MA     44838.
-##  2     0 BA     42278.
-##  3     1 MA     45656.
-##  4     1 BA     43096.
-##  5     2 MA     46474.
-##  6     2 BA     43914.
-##  7     3 MA     47292.
-##  8     3 BA     44732.
-##  9     4 MA     48110.
-## 10     4 BA     45550.
-## # ℹ 66 more rows
+## # A tibble: 4 × 3
+##   years degree   pred
+##   &lt;dbl&gt; &lt;fct&gt;   &lt;dbl&gt;
+## 1     0 MA     44838.
+## 2     0 BA     42278.
+## 3     1 MA     45656.
+## 4     1 BA     43096.
 ```
-
 ---
-## Multiple Linear Regression 
+## Observed salaries and fitted lines
 
-We visualize the predictions
+Each line joins predictions for one degree. What does the distance between the lines represent?
 
 
 ``` r
@@ -851,19 +594,72 @@ ggplot(teacher, aes(years, base, colour = degree)) +
   geom_line(data = grid, aes(y = pred)) + theme_minimal()
 ```
 
-&lt;img src="topic4_files/figure-html/unnamed-chunk-29-1.png" width="576" /&gt;
-
-
+&lt;img src="topic4_files/figure-html/unnamed-chunk-27-1.png" width="76%" /&gt;
 ---
-## Multiple Linear Regression
-
-How do you interpret the coefficients?
+## What does degree explain?
 
 
+``` r
+teacher %&gt;% add_residuals(fit_years, var = "simple") %&gt;%
+  add_residuals(fit_salary, var = "with_degree") %&gt;%
+  pivot_longer(c(simple, with_degree), names_to = "model", values_to = "error") %&gt;%
+  ggplot(aes(years, error, colour = degree)) +
+  geom_hline(yintercept = 0, colour = "grey60") + geom_point() +
+  facet_wrap(~ model) + theme_minimal()
+```
+
+&lt;img src="topic4_files/figure-html/unnamed-chunk-28-1.png" width="68%" /&gt;
+
+Look for a systematic difference between degrees before and after adding `degree`. Which pattern over years of experience is still visible?
 ---
+name: log-predictor
+## When the predictor is a logarithm
+
+For a model `\(\hat y=b_0+b_1\log(x)\)`, compare the two fitted values. If `\(x\)` increases by 10%, the predicted change in `\(y\)` is
+
+$$
+b_1\{\log(1.10x)-\log(x)\}=b_1\log(1.10).
+$$
+
+* In R, use `log(x)` for the natural logarithm. Any other predictors stay fixed in the comparison.
+* For example, if `\(b_1=20\)` dollars, increasing `\(x\)` by 10% changes the prediction by `\(20\log(1.10)\)`, or about 1.91 dollars.
+---
+## What if both variables are logged?
+
+In [Lab 4, Exercise 5](../labs/lab4.html#exercise-5), price and carat are both on a base-two log scale.
+
+
+``` r
+small_diamonds &lt;- diamonds %&gt;% filter(carat &lt;= 2.5)
+fit_log &lt;- lm(log2(price) ~ log2(carat), data = small_diamonds)
+unname(2^coef(fit_log)[2])
+```
+
+```
+## [1] 3.207326
+```
+
+Doubling carat adds one to `log2(carat)`. The fitted `log2(price)` increases by the slope. On the original scale the fitted price is multiplied by `\(2^{b_1}\)`, about **3.21** here.
+---
+name: regression-practice
+## Your turn
+
+Use `sim3` from `modelr` in [Lab 4, Exercise 8](../labs/lab4.html#exercise-8).
+
+1. Fit `y ~ x1 + x2` and identify the reference group.
+2. Compare two groups at the same `x1`. Give the two predicted values and their difference.
+3. Plot the observations and the fitted lines by group. Compare the residuals with those from `y ~ x1`. What pattern does adding `x2` explain?
+
+For more practice, try [Lab 4, Exercises 2–6](../labs/lab4.html#exercise-2) on diamond prices. The remaining slides are [optional reading on inference and bootstrap](#optional-inference).
+---
+name: optional-inference
 class: center, middle, inverse
 
-# Inference 
+# Optional reading
+
+## Inference and bootstrap
+
+[Back to regression practice](#regression-practice)
 
 ---
 
