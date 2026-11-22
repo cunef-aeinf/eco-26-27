@@ -6,7 +6,7 @@ output:
    xaringan::moon_reader:
     css: "ds_slides.css"
     lib_dir: libs
-    chakra: libs/remark-0.14.1/remark.min.js
+    chakra: ../libs/remark-0.14.1/remark.min.js
     mathjax: libs/mathjax/tex-svg.js
     seal: false
     includes:
@@ -33,14 +33,21 @@ class: center, middle, inverse, title-slide
 ## Topic 4 - Modeling
 
 <br>
-
-[Modeling goals](#modelling-goals) · [Regression](#regression) · [Optional reading on bootstrap](#optional-inference)
-
 <br>
 .pull-left[
 ### Roi Naveiro
 #### Academic Year 2026-2027
 ]
+---
+name: project-workflow
+## Modeling
+
+```{r project-workflow, echo=FALSE, out.width='100%', fig.align='center', fig.alt='A data analysis project moves from importing and tidying data to a cycle of transforming, visualising and modelling, then communicating results. The Model step is highlighted.'}
+knitr::include_graphics("img/data-science-model.png")
+```
+
+We have used plots to explore patterns in our data. Now we fit models to describe those patterns and use plots again to see what the models missed.
+
 ---
 name: modelling-goals
 ## What do we want a model to tell us?

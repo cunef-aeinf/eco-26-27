@@ -6,6 +6,7 @@ output:
    xaringan::moon_reader:
     css: "ds_slides.css"
     lib_dir: libs
+    chakra: ../libs/remark-0.14.1/remark.min.js
     seal: false
     includes:
       after_body: insert-logo.html
