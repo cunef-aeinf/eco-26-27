@@ -118,7 +118,7 @@ name: models-in-this-course
 
 Statistical and causal inference need suitable methods and some **control over how the data are generated**. In the quiz example, random sampling lets us estimate the gap for the whole class. Random assignment lets us estimate the effect of the revision activity.
 
-**In this course, we use models to complement EDA.** We will use regression to quantify how mpg varies with car weight, compare salaries across groups and see which observations lie far from the model's predictions.
+**In this course, we use models to complement EDA.** A scatterplot shows two variables at a time. When several predictors vary together, their relationships can be hard to see in separate plots. Regression lets us ask how the predicted response changes with one predictor while the others are held fixed.
 ---
 name: regression
 class: center, middle, inverse
@@ -164,7 +164,7 @@ $$
 
 Here $y_i$ is the car's observed mpg and $x_i$ is its weight in thousands of pounds. The line has intercept $\beta_0$ and slope $\beta_1$. The error $\varepsilon_i$ is the car's departure from the line.
 
-After estimating the intercept and slope, we predict mpg with $\hat y_i = \hat\beta_0 + \hat\beta_1 x_i$. Inference requires assumptions about the errors. Here we use the line to explore these 32 cars.
+After estimating the intercept and slope, we predict mpg with $\hat y_i = \hat\beta_0 + \hat\beta_1 x_i$. Using the model for inference requires assumptions about the errors. We set those assumptions aside in this course and use the line to describe the data.
 
 ---
 name: candidate-lines
@@ -188,7 +188,7 @@ ggplot(mtcars, aes(wt, mpg)) +
   theme_minimal()
 ```
 
-Each choice of intercept and slope gives a different line. The teal line predicts $35-4x_i$ mpg. How could we compare its fit with the others using all 32 cars?
+This model family contains **infinitely many lines**, one for each possible pair of intercept and slope values. **Fitting (or training) the model** means using the data to choose one of them. How well does the teal line, $35-4x_i$, fit our 32 cars?
 
 ---
 name: least-squares
@@ -317,7 +317,7 @@ ggplot(patterns, aes(weight, residual)) +
 ```
 
 * **Exact fit.** Every prediction is correct. Every residual is zero.
-* **Trend captured.** Individual cars differ, but the residuals scatter around zero across the weight range. Weight gives no clear clue about the next error.
+* **Trend captured.** The residuals form a random cloud of points around zero across the weight range. This is what a satisfactory fit to the average trend looks like.
 * **Trend missed.** The curve shows where the model predicts too low (positive residuals) or too high (negative residuals).
 
 ---
@@ -409,11 +409,14 @@ ggplot(teacher, aes(degree, base)) + geom_point() +
 
 Each black point is a teacher's salary. Each red point is that group's mean.
 ---
-## Two ways to compare degrees
+name: why-include-experience
+## Why include years of experience?
 
-The **&#36;352.46** gap compares the two groups as we found them. The BA teachers have **17.1 years** of experience on average, and the MA teachers have **14.4 years**.
+MA teachers earn **&#36;352.46 more** than BA teachers on average. The groups also differ in experience. BA teachers average **17.1 years**, compared with **14.4 years** for MA teachers.
 
-.question[If salary typically rises with experience, how might the extra experience of the BA group affect the raw difference?]
+Salary tends to rise with experience. Comparing the two group means therefore mixes the difference in degree with a difference in career stage. Adding **years of experience** to the model lets us compare degrees at the same career stage.
+
+.question[What salaries would we predict for two teachers who both have 15 years of experience, one with a BA and one with an MA?]
 ---
 name: multiple-regression
 ## From one predictor to several
@@ -422,10 +425,10 @@ The same tools let us build a **multiple regression**. We keep one response and 
 
 `\[y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \varepsilon_i.\]`
 
-We can combine a number, such as **years of experience**, with an indicator, such as **degreeMA**. Changing one predictor at a time gives two comparisons.
+Each predictor coefficient has the **same interpretation as in simple regression**, with **all other predictors held fixed**.
 
-* Hold degree fixed to compare salaries at different experience levels.
-* Hold experience fixed to compare salaries for BA and MA teachers.
+* The numerical coefficient for `years` gives the change in predicted salary for one extra year of experience, holding degree fixed.
+* The indicator coefficient for `degreeMA` gives the difference in predicted salary between MA and BA teachers with the same experience.
 ---
 ## Salary, experience and degree
 
