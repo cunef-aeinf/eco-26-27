@@ -105,6 +105,7 @@ When you render, R does the following:
 * It saves the output file in your **working directory**
 
 * **INSTALL tinytex FOR PDF**!!!!
+    * `install.packages("tinytex")` and then `tinytex::install_tinytex()`
 
 ---
 ## Writing content
@@ -129,8 +130,8 @@ Very simple, just a few rules
 `*Italics*`
 *Italics*
 
-`[link](www.rstudio.com)`
-[link](www.rstudio.com)   
+`[link](https://www.rstudio.com)`
+[link](https://www.rstudio.com)   
 
 ---
 ## Writing content
@@ -166,4 +167,4 @@ knitr::include_graphics("img/4.png")
 
 ## Bibliography
 
-This topic is based on  [Rmd Cheat Sheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)
+This topic is based on  [Rmd Cheat Sheet](https://rstudio.github.io/cheatsheets/rmarkdown.pdf)
